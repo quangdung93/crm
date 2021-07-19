@@ -1,0 +1,56 @@
+<?php 
+
+namespace App\Services;
+use Carbon\Carbon;
+use Yajra\DataTables\DataTables;
+
+class PostService
+{
+    public function getDatatable($table){
+        $data = Datatables::of($table)
+            ->editColumn('id', function ($row) {
+                return $row->id;
+            })
+            ->editColumn('title', function ($row) {
+                return $row->title;
+            })
+            ->editColumn('category_id', function ($row) {
+                return $row->category_id ?? '';
+            })
+            ->editColumn('image', function ($row) {
+                return '<img src="'.asset($row->image).'" class="img-responsive" style="width:60px;">';
+            })
+            ->editColumn('created_at', function ($row) {
+                return Carbon::parse($row->created_at)->format('d/m/Y');
+            })
+            ->editColumn('status', function ($row) {
+                $status =  $row->status === 1 ? '<label class="label label-primary">Hiển thị</label>' : '<label class="label label-danger">Ẩn</label>';
+                if( !empty($row->deleted_at) ){
+                    $status = '<label class="label label-danger">Đã xóa</label><br> <p class="white-space"> Ngày xóa: '.date('d-m-Y',strtotime($row->deleted_at)).' </p>';
+                }
+                return $status;
+            })
+            ->addColumn('action', function ($row) {
+                $action = "";
+                if( !empty($row->deleted_at) ){
+                    $action .= '<a onclick="restoreNews(this)" data-id="'.$row->id.'" class="btn btn-primary" title="Khôi phục">
+                        <i class="fa fa-undo text-white"></i> </a>';
+                }
+                else{
+                    $action .= '<a class="btn btn-primary" href="'.url('hita_enterprise/posts/edit/'.$row->id).'" title="Chỉnh sửa">
+                                    <i class="feather icon-edit-1"></i></a>';
+                    $action .= '<a href="javascript:void(0)" onclick="deleteNew('.$row->id.')" class="btn btn-danger" title="Xóa">
+                                    <i class="feather icon-delete"></i>
+                                </a>';
+                    $action .= '<a href="javascript:void(0)" onclick="duplicateNew('.$row->id.')" class="btn btn-warning" title="Nhân bản">
+                                <i class="feather icon-copy"></i>
+                            </a>';
+                    $action .= '<a class="btn btn-success" href="'.url($row->links()).'" target="_blank"><i class="feather icon-eye" title="Xem"></i></a>';
+                }
+                return $action;
+            })
+            ->rawColumns(['image','status','action'])
+            ->make(true);
+        return $data;
+    }
+}

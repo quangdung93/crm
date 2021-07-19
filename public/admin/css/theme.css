@@ -1,0 +1,120 @@
+/* CUSTOM THEME */
+:root {
+    --color: #027fff;
+}
+
+body{
+    font-size:13px;
+}
+
+table {
+    font-size:13px;
+}
+
+table td{
+    white-space: normal;
+}
+
+.table-bordered td,
+.table-bordered th{
+    text-align: center;
+    vertical-align: middle;
+}
+
+.main-body .page-wrapper{
+    padding:10px;
+}
+
+.btn{
+    padding: 6px 12px;
+    text-transform: unset;
+}
+
+.btn i.icon-upload-cloud{
+    font-size:20px;
+    margin-right:0;
+}
+
+.bg-primary{
+    padding: 7px 10px;
+}
+
+.alert{
+    font-size: 14px;
+    margin-bottom: 15px;
+    padding: 10px;
+}
+
+.main-body .page-wrapper .page-header{
+    margin-bottom: 10px;
+}
+
+.table-custom tr th{
+    background: #00a9ac;
+    color: #fff;
+    border-bottom:0;
+    font-weight:400;
+}
+
+.switchery-default{
+    zoom: 0.6;
+}
+
+.btn{
+    border-radius: 7px;
+    margin-right: 5px;
+}
+
+.bg-primary{
+    background-color: var(--color) !important;
+}
+
+.btn-primary, .wizard>.actions a, .sweet-alert button.confirm{
+    background-color: var(--color);
+    border-color: var(--color);
+}
+
+.btn-primary:active, .wizard>.actions a:active, .sweet-alert button.confirm:active{
+    background-color: var(--color) !important;
+    border-color: var(--color);
+    opacity: 0.7;
+}
+
+.btn-primary:hover, .wizard>.actions a:hover, .sweet-alert button.confirm:hover{
+    background-color: var(--color) !important;
+    border-color: var(--color);
+    opacity: 0.7;
+}
+
+.btn-primary:focus, .wizard>.actions a:focus, .sweet-alert button.confirm:focus{
+    background-color: var(--color) !important;
+    border-color: var(--color);
+    opacity: 0.7;
+}
+
+.page-item.active .page-link{
+    background-color: var(--color);
+    border-color: var(--color);
+}
+
+.main-body .page-wrapper .page-header-breadcrumb{
+    float: left;
+}
+
+.btn i{
+    margin: 0;
+}
+
+.pcoded .pcoded-navbar .pcoded-item>li>a>.pcoded-micon{
+    padding: 0;
+}
+
+.label-primary{
+    background: linear-gradient(to right, var(--color),  var(--color));
+}
+
+.nowrap{
+    white-space: nowrap;
+}
+
+/* END CUSTOM THEME */

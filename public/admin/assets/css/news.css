@@ -1,0 +1,30 @@
+.category-tag{
+    background-color: #fff !important;
+    border: 1px dashed #29b3e8;
+}
+.category-tag:hover{
+    background-color: #29b3e8 !important;
+    color: #fff;
+    cursor: pointer;
+}
+.category-tag:hover .text-warning{
+    color: #fff !important;
+}
+.action-new-category{
+    padding: 2px 5px;
+    border-radius: 3px;
+    margin-right: 5px;
+}
+.action-new-td{
+    width: 150px;
+}
+.delete-new-category:hover{
+    cursor: pointer;
+    opacity: 0.7;
+}
+.reload-new:hover{
+    cursor: pointer;
+}
+.tag-sort-label:hover{
+    cursor: pointer;
+}
