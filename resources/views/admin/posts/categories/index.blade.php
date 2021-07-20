@@ -4,13 +4,8 @@
     $routeName = getCurrentSlug();
 @endphp
 @section('content')
-    <!-- Page-header start -->
-    @include('admin.components.page-header')
-    <!-- Page-header end -->
-
     <!-- Page-body start -->
     <div class="page-body">
-        @include('admin.components.alert')
         <div class="row">
             @can('add_posts')
             <div class="col-sm-12">

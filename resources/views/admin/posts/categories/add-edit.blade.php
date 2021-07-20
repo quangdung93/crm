@@ -4,14 +4,9 @@
     $routeName = getCurrentSlug();
 @endphp
 @section('content')
-    <!-- Page-header start -->
-    @include('admin.components.page-header')
-    <!-- Page-header end -->
-
     <!-- Page-body start -->
     <div class="page-body">
         <div class="panel-body">
-            @include('admin.components.alert')
             <form class="form-horizontal" action="{{url($routeName)}}" method="POST" role="form"
                 enctype="multipart/form-data">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">

@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\Post;
+use Illuminate\Support\Str;
 use App\Models\PostCategory;
-use App\Services\PostService;
 use Illuminate\Http\Request;
+use App\Services\PostService;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -35,7 +37,43 @@ class PostController extends Controller
     }
 
     public function store(Request $request){
-        
+        $request->validate([
+            'title' => 'required',
+            'slug' => 'required|unique:posts',
+            'category_id' => 'required'
+        ],[
+            'title.required' => 'Bạn chưa nhập tên người dùng',
+            'slug.required' => 'Đường dẫn không được trống',
+            'slug.unique' => 'Đường dẫn đã tồn tại',
+            'category_id.required' => 'Bạn chưa chọn danh mục',
+        ]);
+
+        //Avatar image
+        if($request->hasFile('input_file')){
+            $avatarPath = $this->uploadImage('posts', $request->file('input_file'));
+        }
+
+        $data = [
+            'title' => $request->title,
+            'slug' => Str::slug($request->slug),
+            'category_id' => $request->category_id,
+            'author_id' => Auth::id(),
+            'seo_title' => $request->seo_title,
+            'meta_description' => $request->meta_description,
+            'meta_keywords' => $request->meta_keywords,
+            'body' => $request->body,
+            'status' => isset($request->status) ? 1 : 0,
+            'image' => $avatarPath ?? null
+        ];
+
+        $post = Post::create($data);
+
+        if($post){
+            return redirect('admin/posts')->with('success', 'Tạo thành công!');
+        }
+        else{
+            return redirect('admin/posts')->with('danger', 'Tạo thất bại!');
+        }
     }
 
     public function edit($id){
@@ -45,5 +83,48 @@ class PostController extends Controller
             'post' => $post,
             'categories' => $categories
         ]);
+    }
+
+    public function update(Request $request, $id){
+        $request->validate([
+            'title' => 'required',
+            'slug' => 'required|unique:posts,slug,'.$id,
+            'category_id' => 'required'
+        ],[
+            'title.required' => 'Bạn chưa nhập tên người dùng',
+            'slug.required' => 'Đường dẫn không được trống',
+            'slug.unique' => 'Đường dẫn đã tồn tại',
+            'category_id.required' => 'Bạn chưa chọn danh mục',
+        ]);
+
+        $post = Post::findOrFail($id);
+
+        //Avatar image
+        if($request->hasFile('input_file')){
+            $avatarPath = $this->uploadImage('posts', $request->file('input_file'));
+        }else{
+            $avatarPath = $post->image;
+        }
+
+        $data = [
+            'title' => $request->title,
+            'slug' => $request->slug ? Str::slug($request->slug) : Str::slug($request->title),
+            'category_id' => $request->category_id,
+            'seo_title' => $request->seo_title,
+            'meta_description' => $request->meta_description,
+            'meta_keywords' => $request->meta_keywords,
+            'body' => $request->body,
+            'status' => isset($request->status) ? 1 : 0,
+            'image' => $avatarPath ?? null
+        ];
+
+        $update = $post->update($data);
+
+        if($update){
+            return redirect('admin/posts/edit/' . $id)->with('success', 'Sửa thành công!');
+        }
+        else{
+            return redirect('admin/posts/edit/'. $id)->with('danger', 'Sửa thất bại!');
+        }
     }
 }

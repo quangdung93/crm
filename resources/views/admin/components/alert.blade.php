@@ -1,9 +1,11 @@
-@if (Session::has('success'))
-    <div class="alert alert-success">
-        {{ Session::get('success') }}
-    </div>
-@elseif (Session::has('danger'))
-    <div class="alert alert-danger">
-        {{ Session::get('danger') }}
-    </div>
-@endif
+@push('javascript')
+<script>
+    $(document).ready(function(){
+        @if(Session::has('success'))
+            pushNotify('{{ Session::get('success') }}', text = '', type = 'success');
+        @elseif(Session::has('danger'))
+            pushNotify('{{ Session::get('danger') }}', text = '', type = 'danger');
+        @endif
+    });
+</script>
+@endpush

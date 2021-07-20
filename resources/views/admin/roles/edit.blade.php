@@ -4,10 +4,6 @@
     $routeName = getCurrentSlug();
 @endphp
 @section('content')
-    <!-- Page-header start -->
-    @include('admin.components.page-header')
-    <!-- Page-header end -->
-
     <!-- Page-body start -->
     <div class="page-body panels-wells">
         <div class="panel panel-primary">
@@ -66,7 +62,6 @@
     </div>
     <!-- Page-body end -->
 @endsection
-
 @section('javascript')
 <script type="text/javascript">
     $('table tbody tr').each(function(){

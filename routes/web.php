@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
@@ -73,5 +74,15 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'], function () {
         Route::get('/edit/{id}', [PostCategoryController::class, 'edit'])->middleware('can:edit_posts');
         Route::post('/edit/{id}', [PostCategoryController::class, 'update'])->middleware('can:edit_posts');
         Route::get('/delete/{id}', [PostCategoryController::class, 'destroy'])->middleware('can:delete_posts');
+    });
+
+    //Menu
+    Route::group(['prefix' => 'menus', 'middleware' => ['can:read_menus']], function () {
+        Route::get('/', [MenuController::class, 'index']);
+        Route::get('/create', [MenuController::class, 'create']);
+        Route::post('/create', [MenuController::class, 'store']);
+        Route::get('/edit/{id}', [MenuController::class, 'edit']);
+        Route::post('/edit/{id}', [MenuController::class, 'update']);
+        Route::get('/delete/{id}', [MenuController::class, 'destroy'])->middleware('can:delete_users');
     });
 });

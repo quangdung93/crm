@@ -4,14 +4,9 @@
     $routeName = getCurrentSlug();
 @endphp
 @section('content')
-    <!-- Page-header start -->
-    @include('admin.components.page-header')
-    <!-- Page-header end -->
-
     <!-- Page-body start -->
     <div class="page-body">
         <div class="panel-body">
-            @include('admin.components.alert')
             <form class="form-horizontal" action="{{url($routeName)}}" method="POST" role="form"
                 enctype="multipart/form-data">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -27,7 +22,7 @@
                                     :lists="$categories" 
                                     value="id" 
                                     display="name" 
-                                    selected=""
+                                    selected="{{ isset($post) ? $post->category_id : '' }}"
                                 />
                             </div>
                         </div>
@@ -37,7 +32,7 @@
                                 <x-input type="text" title="Đường dẫn" name="slug" value="{{ isset($post) ? $post->slug : ''  }}"/>
                                 <x-input type="text" title="Meta title" name="seo_title" value="{{ isset($post) ? $post->seo_title : ''  }}"/>
                                 <x-input type="text" title="Meta description" name="meta_description" value="{{ isset($post) ? $post->meta_description : ''  }}"/>
-                                <x-input type="text" title="Meta weyword" name="meta_keywords" value="{{ isset($post) ? $post->meta_keywords : ''  }}"/>
+                                <x-input type="text" title="Meta keyword" name="meta_keywords" value="{{ isset($post) ? $post->meta_keywords : ''  }}"/>
                             </div>
                         </div>
                         <div class="card">
@@ -66,4 +61,17 @@
         </div>
     </div>
 <!-- Page-body end -->
+@endsection
+
+@section('javascript')
+<script type="text/javascript">
+    $(document).ready(function(){
+
+        @if(!isset($post))
+            $('input[name="title"]').on('keyup', function(){
+                convert_slug($(this).val());
+            });
+        @endif
+    });
+</script>
 @endsection

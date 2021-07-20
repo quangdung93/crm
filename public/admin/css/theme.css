@@ -158,4 +158,22 @@ table td{
     display: none;
 }
 
+.ui-pnotify.ui-pnotify-fade-normal.ui-pnotify.ui-pnotify-move{
+    border-radius: 8px;
+}
+
+.brighttheme.ui-pnotify-container{
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.brighttheme .ui-pnotify-title{
+    margin-bottom: 0;
+}
+
+.ui-pnotify-icon{
+    margin-top: 5px;
+    margin-right: 5px;
+}
+
 /* END CUSTOM THEME */

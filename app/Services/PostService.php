@@ -16,7 +16,7 @@ class PostService
                 return $row->title;
             })
             ->editColumn('category_id', function ($row) {
-                return $row->category_id ?? '';
+                return $row->category->name ?? '';
             })
             ->editColumn('image', function ($row) {
                 return '<img src="'.asset($row->image).'" class="img-responsive" style="width:60px;">';

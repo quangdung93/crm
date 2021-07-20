@@ -111,5 +111,6 @@
     <!--Custom TinyMCE Editor -->
     <script type="text/javascript" src="{{asset('admin/js/tinymce-custom.js')}}"></script>
     @yield('javascript')
+    @stack('javascript')
 </body>
 </html>

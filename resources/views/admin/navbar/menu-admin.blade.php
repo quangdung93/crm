@@ -29,6 +29,7 @@
                 </ul>
             </li>
             @endif
+
             @can('read_posts')
             <li class="{{request()->is('*/posts*') ? 'active' : ''}} pcoded-hasmenu">
                 <a href="javascript:void(0)">
@@ -46,6 +47,24 @@
                             <span class="pcoded-mtext">Danh sách bài viết</span>
                         </a>
                     </li>
+                </ul>
+            </li>
+            @endcan
+
+            @can('read_settings')
+            <li class="{{request()->is('*/settings*') ? 'active' : ''}} pcoded-hasmenu">
+                <a href="javascript:void(0)">
+                    <span class="pcoded-micon"><i class="feather icon-settings"></i></span>
+                    <span class="pcoded-mtext">Cấu hình</span>
+                </a>
+                <ul class="pcoded-submenu">
+                    @can('read_menus')
+                    <li>
+                        <a href="{{ url('admin/menus') }}">
+                            <span class="pcoded-mtext">Menu</span>
+                        </a>
+                    </li>
+                    @endcan
                 </ul>
             </li>
             @endcan

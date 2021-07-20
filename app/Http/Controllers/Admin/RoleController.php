@@ -52,6 +52,6 @@ class RoleController extends Controller
         $role->save();
         $role->syncPermissions(array_keys($request->permission));
 
-        return redirect('admin/roles/edit/'.$id);
+        return redirect('admin/roles/edit/'.$id)->with('success','Cập nhật thành công!');
     }
 }

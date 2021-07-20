@@ -16,14 +16,14 @@
         <div class="pcoded-container navbar-wrapper">
 
             {{-- Header --}}
-            @include('admin.menu.header')
+            @include('admin.navbar.header')
             {{-- End Header --}}
 
             <div class="pcoded-main-container">
                 <div class="pcoded-wrapper">
 
                     {{-- Menu --}}
-                    @include('admin.menu.menu-admin')
+                    @include('admin.navbar.menu-admin')
                     {{-- End menu --}}
 
                     {{-- Main content --}}
@@ -31,6 +31,10 @@
                         <div class="pcoded-inner-content">
                             <div class="main-body">
                                 <div class="page-wrapper">
+                                    {{-- Header --}}
+                                    @include('admin.components.page-header')
+
+                                    {{-- Content --}}
                                     @yield('content')
                                 </div>
                             </div>
@@ -43,3 +47,6 @@
         </div>
     </div>
 @endsection
+
+{{-- Alert --}}
+@include('admin.components.alert')
