@@ -23,11 +23,19 @@
                 <div class="pcoded-wrapper">
 
                     {{-- Menu --}}
-                    @include('admin.menu.menu_admin')
+                    @include('admin.menu.menu-admin')
                     {{-- End menu --}}
 
                     {{-- Main content --}}
-                    @yield('content')
+                    <div class="pcoded-content">
+                        <div class="pcoded-inner-content">
+                            <div class="main-body">
+                                <div class="page-wrapper">
+                                    @yield('content')
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     {{-- End Main content --}}
 
                 </div>

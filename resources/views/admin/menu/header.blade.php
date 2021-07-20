@@ -46,7 +46,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="{{url('hita_enterprise/logout')}}">
+                                <a href="{{url('admin/logout')}}">
                                     <i class="feather icon-log-out"></i> Đăng xuất
                                 </a>
                             </li>

@@ -7,6 +7,7 @@
                     <span class="pcoded-mtext">Tổng quan</span>
                 </a>
             </li>
+            @can('read_users')
             <li class="{{request()->is('*/users*') ? 'active' : ''}} pcoded-hasmenu">
                 <a href="javascript:void(0)">
                     <span class="pcoded-micon"><i class="feather icon-user"></i></span>
@@ -18,13 +19,17 @@
                             <span class="pcoded-mtext">Danh sách người dùng</span>
                         </a>
                     </li>
+                    @can('read_roles')
                     <li>
                         <a href="{{ url('admin/roles') }}">
                             <span class="pcoded-mtext">Phân quyền</span>
                         </a>
                     </li>
+                    @endcan
                 </ul>
             </li>
+            @endif
+            @can('read_posts')
             <li class="{{request()->is('*/posts*') ? 'active' : ''}} pcoded-hasmenu">
                 <a href="javascript:void(0)">
                     <span class="pcoded-micon"><i class="feather icon-file-text"></i></span>
@@ -32,7 +37,7 @@
                 </a>
                 <ul class="pcoded-submenu">
                     <li>
-                        <a href="/">
+                        <a href="{{ url('admin/category_posts') }}">
                             <span class="pcoded-mtext">Danh mục</span>
                         </a>
                     </li>
@@ -43,6 +48,7 @@
                     </li>
                 </ul>
             </li>
+            @endcan
         </ul>
     </div>
 </nav>

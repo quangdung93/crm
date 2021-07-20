@@ -116,6 +116,17 @@ $(function () {
             reader.readAsDataURL(input.files[0]);
         }
     }
+
+    $("#input_file").change(function () {
+        $("#input_img").show();
+        readURL(this, 'input_img');
+    });
+    
+    //Handle upload avatar
+    $(document).on('click', '#btn-upload-file', function(e){
+        e.preventDefault();
+        $('#input_file')[0].click();
+    });
     
     timeSince = function(date) {
 

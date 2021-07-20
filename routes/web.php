@@ -2,8 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\PostCategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,26 +19,59 @@ use App\Http\Controllers\Admin\DashboardController;
 |
 */
 
-// Route::get('/login', '');
+Route::get('/login', [LoginController::class, 'login']);
+Route::post('/login', [LoginController::class, 'postLogin'])->name('login');
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['prefix' => 'admin'], function () {
-    Route::get('/', [DashboardController::class, 'index']);
+//Filemanager
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
+    \UniSharp\LaravelFilemanager\Lfm::routes();
+});
 
-    Route::group(['prefix' => 'users'], function () {
+Route::group(['prefix' => 'admin','middleware' => 'auth'], function () {
+    Route::get('/', [DashboardController::class, 'index'])->name('dashbroad');
+    Route::get('/logout', [LoginController::class, 'logout']);
+
+    //User
+    Route::group(['prefix' => 'users', 'middleware' => ['can:read_users']], function () {
         Route::get('/', [UserController::class, 'index']);
+        Route::get('/create', [UserController::class, 'create']);
+        Route::post('/create', [UserController::class, 'store']);
+        Route::get('/edit/{id}', [UserController::class, 'edit']);
+        Route::post('/edit/{id}', [UserController::class, 'update']);
+        Route::get('/delete/{id}', [UserController::class, 'destroy'])->middleware('can:delete_users');
     });
 
-    Route::group(['prefix' => 'roles'], function () {
-        Route::get('/', [UserController::class, 'role']);
-        Route::get('/create', [UserController::class, 'createRole']);
+    //Role
+    Route::group(['prefix' => 'roles', 'middleware' => ['can:read_roles']], function () {
+        Route::get('/', [RoleController::class, 'index']);
+        Route::get('/create', [RoleController::class, 'create']);
+        Route::post('/create', [RoleController::class, 'store']);
+        Route::get('/edit/{id}', [RoleController::class, 'edit']);
+        Route::post('/edit/{id}', [RoleController::class, 'update']);
     });
 
-    Route::group(['prefix' => 'posts'], function () {
+    //Post
+    Route::group(['prefix' => 'posts', 'middleware' => ['can:read_posts']], function () {
         Route::get('/', [PostController::class, 'index']);
         Route::get('datatable', [PostController::class,'getDatatable'])->name('posts.view');
+        Route::get('/create', [PostController::class, 'create'])->middleware('can:add_posts');
+        Route::post('/create', [PostController::class, 'store'])->middleware('can:add_posts');
+        Route::get('/edit/{id}', [PostController::class, 'edit'])->middleware('can:edit_posts');
+        Route::post('/edit/{id}', [PostController::class, 'update'])->middleware('can:edit_posts');
+        Route::get('/delete/{id}', [PostController::class, 'destroy'])->middleware('can:delete_posts');
+    });
+
+    //Category Post
+    Route::group(['prefix' => 'category_posts', 'middleware' => ['can:read_posts']], function () {
+        Route::get('/', [PostCategoryController::class, 'index']);
+        Route::get('/create', [PostCategoryController::class, 'create'])->middleware('can:add_posts');
+        Route::post('/create', [PostCategoryController::class, 'store'])->middleware('can:add_posts');
+        Route::get('/edit/{id}', [PostCategoryController::class, 'edit'])->middleware('can:edit_posts');
+        Route::post('/edit/{id}', [PostCategoryController::class, 'update'])->middleware('can:edit_posts');
+        Route::get('/delete/{id}', [PostCategoryController::class, 'destroy'])->middleware('can:delete_posts');
     });
 });

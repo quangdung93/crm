@@ -117,4 +117,45 @@ table td{
     white-space: nowrap;
 }
 
+.w100{
+    width: 100% !important;
+}
+
+.panels-wells .panel-primary{
+    border-color: var(--color);
+}
+
+.form-control{
+    border-radius: 6px;
+}
+
+.form-control:focus{
+    border-color: var(--color);
+}
+
+.breadcrumb-title a{
+    color: #004d9c;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered{
+    background-color: var(--color);
+    padding: 4px 15px;
+}
+.select2-container--default .select2-results__option--highlighted[aria-selected]{
+    background-color: var(--color);
+}
+
+.select2-container--default .select2-search__field:focus{
+    border: 1px solid var(--color);
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow{
+    top: 5px;
+    right: 8px;
+}
+
+.hidden{
+    display: none;
+}
+
 /* END CUSTOM THEME */
