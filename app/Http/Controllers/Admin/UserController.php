@@ -101,6 +101,9 @@ class UserController extends Controller
         //Avatar image
         if($request->hasFile('input_file')){
             $avatarPath = $this->uploadImage('users', $request->file('input_file'));
+            if($avatarPath){
+                $this->deleteImage($user->image);
+            }
         }else{
             $avatarPath = $user->avatar;
         }

@@ -12,7 +12,7 @@ use Hash;
 class LoginController extends Controller
 {
     use AuthenticatesUsers;
-    protected $redirectTo = '/admin';
+    protected $redirectTo = '/admin/dashbroad';
 
     public function __construct()
     {
@@ -34,7 +34,7 @@ class LoginController extends Controller
 
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials, $request->has('remember'))) {
-            return redirect('admin');
+            return redirect('admin/dashbroad');
         }
 
         return redirect("login")->with('login_failed', 'Tên đăng nhập hoặc mật khẩu không đúng!');

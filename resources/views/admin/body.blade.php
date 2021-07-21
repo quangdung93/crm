@@ -21,7 +21,11 @@
                 <div class="pcoded-wrapper">
 
                     {{-- Menu --}}
-                    @include('admin.navbar.menu-admin')
+                    <nav class="pcoded-navbar">
+                        <div class="pcoded-inner-navbar main-menu">
+                            {!! menu('admin', 'admin') !!}
+                        </div>
+                    </nav>
                     {{-- End menu --}}
 
                     {{-- Main content --}}

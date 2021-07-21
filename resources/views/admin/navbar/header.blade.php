@@ -1,7 +1,6 @@
 <nav class="navbar header-navbar pcoded-header">
     <div class="navbar-wrapper">
-
-        <div class="navbar-logo">
+        <div class="navbar-logo" style="background-image: url('{{ asset(setting('admin_bg_header')) }}');background-size: cover; background-position: 0px;">
             <a class="mobile-menu" id="mobile-collapse" href="#!">
                 <i class="feather icon-menu"></i>
             </a>

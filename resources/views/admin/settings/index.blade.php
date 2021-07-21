@@ -35,7 +35,7 @@
                     @endforeach
                 </ul>
 
-                <div class="tab-content card-block">
+                <div class="tab-content card-block p-0">
                 @foreach($groupSetting as $group => $settings)
                     <div class="tab-pane {{ $loop->iteration == 1 ? 'active' : ''}}" id="{{ $group }}{{ $loop->iteration }}" role="tabpanel" aria-expanded="true">
                         <div class="row">

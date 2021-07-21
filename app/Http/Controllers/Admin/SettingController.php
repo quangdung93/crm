@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Setting;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
 class SettingController extends Controller
 {
@@ -36,7 +37,11 @@ class SettingController extends Controller
             //Image
             if($request->hasFile($key)){
                 $imagePath = $this->uploadImage('settings', $request->file($key));
-                $value = $imagePath;
+                if($imagePath){
+                    $setting = Setting::where('key', $key)->first();
+                    $this->deleteImage($setting->value);
+                    $value = $imagePath;
+                }
             }
 
             Setting::where('key', $key)->update(['value' => $value]);

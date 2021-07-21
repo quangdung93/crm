@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Storage;
 trait UploadImage
 {
 
-    public function uploadImage($folder, $file)
+    public function uploadImage($folder, $file, $thumb = null)
     {
         try {
             //get filename with extension
@@ -25,12 +25,15 @@ trait UploadImage
             $finalFile = time() .'_'. $fileName .'.' . $extension;
 
             Storage::put('/public/' . $folder . '/' . $finalFile, fopen($file, 'r+'));
-            Storage::put('/public/' . $folder . '/thumb/' . $finalFile, fopen($file, 'r+'));
 
             //Resize image thumbnail
-            $thumbnail = storage_path('/app/public/' . $folder . '/thumb/' . $finalFile);
-            $img = Image::make($thumbnail)->resize(60, 60);
-            $img->save($thumbnail);
+            if(!is_null($thumb)){
+                $thumb = explode('/', $thumb);
+                Storage::put('/public/' . $folder . '/thumb/' . $finalFile, fopen($file, 'r+'));
+                $thumbnail = storage_path('/app/public/' . $folder . '/thumb/' . $finalFile);
+                $img = Image::make($thumbnail)->resize($thumb[0], $thumb[1]);
+                $img->save($thumbnail);
+            }
 
             return $folder . '/' . $finalFile;
         }
@@ -78,6 +81,12 @@ trait UploadImage
         }
         catch (\Exception $e) {
             return null;
+        }
+    }
+
+    public function deleteImage($imagePath){
+        if(Storage::disk('public')->exists($imagePath)){
+            Storage::disk('public')->delete($imagePath);
         }
     }
 }

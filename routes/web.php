@@ -34,7 +34,7 @@ Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']
 });
 
 Route::group(['prefix' => 'admin','middleware' => 'auth'], function () {
-    Route::get('/', [DashboardController::class, 'index'])->name('dashbroad');
+    Route::get('/dashbroad', [DashboardController::class, 'index'])->name('dashbroad');
     Route::get('/logout', [LoginController::class, 'logout']);
 
     //User
@@ -54,6 +54,10 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'], function () {
         Route::post('/create', [RoleController::class, 'store']);
         Route::get('/edit/{id}', [RoleController::class, 'edit']);
         Route::post('/edit/{id}', [RoleController::class, 'update']);
+
+        //Create permission // url : /admin/roles/create_permission/{permission_group_name}
+        Route::get('/create_permission/{permission}', [RoleController::class, 'createPermission'])
+        ->middleware('role:developer');
     });
 
     //Post

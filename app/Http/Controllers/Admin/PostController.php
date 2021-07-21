@@ -102,6 +102,9 @@ class PostController extends Controller
         //Avatar image
         if($request->hasFile('input_file')){
             $avatarPath = $this->uploadImage('posts', $request->file('input_file'));
+            if($avatarPath){
+                $this->deleteImage($post->image);
+            }
         }else{
             $avatarPath = $post->image;
         }

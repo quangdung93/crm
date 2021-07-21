@@ -6,6 +6,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Permission;
 
 class RoleController extends Controller
@@ -26,12 +27,7 @@ class RoleController extends Controller
             'display_name' => $request->display_name
         ];
         Role::create($data);
-        // foreach($this->listPermission as $per){
-        //     Permission::create(['name' => 'read_'.$per, 'groups' => $per]);
-        //     Permission::create(['name' => 'add_'.$per, 'groups' => $per]);
-        //     Permission::create(['name' => 'edit_'.$per, 'groups' => $per]);
-        //     Permission::create(['name' => 'delete_'.$per, 'groups' => $per]);
-        // }
+        
         return redirect('admin/roles');
     }
 
@@ -53,5 +49,19 @@ class RoleController extends Controller
         $role->syncPermissions(array_keys($request->permission));
 
         return redirect('admin/roles/edit/'.$id)->with('success','Cập nhật thành công!');
+    }
+
+    public function createPermission(Request $request){
+        if(Auth::user()->roles->first()->name != 'developer'){
+            return abort(403);
+        }
+
+        $permission = $request->permission;
+        Permission::create(['name' => 'read_'.$permission, 'groups' => $permission]);
+        Permission::create(['name' => 'add_'.$permission, 'groups' => $permission]);
+        Permission::create(['name' => 'edit_'.$permission, 'groups' => $permission]);
+        Permission::create(['name' => 'delete_'.$permission, 'groups' => $permission]);
+
+        return 'Create Permission Success!';
     }
 }

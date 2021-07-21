@@ -1,6 +1,7 @@
 /* CUSTOM THEME */
 :root {
-    --color: #027fff;
+    --primary: #027fff;
+    --success: #009c66;
 }
 
 body{
@@ -65,36 +66,40 @@ table td{
     margin-right: 5px;
 }
 
+.bg-success{
+    background-color: var(--success) !important;
+}
+
 .bg-primary{
-    background-color: var(--color) !important;
+    background-color: var(--primary) !important;
 }
 
 .btn-primary, .wizard>.actions a, .sweet-alert button.confirm{
-    background-color: var(--color);
-    border-color: var(--color);
+    background-color: var(--primary);
+    border-color: var(--primary);
 }
 
 .btn-primary:active, .wizard>.actions a:active, .sweet-alert button.confirm:active{
-    background-color: var(--color) !important;
-    border-color: var(--color);
+    background-color: var(--primary) !important;
+    border-color: var(--primary);
     opacity: 0.7;
 }
 
 .btn-primary:hover, .wizard>.actions a:hover, .sweet-alert button.confirm:hover{
-    background-color: var(--color) !important;
-    border-color: var(--color);
+    background-color: var(--primary) !important;
+    border-color: var(--primary);
     opacity: 0.7;
 }
 
 .btn-primary:focus, .wizard>.actions a:focus, .sweet-alert button.confirm:focus{
-    background-color: var(--color) !important;
-    border-color: var(--color);
+    background-color: var(--primary) !important;
+    border-color: var(--primary);
     opacity: 0.7;
 }
 
 .page-item.active .page-link{
-    background-color: var(--color);
-    border-color: var(--color);
+    background-color: var(--primary);
+    border-color: var(--primary);
 }
 
 .main-body .page-wrapper .page-header-breadcrumb{
@@ -110,7 +115,7 @@ table td{
 }
 
 .label-primary{
-    background: linear-gradient(to right, var(--color),  var(--color));
+    background: linear-gradient(to right, var(--primary),  var(--primary));
 }
 
 .nowrap{
@@ -122,7 +127,7 @@ table td{
 }
 
 .panels-wells .panel-primary{
-    border-color: var(--color);
+    border-color: var(--primary);
 }
 
 .form-control{
@@ -130,7 +135,7 @@ table td{
 }
 
 .form-control:focus{
-    border-color: var(--color);
+    border-color: var(--primary);
 }
 
 .breadcrumb-title a{
@@ -138,15 +143,15 @@ table td{
 }
 
 .select2-container--default .select2-selection--single .select2-selection__rendered{
-    background-color: var(--color);
+    background-color: var(--primary);
     padding: 4px 15px;
 }
 .select2-container--default .select2-results__option--highlighted[aria-selected]{
-    background-color: var(--color);
+    background-color: var(--primary);
 }
 
 .select2-container--default .select2-search__field:focus{
-    border: 1px solid var(--color);
+    border: 1px solid var(--primary);
 }
 
 .select2-container--default .select2-selection--single .select2-selection__arrow{
@@ -201,13 +206,32 @@ table td{
     padding: 10px 10px !important;
 }
 
+.navbar-wrapper .navbar-logo{
+    position: relative;
+}
+
+.navbar-wrapper .navbar-logo:before{
+    content: "";
+    background: rgb(30,29,37);
+    background: linear-gradient(324deg, rgba(30,29,37,1) 0%, rgba(9,81,121,1) 67%, rgba(0,212,255,1) 93%);
+    opacity: .5;
+    -webkit-transition: all .3s ease;
+    transition: all .3s ease;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+}
+
 .md-tabs .nav-item .nav-link{
     text-transform: capitalize;
 }
 
 .md-tabs .nav-item.open .nav-link, .md-tabs .nav-item.open .nav-link:focus, .md-tabs .nav-item.open .nav-link:hover, .md-tabs .nav-link.active, .md-tabs .nav-link.active:focus, .md-tabs .nav-link.active:hover{
-    color: var(--color);
-    border-bottom: 5px solid var(--color);
+    color: var(--primary);
+    border-bottom: 5px solid var(--primary);
 }
 
 .theme-loader {
@@ -258,6 +282,44 @@ table td{
   
 .pointer-move{
     cursor: move;
+}
+
+.nav-tabs .nav-item{
+    background: #fff;
+}
+
+.md-tabs .nav-item a{
+    padding: 15px 0!important;
+}
+
+.pcoded .pcoded-navbar .pcoded-item .pcoded-hasmenu .pcoded-submenu li>a .pcoded-micon{
+    display: inline-block;
+}
+
+.pcoded .pcoded-navbar .pcoded-item .pcoded-hasmenu[subitem-icon="style1"] .pcoded-submenu li>a .pcoded-mtext:before{
+    display: none;
+}
+
+.pcoded[theme-layout="vertical"] .pcoded-navbar .pcoded-item[item-border="true"][item-border-style="none"] li>a{
+    padding: 10px 15px;
+    font-size: 15px;
+}
+
+.pcoded[theme-layout="vertical"] .pcoded-navbar .pcoded-item li.pcoded-hasmenu>a:after{
+    top: 8px;
+}
+
+.pcoded .pcoded-navbar .pcoded-item{
+    padding-top: 10px;
+    border-top: 5px solid var(--primary);
+}
+
+.pcoded .pcoded-header[header-theme="theme1"] .navbar-logo a{
+    z-index: 1;
+}
+
+.header-navbar .navbar-wrapper .navbar-logo{
+    text-transform: unset;
 }
 
 /* END CUSTOM THEME */

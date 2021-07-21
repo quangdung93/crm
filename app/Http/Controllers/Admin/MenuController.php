@@ -147,6 +147,10 @@ class MenuController extends Controller
         $highestOrder = MenuItem::highestOrderMenuItem();
         $data = $request->except(['id']);
         $data['order'] = $highestOrder;
+
+        if($data['url'] != '#'){
+            $data['url'] = Str::start($data['url'], '/');
+        }
         
         $menuItem = MenuItem::create($data);
 
@@ -162,6 +166,11 @@ class MenuController extends Controller
         $id = $request->input('id');
         $data = $request->except(['id']);
         $menuItem = MenuItem::findOrFail($id);
+
+        if($data['url'] != '#'){
+            $data['url'] = Str::start($data['url'], '/');
+        }
+
         $update = $menuItem->update($data);
 
         if($update){
@@ -181,7 +190,9 @@ class MenuController extends Controller
 
     public function deleteItem($id){
         $item = MenuItem::findOrFail($id);
-        $delete = $item->destroy($id);
+        $item->children()->delete();
+        $delete = $item->delete();
+
         if($delete){
             return response()->json(['status' => true]);
         }
