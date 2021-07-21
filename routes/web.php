@@ -83,6 +83,20 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'], function () {
         Route::post('/create', [MenuController::class, 'store']);
         Route::get('/edit/{id}', [MenuController::class, 'edit']);
         Route::post('/edit/{id}', [MenuController::class, 'update']);
-        Route::get('/delete/{id}', [MenuController::class, 'destroy'])->middleware('can:delete_users');
+        Route::get('/delete/{id}', [MenuController::class, 'destroy'])->middleware('can:delete_menus');
+        Route::get('/builder/{id}', [MenuController::class, 'builder'])->middleware('can:edit_menus');
+
+        Route::group(['prefix' => 'item'], function () {
+            Route::post('/order', [MenuController::class, 'orderItem'])
+            ->middleware('can:edit_menus')->name('menus.item.order');
+            Route::post('/add', [MenuController::class, 'addItem'])
+            ->middleware('can:add_menus')->name('menus.item.add');
+            Route::post('/add_custom', [MenuController::class, 'addItemCustom'])
+            ->middleware('can:add_menus')->name('menus.item.addcustom');
+            Route::post('/update/{id}', [MenuController::class, 'updateItem'])
+            ->middleware('can:edit_menus')->name('menus.item.update');
+            Route::get('/delete/{id}', [MenuController::class, 'deleteItem'])
+            ->middleware('can:delete_menus');
+        });
     });
 });

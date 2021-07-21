@@ -31,9 +31,6 @@
                         <div class="pcoded-inner-content">
                             <div class="main-body">
                                 <div class="page-wrapper">
-                                    {{-- Header --}}
-                                    @include('admin.components.page-header')
-
                                     {{-- Content --}}
                                     @yield('content')
                                 </div>

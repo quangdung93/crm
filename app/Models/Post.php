@@ -17,4 +17,12 @@ class Post extends Model
     public function category(){
         return $this->belongsTo(PostCategory::class);
     }
+
+    public function scopeActive($query){
+        return $query->where('status', 1);
+    }
+
+    public function link(){
+        return $this->slug;
+    }
 }

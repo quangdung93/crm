@@ -4,6 +4,7 @@
     $routeName = getCurrentSlug();
 @endphp
 @section('content')
+    @include('admin.components.page-header')
     <!-- Page-body start -->
     <div class="page-body">
         <div class="row ">
@@ -46,7 +47,7 @@
         const ajax_url = "{!! route('posts.view') !!}";
         var columns = [
             { data: 'id',name: 'id',width: '5%'},
-            { data: 'title',name: 'title',width: '25%'},
+            { data: 'name',name: 'name',width: '25%'},
             { data: 'category_id',name: 'category_id'},
             { data: 'image',name: 'image',orderable: false, searchable: false},
             { data: 'created_at',name: 'created_at', searchable: false},

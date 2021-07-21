@@ -4,6 +4,7 @@
     $routeName = getCurrentSlug();
 @endphp
 @section('content')
+    @include('admin.components.page-header')
     <!-- Page-body start -->
     <div class="page-body">
         <div class="row">

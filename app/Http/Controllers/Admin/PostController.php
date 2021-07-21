@@ -38,11 +38,11 @@ class PostController extends Controller
 
     public function store(Request $request){
         $request->validate([
-            'title' => 'required',
+            'name' => 'required',
             'slug' => 'required|unique:posts',
             'category_id' => 'required'
         ],[
-            'title.required' => 'Bạn chưa nhập tên người dùng',
+            'name.required' => 'Bạn chưa nhập tên người dùng',
             'slug.required' => 'Đường dẫn không được trống',
             'slug.unique' => 'Đường dẫn đã tồn tại',
             'category_id.required' => 'Bạn chưa chọn danh mục',
@@ -54,7 +54,7 @@ class PostController extends Controller
         }
 
         $data = [
-            'title' => $request->title,
+            'name' => $request->name,
             'slug' => Str::slug($request->slug),
             'category_id' => $request->category_id,
             'author_id' => Auth::id(),
@@ -87,11 +87,11 @@ class PostController extends Controller
 
     public function update(Request $request, $id){
         $request->validate([
-            'title' => 'required',
+            'name' => 'required',
             'slug' => 'required|unique:posts,slug,'.$id,
             'category_id' => 'required'
         ],[
-            'title.required' => 'Bạn chưa nhập tên người dùng',
+            'name.required' => 'Bạn chưa nhập tên người dùng',
             'slug.required' => 'Đường dẫn không được trống',
             'slug.unique' => 'Đường dẫn đã tồn tại',
             'category_id.required' => 'Bạn chưa chọn danh mục',
@@ -107,7 +107,7 @@ class PostController extends Controller
         }
 
         $data = [
-            'title' => $request->title,
+            'name' => $request->name,
             'slug' => $request->slug ? Str::slug($request->slug) : Str::slug($request->title),
             'category_id' => $request->category_id,
             'seo_title' => $request->seo_title,

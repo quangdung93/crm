@@ -12,8 +12,8 @@ class PostService
             ->editColumn('id', function ($row) {
                 return $row->id;
             })
-            ->editColumn('title', function ($row) {
-                return $row->title;
+            ->editColumn('name', function ($row) {
+                return $row->name;
             })
             ->editColumn('category_id', function ($row) {
                 return $row->category->name ?? '';

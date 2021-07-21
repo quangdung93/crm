@@ -176,4 +176,25 @@ table td{
     margin-right: 5px;
 }
 
+.pull-right{
+    float:right !important;
+}
+
+.modal.modal-info .modal-content{
+    border-radius: 7px;
+    border: 0;
+}
+
+.modal.modal-info .modal-header{
+    background-color: #22a7f0;
+    color: #fff;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+}
+
+.prevent-event{
+    pointer-events: none;
+    opacity: 0.6;
+}
+
 /* END CUSTOM THEME */

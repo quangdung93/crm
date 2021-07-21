@@ -43,6 +43,7 @@
     <script type="text/javascript">
         var URL_MAIN = '{{ asset('') }}';
     </script>
+    @yield('styles')
 </head>
 <body>
     @yield('body')
@@ -102,6 +103,8 @@
     <script type="text/javascript" src="{{asset('admin\bower_components\select2\js\select2.full.min.js')}}"></script>
     {{-- Lodash --}}
     <script type="text/javascript" src="{{asset('admin\assets\js\lodash.min.js')}}"></script>
+    {{-- nestable --}}
+    <script type="text/javascript" src="{{asset('admin/assets/pages/nestable/jquery.nestable.js')}}"></script>
     <!-- custom js -->
     <script src="{{asset('admin/assets/js/vartical-layout.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('admin/assets/pages/dashboard/custom-dashboard.js')}}"></script>

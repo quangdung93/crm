@@ -4,6 +4,7 @@
     $routeName = getCurrentSlug();
 @endphp
 @section('content')
+    @include('admin.components.page-header')
     <!-- Page-body start -->
     <div class="page-body">
         <div class="panel-body">
@@ -15,7 +16,7 @@
                         <div class="card">
                             <div class="card-block">
                                 <h4 class="sub-title">Thông tin {{ $pageName }}</h4>
-                                <x-input type="text" :title="$pageName" name="title" value="{{ isset($post) ? $post->title : ''  }}"/>
+                                <x-input type="text" :title="$pageName" name="name" value="{{ isset($post) ? $post->name : ''  }}"/>
                                 <x-selectbox 
                                     title="Danh mục" 
                                     name="category_id" 
@@ -68,7 +69,7 @@
     $(document).ready(function(){
 
         @if(!isset($post))
-            $('input[name="title"]').on('keyup', function(){
+            $('input[name="name"]').on('keyup', function(){
                 convert_slug($(this).val());
             });
         @endif
