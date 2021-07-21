@@ -5277,27 +5277,12 @@ a[data-toggle="lightbox"] .img-fluid {
 
             .ring {
                 display: none;
-
-                &:first-child {
-                    display: block;
+                img {
                     height: 100%;
                     width: 100%;
                     border-radius: 50%;
-                    padding: 10px;
-                    border: 3px solid transparent;
-                    border-left-color: $primary-color;
-                    border-right-color: $primary-color;
                     animation: round-rotate 1.5s ease-in-out infinite;
-                    .frame {
-                        height: 100%;
-                        width: 100%;
-                        border-radius: 50%;
-                        border: 3px solid transparent;
-                        border-left-color: $success-color;
-                        border-right-color: $success-color;
-                        animation: round-rotate 1.5s ease-in-out infinite;
-                    }
-                }
+                }   
             }
         }
     }

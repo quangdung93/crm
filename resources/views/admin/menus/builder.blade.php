@@ -69,7 +69,7 @@
                         <div class="card-block">
                             <h4 class="sub-title">{{ $pageName }} ({{ $menu->name }})</h4>
                             <div class="dd">
-                                {!! menu($menu->name, 'admin') !!}
+                                {!! menu($menu->name, 'builder') !!}
                             </div>
                         </div>
                     </div>

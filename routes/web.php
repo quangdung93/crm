@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PostCategoryController;
 
@@ -99,4 +100,14 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'], function () {
             ->middleware('can:delete_menus');
         });
     });
+
+    Route::group(['prefix' => 'settings', 'middleware' => ['can:read_settings','can:edit_settings']], function () {
+        Route::get('/', [SettingController::class, 'index']);
+        Route::post('/', [SettingController::class, 'update']);
+        Route::post('/create', [SettingController::class, 'store'])->name('settings.add');
+        Route::get('/delete/{id}', [SettingController::class, 'destroy'])
+        ->middleware('role:developer')->name('settings.delete');
+        Route::post('/order', [SettingController::class, 'order'])->name('settings.order');
+    });
+
 });

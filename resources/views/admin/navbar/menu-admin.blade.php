@@ -1,8 +1,8 @@
 <nav class="pcoded-navbar">
     <div class="pcoded-inner-navbar main-menu">
         <ul class="pcoded-item pcoded-left-item">
-            <li class="{{request()->is('*hita_enterprise') ? 'active' : ''}} pcoded-submenu">
-                <a href="{{url('/hita_enterprise')}}">
+            <li class="{{request()->is('*admin') ? 'active' : ''}} pcoded-submenu">
+                <a href="{{url('/admin')}}">
                     <span class="pcoded-micon"><i class="feather icon-home"></i></span>
                     <span class="pcoded-mtext">Tổng quan</span>
                 </a>
@@ -52,10 +52,10 @@
             @endcan
 
             @can('read_settings')
-            <li class="{{request()->is('*/settings*') ? 'active' : ''}} pcoded-hasmenu">
+            <li class="{{request()->is('*/tools*') ? 'active' : ''}} pcoded-hasmenu">
                 <a href="javascript:void(0)">
-                    <span class="pcoded-micon"><i class="feather icon-settings"></i></span>
-                    <span class="pcoded-mtext">Cấu hình</span>
+                    <span class="pcoded-micon"><i class="feather icon-sliders"></i></span>
+                    <span class="pcoded-mtext">Công cụ</span>
                 </a>
                 <ul class="pcoded-submenu">
                     @can('read_menus')
@@ -66,6 +66,15 @@
                     </li>
                     @endcan
                 </ul>
+            </li>
+            @endcan
+
+            @can('read_settings')
+            <li class="{{request()->is('*/settings*') ? 'active' : ''}}">
+                <a href="{{url('admin/settings')}}">
+                    <span class="pcoded-micon"><i class="feather icon-settings"></i></span>
+                    <span class="pcoded-mtext">Cấu hình</span>
+                </a>
             </li>
             @endcan
         </ul>

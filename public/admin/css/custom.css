@@ -1,0 +1,26 @@
+.input-img{
+    border-radius:3px;
+    border:1px solid #ddd;
+    margin-bottom:5px;
+    width:100%
+}
+
+.input-file{
+    overflow: hidden;
+    display:none;
+}
+
+.w300px{
+    width: 300px;
+}
+
+.code{
+    border-radius: 30px;
+    padding: 5px 10px;
+    font-size: 12px;
+    border: 0;
+    position: relative;
+    top: -2px;
+    color: #c7254e;
+    background-color: #f9f2f4;
+}

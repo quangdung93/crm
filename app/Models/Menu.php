@@ -52,14 +52,12 @@ class Menu extends Model
 
         $items = $menu->parent_items->sortBy('order');
 
-        if ($type == 'admin') {
-            $type = 'admin.menus.template.'.$type;
-        } else {
-            if (is_null($type)) {
-                $type = 'admin.menus.template.default';
-            } elseif ($type == 'bootstrap' && !view()->exists($type)) {
-                $type = 'admin.menus.template.bootstrap';
-            }
+        $templateMenuView = 'admin.menus.template';
+
+        if (is_null($type)) {
+            $type = $templateMenuView.'.default';
+        } elseif(view()->exists($templateMenuView.'.'.$type)) {
+            $type = $templateMenuView.'.'.$type;
         }
 
         return new \Illuminate\Support\HtmlString(

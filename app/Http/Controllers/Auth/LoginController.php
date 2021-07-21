@@ -34,7 +34,7 @@ class LoginController extends Controller
 
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials, $request->has('remember'))) {
-            return redirect('admin')->withSuccess('Signed in');
+            return redirect('admin');
         }
 
         return redirect("login")->with('login_failed', 'Tên đăng nhập hoặc mật khẩu không đúng!');

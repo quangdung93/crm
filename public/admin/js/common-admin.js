@@ -107,26 +107,28 @@ $(function () {
         });
     }
 
-    readURL = function(input,container) {
+    //Handle upload avatar
+    $(document).on('click', '.btn-upload-file', function(e){
+        e.preventDefault();
+        let file_upload = $(this).closest('.box-image').find('.input-file');
+        file_upload[0].click();
+    });
+
+    $(document).on('change','.input-file',function () {
+        let image = $(this).closest('.box-image').find('.input-img');
+        image.show();
+        readURL(this, image);
+    });
+
+    readURL = function(input, element) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
             reader.onload = function (e) {
-                $('#'+container).attr('src', e.target.result);
+                element.attr('src', e.target.result);
             };
             reader.readAsDataURL(input.files[0]);
         }
     }
-
-    $("#input_file").change(function () {
-        $("#input_img").show();
-        readURL(this, 'input_img');
-    });
-    
-    //Handle upload avatar
-    $(document).on('click', '#btn-upload-file', function(e){
-        e.preventDefault();
-        $('#input_file')[0].click();
-    });
     
     timeSince = function(date) {
 

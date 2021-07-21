@@ -4,9 +4,7 @@
     <div class="theme-loader">
         <div class="ball-scale">
             <div class='contain'>
-                <div class="ring">
-                    <div class="frame"></div>
-                </div>
+                <img style="width:50px" src="{{ asset(setting('admin_loader')) }}" alt="admin loader" />
             </div>
         </div>
     </div>

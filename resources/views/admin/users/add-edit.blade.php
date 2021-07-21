@@ -33,7 +33,17 @@
                         </div>
                     </div>
                     <div class="col-sm-3">
-                        <x-upload-file title="Ảnh đại diện" width="500" height="500" image="{{ isset($user) ? $user->avatar : '' }}"/>
+                        <div class="card">
+                            <div class="card-block">
+                                <h4 class="sub-title">Ảnh đại diện</h4>
+                                <x-upload-file 
+                                type="short"
+                                title="Ảnh đại diện" 
+                                name="input_file"
+                                image="{{ isset($user) ? $user->avatar : '' }}"
+                                width="100%"/>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <x-submit-button :route="$routeName"/>

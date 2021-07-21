@@ -11,3 +11,9 @@ if (!function_exists('menu')) {
         return (new App\Models\Menu)->display($menuName, $type);
     }
 }
+
+if (!function_exists('setting')) {
+    function setting($key, $default = null){
+        return (new App\Models\Setting)->setting($key, $default);
+    }
+}

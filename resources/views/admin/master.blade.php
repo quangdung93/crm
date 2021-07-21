@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="robots" content="noindex, nofollow" />
     <!-- Favicon icon -->
-    <link rel="icon" href="{{asset('admin\images\logo.png')}}" type="image/x-icon">
+    <link rel="icon" href="{{asset(setting('site_favicon'))}}" type="image/x-icon">
     <!-- Google font-->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet">
     <!-- Required Fremwork -->

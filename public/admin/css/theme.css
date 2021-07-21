@@ -197,4 +197,67 @@ table td{
     opacity: 0.6;
 }
 
+.header-navbar .navbar-wrapper .navbar-container .header-notification .profile-notification li{
+    padding: 10px 10px !important;
+}
+
+.md-tabs .nav-item .nav-link{
+    text-transform: capitalize;
+}
+
+.md-tabs .nav-item.open .nav-link, .md-tabs .nav-item.open .nav-link:focus, .md-tabs .nav-item.open .nav-link:hover, .md-tabs .nav-link.active, .md-tabs .nav-link.active:focus, .md-tabs .nav-link.active:hover{
+    color: var(--color);
+    border-bottom: 5px solid var(--color);
+}
+
+.theme-loader {
+    height: 100%;
+    width: 100%;
+    background-color: white;
+    position: fixed;
+    z-index: 999999;
+    top: 0;
+  }
+  
+  .theme-loader .ball-scale {
+    left: 50%;
+    top: 50%;
+    position: absolute;
+    height: 50px;
+    width: 50px;
+    margin: -25px 0 0 -25px;
+  }
+  
+  .theme-loader .ball-scale .contain {
+    height: 100%;
+    width: 100%;
+  }
+  
+  .theme-loader .ball-scale .contain img {
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    -webkit-animation: round-rotate 1s ease-in-out infinite;
+            animation: round-rotate 1s ease-in-out infinite;
+  }
+  
+  @-webkit-keyframes round-rotate {
+    100% {
+      -webkit-transform: rotate(360deg);
+              transform: rotate(360deg);
+    }
+  }
+  
+  @keyframes round-rotate {
+    100% {
+      -webkit-transform: rotate(360deg);
+              transform: rotate(360deg);
+    }
+  }
+  
+.pointer-move{
+    cursor: move;
+}
+
 /* END CUSTOM THEME */

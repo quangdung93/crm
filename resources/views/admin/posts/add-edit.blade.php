@@ -54,7 +54,17 @@
                                 <x-switch-box type="short" title="Trạng thái" name="status" checked="{{ isset($post) && $post->status ? 'true' : '' }}"/>
                             </div>
                         </div>
-                        <x-upload-file title="Ảnh đại diện" width="500" height="500" image="{{ isset($post) ? $post->image : '' }}"/>
+                        <div class="card">
+                            <div class="card-block">
+                                <h4 class="sub-title">Ảnh đại diện</h4>
+                                <x-upload-file 
+                                type="short"
+                                title="Ảnh đại diện" 
+                                name="input_file"
+                                image="{{ isset($post) ? $post->image : '' }}"
+                                width="100%"/>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <x-submit-button :route="$routeName"/>
