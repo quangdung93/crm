@@ -247,4 +247,12 @@ $(function () {
         $('input[name="slug"]').val(slug);
     }
 
+
+    //Active Menu current (Menu Admin)
+    $('ul.pcoded-submenu li').each(function(){
+        if($(this).hasClass('active')){
+            $(this).closest('.pcoded-hasmenu').addClass('pcoded-trigger');
+        }
+    });
+
 });

@@ -16,6 +16,7 @@
                     data-title="{{ $item->title }}"
                     data-type="{{ $item->type }}"
                     data-url="{{ $item->url }}"
+                    data-permission="{{ $item->permission }}"
                     data-target="{{ $item->target }}"
                     data-icon_class="{{ $item->icon_class }}"
                     data-css_class="{{ $item->css_class }}">

@@ -213,7 +213,7 @@ table td{
 .navbar-wrapper .navbar-logo:before{
     content: "";
     background: rgb(30,29,37);
-    background: linear-gradient(324deg, rgba(30,29,37,1) 0%, rgba(9,81,121,1) 67%, rgba(0,212,255,1) 93%);
+    background: linear-gradient(324deg, rgb(0 0 0) 40%, rgb(33 176 255) 67%, rgb(255 255 255) 93%);
     opacity: .5;
     -webkit-transition: all .3s ease;
     transition: all .3s ease;

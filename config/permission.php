@@ -2,6 +2,8 @@
 
 return [
 
+    'role_dev' => 'developer',
+
     'models' => [
 
         /*

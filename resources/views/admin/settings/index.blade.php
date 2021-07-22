@@ -10,7 +10,7 @@
     @include('admin.components.page-header')
     <!-- Page-body start -->
     <div class="page-body">
-        @role('developer')
+        @role(config('permission.role_dev'))
             <div class="col-sm-12">
                 <div class="text-right">
                     <a href="#" id="add-setting" class="btn btn-primary"><i class="feather icon-plus-circle"></i> Thêm cấu hình</a>
@@ -60,8 +60,8 @@
                                                         image="{{ $setting->value ?? '' }}"
                                                         width="100px" />
                                                     @endif
-
-                                                    @role('developer')
+`
+                                                    @role(config('permission.role_dev'))
                                                         <div class="form-group row">
                                                             <div class="col-sm-3 text-right">
                                                                 <label class="label label-info pointer-move"><i class="feather icon-move"></i></label>

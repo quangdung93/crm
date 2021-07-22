@@ -101,6 +101,12 @@
                         <label for="name">Đường dẫn</label>
                         <input type="text" class="form-control" id="m_url" name="url" placeholder="Đường dẫn" required><br>
                     </div>
+                    @role(config('permission.role_dev'))
+                    <div>
+                        <label for="name">Quyền truy cập</label>
+                        <input type="text" class="form-control" id="m_permission" name="permission" placeholder="Quyền truy cập"><br>
+                    </div>
+                    @endrole
                     <div>
                         <label for="name">Class icon</label>
                         <input type="text" class="form-control" id="m_icon_class" name="icon_class" placeholder="Class icon"><br>
@@ -141,6 +147,7 @@
             $m_form        = $('#m_form'),
             $m_title       = $('#m_title'),
             $m_url         = $('#m_url'),
+            $m_permission  = $('#m_permission'),
             $m_icon_class  = $('#m_icon_class'),
             $m_css_class   = $('#m_css_class'),
             $m_color       = $('#m_color'),
@@ -210,6 +217,7 @@
                 $m_hd_edit.hide();
                 $m_target.val('_self').change();
                 $m_url.val('');
+                $m_permission.val('');
                 $m_icon_class.val('');
                 $m_css_class.val('');
             }
@@ -223,6 +231,7 @@
 
                 $m_title.val(_src.data('title'));
                 $m_url.val(_src.data('url'));
+                $m_permission.val(_src.data('permission'));
                 $m_icon_class.val(_src.data('icon_class'));
                 $m_css_class.val(_src.data('css_class'));
                 $m_id.val(id);

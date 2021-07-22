@@ -57,7 +57,7 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'], function () {
 
         //Create permission // url : /admin/roles/create_permission/{permission_group_name}
         Route::get('/create_permission/{permission}', [RoleController::class, 'createPermission'])
-        ->middleware('role:developer');
+        ->middleware('role:'.config('permission.role_dev'));
     });
 
     //Post
@@ -110,7 +110,7 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'], function () {
         Route::post('/', [SettingController::class, 'update']);
         Route::post('/create', [SettingController::class, 'store'])->name('settings.add');
         Route::get('/delete/{id}', [SettingController::class, 'destroy'])
-        ->middleware('role:developer')->name('settings.delete');
+        ->middleware('role:'.config('permission.role_dev'))->name('settings.delete');
         Route::post('/order', [SettingController::class, 'order'])->name('settings.order');
     });
 
