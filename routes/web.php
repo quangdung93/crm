@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Admin\MediaController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PostCategoryController;
@@ -26,11 +27,6 @@ Route::post('/login', [LoginController::class, 'postLogin'])->name('login');
 
 Route::get('/', function () {
     return view('welcome');
-});
-
-//Filemanager
-Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
-    \UniSharp\LaravelFilemanager\Lfm::routes();
 });
 
 Route::group(['prefix' => 'admin','middleware' => 'auth'], function () {
@@ -105,6 +101,8 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'], function () {
         });
     });
 
+
+    //Setting
     Route::group(['prefix' => 'settings', 'middleware' => ['can:read_settings','can:edit_settings']], function () {
         Route::get('/', [SettingController::class, 'index']);
         Route::post('/', [SettingController::class, 'update']);
@@ -112,6 +110,14 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'], function () {
         Route::get('/delete/{id}', [SettingController::class, 'destroy'])
         ->middleware('role:'.config('permission.role_dev'))->name('settings.delete');
         Route::post('/order', [SettingController::class, 'order'])->name('settings.order');
+    });
+
+    //Media
+    Route::group(['prefix' => 'media'], function () {
+        Route::get('/', [MediaController::class, 'index']);
+        Route::group(['prefix' => 'filemanager'], function () {
+            \UniSharp\LaravelFilemanager\Lfm::routes();
+        });
     });
 
 });

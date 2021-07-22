@@ -15,7 +15,6 @@
     <link rel="stylesheet" type="text/css" href="{{asset('admin/bower_components/bootstrap/css/bootstrap.min.css')}}">
     <!-- feather Awesome -->
     <link rel="stylesheet" type="text/css" href="{{asset('admin/assets/icon/feather/css/feather.css')}}">
-    <link rel="stylesheet" type="text/css" media="screen" href="{{asset('css/font-awesome.min.css')}}">
     <!-- Date-time picker css --> 
     <link rel="stylesheet" type="text/css" href="{{asset('admin/assets\pages\advance-elements\css\bootstrap-datetimepicker.css')}}">
     <!-- notify js Fremwork -->

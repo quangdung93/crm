@@ -130,12 +130,7 @@ tinymce.init({
         var x = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth;
         var y = window.innerHeight|| document.documentElement.clientHeight|| document.getElementsByTagName('body')[0].clientHeight;
 
-        var cmsURL = URL_MAIN + 'laravel-filemanager?editor=' + meta.fieldname;
-        if (meta.filetype == 'image') {
-            cmsURL = cmsURL + "&type=Images";
-        } else {
-            cmsURL = cmsURL + "&type=Files";
-        }
+        var cmsURL = URL_MAIN + 'admin/media/filemanager?editor=' + meta.fieldname + '&type=Files';
 
         tinyMCE.activeEditor.windowManager.openUrl({
             url : cmsURL,
