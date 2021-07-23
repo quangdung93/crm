@@ -366,11 +366,21 @@ table td{
     background: var(--menu_active);
 }
 
-.pcoded .pcoded-navbar[navbar-theme="theme1"] .pcoded-item>li.active:hover>a, .pcoded .pcoded-navbar[navbar-theme="theme1"] .pcoded-item>li:hover>a{
+.pcoded .pcoded-navbar[navbar-theme="theme1"] .pcoded-item>li.active:hover>a, 
+.pcoded .pcoded-navbar[navbar-theme="theme1"] .pcoded-item>li:hover>a{
     background: var(--menu_active);
 }
 
-.pcoded .pcoded-navbar[active-item-theme="theme1"] .pcoded-item>li.pcoded-trigger>a:before, .pcoded .pcoded-navbar[active-item-theme="theme1"] .pcoded-item>li.active>a:before{
+.pcoded .pcoded-navbar[navbar-theme="theme1"] .pcoded-item .pcoded-hasmenu .pcoded-submenu li.active>a{
+    background: var(--menu_active);
+}
+
+.pcoded .pcoded-navbar[navbar-theme="theme1"] .pcoded-item li.pcoded-hasmenu .pcoded-submenu li>a{
+    background: var(--menu_active);
+}
+
+.pcoded .pcoded-navbar[active-item-theme="theme1"] .pcoded-item>li.pcoded-trigger>a:before, 
+.pcoded .pcoded-navbar[active-item-theme="theme1"] .pcoded-item>li.active>a:before{
     border-left-color: #f55971 !important;
 }
 

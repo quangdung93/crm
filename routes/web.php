@@ -33,6 +33,10 @@ Route::post('/login', [LoginController::class, 'postLogin'])->name('login');
 
 //Admin
 Route::group(['prefix' => 'admin','middleware' => 'auth'], function () {
+    Route::get('/', function(){
+        return redirect(route('dashbroad'), 301);
+    });
+
     Route::get('/dashbroad', [DashboardController::class, 'index'])->name('dashbroad');
     Route::get('/logout', [LoginController::class, 'logout']);
 

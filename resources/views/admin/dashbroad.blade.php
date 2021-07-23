@@ -1,4 +1,5 @@
 @extends('admin.body')
+@section('title','Tổng quan')
 @section('content')
 <div class="page-body">
     <div class="row">

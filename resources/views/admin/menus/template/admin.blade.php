@@ -14,7 +14,7 @@
             <li class="{{ $isActive }} {{ $item->children->isNotEmpty() ? 'pcoded-hasmenu' : '' }}">
                 <a href="{{ $item->children->isNotEmpty() ? 'javascript:void(0)' : url($item->url)}}" target="{{ $item->target }}">
                     <span class="pcoded-micon"><i class="{{ $item->icon_class }}"></i></span>
-                    <span class="pcoded-mtext">{{ $item->title }}</span>
+                    <span class="pcoded-mtext">{{ Str::limit($item->title, 20) }}</span>
                 </a>
                 @if($item->children->isNotEmpty())
                     @include('admin.menus.template.admin', ['items' => $item->children, 'children' => true])
