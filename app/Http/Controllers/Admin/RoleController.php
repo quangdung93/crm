@@ -33,6 +33,13 @@ class RoleController extends Controller
 
     public function edit(Request $request, $id){
         $role = Role::findOrFail($id)->load('permissions');
+
+        //Check permission edit
+        if($role->name == config('permission.role_dev') 
+        && !Auth::user()->hasRole(config('permission.role_dev'))){
+            return abort(403);
+        }
+
         $permissions = Permission::all();
         return view('admin.roles.edit')
             ->with([
@@ -43,6 +50,13 @@ class RoleController extends Controller
 
     public function update(Request $request, $id){
         $role = Role::findOrFail($id);
+
+        //Check permission edit
+        if($role->name == config('permission.role_dev') 
+        && !Auth::user()->hasRole(config('permission.role_dev'))){
+            return abort(403);
+        }
+
         $role->name = Str::slug($request->name);
         $role->display_name = $request->display_name;
         $role->save();
@@ -52,7 +66,7 @@ class RoleController extends Controller
     }
 
     public function createPermission(Request $request){
-        if(Auth::user()->roles->first()->name != 'developer'){
+        if(Auth::user()->roles->first()->name != config('permission.role_dev')){
             return abort(403);
         }
 

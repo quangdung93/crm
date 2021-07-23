@@ -322,4 +322,21 @@ table td{
     text-transform: unset;
 }
 
+#nav, #nav .dropdown-menu, .bg-main{
+    background-color: var(--primary);
+}
+
+.pcoded .pcoded-navbar .pcoded-item .pcoded-hasmenu .pcoded-submenu li>a .pcoded-micon{
+    font-size: 15px;
+}
+
+.img-responsive{
+    width: 100% !important;
+}
+
+.md-tabs .nav-item .nav-link i{
+    font-size: 18px;
+    margin-right: 10px;
+}
+
 /* END CUSTOM THEME */

@@ -6,28 +6,46 @@
     $pageName = 'Menu';
     $routeName = getCurrentSlug();
 @endphp
+@section('title', $pageName)
 @section('content')
     @include('admin.components.page-header')
     <!-- Page-body start -->
     <div class="page-body">
         <div class="panel-body">
-            <div class="row mb-3">
-                @can('add_menus')
-                    <div class="col-sm-12">
-                        <div class="text-right">
-                            <a href="#" id="add-menu-item-custom" class="btn btn-primary"><i class="feather icon-plus-circle"></i> Thêm liên kết tùy chỉnh</a>
-                        </div>
-                    </div>
-                @endcan
-            </div>
             <div class="row">
+                @can('add_menus')
                 <div class="col-sm-4">
                     <div class="card">
                         <div class="card-block">
                             <h4 class="sub-title">Thành phần {{ $pageName }}</h4>
+                            @can('add_menus')
                             <div class="form-group row">
-                                <label class="col-sm-12 col-form-label font-weight-bold">Danh mục bài viết</label>
-                                <div class="col-sm-10">
+                                <div class="col-sm-12">
+                                    <a href="#" id="add-menu-item-custom" class="btn btn-primary"><i class="feather icon-plus-circle"></i> Thêm liên kết tùy chỉnh</a>
+                                </div>
+                            </div>
+                            @endcan
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-form-label font-weight-bold">Liên kết từ trang</label>
+                                <div class="col-sm-9">
+                                    <select class="form-control populate select2">
+                                        <option value="0">Chọn trang</option>
+                                        @if($pages)
+                                            @foreach($pages as $item)
+                                                <option value="{{$item->id}}">{{$item->name}}</option>
+                                            @endforeach
+                                        @endif
+                                    </select>
+                                </div>
+                                <div class="col-sm-3 pl-0">
+                                    <div class="btn btn-success mt-1 add-menu-item" data-type="pages" style="padding:6px">
+                                        <i class="feather icon-arrow-right"></i> Thêm
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-form-label font-weight-bold">Liên kết từ danh mục bài viết</label>
+                                <div class="col-sm-9">
                                     <select class="form-control populate select2">
                                         <option value="0">Chọn danh mục bài viết</option>
                                         @if($category_posts)
@@ -37,15 +55,15 @@
                                         @endif
                                     </select>
                                 </div>
-                                @can('add_menus')
-                                <div class="col-sm-2 pl-0">
-                                    <div class="btn btn-success mt-1 add-menu-item" data-type="post_category"><i class="feather icon-arrow-right"></i></div>
+                                <div class="col-sm-3 pl-0">
+                                    <div class="btn btn-success mt-1 add-menu-item" data-type="post_category" style="padding:6px">
+                                        <i class="feather icon-arrow-right"></i>  Thêm
+                                    </div>
                                 </div>
-                                @endcan
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-12 col-form-label font-weight-bold">Bài viết</label>
-                                <div class="col-sm-10">
+                                <label class="col-sm-12 col-form-label font-weight-bold">Liên kết từ bài viết</label>
+                                <div class="col-sm-9">
                                     <select class="form-control populate select2">
                                         <option value="0">Chọn bài viết</option>
                                         @if($posts)
@@ -55,15 +73,16 @@
                                         @endif
                                     </select>
                                 </div>
-                                @can('add_menus')
-                                <div class="col-sm-2 pl-0">
-                                    <div class="btn btn-success mt-1 add-menu-item" data-type="posts"><i class="feather icon-arrow-right"></i></div>
+                                <div class="col-sm-3 pl-0">
+                                    <div class="btn btn-success mt-1 add-menu-item" data-type="posts" style="padding:6px">
+                                    <i class="feather icon-arrow-right"></i> Thêm
+                                    </div>
                                 </div>
-                                @endcan
                             </div>
                         </div>
                     </div>
                 </div>
+                @endcan
                 <div class="col-sm-8">
                     <div class="card">
                         <div class="card-block">

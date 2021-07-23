@@ -3,6 +3,7 @@
     $pageName = 'Người dùng';
     $routeName = getCurrentSlug();
 @endphp
+@section('title', $pageName)
 @section('content')
     @include('admin.components.page-header')
     <!-- Page-body start -->
@@ -37,7 +38,7 @@
                                         @foreach($users as $row)
                                             <tr>
                                                 <td>{{$loop->index + 1}}</td>
-                                                <td><img class="img-width-50px img-radius" src="" alt="">  {{$row->name}} </td>
+                                                <td><img width="40" style="border-radius:50%;margin-right:10px" src="{{ asset($row->avatar) }}" alt="User avatar"> {{$row->name}} </td>
                                                 <td>{{$row->email}}</td>
                                                 <td>{{ optional($row->roles->first())->display_name }}</td>
                                                 <td>

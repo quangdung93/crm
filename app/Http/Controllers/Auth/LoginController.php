@@ -32,7 +32,12 @@ class LoginController extends Controller
             'password.required' => 'Bạn chưa nhập mật khẩu'
         ]);
 
-        $credentials = $request->only('email', 'password');
+        $credentials = [
+            'email' => $request->email,
+            'password' => $request->password,
+            'status' => 1
+        ];
+
         if (Auth::attempt($credentials, $request->has('remember'))) {
             return redirect('admin/dashbroad');
         }

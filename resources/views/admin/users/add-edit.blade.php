@@ -3,6 +3,7 @@
     $pageName = 'Người dùng';
     $routeName = getCurrentSlug();
 @endphp
+@section('title', $pageName)
 @section('content')
     @include('admin.components.page-header')
     <!-- Page-body start -->

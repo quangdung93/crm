@@ -19,10 +19,10 @@ class PostService
                 return $row->category->name ?? '';
             })
             ->editColumn('image', function ($row) {
-                return '<img src="'.asset($row->image).'" class="img-responsive" style="width:60px;">';
+                return '<img src="'.asset($row->image).'" style="width:60px;">';
             })
             ->editColumn('created_at', function ($row) {
-                return Carbon::parse($row->created_at)->format('d/m/Y');
+                return format_date($row->created_at);
             })
             ->editColumn('status', function ($row) {
                 $status =  $row->status === 1 ? '<label class="label label-primary">Hiển thị</label>' : '<label class="label label-danger">Ẩn</label>';
@@ -47,7 +47,7 @@ class PostService
                                 <i class="feather icon-copy"></i>
                             </a>';
                     if($user->can('delete_posts')){
-                        $action .= '<a href="'.url('admin/posts/delete/'.$row->id).'" onclick="return confirm("Bạn có muốn xóa dòng này?")" class="btn btn-danger" title="Xóa">
+                        $action .= '<a href="'.url('admin/posts/delete/'.$row->id).'" onclick="return confirm(`Bạn có muốn xóa dòng này?`)" class="btn btn-danger" title="Xóa">
                             <i class="feather icon-trash-2"></i>
                         </a>';
                     }

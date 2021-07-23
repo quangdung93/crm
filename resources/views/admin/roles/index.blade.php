@@ -3,6 +3,7 @@
     $pageName = 'Phân quyền';
     $routeName = getCurrentSlug();
 @endphp
+@section('title', $pageName)
 @section('content')
     @include('admin.components.page-header')
     <!-- Page-body start -->
@@ -31,6 +32,10 @@
                                 <tbody>
                                     @if(!empty($roles))
                                         @foreach($roles as $row)
+                                            @if($row->name == config('permission.role_dev') 
+                                            && !Auth::user()->hasRole(config('permission.role_dev')))
+                                                @continue
+                                            @endif
                                             <tr>
                                                 <td>{{$loop->index + 1}}</td>
                                                 <td>{{$row->name}}</td>

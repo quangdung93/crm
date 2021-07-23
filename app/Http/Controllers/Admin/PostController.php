@@ -42,7 +42,7 @@ class PostController extends Controller
             'slug' => 'required|unique:posts',
             'category_id' => 'required'
         ],[
-            'name.required' => 'Bạn chưa nhập tên người dùng',
+            'name.required' => 'Bạn chưa nhập tên bài viết',
             'slug.required' => 'Đường dẫn không được trống',
             'slug.unique' => 'Đường dẫn đã tồn tại',
             'category_id.required' => 'Bạn chưa chọn danh mục',
@@ -91,7 +91,7 @@ class PostController extends Controller
             'slug' => 'required|unique:posts,slug,'.$id,
             'category_id' => 'required'
         ],[
-            'name.required' => 'Bạn chưa nhập tên người dùng',
+            'name.required' => 'Bạn chưa nhập tên bài viết',
             'slug.required' => 'Đường dẫn không được trống',
             'slug.unique' => 'Đường dẫn đã tồn tại',
             'category_id.required' => 'Bạn chưa chọn danh mục',
@@ -128,6 +128,16 @@ class PostController extends Controller
         }
         else{
             return redirect('admin/posts/edit/'. $id)->with('danger', 'Sửa thất bại!');
+        }
+    }
+
+    public function destroy($id)
+    {
+        $post = Post::findOrFail($id);
+        $delete = $post->delete();
+
+        if($delete){
+            return redirect('admin/posts')->with('success', 'Xóa thành công!');
         }
     }
 }

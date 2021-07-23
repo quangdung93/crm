@@ -1,6 +1,6 @@
 @extends('admin.body')
 @php
-    $pageName = 'Bài viết';
+    $pageName = 'Trang';
     $routeName = getCurrentSlug();
 @endphp
 @section('title', $pageName)
@@ -17,30 +17,22 @@
                         <div class="card">
                             <div class="card-block">
                                 <h4 class="sub-title">Thông tin {{ $pageName }}</h4>
-                                <x-input type="text" :title="$pageName" name="name" value="{{ $post->name ?? ''  }}"/>
-                                <x-selectbox 
-                                    title="Danh mục" 
-                                    name="category_id" 
-                                    :lists="$categories" 
-                                    value="id" 
-                                    display="name" 
-                                    selected="{{ $post->category_id ?? '' }}"
-                                />
+                                <x-input type="text" :title="$pageName" name="name" value="{{ isset($page) ? $page->name : ''  }}"/>
                             </div>
                         </div>
                         <div class="card">
                             <div class="card-block">
                                 <h4 class="sub-title">Thông tin SEO</h4>
-                                <x-input type="text" title="Đường dẫn" name="slug" value="{{ $post->slug ?? ''  }}"/>
-                                <x-input type="text" title="Meta title" name="seo_title" value="{{ $post->seo_title ?? ''  }}"/>
-                                <x-input type="text" title="Meta description" name="meta_description" value="{{ $post->meta_description ?? ''  }}"/>
-                                <x-input type="text" title="Meta keyword" name="meta_keywords" value="{{ $post->meta_keywords ?? ''  }}"/>
+                                <x-input type="text" title="Đường dẫn" name="slug" value="{{ isset($page) ? $page->slug : ''  }}"/>
+                                <x-input type="text" title="Meta title" name="meta_title" value="{{ isset($page) ? $page->seo_title : ''  }}"/>
+                                <x-input type="text" title="Meta description" name="meta_description" value="{{ isset($page) ? $page->meta_description : ''  }}"/>
+                                <x-input type="text" title="Meta keyword" name="meta_keywords" value="{{ isset($page) ? $page->meta_keywords : ''  }}"/>
                             </div>
                         </div>
                         <div class="card">
                             <div class="card-block">
                                 <h4 class="sub-title">Nội dung {{ $pageName }}</h4>
-                                <x-textarea name="body" value="{!! $post->body ?? '' !!}" />
+                                <x-textarea name="body" value="{!! isset($page) ? $page->body : '' !!}" />
                             </div>
                         </div>
                     </div>
@@ -48,7 +40,7 @@
                         <div class="card">
                             <div class="card-block">
                                 <h4 class="sub-title">Trạng thái</h4>
-                                <x-switch-box type="short" title="Trạng thái" name="status" checked="{{ isset($post) && $post->status ? 'true' : '' }}"/>
+                                <x-switch-box type="short" title="Trạng thái" name="status" checked="{{ isset($page) && $page->status ? 'true' : '' }}"/>
                             </div>
                         </div>
                         <div class="card">
@@ -58,7 +50,7 @@
                                 type="short"
                                 title="Ảnh đại diện" 
                                 name="input_file"
-                                image="{{ $post->image ?? '' }}"
+                                image="{{ isset($page) ? $page->image : '' }}"
                                 width="100%"/>
                             </div>
                         </div>

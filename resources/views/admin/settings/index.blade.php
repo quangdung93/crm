@@ -1,11 +1,9 @@
 @extends('admin.body')
-@section('styles')
-    <link rel="stylesheet" type="text/css" href="{{asset('admin/css/menu.css')}}">
-@endsection
 @php
     $pageName = 'Cấu hình';
     $routeName = getCurrentSlug();
 @endphp
+@section('title', $pageName)
 @section('content')
     @include('admin.components.page-header')
     <!-- Page-body start -->
@@ -29,7 +27,7 @@
                     @foreach($groupSetting as $group => $settings)
                         <li class="nav-item">
                             <a class="nav-link {{ $loop->iteration == 1 ? 'active' : ''}}" data-toggle="tab" href="#{{ $group }}{{ $loop->iteration }}" role="tab" aria-expanded="true">
-                                <i class="fa fa-gears"></i> {{ $group }}
+                                <i class="feather icon-globe"></i> {{ $group }}
                             </a>
                         </li>
                     @endforeach
@@ -78,13 +76,20 @@
                                                 </div>
                                             @endforeach
                                         </div>
-                                        <x-submit-button :route="$routeName"/>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 @endforeach
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-12 text-center">
+                        <button type="submit" class="btn btn-primary btn-label-left">
+                            <span><i class="feather icon-save"></i></span>
+                            Lưu cấu hình
+                        </button>
+                    </div>
                 </div>
             </form>
         </div>

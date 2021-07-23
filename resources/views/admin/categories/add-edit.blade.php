@@ -1,6 +1,6 @@
 @extends('admin.body')
 @php
-    $pageName = 'Bài viết';
+    $pageName = 'Danh mục';
     $routeName = getCurrentSlug();
 @endphp
 @section('title', $pageName)
@@ -17,30 +17,30 @@
                         <div class="card">
                             <div class="card-block">
                                 <h4 class="sub-title">Thông tin {{ $pageName }}</h4>
-                                <x-input type="text" :title="$pageName" name="name" value="{{ $post->name ?? ''  }}"/>
+                                <x-input type="text" :title="$pageName" name="name" value="{{ isset($category) ? $category->name : ''  }}"/>
                                 <x-selectbox 
-                                    title="Danh mục" 
-                                    name="category_id" 
+                                    title="Danh mục cha" 
+                                    name="father_id" 
                                     :lists="$categories" 
                                     value="id" 
                                     display="name" 
-                                    selected="{{ $post->category_id ?? '' }}"
+                                    selected="{{ isset($category) ? $category->father_id : '' }}"
                                 />
                             </div>
                         </div>
                         <div class="card">
                             <div class="card-block">
                                 <h4 class="sub-title">Thông tin SEO</h4>
-                                <x-input type="text" title="Đường dẫn" name="slug" value="{{ $post->slug ?? ''  }}"/>
-                                <x-input type="text" title="Meta title" name="seo_title" value="{{ $post->seo_title ?? ''  }}"/>
-                                <x-input type="text" title="Meta description" name="meta_description" value="{{ $post->meta_description ?? ''  }}"/>
-                                <x-input type="text" title="Meta keyword" name="meta_keywords" value="{{ $post->meta_keywords ?? ''  }}"/>
+                                <x-input type="text" title="Đường dẫn" name="slug" value="{{ isset($category) ? $category->slug : ''  }}"/>
+                                <x-input type="text" title="Meta title" name="meta_title" value="{{ isset($category) ? $category->meta_title : ''  }}"/>
+                                <x-input type="text" title="Meta description" name="meta_description" value="{{ isset($category) ? $category->meta_description : ''  }}"/>
+                                <x-input type="text" title="Meta keyword" name="meta_keyword" value="{{ isset($category) ? $category->meta_keyword : ''  }}"/>
                             </div>
                         </div>
                         <div class="card">
                             <div class="card-block">
                                 <h4 class="sub-title">Nội dung {{ $pageName }}</h4>
-                                <x-textarea name="body" value="{!! $post->body ?? '' !!}" />
+                                <x-textarea name="content" value="{!! isset($category) ? $category->content : '' !!}" />
                             </div>
                         </div>
                     </div>
@@ -48,18 +48,7 @@
                         <div class="card">
                             <div class="card-block">
                                 <h4 class="sub-title">Trạng thái</h4>
-                                <x-switch-box type="short" title="Trạng thái" name="status" checked="{{ isset($post) && $post->status ? 'true' : '' }}"/>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-block">
-                                <h4 class="sub-title">Ảnh đại diện</h4>
-                                <x-upload-file 
-                                type="short"
-                                title="Ảnh đại diện" 
-                                name="input_file"
-                                image="{{ $post->image ?? '' }}"
-                                width="100%"/>
+                                <x-switch-box type="short" title="Trạng thái" name="status" checked="{{ isset($category) && $category->status ? 'true' : '' }}"/>
                             </div>
                         </div>
                     </div>

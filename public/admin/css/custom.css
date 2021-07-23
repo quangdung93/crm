@@ -24,3 +24,87 @@
     color: #c7254e;
     background-color: #f9f2f4;
 }
+
+#themes .page-title{
+    background-image: linear-gradient(120deg, #f093fb 0%, #f5576c 100%);
+    color: #fff;
+    width: 100%;
+    border-radius: 3px;
+    margin-bottom: 15px;
+    overflow: hidden;
+    display: inline-block;
+    font-size: 20px;
+    height: 100px;
+    line-height: 43px;
+    margin-top: 3px;
+    padding-top: 28px;
+    position: relative;
+    padding-left: 75px;
+    font-weight: 700;
+    margin-right: 20px;
+}
+
+#themes .page-title:before{
+    content: '';
+    width: 110%;
+    background: rgba(0, 0, 0, 0.04);
+    position: absolute;
+    top: -20px;
+    z-index: 9;
+    display: block;
+    transform: rotate(2deg);
+    height: 50px;
+    left: 0px;
+}
+
+#themes .page-title:after {
+    content: '';
+    width: 110%;
+    background: rgba(255, 255, 255, 0.1);
+    position: absolute;
+    bottom: -24px;
+    z-index: 9;
+    display: block;
+    transform: rotate(-2deg);
+    height: 50px;
+    right: 0px;
+}
+
+#themes .page-title > i{
+    font-size: 36px;
+    position: absolute;
+    top: 30px;
+    left: 25px;
+    margin-right: 10px;
+}
+
+#themes .page-title small {
+    margin-left: 10px;
+    font-size:12px;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+#themes .theme{
+    border: 1px solid #f1f1f1;
+    border-radius: 5px;
+    color: #76838f;
+}
+
+#themes .theme .theme-details{
+    display: flex;
+    padding: 15px;
+}
+
+#themes .theme .theme-thumb{
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+#themes .theme .theme-details .item{
+    flex: 1;
+    align-self: center;
+}
+
+#themes .theme .theme-details .item h5{
+    font-size: 18px;
+}

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Exception;
 use App\Models\Menu;
+use App\Models\Page;
 use App\Models\Post;
 use App\Models\MenuItem;
 use Illuminate\Support\Str;
@@ -101,10 +102,12 @@ class MenuController extends Controller
 
         $category_posts = PostCategory::active()->get();
         $posts = Post::active()->get();
+        $pages = Page::active()->get();
 
         return view('admin.menus.builder')->with([
             'menu' => $menu,
             'posts' => $posts,
+            'pages' => $pages,
             'category_posts' => $category_posts
         ]);
     }
