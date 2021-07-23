@@ -2,6 +2,8 @@
 :root {
     --primary: #027fff;
     --success: #009c66;
+    --menu: #01162b;
+    --menu_active: #0c2741;
 }
 
 body{
@@ -208,21 +210,34 @@ table td{
 
 .navbar-wrapper .navbar-logo{
     position: relative;
+    background-image: linear-gradient(270deg, #ee63ff 0%, #f5576c 100%);
+    overflow: hidden;
 }
 
 .navbar-wrapper .navbar-logo:before{
-    content: "";
-    background: rgb(30,29,37);
-    background: linear-gradient(324deg, rgb(0 0 0) 40%, rgb(33 176 255) 67%, rgb(255 255 255) 93%);
-    opacity: .5;
-    -webkit-transition: all .3s ease;
-    transition: all .3s ease;
+    content: '';
+    width: 110%;
+    background: rgb(0 0 0 / 8%);
     position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 0;
+    top: -10px;
+    z-index: 9;
+    display: block;
+    transform: rotate(5deg);
+    height: 26px;
+    left: 0px;
+}
+
+.navbar-wrapper .navbar-logo:after{
+    content: '';
+    width: 120%;
+    background: rgba(255, 255, 255, 0.1);
+    position: absolute;
+    bottom: -12px;
+    z-index: 9;
+    display: block;
+    transform: rotate(-5deg);
+    height: 29px;
+    left: 0px;
 }
 
 .md-tabs .nav-item .nav-link{
@@ -311,11 +326,11 @@ table td{
 
 .pcoded .pcoded-navbar .pcoded-item{
     padding-top: 10px;
-    border-top: 5px solid var(--primary);
+    border-top: 5px solid #9b659c;
 }
 
 .pcoded .pcoded-header[header-theme="theme1"] .navbar-logo a{
-    z-index: 1;
+    z-index: 10;
 }
 
 .header-navbar .navbar-wrapper .navbar-logo{
@@ -337,6 +352,26 @@ table td{
 .md-tabs .nav-item .nav-link i{
     font-size: 18px;
     margin-right: 10px;
+}
+
+.pcoded .pcoded-navbar[navbar-theme="theme1"]{
+    background: var(--menu);
+}
+
+.pcoded .pcoded-navbar[navbar-theme="theme1"] .main-menu{
+    background-color: var(--menu);
+}
+
+.pcoded .pcoded-navbar[navbar-theme="theme1"] .pcoded-item>li.active>a{
+    background: var(--menu_active);
+}
+
+.pcoded .pcoded-navbar[navbar-theme="theme1"] .pcoded-item>li.active:hover>a, .pcoded .pcoded-navbar[navbar-theme="theme1"] .pcoded-item>li:hover>a{
+    background: var(--menu_active);
+}
+
+.pcoded .pcoded-navbar[active-item-theme="theme1"] .pcoded-item>li.pcoded-trigger>a:before, .pcoded .pcoded-navbar[active-item-theme="theme1"] .pcoded-item>li.active>a:before{
+    border-left-color: #f55971 !important;
 }
 
 /* END CUSTOM THEME */
