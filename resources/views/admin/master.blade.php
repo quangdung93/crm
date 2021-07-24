@@ -12,7 +12,7 @@
     <!-- Google font-->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet">
     
-    <link rel="stylesheet" type="text/css" href="{{ mix('admin/css/vendor.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ mix('admin/css/vendor.min.css')}}"> 
     <link rel="stylesheet" type="text/css" href="{{asset('admin/css/theme.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('admin/css/custom.css')}}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
