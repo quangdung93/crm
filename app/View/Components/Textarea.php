@@ -11,11 +11,15 @@ class Textarea extends Component
      *
      * @return void
      */
+    public $type;
+    public $title;
     public $name;
     public $value;
 
-    public function __construct($name, $value)
+    public function __construct($type, $title, $name, $value)
     {
+        $this->type = $type;
+        $this->title = $title;
         $this->name = $name;
         $this->value = $value;
     }

@@ -11,31 +11,8 @@
     <link rel="icon" href="{{asset(setting('site_favicon'))}}" type="image/x-icon">
     <!-- Google font-->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet">
-    <!-- Required Fremwork -->
-    <link rel="stylesheet" type="text/css" href="{{asset('admin/bower_components/bootstrap/css/bootstrap.min.css')}}">
-    <!-- feather Awesome -->
-    <link rel="stylesheet" type="text/css" href="{{asset('admin/assets/icon/feather/css/feather.css')}}">
-    <!-- Date-time picker css --> 
-    <link rel="stylesheet" type="text/css" href="{{asset('admin/assets\pages\advance-elements\css\bootstrap-datetimepicker.css')}}">
-    <!-- notify js Fremwork -->
-    <link rel="stylesheet" type="text/css" href="{{asset('admin\bower_components\pnotify\css\pnotify.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('admin\bower_components\pnotify\css\pnotify.brighttheme.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('admin\bower_components\pnotify\css\pnotify.buttons.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('admin\bower_components\pnotify\css\pnotify.history.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('admin\bower_components\pnotify\css\pnotify.mobile.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('admin\assets\pages\pnotify\notify.css')}}">
-     <!-- Data Table Css -->
-    <link rel="stylesheet" type="text/css" href="{{asset('admin\bower_components\datatables.net-bs4\css\dataTables.bootstrap4.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('admin\assets\pages\data-table\css\buttons.dataTables.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('admin\bower_components\datatables.net-responsive-bs4\css\responsive.bootstrap4.min.css')}}">
-    <!-- Switch component css -->
-    <link rel="stylesheet" type="text/css" href="{{asset('admin\bower_components\switchery\css\switchery.min.css')}}">
-    <!-- Select 2 css -->
-    <link rel="stylesheet" href="{{asset('admin\bower_components\select2\css\select2.min.css')}}">
-    @yield('style_admin')
-    <!-- Style.css -->
-    <link rel="stylesheet" type="text/css" href="{{asset('admin/assets/css/style.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('admin/assets/css/jquery.mCustomScrollbar.css')}}">
+    
+    <link rel="stylesheet" type="text/css" href="{{ mix('admin/css/vendor.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('admin/css/theme.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('admin/css/custom.css')}}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -48,7 +25,6 @@
     @yield('body')
 
     <!-- Required Jquery -->
-    {{-- <script data-cfasync="false" src="{{asset('admin/..\..\cdn-cgi\scripts\5c5dd728\cloudflare-static\email-decode.min.js')}}"></script> --}}
     <script type="text/javascript" src="{{asset('admin/bower_components/jquery/js/jquery.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('admin/bower_components/jquery-ui/js/jquery-ui.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('admin/bower_components/popper.js/js/popper.min.js')}}"></script>
@@ -106,7 +82,6 @@
     <script type="text/javascript" src="{{asset('admin/assets/pages/nestable/jquery.nestable.js')}}"></script>
     <!-- custom js -->
     <script src="{{asset('admin/assets/js/vartical-layout.min.js')}}"></script>
-    <script type="text/javascript" src="{{asset('admin/assets/pages/dashboard/custom-dashboard.js')}}"></script>
     <script type="text/javascript" src="{{asset('admin/assets/js/script.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('admin/js/common-admin.js')}}"></script>
 

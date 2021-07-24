@@ -40,7 +40,7 @@
                         <div class="card">
                             <div class="card-block">
                                 <h4 class="sub-title">Nội dung {{ $pageName }}</h4>
-                                <x-textarea name="content" value="{!! isset($category) ? $category->content : '' !!}" />
+                                <x-textarea type="tinymce" title="" name="content" value="{!! isset($category) ? $category->content : '' !!}" />
                             </div>
                         </div>
                     </div>

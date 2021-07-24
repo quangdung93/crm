@@ -42,8 +42,8 @@
                                         title="Logo" 
                                         name="home_headline" 
                                         value="{{ $themeOptions['home_headline'] }}" />
-                                        <x-input 
-                                        type="text" 
+                                        <x-textarea 
+                                        type="" 
                                         title="Mô tả trang chủ" 
                                         name="home_description" 
                                         value="{{ $themeOptions['home_description'] }}" />

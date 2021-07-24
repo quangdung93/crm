@@ -1,6 +1,10 @@
 <div class="form-group row">
-    <div class="col-sm-12">
-        <textarea class="tinymce"
+    @if($type != 'tinymce')
+        <label class="col-sm-3 col-form-label text-right">{{ $title }}</label>
+    @endif
+    <div class="{{ $type == 'tinymce' ? 'col-sm-12' : 'col-sm-9' }}">
+        <textarea 
+        class="{{ $type ?: 'form-control' }}"
         name="{{ $name }}">
             {{ old($name, $value)  }}
         </textarea>

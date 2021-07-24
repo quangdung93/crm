@@ -384,4 +384,9 @@ table td{
     border-left-color: #f55971 !important;
 }
 
+.form-group textarea:not(.tinymce){
+    width: 100%;
+    height: 90px;
+}
+
 /* END CUSTOM THEME */
