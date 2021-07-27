@@ -31,7 +31,7 @@
                         <div class="card">
                             <div class="card-block">
                                 <h4 class="sub-title">Thông tin SEO</h4>
-                                <x-input type="text" title="Đường dẫn" name="slug" value="{{ $post->slug ?? ''  }}"/>
+                                <x-input type="text" title="Đường dẫn" name="slug" value="{{ $post->slugable->slug ?? ''  }}"/>
                                 <x-input type="text" title="Meta title" name="seo_title" value="{{ $post->seo_title ?? ''  }}"/>
                                 <x-input type="text" title="Meta description" name="meta_description" value="{{ $post->meta_description ?? ''  }}"/>
                                 <x-input type="text" title="Meta keyword" name="meta_keywords" value="{{ $post->meta_keywords ?? ''  }}"/>
@@ -48,7 +48,11 @@
                         <div class="card">
                             <div class="card-block">
                                 <h4 class="sub-title">Trạng thái</h4>
-                                <x-switch-box type="short" title="Trạng thái" name="status" checked="{{ isset($post) && $post->status ? 'true' : '' }}"/>
+                                <x-switch-box 
+                                type="short" 
+                                title="Trạng thái" 
+                                name="status" 
+                                checked="{{ !isset($post) ? 'true' : ($post->status ? 'true' : '') }}"/>
                             </div>
                         </div>
                         <div class="card">
@@ -57,7 +61,7 @@
                                 <x-upload-file 
                                 type="short"
                                 title="Ảnh đại diện" 
-                                name="input_file"
+                                name="image"
                                 image="{{ $post->image ?? '' }}"
                                 width="100%"/>
                             </div>

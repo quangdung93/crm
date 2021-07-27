@@ -76,24 +76,25 @@ table td{
     background-color: var(--primary) !important;
 }
 
-.btn-primary, .wizard>.actions a, .sweet-alert button.confirm{
+.btn-primary, .wizard>.actions a{
     background-color: var(--primary);
     border-color: var(--primary);
 }
 
-.btn-primary:active, .wizard>.actions a:active, .sweet-alert button.confirm:active{
+.btn-primary:active, .wizard>.actions a:active{
     background-color: var(--primary) !important;
     border-color: var(--primary);
     opacity: 0.7;
 }
 
-.btn-primary:hover, .wizard>.actions a:hover, .sweet-alert button.confirm:hover{
+.btn-primary:hover, .wizard>.actions a:hover{
     background-color: var(--primary) !important;
     border-color: var(--primary);
+    color: #fff !important;
     opacity: 0.7;
 }
 
-.btn-primary:focus, .wizard>.actions a:focus, .sweet-alert button.confirm:focus{
+.btn-primary:focus, .wizard>.actions a:focus{
     background-color: var(--primary) !important;
     border-color: var(--primary);
     opacity: 0.7;

@@ -1,6 +1,6 @@
 @extends('admin.body')
 @php
-    $pageName = 'Danh mục bài viết';
+    $pageName = 'Thương hiệu';
     $routeName = getCurrentSlug();
 @endphp
 @section('title', $pageName)
@@ -25,27 +25,25 @@
                             <table id="datatable" class="table table-striped table-bordered w100">
                                 <thead>
                                     <tr>
-                                        <th>STT</th>
                                         <th>Tên {{ $pageName }}</th>
                                         <th>Trạng thái</th>
                                         <th>Thao tác</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if($category_posts)
-                                        @foreach($category_posts as $row)
+                                    @if($brands)
+                                        @foreach($brands as $row)
                                             <tr>
-                                                <td>{{$loop->index + 1}}</td>
                                                 <td>{{$row->name}}</td>
                                                 <td>
                                                     {!! $row->status ? '<label class="label label-success">Hiển thị</label>' : '<label class="label label-danger">Ẩn</label>' !!}
                                                 </td>
                                                 <td>
-                                                    @can('edit_posts')
+                                                    @can('edit_products')
                                                     <a class="btn btn-primary" href="{{url($routeName.'/edit/'.$row->id)}}" title="Chỉnh sửa"> <i class="feather icon-edit-1 "></i></a>
                                                     @endcan
 
-                                                    @can('delete_posts')
+                                                    @can('delete_products')
                                                     <a class="btn btn-danger notify-confirm" href="{{url($routeName.'/delete/'.$row->id)}}" title="Xóa"> <i class="feather icon-trash-2"></i></a>
                                                     @endcan
                                                 </form>

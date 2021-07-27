@@ -23,7 +23,6 @@
                             <table id="datatable" class="table table-striped table-bordered w100">
                                 <thead>
                                     <tr>
-                                        <th>STT</th>
                                         <th>Tên {{ $pageName }}</th>
                                         <th>Tên hiển thị</th>
                                         <th>Thao tác</th>
@@ -37,7 +36,6 @@
                                                 @continue
                                             @endif
                                             <tr>
-                                                <td>{{$loop->index + 1}}</td>
                                                 <td>{{$row->name}}</td>
                                                 <td>{{$row->display_name}}</td>
                                                 <td>

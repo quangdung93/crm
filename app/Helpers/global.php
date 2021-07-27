@@ -1,6 +1,7 @@
 <?php
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
 
 if (!function_exists('getCurrentSlug')) {
     function getCurrentSlug(){
@@ -29,6 +30,23 @@ if (!function_exists('format_date')) {
 if (!function_exists('format_datetime')) {
     function format_datetime($data){
         return Carbon::parse($data)->format('d/m/Y - H:i');
+    }
+}
+
+if (!function_exists('format_price')) {
+    function format_price($price){
+        return number_format($price);
+    }
+}
+
+if (!function_exists('asset_image')) {
+    function asset_image($path){
+		if(Storage::disk('public')->exists($path)){
+			return asset($path);
+		}
+		else{
+			return asset('admin/images/default.png');
+		}
     }
 }
 

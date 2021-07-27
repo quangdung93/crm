@@ -83,7 +83,11 @@
     <!-- custom js -->
     <script src="{{asset('admin/assets/js/vartical-layout.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('admin/assets/js/script.min.js')}}"></script>
+    {{-- Sortable --}}
+    <script type="text/javascript" src="{{asset('admin\bower_components\Sortable\js\Sortable.js')}}"></script>
     <script type="text/javascript" src="{{asset('admin/js/common-admin.js')}}"></script>
+    <script type="text/javascript" src="{{asset('admin/js/alert.js')}}"></script>
+    <script type="text/javascript" src="{{asset('admin/js/image.js')}}"></script>
 
     <!--Custom TinyMCE Editor -->
     <script type="text/javascript" src="{{asset('admin/js/tinymce-custom.js')}}"></script>

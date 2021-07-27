@@ -65,7 +65,7 @@
                                                                 <label class="label label-info pointer-move"><i class="feather icon-move"></i></label>
                                                             </div>
                                                             <div class="col-sm-9">
-                                                                <a href="{{ route('settings.delete',['id' => $setting->id]) }}" onclick="return confirm('Bạn có muốn xóa cấu hình này?')" class="text-danger remove-setting">
+                                                                <a href="{{ route('settings.delete',['id' => $setting->id]) }}" class="text-danger notify-confirm remove-setting">
                                                                     <i class="feather icon-trash-2"></i> Xóa
                                                                 </a>
                                                                 <label class="code mb-0">{{ $setting->key }}</label>
@@ -140,7 +140,6 @@
 @endsection
 
 @section('javascript')
-<script type="text/javascript" src="{{asset('admin\bower_components\Sortable\js\Sortable.js')}}"></script>
 <script>
     $(document).ready(function(){
         $('#add-setting').click(function() {

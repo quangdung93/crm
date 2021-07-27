@@ -23,7 +23,6 @@
                             <table id="datatable" class="table table-striped table-bordered w100">
                                 <thead>
                                     <tr>
-                                        <th>STT</th>
                                         <th>Tên {{ $pageName }}</th>
                                         <th>Thao tác</th>
                                     </tr>
@@ -32,7 +31,6 @@
                                     @if(!empty($menus))
                                         @foreach($menus as $row)
                                             <tr>
-                                                <td>{{$loop->index + 1}}</td>
                                                 <td>{{$row->name}}</td>
                                                 <td>
                                                     @can('edit_menus')
@@ -40,9 +38,9 @@
                                                     <a class="btn btn-primary" href="{{url($routeName.'/edit/'.$row->id)}}" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Chỉnh sửa"> <i class="feather icon-edit-1"></i></a>
                                                     @endcan
 
-                                                    @can('delete_menus')
-                                                        <a class="btn btn-danger" href="{{url($routeName.'/delete/'.$row->id)}}" onclick="return confirm('Bạn muốn xóa dòng này?')" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Xóa"> <i class="feather icon-trash-2"></i></a>
-                                                    @endcan
+                                                    @role(config('permission.role_dev'))
+                                                        <a class="btn btn-danger notify-confirm" href="{{url($routeName.'/delete/'.$row->id)}}" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Xóa"> <i class="feather icon-trash-2"></i></a>
+                                                    @endrole
                                                 </form>
                                                 </td>
                                             </tr>

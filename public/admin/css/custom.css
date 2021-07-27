@@ -108,3 +108,80 @@
 #themes .theme .theme-details .item h5{
     font-size: 18px;
 }
+
+/* Upload */
+
+.wrap-upload{
+    padding:30px 15px;
+    width: 100%;
+    background: #fafafa;
+    border: 2px dashed #C8CBCE;
+    border-radius: 3px;
+}
+
+.upload-zone-icon{
+    text-align: center;
+    margin-bottom:15px;
+}
+
+.upload-zone-icon i{
+    font-size:30px;
+    color:#97A1A8;
+}
+
+.upload-zone-text{
+    text-align: center;
+    font-size:17px;
+    margin-bottom:15px;
+    color:#97A1A8;
+}
+
+.upload-zone-button{
+    text-align: center;
+}
+
+.preview-images {
+    width: 100%;
+    text-align: left;
+    margin-top:20px;
+    padding-top: 20px;
+    border-top: 1px dashed #C8CBCE;
+}
+
+.preview-images li {
+    position: relative;
+    display: inline-block;
+    padding: 2px;
+    max-width: 150px;
+    cursor: move;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.06);
+    margin: 0 15px 15px 0;
+    border-radius: 5px;
+}
+
+.preview-images li span {
+    background: #ddd;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    position: absolute;
+    right: -10px;
+    top: -10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #d92329;
+}
+
+.preview-images li img {
+    border-radius: 3px;
+    width: 100%;
+    border: 1px solid #e0e0e0;
+}
+
+input[type=file]{
+    overflow: hidden;
+}
+/* End upload */

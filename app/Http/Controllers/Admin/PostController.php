@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use App\Models\PostCategory;
 use Illuminate\Http\Request;
 use App\Services\PostService;
+use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
@@ -39,7 +40,7 @@ class PostController extends Controller
     public function store(Request $request){
         $request->validate([
             'name' => 'required',
-            'slug' => 'required|unique:posts',
+            'slug' => 'required|unique:slugs',
             'category_id' => 'required'
         ],[
             'name.required' => 'Bạn chưa nhập tên bài viết',
@@ -49,24 +50,19 @@ class PostController extends Controller
         ]);
 
         //Avatar image
-        if($request->hasFile('input_file')){
-            $avatarPath = $this->uploadImage('posts', $request->file('input_file'));
+        if($request->hasFile('image')){
+            $avatarPath = $this->uploadImage('posts', $request->file('image'));
         }
 
-        $data = [
-            'name' => $request->name,
-            'slug' => Str::slug($request->slug),
-            'category_id' => $request->category_id,
-            'author_id' => Auth::id(),
-            'seo_title' => $request->seo_title,
-            'meta_description' => $request->meta_description,
-            'meta_keywords' => $request->meta_keywords,
-            'body' => $request->body,
-            'status' => isset($request->status) ? 1 : 0,
-            'image' => $avatarPath ?? null
-        ];
+        $data = $request->except('slug');
+        $data['image'] = $avatarPath ?? null;
+        $data['status'] = isset($request->status) ? 1 : 0;
+        $data['author_id'] = Auth::id();
 
         $post = Post::create($data);
+
+        //Slug
+        $post->slugable()->create(['slug' => Str::slug($request->slug)]);
 
         if($post){
             return redirect('admin/posts')->with('success', 'Tạo thành công!');
@@ -88,7 +84,7 @@ class PostController extends Controller
     public function update(Request $request, $id){
         $request->validate([
             'name' => 'required',
-            'slug' => 'required|unique:posts,slug,'.$id,
+            'slug' => ['required', Rule::unique('slugs')->ignore($id, 'slugable_id')],
             'category_id' => 'required'
         ],[
             'name.required' => 'Bạn chưa nhập tên bài viết',
@@ -100,8 +96,8 @@ class PostController extends Controller
         $post = Post::findOrFail($id);
 
         //Avatar image
-        if($request->hasFile('input_file')){
-            $avatarPath = $this->uploadImage('posts', $request->file('input_file'));
+        if($request->hasFile('image')){
+            $avatarPath = $this->uploadImage('posts', $request->file('image'));
             if($avatarPath){
                 $this->deleteImage($post->image);
             }
@@ -109,17 +105,12 @@ class PostController extends Controller
             $avatarPath = $post->image;
         }
 
-        $data = [
-            'name' => $request->name,
-            'slug' => $request->slug ? Str::slug($request->slug) : Str::slug($request->title),
-            'category_id' => $request->category_id,
-            'seo_title' => $request->seo_title,
-            'meta_description' => $request->meta_description,
-            'meta_keywords' => $request->meta_keywords,
-            'body' => $request->body,
-            'status' => isset($request->status) ? 1 : 0,
-            'image' => $avatarPath ?? null
-        ];
+        $data = $request->except('slug');
+        $data['image'] = $avatarPath ?? null;
+        $data['status'] = isset($request->status) ? 1 : 0;
+
+        //Slug
+        $post->slugable()->updateOrCreate([],['slug' => Str::slug($request->slug)]);
 
         $update = $post->update($data);
 

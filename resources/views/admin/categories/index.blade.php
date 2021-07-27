@@ -48,7 +48,7 @@
                                                     @endcan
 
                                                     @can('delete_products')
-                                                    <a class="btn btn-danger" href="{{url($routeName.'/delete/'.$row->id)}}" onclick="return confirm('Bạn có muốn xóa dòng này?')" title="Xóa"> <i class="feather icon-trash-2"></i></a>
+                                                    <a class="btn btn-danger notify-confirm" href="{{url($routeName.'/delete/'.$row->id)}}" title="Xóa"> <i class="feather icon-trash-2"></i></a>
                                                     @endcan
                                                 </form>
                                                 </td>

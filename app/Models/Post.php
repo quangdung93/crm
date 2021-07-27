@@ -13,12 +13,12 @@ class Post extends Model
     protected $guarded = [];
     protected $dates = ['deleted_at'];
 
-    public function links(){
-        return $this->slug;
-    }
-
     public function category(){
         return $this->belongsTo(PostCategory::class);
+    }
+
+    public function slugable(){
+        return $this->morphOne(Slug::class, 'slugable');
     }
 
     public function scopeActive($query){
@@ -26,6 +26,6 @@ class Post extends Model
     }
 
     public function link(){
-        return $this->slug;
+        return $this->slugable ? $this->slugable->slug : '';
     }
 }

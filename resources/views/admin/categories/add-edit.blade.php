@@ -48,7 +48,11 @@
                         <div class="card">
                             <div class="card-block">
                                 <h4 class="sub-title">Trạng thái</h4>
-                                <x-switch-box type="short" title="Trạng thái" name="status" checked="{{ isset($category) && $category->status ? 'true' : '' }}"/>
+                                <x-switch-box 
+                                type="short" 
+                                title="Trạng thái" 
+                                name="status" 
+                                checked="{{ !isset($category) ? 'true' : ($category->status ? 'true' : '') }}"/>
                             </div>
                         </div>
                     </div>
@@ -64,7 +68,7 @@
 <script type="text/javascript">
     $(document).ready(function(){
 
-        @if(!isset($post))
+        @if(!isset($category))
             $('input[name="name"]').on('keyup', function(){
                 convert_slug($(this).val());
             });

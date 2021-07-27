@@ -85,51 +85,6 @@ $(function () {
     
     });
     
-    hideSuccessMessage = function(time = 3000) {
-        setTimeout(() => {
-            $('.alert.alert-success').fadeOut();
-        }, time);
-    }
-
-    hideErrorMessage = function(time = 3000) {
-        setTimeout(() => {
-            $('.alert.alert-danger').fadeOut();
-        }, time);
-    }
-
-    pushNotify = function(title, text = '', type = 'success'){ //success , danger , warning, info
-        let icon = type == 'success' ? 'feather icon-check-circle' : 'feather icon-info';
-        new PNotify({
-            title: title,
-            text: text,
-            icon: icon,
-            type: type
-        });
-    }
-
-    //Handle upload avatar
-    $(document).on('click', '.btn-upload-file', function(e){
-        e.preventDefault();
-        let file_upload = $(this).closest('.box-image').find('.input-file');
-        file_upload[0].click();
-    });
-
-    $(document).on('change','.input-file',function () {
-        let image = $(this).closest('.box-image').find('.input-img');
-        image.show();
-        readURL(this, image);
-    });
-
-    readURL = function(input, element) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                element.attr('src', e.target.result);
-            };
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-    
     timeSince = function(date) {
 
         var seconds = Math.floor((new Date() - date) / 1000);
@@ -217,7 +172,6 @@ $(function () {
 
     convert_slug = function(title){
         var slug;
-
         //Đổi chữ hoa thành chữ thường
         slug = title.toLowerCase();
     

@@ -1,6 +1,6 @@
 @extends('admin.body')
 @php
-    $pageName = 'Trang';
+    $pageName = 'Thương hiệu';
     $routeName = getCurrentSlug();
 @endphp
 @section('title', $pageName)
@@ -17,22 +17,22 @@
                         <div class="card">
                             <div class="card-block">
                                 <h4 class="sub-title">Thông tin {{ $pageName }}</h4>
-                                <x-input type="text" :title="$pageName" name="name" value="{{ isset($page) ? $page->name : ''  }}"/>
+                                <x-input type="text" :title="$pageName" name="name" value="{{ $brand->name ?? '' }}"/>
                             </div>
                         </div>
                         <div class="card">
                             <div class="card-block">
                                 <h4 class="sub-title">Thông tin SEO</h4>
-                                <x-input type="text" title="Đường dẫn" name="slug" value="{{ isset($page) ? $page->slug : ''  }}"/>
-                                <x-input type="text" title="Meta title" name="meta_title" value="{{ isset($page) ? $page->seo_title : ''  }}"/>
-                                <x-input type="text" title="Meta description" name="meta_description" value="{{ isset($page) ? $page->meta_description : ''  }}"/>
-                                <x-input type="text" title="Meta keyword" name="meta_keywords" value="{{ isset($page) ? $page->meta_keywords : ''  }}"/>
+                                <x-input type="text" title="Đường dẫn" name="slug" value="{{ $brand->slug ?? '' }}"/>
+                                <x-input type="text" title="Meta title" name="meta_title" value="{{ $brand->meta_title ?? '' }}"/>
+                                <x-input type="text" title="Meta description" name="meta_description" value="{{ $brand->meta_description ?? '' }}"/>
+                                <x-input type="text" title="Meta keyword" name="meta_keyword" value="{{ $brand->meta_keyword ?? '' }}"/>
                             </div>
                         </div>
                         <div class="card">
                             <div class="card-block">
                                 <h4 class="sub-title">Nội dung {{ $pageName }}</h4>
-                                <x-textarea type="tinymce" title="" name="body" value="{!! isset($page) ? $page->body : '' !!}" />
+                                <x-textarea type="tinymce" title="" name="content" value="{!! isset($brand) ? $brand->content : '' !!}" />
                             </div>
                         </div>
                     </div>
@@ -44,17 +44,17 @@
                                 type="short" 
                                 title="Trạng thái" 
                                 name="status" 
-                                checked="{{ !isset($page) ? 'true' : ($page->status ? 'true' : '') }}"/>
+                                checked="{{ !isset($brand) ? 'true' : ($brand->status ? 'true' : '') }}"/>
                             </div>
                         </div>
                         <div class="card">
                             <div class="card-block">
-                                <h4 class="sub-title">Ảnh đại diện</h4>
+                                <h4 class="sub-title">Hình ảnh</h4>
                                 <x-upload-file 
                                 type="short"
-                                title="Ảnh đại diện" 
+                                title="Hình ảnh" 
                                 name="input_file"
-                                image="{{ isset($page) ? $page->image : '' }}"
+                                image="{{ $brand->image ?? '' }}"
                                 width="100%"/>
                             </div>
                         </div>
@@ -71,7 +71,7 @@
 <script type="text/javascript">
     $(document).ready(function(){
 
-        @if(!isset($page))
+        @if(!isset($brand))
             $('input[name="name"]').on('keyup', function(){
                 convert_slug($(this).val());
             });

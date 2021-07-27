@@ -25,9 +25,8 @@
                             <table id="datatable" class="table table-striped table-bordered w100">
                                 <thead>
                                     <tr>
-                                        <th>STT</th>
-                                        <th>Tên {{ $pageName }}</th>
                                         <th>Hình ảnh</th>
+                                        <th>Tên {{ $pageName }}</th>
                                         <th>Ngày tạo</th>
                                         <th>Trạng thái</th>
                                         <th>Thao tác</th>
@@ -37,9 +36,8 @@
                                     @if($pages)
                                         @foreach($pages as $row)
                                             <tr>
-                                                <td> {{ $loop->iteration }} </td>
-                                                <td> {{$row->name}} </td>
                                                 <td><img width="70" src="{{ asset($row->image) }}" alt=""></td>
+                                                <td> {{$row->name}} </td>
                                                 <td>{{ format_date($row->created_at) }}</td>
                                                 <td>
                                                     {!! $row->status ? '<label class="label label-success">Hoạt động</label>' : '<label class="label label-danger">Ngừng hoạt động</label>' !!}
@@ -50,7 +48,7 @@
                                                     @endcan
 
                                                     @can('delete_pages')
-                                                    <a class="btn btn-danger" href="{{url($routeName.'/delete/'.$row->id)}}" onclick="return confirm('Bạn có muốn xóa dòng này?')" title="Xóa"> <i class="feather icon-trash-2"></i></a>
+                                                    <a href="{{url($routeName.'/delete/'.$row->id)}}" class="btn btn-danger notify-confirm" title="Xóa"> <i class="feather icon-trash-2"></i></a>
                                                     @endcan
 
                                                     <a class="btn btn-success" href="{{url($row->link())}}" target="_blank" title="Xem"> <i class="feather icon-eye"></i></a>

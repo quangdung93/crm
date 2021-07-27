@@ -1,6 +1,6 @@
 @extends('admin.body')
 @php
-    $pageName = 'Bài viết';
+    $pageName = 'Sản phẩm';
     $routeName = getCurrentSlug();
 @endphp
 @section('title', $pageName)
@@ -26,6 +26,9 @@
                                         <th>Hình ảnh</th>
                                         <th>{{ $pageName }}</th>
                                         <th>Danh mục</th>
+                                        <th>Thương hiệu</th>
+                                        <th>Giá bán</th>
+                                        <th>Giảm giá</th>
                                         <th>Ngày tạo</th>
                                         <th>Trạng thái</th>
                                         <th>Thao tác</th>
@@ -44,13 +47,16 @@
 @section('javascript')
 <script type="text/javascript">
     $(document).ready(function(){
-        const ajax_url = "{!! route('posts.view') !!}";
+        const ajax_url = "{!! route('products.view') !!}";
         var columns = [
             { data: 'image',name: 'image',orderable: false, searchable: false},
             { data: 'name',name: 'name',width: '25%'},
             { data: 'category_id',name: 'category_id'},
+            { data: 'brand_id',name: 'brand_id'},
+            { data: 'price',name: 'price', className: 'nowrap'},
+            { data: 'discount',name: 'discount'},
             { data: 'created_at',name: 'created_at', searchable: false},
-            { data: 'status',name: 'status', searchable: false},
+            { data: 'status',name: 'status', searchable: false, className: 'nowrap'},
             { data: 'action',orderable: false, searchable: false, className: 'nowrap'}
         ];
 

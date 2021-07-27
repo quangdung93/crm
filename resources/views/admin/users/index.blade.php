@@ -25,7 +25,6 @@
                             <table id="datatable" class="table table-striped table-bordered w100">
                                 <thead>
                                     <tr>
-                                        <th>STT</th>
                                         <th>Tên {{ $pageName }}</th>
                                         <th>Email</th>
                                         <th>Quyền</th>
@@ -37,7 +36,6 @@
                                     @if(!empty($users))
                                         @foreach($users as $row)
                                             <tr>
-                                                <td>{{$loop->index + 1}}</td>
                                                 <td><img width="40" style="border-radius:50%;margin-right:10px" src="{{ asset($row->avatar) }}" alt="User avatar"> {{$row->name}} </td>
                                                 <td>{{$row->email}}</td>
                                                 <td>{{ optional($row->roles->first())->display_name }}</td>
@@ -50,7 +48,7 @@
                                                     @endcan
 
                                                     @can('delete_users')
-                                                    <a class="btn btn-danger" href="{{url($routeName.'/delete/'.$row->id)}}" onclick="return confirm('Bạn có muốn xóa dòng này?')" title="Xóa"> <i class="feather icon-trash-2"></i></a>
+                                                    <a class="btn btn-danger notify-confirm" href="{{url($routeName.'/delete/'.$row->id)}}" title="Xóa"> <i class="feather icon-trash-2"></i></a>
                                                     @endcan
                                                 </form>
                                                 </td>
