@@ -390,4 +390,44 @@ table td{
     height: 90px;
 }
 
+/* Mini Menu / Localstorage Menu State */
+.pcoded[theme-layout=vertical][vertical-placement=left][vertical-nav-type=offcanvas][vertical-effect=shrink] .pcoded-navbar{
+    margin-left: 0;
+}
+
+.mini-menu .pcoded-navbar .main-menu{
+    width: 55px !important;
+}
+
+.mini-menu .pcoded-navbar{
+    width: 55px !important;
+    margin-left: 0px !important;
+}
+
+.mini-menu .pcoded-content{
+    margin-left: 55px !important;
+}
+
+.pcoded-wrapper:not(.mini-menu) .pcoded-content{
+    margin-left: 240px !important;
+}
+
+.mini-menu .pcoded-navbar .pcoded-item>li>a .pcoded-mtext{
+    display: none !important;
+}
+
+.mini-menu .pcoded-navbar .pcoded-item li.pcoded-hasmenu>a:after{
+    display: none !important;
+}
+
+.mini-menu .pcoded-navbar .pcoded-item .pcoded-hasmenu .pcoded-submenu li>a>.pcoded-mtext{
+    display: none !important;
+}
+
+.mini-menu .pcoded-navbar .pcoded-item .pcoded-hasmenu .pcoded-submenu li>a{
+    padding-left: 20px !important;
+}
+
+/* End Mini Menu */
+
 /* END CUSTOM THEME */
