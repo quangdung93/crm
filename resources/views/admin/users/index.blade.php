@@ -11,18 +11,18 @@
         <div class="row ">
             @can('add_users')
             <div class="col-sm-12">
-                <div class="text-right mb-20">
+                <div class="text-left mb-3">
                     <a href="{{url($routeName.'/create')}}" class="btn btn-primary"><i
                             class="feather icon-plus"></i> Thêm mới</a>
                 </div>
             </div>
             @endcan
-            <div class="col-sm-12 mt-2">
-                <div class="panel panel-primary">
-                    <div class="panel-heading bg-primary">{{ $pageName }}</div>
-                    <div class="panel-body p-2">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-block">
+                        <h4 class="sub-title">{{ $pageName }}</h4>
                         <div class="dt-responsive table-responsive">
-                            <table id="datatable" class="table table-striped table-bordered w100">
+                            <table id="datatable" class="table stableweb-table w100">
                                 <thead>
                                     <tr>
                                         <th>Tên {{ $pageName }}</th>

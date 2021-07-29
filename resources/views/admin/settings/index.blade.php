@@ -9,10 +9,8 @@
     <!-- Page-body start -->
     <div class="page-body">
         @role(config('permission.role_dev'))
-            <div class="col-sm-12">
-                <div class="text-right">
-                    <a href="#" id="add-setting" class="btn btn-primary"><i class="feather icon-plus-circle"></i> Thêm cấu hình</a>
-                </div>
+            <div class="col-sm-12 mb-3">
+                <a href="#" id="add-setting" class="btn btn-primary"><i class="feather icon-plus-circle"></i> Thêm cấu hình</a>
             </div>
         @endrole
         <div class="panel-body">

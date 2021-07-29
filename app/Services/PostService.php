@@ -22,7 +22,7 @@ class PostService
                 return format_date($row->created_at);
             })
             ->editColumn('status', function ($row) {
-                $status =  $row->status === 1 ? '<label class="label label-primary">Hiển thị</label>' : '<label class="label label-danger">Ẩn</label>';
+                $status =  $row->status === 1 ? '<label class="label label-success">Hiển thị</label>' : '<label class="label label-danger">Ẩn</label>';
                 if( !empty($row->deleted_at) ){
                     $status = '<label class="label label-danger">Đã xóa</label><br> <p class="white-space"> Ngày xóa: '.date('d-m-Y',strtotime($row->deleted_at)).' </p>';
                 }

@@ -40,7 +40,7 @@ mix.styles([
 
     //Select 2
     'public/admin/bower_components/select2/css/select2.min.css',
-
+    'public/admin/assets/css/style.css',
     'public/admin/assets/css/jquery.mCustomScrollbar.css',
 
     ], 'public/admin/css/vendor.min.css');
