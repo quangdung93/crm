@@ -10,7 +10,8 @@
     <!-- Favicon icon -->
     <link rel="icon" href="{{asset(setting('site_favicon'))}}" type="image/x-icon">
     <!-- Google font-->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet">
+    {{-- <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet"> --}}
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:400,500,600,700&amp;subset=vietnamese" rel="stylesheet">
     
     <link rel="stylesheet" type="text/css" href="{{ mix('admin/css/vendor.min.css')}}"> 
     <link rel="stylesheet" type="text/css" href="{{asset('admin/css/theme.css')}}">
@@ -85,8 +86,8 @@
     <script type="text/javascript" src="{{asset('admin/assets/js/script.min.js')}}"></script>
     {{-- Sortable --}}
     <script type="text/javascript" src="{{asset('admin\bower_components\Sortable\js\Sortable.js')}}"></script>
-    <script type="text/javascript" src="{{asset('admin/js/common-admin.js')}}"></script>
-    <script type="text/javascript" src="{{asset('admin/js/alert.js')}}"></script>
+    <script type="text/javascript" src="{{asset('admin/js/admin-custom.js')}}"></script>
+    <script type="text/javascript" src="{{asset('admin/js/notify-custom.js')}}"></script>
     <script type="text/javascript" src="{{asset('admin/js/image.js')}}"></script>
 
     <!--Custom TinyMCE Editor -->

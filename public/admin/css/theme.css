@@ -6,12 +6,32 @@
     --menu_active: #0c49c3;
 }
 
+@font-face {
+    font-family: 'opensans';
+    src: url(../fonts/opensans-light.ttf);
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: 'opensans';
+    src: url(../fonts/opensans-regular.ttf);
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: 'opensans';
+    src: url(../fonts/opensans-bold.ttf);
+    font-weight: 600;
+}
+
 body{
-    font-size:13px;
+    font-size:14px;
+    font-family: "opensans";
+    font-weight: 500;
 }
 
 table {
-    font-size:13px;
+    font-size:14px;
 }
 
 .stableweb-table.table thead th{
@@ -51,6 +71,7 @@ table td{
 .btn{
     padding: 6px 12px;
     text-transform: unset;
+    font-weight: 500;
 }
 
 .btn i.icon-upload-cloud{
@@ -149,7 +170,7 @@ table td{
     text-align: center;
     white-space: nowrap;
     vertical-align: baseline;
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .label-primary{
@@ -170,6 +191,8 @@ table td{
 
 .form-control{
     border-radius: 6px;
+    font-weight: 500;
+    line-height: 1.4;
 }
 
 .form-control:focus{
@@ -344,6 +367,10 @@ table td{
     padding: 15px 0!important;
 }
 
+.pcoded .pcoded-navbar .pcoded-item .pcoded-hasmenu .pcoded-submenu li>a{
+    font-weight: 500;
+}
+
 .pcoded .pcoded-navbar .pcoded-item .pcoded-hasmenu .pcoded-submenu li>a .pcoded-micon{
     display: inline-block;
 }
@@ -399,6 +426,10 @@ table td{
     background-color: var(--menu);
 }
 
+.pcoded .pcoded-navbar[navbar-theme=theme1] .pcoded-item>li.pcoded-trigger>a{
+    background: var(--menu_active);
+}
+
 .pcoded .pcoded-navbar[navbar-theme="theme1"] .pcoded-item>li.active>a{
     background: var(--menu_active);
 }
@@ -427,7 +458,7 @@ table td{
 
 .form-group textarea:not(.tinymce){
     width: 100%;
-    height: 90px;
+    height: 95px;
 }
 
 /* Mini Menu / Localstorage Menu State */

@@ -18,6 +18,6 @@ class Page extends Model
     }
 
     public function link(){
-        return $this->slug;
+        return $this->slug ? url($this->slug) : '';
     }
 }

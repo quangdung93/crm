@@ -25,6 +25,7 @@
                             <table id="datatable" class="table stableweb-table center w100">
                                 <thead>
                                     <tr>
+                                        <th>Hình ảnh</th>
                                         <th>Tên {{ $pageName }}</th>
                                         <th>Trạng thái</th>
                                         <th>Thao tác</th>
@@ -34,6 +35,7 @@
                                     @if($brands)
                                         @foreach($brands as $row)
                                             <tr>
+                                                <td><img width="70" src="{{ asset_image($row->image) }}" alt="Brand"/></td>
                                                 <td>{{$row->name}}</td>
                                                 <td>
                                                     {!! $row->status ? '<label class="label label-success">Hiển thị</label>' : '<label class="label label-danger">Ẩn</label>' !!}

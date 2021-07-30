@@ -174,22 +174,6 @@
             $m_id          = $('#m_id');
 
         /**
-        * Delete menu item
-        */
-        $('.item_actions').on('click', '.delete', function (e) {
-            if(confirm('Bạn có muốn xóa menu này?')){
-                let self = $(this),
-                    id = $(this).data('id');
-                $.get(URL_MAIN + 'admin/menus/item/delete/' + id, function (data) {
-                    if(data.status){
-                        pushNotify('Xóa thành công!', text = '', type = 'success');
-                        window.location.reload();
-                    }
-                });
-            }
-        });
-
-        /**
         * Add Menu
         */
         $(document).on('click', '.add-menu-item', function(){

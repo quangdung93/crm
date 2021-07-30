@@ -25,7 +25,7 @@
                                 <h4 class="sub-title">Thông tin SEO</h4>
                                 <x-input type="text" title="Đường dẫn" name="slug" value="{{ $brand->slug ?? '' }}"/>
                                 <x-input type="text" title="Meta title" name="meta_title" value="{{ $brand->meta_title ?? '' }}"/>
-                                <x-input type="text" title="Meta description" name="meta_description" value="{{ $brand->meta_description ?? '' }}"/>
+                                <x-textarea type="" title="Meta description" name="meta_description" value="{{ $brand->meta_description ?? ''  }}" />
                                 <x-input type="text" title="Meta keyword" name="meta_keyword" value="{{ $brand->meta_keyword ?? '' }}"/>
                             </div>
                         </div>
@@ -35,6 +35,9 @@
                                 <x-textarea type="tinymce" title="" name="content" value="{!! isset($brand) ? $brand->content : '' !!}" />
                             </div>
                         </div>
+                        @if(config('themes.google_review'))
+                            <x-google-review :model="$brand ?? ''"/>
+                        @endif
                     </div>
                     <div class="col-sm-3">
                         <div class="card">
@@ -53,7 +56,7 @@
                                 <x-upload-file 
                                 type="short"
                                 title="Hình ảnh" 
-                                name="input_file"
+                                name="image"
                                 image="{{ $brand->image ?? '' }}"
                                 width="100%"/>
                             </div>
@@ -70,7 +73,6 @@
 @section('javascript')
 <script type="text/javascript">
     $(document).ready(function(){
-
         @if(!isset($brand))
             $('input[name="name"]').on('keyup', function(){
                 convert_slug($(this).val());

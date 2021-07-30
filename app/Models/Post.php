@@ -17,15 +17,11 @@ class Post extends Model
         return $this->belongsTo(PostCategory::class);
     }
 
-    public function slugable(){
-        return $this->morphOne(Slug::class, 'slugable');
-    }
-
     public function scopeActive($query){
         return $query->where('status', 1);
     }
 
     public function link(){
-        return $this->slugable ? $this->slugable->slug : '';
+        return $this->slug ? url($this->slug) : '';
     }
 }

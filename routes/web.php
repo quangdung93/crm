@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\ThemeController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\RedirectController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PostCategoryController;
 
@@ -126,7 +127,7 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'], function () {
             Route::post('/update/{id}', [MenuController::class, 'updateItem'])
             ->middleware('can:edit_menus')->name('menus.item.update');
             Route::get('/delete/{id}', [MenuController::class, 'deleteItem'])
-            ->middleware('can:delete_menus');
+            ->middleware('can:delete_menus')->name('menus.item.delete');
         });
     });
 
@@ -182,6 +183,16 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'], function () {
         Route::post('/upload', [ImageController::class, 'upload'])->name('images.upload');
         Route::post('/order', [ImageController::class, 'order'])->name('images.order');
         Route::post('/delete', [ImageController::class, 'delete'])->name('images.delete');
+    });
+
+    //Redirect
+    Route::group(['prefix' => 'redirects', 'middleware' => ['can:read_redirects']], function () {
+        Route::get('/', [RedirectController::class, 'index']);
+        Route::get('/create', [RedirectController::class, 'create'])->middleware('can:add_redirects');
+        Route::post('/create', [RedirectController::class, 'store'])->middleware('can:add_redirects');
+        Route::get('/edit/{id}', [RedirectController::class, 'edit'])->middleware('can:edit_redirects');
+        Route::post('/edit/{id}', [RedirectController::class, 'update'])->middleware('can:edit_redirects');
+        Route::get('/delete/{id}', [RedirectController::class, 'destroy'])->middleware('can:delete_redirects');
     });
 
 });

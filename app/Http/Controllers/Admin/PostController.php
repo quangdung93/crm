@@ -40,7 +40,7 @@ class PostController extends Controller
     public function store(Request $request){
         $request->validate([
             'name' => 'required',
-            'slug' => 'required|unique:slugs',
+            'slug' => 'required|unique:posts',
             'category_id' => 'required'
         ],[
             'name.required' => 'Bạn chưa nhập tên bài viết',
@@ -54,15 +54,13 @@ class PostController extends Controller
             $avatarPath = $this->uploadImage('posts', $request->file('image'));
         }
 
-        $data = $request->except('slug');
+        $data = $request->all();
+        $data['slug'] = Str::slug($request->slug);
         $data['image'] = $avatarPath ?? null;
         $data['status'] = isset($request->status) ? 1 : 0;
         $data['author_id'] = Auth::id();
 
         $post = Post::create($data);
-
-        //Slug
-        $post->slugable()->create(['slug' => Str::slug($request->slug)]);
 
         if($post){
             return redirect('admin/posts')->with('success', 'Tạo thành công!');
@@ -84,7 +82,7 @@ class PostController extends Controller
     public function update(Request $request, $id){
         $request->validate([
             'name' => 'required',
-            'slug' => ['required', Rule::unique('slugs')->ignore($id, 'slugable_id')],
+            'slug' => 'required|unique:posts,slug,'.$id,
             'category_id' => 'required'
         ],[
             'name.required' => 'Bạn chưa nhập tên bài viết',
@@ -105,12 +103,10 @@ class PostController extends Controller
             $avatarPath = $post->image;
         }
 
-        $data = $request->except('slug');
+        $data = $request->all();
+        $data['slug'] = Str::slug($request->slug);
         $data['image'] = $avatarPath ?? null;
         $data['status'] = isset($request->status) ? 1 : 0;
-
-        //Slug
-        $post->slugable()->updateOrCreate([],['slug' => Str::slug($request->slug)]);
 
         $update = $post->update($data);
 

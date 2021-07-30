@@ -29,7 +29,7 @@ class Product extends Model
         return $query->where('status', 1);
     }
 
-    public function links(){
-        return $this->slug;
+    public function link(){
+        return $this->slug ? url($this->slug) : '';
     }
 }

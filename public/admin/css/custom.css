@@ -222,3 +222,27 @@ input[type=file]{
 #analytics-dashboard{
     display: none;
 }
+
+.google-url{
+    color: #158d02;
+    font-style: normal;
+}
+
+.google-title{
+    font-size: 20px;
+    line-height: 1.3;
+    color: #1a0dab;
+    margin-top: 5px;
+}
+
+.google-description{
+    max-width: 48em;
+    color: #4d5156;
+    line-height: 1.58;
+    margin-top: 7px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}

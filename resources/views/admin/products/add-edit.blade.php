@@ -118,7 +118,7 @@
                                 <h4 class="sub-title">Thông tin SEO</h4>
                                 <x-input type="text" title="Đường dẫn" name="slug" value="{{ $product->slug ?? ''  }}"/>
                                 <x-input type="text" title="Meta title" name="meta_title" value="{{ $product->meta_title ?? ''  }}"/>
-                                <x-input type="text" title="Meta description" name="meta_description" value="{{ $product->meta_description ?? ''  }}"/>
+                                <x-textarea type="" title="Meta description" name="meta_description" value="{{ $product->meta_description ?? ''  }}" />
                                 <x-input type="text" title="Meta keyword" name="meta_keyword" value="{{ $product->meta_keyword ?? ''  }}"/>
                             </div>
                         </div>
@@ -128,6 +128,9 @@
                                 <x-textarea type="tinymce" title="" name="content" value="{!! isset($product) ? $product->content : '' !!}" />
                             </div>
                         </div>
+                        @if(config('themes.google_review'))
+                            <x-google-review :model="$product ?? ''"/>
+                        @endif
                     </div>
                     <div class="col-sm-3">
                         <div class="card">

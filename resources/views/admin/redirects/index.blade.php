@@ -1,6 +1,6 @@
 @extends('admin.body')
 @php
-    $pageName = 'Trang';
+    $pageName = 'Chuyển hướng trang';
     $routeName = getCurrentSlug();
 @endphp
 @section('title', $pageName)
@@ -8,8 +8,8 @@
     @include('admin.components.page-header')
     <!-- Page-body start -->
     <div class="page-body">
-        <div class="row ">
-            @can('add_users')
+        <div class="row">
+            @can('add_posts')
             <div class="col-sm-12">
                 <div class="text-left mb-3">
                     <a href="{{url($routeName.'/create')}}" class="btn btn-primary"><i
@@ -25,33 +25,25 @@
                             <table id="datatable" class="table stableweb-table center w100">
                                 <thead>
                                     <tr>
-                                        <th>Hình ảnh</th>
-                                        <th>Tên {{ $pageName }}</th>
-                                        <th>Ngày tạo</th>
-                                        <th>Trạng thái</th>
+                                        <th>Đường dẫn gốc</th>
+                                        <th>Đường dẫn đích</th>
                                         <th>Thao tác</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if($pages)
-                                        @foreach($pages as $row)
+                                    @if($redirects)
+                                        @foreach($redirects as $row)
                                             <tr>
-                                                <td><img width="70" src="{{ asset($row->image) }}" alt=""></td>
-                                                <td> {{$row->name}} </td>
-                                                <td>{{ format_date($row->created_at) }}</td>
+                                                <td><a href="{{ url($row->from_url) }}" target="_blank">{{ $row->from_url }}</a></td>
+                                                <td><a href="{{ url($row->to_url) }}" target="_blank">{{ $row->to_url }}</a></td>
                                                 <td>
-                                                    {!! $row->status ? '<label class="label label-success">Hoạt động</label>' : '<label class="label label-danger">Ngừng hoạt động</label>' !!}
-                                                </td>
-                                                <td>
-                                                    @can('edit_pages')
+                                                    @can('edit_redirects')
                                                     <a class="btn btn-primary" href="{{url($routeName.'/edit/'.$row->id)}}" title="Chỉnh sửa"> <i class="feather icon-edit-1 "></i></a>
                                                     @endcan
 
-                                                    @can('delete_pages')
-                                                    <a href="{{url($routeName.'/delete/'.$row->id)}}" class="btn btn-danger notify-confirm" title="Xóa"> <i class="feather icon-trash-2"></i></a>
+                                                    @can('delete_redirects')
+                                                    <a class="btn btn-danger notify-confirm" href="{{url($routeName.'/delete/'.$row->id)}}" title="Xóa"> <i class="feather icon-trash-2"></i></a>
                                                     @endcan
-
-                                                    <a class="btn btn-success" href="{{ $row->link() }}" target="_blank" title="Xem"> <i class="feather icon-eye"></i></a>
                                                 </form>
                                                 </td>
                                             </tr>

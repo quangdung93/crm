@@ -31,9 +31,9 @@
                         <div class="card">
                             <div class="card-block">
                                 <h4 class="sub-title">Thông tin SEO</h4>
-                                <x-input type="text" title="Đường dẫn" name="slug" value="{{ $post->slugable->slug ?? ''  }}"/>
+                                <x-input type="text" title="Đường dẫn" name="slug" value="{{ $post->slug ?? ''  }}"/>
                                 <x-input type="text" title="Meta title" name="seo_title" value="{{ $post->seo_title ?? ''  }}"/>
-                                <x-input type="text" title="Meta description" name="meta_description" value="{{ $post->meta_description ?? ''  }}"/>
+                                <x-textarea type="" title="Meta description" name="meta_description" value="{{ $post->meta_description ?? ''  }}" />
                                 <x-input type="text" title="Meta keyword" name="meta_keywords" value="{{ $post->meta_keywords ?? ''  }}"/>
                             </div>
                         </div>
@@ -43,6 +43,9 @@
                                 <x-textarea type="tinymce" title="" name="body" value="{!! isset($post) ? $post->body : '' !!}" />
                             </div>
                         </div>
+                        @if(config('themes.google_review'))
+                            <x-google-review :model="$post ?? ''"/>
+                        @endif
                     </div>
                     <div class="col-sm-3">
                         <div class="card">

@@ -4,12 +4,16 @@ namespace App\Models;
 
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Setting extends Model
 {   
+    use SoftDeletes;
+
     protected $table = 'settings';
 
     protected $guarded = [];
+    protected $dates = ['deleted_at'];
 
     public $setting_cache = null;
 

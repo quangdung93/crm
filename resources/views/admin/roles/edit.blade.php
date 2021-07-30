@@ -40,7 +40,7 @@
                         <div class="form-group row">
                             <div class="col-sm-12 mt-2">
                                 <div class="dt-responsive table-responsive">
-                                    <table class="table stableweb-table w100">
+                                    <table class="table stableweb-table center w100">
                                         <thead>
                                             <tr>
                                                 <th>STT</th>

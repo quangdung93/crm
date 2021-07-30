@@ -47,7 +47,7 @@ class MenuController extends Controller
         $menu = Menu::create($data);
 
         if($menu){
-            return redirect('admin/menus');
+            return redirect('admin/menus')->with('success', 'Tạo menu thành công!');
         }
         else{
             return redirect('admin/menus')->with('danger', 'Tạo thất bại!');
@@ -197,10 +197,10 @@ class MenuController extends Controller
         $delete = $item->delete();
 
         if($delete){
-            return response()->json(['status' => true]);
+            return redirect('admin/menus/builder/'.$item->menu_id)->with('success', 'Xóa menu thành công!');
         }
         else{
-            return response()->json(['status' => false]);
+            return redirect('admin/menus/builder/'.$item->menu_id)->with('danger', 'Xóa menu thất bại!');
         }
     }
 }

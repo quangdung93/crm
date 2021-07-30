@@ -14,7 +14,7 @@ pushNotify = function(title, text = '', type = 'success'){ //success , danger , 
     let icon = type == 'success' ? 'feather icon-check-circle' : 'feather icon-info';
     new PNotify({
         title: title,
-        text: `<p>${text}</p>`,
+        text: text && `<p>${text}</p>`,
         icon: icon,
         type: type
     });
