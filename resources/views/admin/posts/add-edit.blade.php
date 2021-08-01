@@ -43,7 +43,7 @@
                                 <x-textarea type="tinymce" title="" name="body" value="{!! isset($post) ? $post->body : '' !!}" />
                             </div>
                         </div>
-                        @if(config('themes.google_review'))
+                        @if(config('stableweb.google_review'))
                             <x-google-review :model="$post ?? ''"/>
                         @endif
                     </div>

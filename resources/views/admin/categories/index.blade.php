@@ -9,7 +9,7 @@
     <!-- Page-body start -->
     <div class="page-body">
         <div class="row">
-            @can('add_posts')
+            @can('add_products')
             <div class="col-sm-12">
                 <div class="text-left mb-3">
                     <a href="{{url($routeName.'/create')}}" class="btn btn-primary"><i

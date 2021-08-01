@@ -177,6 +177,15 @@ table td{
     background: linear-gradient(to right, var(--primary),  var(--primary));
 }
 
+.label-success{
+    background: #0ac282;
+}
+
+.label-default{
+    background: #aeaeae;
+    background-color: #aeaeae !important;
+}
+
 .nowrap{
     white-space: nowrap;
 }

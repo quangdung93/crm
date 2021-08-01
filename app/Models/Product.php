@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use App\Traits\LogActivity;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
 {
     use SoftDeletes;
+    use LogActivity;
     protected $table = 'products';
 
     protected $guarded = [];
@@ -30,6 +32,6 @@ class Product extends Model
     }
 
     public function link(){
-        return $this->slug ? url($this->slug) : '';
+        return $this->slug ?: '/';
     }
 }

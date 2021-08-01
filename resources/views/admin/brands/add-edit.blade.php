@@ -35,7 +35,7 @@
                                 <x-textarea type="tinymce" title="" name="content" value="{!! isset($brand) ? $brand->content : '' !!}" />
                             </div>
                         </div>
-                        @if(config('themes.google_review'))
+                        @if(config('stableweb.google_review'))
                             <x-google-review :model="$brand ?? ''"/>
                         @endif
                     </div>

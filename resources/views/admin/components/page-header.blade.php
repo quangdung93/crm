@@ -8,7 +8,7 @@
                             <li class="breadcrumb-item">
                                 <a href="{{url('/admin')}}"> <i class="feather icon-home"></i> </a>
                             </li>
-                            @if(Str::contains($routeName, ['/create','/edit/','/builder/']))
+                            @if(Str::contains($routeName, ['/create','/edit/','/builder/','/details/']))
                                 <li class="breadcrumb-item">
                                     @php
                                         $splitRoute = explode('/', $routeName);
@@ -23,6 +23,8 @@
                                             Sửa
                                         @elseif(Str::contains($routeName, '/builder'))
                                             Builder
+                                        @elseif(Str::contains($routeName, '/details'))
+                                            Chi tiết
                                         @endif
                                     </span>
                                 </li>

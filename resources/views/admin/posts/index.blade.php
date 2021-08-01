@@ -10,10 +10,12 @@
     <div class="page-body">
         <div class="row ">
             <div class="col-sm-12">
-                <div class="text-left mb-3">
-                    <a href="{{url($routeName.'/create')}}" class="btn btn-primary"><i
-                            class="feather icon-plus"></i> Thêm mới</a>
-                </div>
+                @can('add_posts')
+                    <div class="text-left mb-3">
+                        <a href="{{url($routeName.'/create')}}" class="btn btn-primary"><i
+                                class="feather icon-plus"></i> Thêm mới</a>
+                    </div>
+                @endcan
             </div>
             <div class="col-sm-12">
                 <div class="card">

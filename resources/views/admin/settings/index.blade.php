@@ -135,6 +135,7 @@
                         <select id="m_group" class="form-control" name="group">
                             <option value="site" selected="selected">Website</option>
                             <option value="admin">Admin</option>
+                            <option value="develop">Develop</option>
                         </select>
                     </div>
                 </div>

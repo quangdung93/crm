@@ -26,6 +26,24 @@
                             </div>
                             @endcan
                             <div class="form-group row">
+                                <label class="col-sm-12 col-form-label font-weight-bold">Liên kết từ danh mục sản phẩm</label>
+                                <div class="col-sm-9">
+                                    <select class="form-control populate select2">
+                                        <option value="0">Chọn danh mục sản phẩm</option>
+                                        @if($category)
+                                            @foreach($category as $item)
+                                                <option value="{{$item->id}}">{{$item->name}}</option>
+                                            @endforeach
+                                        @endif
+                                    </select>
+                                </div>
+                                <div class="col-sm-3 pl-0">
+                                    <div class="btn btn-success mt-1 add-menu-item" data-type="category" style="padding:6px">
+                                        <i class="feather icon-arrow-right"></i>  Thêm
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label class="col-sm-12 col-form-label font-weight-bold">Liên kết từ trang</label>
                                 <div class="col-sm-9">
                                     <select class="form-control populate select2">

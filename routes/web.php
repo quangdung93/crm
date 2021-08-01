@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\LogController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\PostController;
@@ -193,6 +194,13 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'], function () {
         Route::get('/edit/{id}', [RedirectController::class, 'edit'])->middleware('can:edit_redirects');
         Route::post('/edit/{id}', [RedirectController::class, 'update'])->middleware('can:edit_redirects');
         Route::get('/delete/{id}', [RedirectController::class, 'destroy'])->middleware('can:delete_redirects');
+    });
+
+    //Redirect
+    Route::group(['prefix' => 'logs', 'middleware' => ['can:read_logs']], function () {
+        Route::get('/', [LogController::class, 'index']);
+        Route::get('datatable', [LogController::class,'getDatatable'])->name('logs.view');
+        Route::get('details/{id}', [LogController::class,'show']);
     });
 
 });

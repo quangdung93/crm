@@ -34,6 +34,6 @@ class Category extends Model
     }
 
     public function link(){
-        return $this->slug ? url($this->slug) : '';
+        return $this->slug ?: '/';
     }
 }

@@ -6,6 +6,7 @@ use Exception;
 use App\Models\Menu;
 use App\Models\Page;
 use App\Models\Post;
+use App\Models\Category;
 use App\Models\MenuItem;
 use Illuminate\Support\Str;
 use App\Models\PostCategory;
@@ -103,11 +104,13 @@ class MenuController extends Controller
         $category_posts = PostCategory::active()->get();
         $posts = Post::active()->get();
         $pages = Page::active()->get();
+        $category = Category::active()->get();
 
         return view('admin.menus.builder')->with([
             'menu' => $menu,
             'posts' => $posts,
             'pages' => $pages,
+            'category' => $category,
             'category_posts' => $category_posts
         ]);
     }
@@ -130,7 +133,7 @@ class MenuController extends Controller
         $data = [
             'menu_id' => $request->menu_id,
             'title' => $instance->name,
-            'url' => $instance->link(),
+            'url' => Str::start($instance->link(), '/'),
             'type' => $type,
             'object_id' => $instance->id,
             'order' => $highestOrder

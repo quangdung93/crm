@@ -50,6 +50,30 @@ if (!function_exists('asset_image')) {
     }
 }
 
+if (!function_exists('handle_show_attribute')) {
+    function handle_show_attribute($key, $value, $model){
+		if($key == 'price' || $key == 'price_old'){
+			return format_price($value);
+		}
+		elseif($key == 'brand_id' && $model == 'App\Models\Product'){
+			return App\Models\Brand::find($value)->name;
+		}
+		elseif($key == 'category_id'){
+			if($model == 'App\Models\Product'){
+				return App\Models\Category::find($value)->name;
+			}
+			elseif($model == 'App\Models\Post'){
+				return App\Models\PostCategory::find($value)->name;
+			}
+		}
+		elseif(in_array($key, ['content', 'body'])){
+			return 'Chỉnh sửa nội dung';
+		}
+		
+		return $value;
+    }
+}
+
 if (!function_exists('theme_field')){
 
 	function theme_field($type, $key, $title, $content = '', $details = '', $placeholder = '', $required = 0){

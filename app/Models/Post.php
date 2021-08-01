@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
+use App\Traits\LogActivity;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Post extends Model
 {
+    use LogActivity;
     use SoftDeletes;
     protected $table = 'posts';
 
@@ -22,6 +24,6 @@ class Post extends Model
     }
 
     public function link(){
-        return $this->slug ? url($this->slug) : '';
+        return $this->slug ?: '/';
     }
 }

@@ -48,7 +48,7 @@ class PostService
                             <i class="feather icon-trash-2"></i>
                         </a>';
                     }
-                    $action .= '<a class="btn btn-success" href="'.$row->link().'" target="_blank"><i class="feather icon-eye" title="Xem"></i></a>';
+                    $action .= '<a class="btn btn-success" href="'.url($row->link()).'" target="_blank"><i class="feather icon-eye" title="Xem"></i></a>';
                 }
                 return $action;
             })

@@ -9,7 +9,7 @@
     <!-- Page-body start -->
     <div class="page-body">
         <div class="row ">
-            @can('add_users')
+            @can('add_pages')
             <div class="col-sm-12">
                 <div class="text-left mb-3">
                     <a href="{{url($routeName.'/create')}}" class="btn btn-primary"><i
@@ -51,7 +51,7 @@
                                                     <a href="{{url($routeName.'/delete/'.$row->id)}}" class="btn btn-danger notify-confirm" title="Xóa"> <i class="feather icon-trash-2"></i></a>
                                                     @endcan
 
-                                                    <a class="btn btn-success" href="{{ $row->link() }}" target="_blank" title="Xem"> <i class="feather icon-eye"></i></a>
+                                                    <a class="btn btn-success" href="{{ url($row->link()) }}" target="_blank" title="Xem"> <i class="feather icon-eye"></i></a>
                                                 </form>
                                                 </td>
                                             </tr>

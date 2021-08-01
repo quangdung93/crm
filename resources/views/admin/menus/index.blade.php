@@ -9,10 +9,12 @@
     <!-- Page-body start -->
     <div class="page-body">
         <div class="row ">
-            <div class="col-sm-12 mb-3">
-                <a href="{{url($routeName.'/create')}}" class="btn btn-primary"><i
-                            class="feather icon-plus"></i> Thêm mới</a>
-            </div>
+            @can('add_menus')
+                <div class="col-sm-12 mb-3">
+                    <a href="{{url($routeName.'/create')}}" class="btn btn-primary"><i
+                                class="feather icon-plus"></i> Thêm mới</a>
+                </div>
+            @endcan
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-block">

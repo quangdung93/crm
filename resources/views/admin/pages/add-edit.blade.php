@@ -35,7 +35,7 @@
                                 <x-textarea type="tinymce" title="" name="body" value="{!! isset($page) ? $page->body : '' !!}" />
                             </div>
                         </div>
-                        @if(config('themes.google_review'))
+                        @if(config('stableweb.google_review'))
                             <x-google-review :model="$page ?? ''"/>
                         @endif
                     </div>

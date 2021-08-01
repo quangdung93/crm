@@ -15,6 +15,21 @@ class Setting extends Model
     protected $guarded = [];
     protected $dates = ['deleted_at'];
 
+    const MODEL = [
+        'App\Models\Post' => 'Bài viết',
+        'App\Models\Product' => 'Sản phẩm',
+        'App\Models\Page' => 'Trang',
+        'App\Models\PostCategory' => 'Danh mục bài viết',
+        'App\Models\Category' => 'Danh mục',
+        'App\Models\Brand' => 'Thương hiệu',
+        'App\Models\RedirectLink' => 'Chuyển hướng',
+        'App\Models\Setting' => 'Cấu hình',
+        'App\Models\Theme' => 'Giao diện',
+        'App\Models\User' => 'Người dùng',
+        'App\Models\Menu' => 'Menu',
+        'App\Models\MenuItem' => 'Mục menu',
+    ];
+
     public $setting_cache = null;
 
     public function setting($key, $default = null){

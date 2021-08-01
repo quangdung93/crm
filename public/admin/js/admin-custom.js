@@ -1,6 +1,7 @@
 $(function () {
     // MENU
     //Localstorage Menu State
+    console.log(localStorage.getItem('menu_type'));
     if(localStorage.getItem('menu_type') == 'mini'){
         $('.pcoded-wrapper').addClass('mini-menu');
         $('#mobile-collapse i').removeClass('icon-toggle-right');
@@ -11,11 +12,6 @@ $(function () {
         $('#mobile-collapse i').removeClass('icon-toggle-left');
         $('#mobile-collapse i').addClass('icon-toggle-right');
     }
-
-    // $(document).on('click', '.pcoded-hasmenu', function(e){
-    //     e.preventDefault();
-    //     $('#mobile-collapse').click();
-    // });
 
     //Active Menu current (Menu Admin)
     $('ul.pcoded-submenu li').each(function(){
