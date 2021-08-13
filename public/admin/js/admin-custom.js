@@ -1,7 +1,6 @@
 $(function () {
     // MENU
     //Localstorage Menu State
-    console.log(localStorage.getItem('menu_type'));
     if(localStorage.getItem('menu_type') == 'mini'){
         $('.pcoded-wrapper').addClass('mini-menu');
         $('#mobile-collapse i').removeClass('icon-toggle-right');

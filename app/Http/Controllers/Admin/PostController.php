@@ -26,7 +26,7 @@ class PostController extends Controller
     }
 
     public function getDatatable(){
-        $posts = Post::orderByDesc('created_at')->get();
+        $posts = Post::with('category')->orderByDesc('created_at')->get();
         return $this->postService->getDatatable($posts);
     }
 

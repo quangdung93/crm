@@ -53,6 +53,10 @@ class User extends Authenticatable
         });
     }
 
+    public function isAdmin(){
+        return $this->hasRole('admin');
+    }
+
     public function findUser($id){
         $query = self::where('id', $id);
         if(!Auth::user()->hasRole(config('permission.role_dev'))){

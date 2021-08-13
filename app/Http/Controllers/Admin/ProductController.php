@@ -30,7 +30,7 @@ class ProductController extends Controller
     }
 
     public function getDatatable(){
-        $products = Product::orderByDesc('created_at')->get();
+        $products = Product::with('category','brand')->orderByDesc('created_at')->get();
         return $this->productService->getDatatable($products);
     }
 

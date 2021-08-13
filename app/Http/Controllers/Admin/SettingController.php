@@ -53,7 +53,8 @@ class SettingController extends Controller
                 }
             }
 
-            Setting::where('key', $key)->update(['value' => $value]);
+            $setting = Setting::where('key', $key)->first();
+            $update = $setting->update(['value' => $value]);
         }
 
         return redirect('admin/settings')->with('success','Cập nhật thành công!');

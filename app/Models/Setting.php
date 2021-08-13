@@ -30,22 +30,31 @@ class Setting extends Model
         'App\Models\MenuItem' => 'Mục menu',
     ];
 
-    public $setting_cache = null;
+    public static function boot()
+    {
+        parent::boot();
+
+        static::saved(function ($model) {
+            $model->removeSettingFromCache();
+        });
+
+        static::deleted(function ($model) {
+            $model->removeSettingFromCache();
+        });
+    }
+
+    public function removeSettingFromCache(){
+        Cache::forget('settings');
+    }
 
     public function setting($key, $default = null){
-        if (Cache::tags('settings')->has($key)) {
-            return Cache::tags('settings')->get($key);
+        if(Cache::has('settings')) {
+            return Cache::get('settings')[$key] ?? null;
         }
 
-        if ($this->setting_cache === null) {
-            Cache::tags('settings')->flush();
-
-            foreach (Setting::orderBy('order')->get() as $setting) {
-                @$this->setting_cache[$setting->key] = $setting->value;
-                Cache::tags('settings')->forever($setting->key, $setting->value);
-            }
-        }
+        $settings = Setting::orderBy('order')->pluck('value','key')->toArray();
+        Cache::forever('settings', $settings);
     
-        return @$this->setting_cache[$key] ?: $default;
+        return $settings[$key] ?: $default;
     }
 }
