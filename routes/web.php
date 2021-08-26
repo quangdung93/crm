@@ -1,7 +1,11 @@
 <?php
 
+use App\Models\Page;
+use App\Models\Post;
+use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\LogController;
+use App\Http\Controllers\Site\HomeController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\PostController;
@@ -34,7 +38,6 @@ use App\Http\Controllers\Admin\PostCategoryController;
 //Login
 Route::get('/login', [LoginController::class, 'login']);
 Route::post('/login', [LoginController::class, 'postLogin'])->name('login');
-
 
 //Admin
 Route::group(['prefix' => 'admin','middleware' => 'auth'], function () {
@@ -202,5 +205,30 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'], function () {
         Route::get('datatable', [LogController::class,'getDatatable'])->name('logs.view');
         Route::get('details/{id}', [LogController::class,'show']);
     });
+
+});
+
+
+//Site Route
+Route::get('/', [HomeController::class, 'index']);
+Route::get('/{url}', function(Request $request, $url){
+
+    // //Product
+    // $product = Product::where('slug', $url)->first();
+    // if($product){
+    //     return (new ProductController)->index($product);
+    // }
+    
+    // //Post
+    // $post = Post::where('slug', $url)->first();
+    // if($post){
+    //     return (new PostController)->index($post);
+    // }
+
+    // //Page
+    // $page = Page::where('slug', $url)->first();
+    // if($page){
+    //     return (new PageController)->index($page);
+    // }
 
 });
