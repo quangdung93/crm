@@ -301,9 +301,10 @@ section .section-title h3 a:after{
     content: '';
     position: absolute;
     bottom: -8px;
-    left: 0;
+    left: 50%;
+    transform: translateX(-50%);
     height: 2px;
-    width: 100%;
+    width: 100px;
     background:var(--primary);
 }
 
@@ -476,4 +477,22 @@ a.youtube-item:hover{
     display:block;
     padding: 10px;
     border-bottom: 1px solid #ddd;
+}
+
+section.call-to-action{
+    background: #4d60a5;
+    padding: 40px 0;
+}
+
+section.call-to-action .left{
+    display: flex;
+}
+
+section.call-to-action .left .content{
+    margin-left: 25px;
+    align-self: center;
+}
+
+.icon-hand-oke img{
+    filter: invert(79%) sepia(83%) saturate(1637%) hue-rotate(357deg) brightness(101%) contrast(106%);
 }
