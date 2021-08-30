@@ -17,11 +17,11 @@ class Menu extends Model
         parent::boot();
 
         static::saved(function ($model) {
-            $model->removeMenuFromCache();
+            $model->removeMenuFromCache($model->getOriginal('name'));
         });
 
         static::deleted(function ($model) {
-            $model->removeMenuFromCache();
+            $model->removeMenuFromCache($model->getOriginal('name'));
         });
     }
 
@@ -65,8 +65,15 @@ class Menu extends Model
         );
     }
 
-    public function removeMenuFromCache()
+    public function removeMenuFromCache($menuName = null)
     {
-        Cache::forget('menu_'.$this->name);
+        if(is_null($menuName)){
+            $name = $this->name;
+        }
+        else{
+            $name = $menuName;
+        }
+        
+        Cache::forget('menu_'.$name);
     }
 }

@@ -282,7 +282,7 @@
                 order: JSON.stringify($('.dd').nestable('serialize')),
                 _token: '{{ csrf_token() }}'
             }, function (data) {
-                data.status && pushNotify('Cập nhật thành công!', text = '', type = 'success');
+                //data.status && pushNotify('Cập nhật thành công!', text = '', type = 'success');
             });
         });
     });

@@ -19,6 +19,19 @@ $('.top-news').slick({
     rtl: false,
 });
 
+$('.cusomter-slider').slick({
+    dots: true,
+    pauseOnHover: true,
+    infinite: true,
+    slidesToShow: 2,
+    speed: 600,
+    arrows: false,
+    autoplaySpeed: 3000,
+    swipe: true,
+    draggable: true,
+    rtl: false,
+});
+
 //Youtube
 if($('.youtube').length > 0){
     generateYoutube();
@@ -27,6 +40,25 @@ if($('.youtube').length > 0){
 if($('.youtube-list').length > 0){
     generateYoutubeItem();
 }
+
+
+//Icon Menu Mobile Click
+$(document).on('click', '.icon-menu-mobile', function(){
+    $('.main-menu').toggleClass('menu-mobile');
+
+    if($('.main-menu').hasClass('menu-mobile')){
+        $(this).find('i').removeClass('icon-menu');
+        $(this).find('i').addClass('icon-x');
+    }
+    else{
+        $(this).find('i').addClass('icon-menu');
+        $(this).find('i').removeClass('icon-x');
+    }
+}); 
+
+$(document).on('click', '.menu-mobile li.has-submenu .icon-show', function(){
+    $(this).closest('.has-submenu').find('.sub-menu').toggleClass('show-menu');
+});
 
 function generateYoutube() {
     var youtube = document.querySelectorAll(".youtube");

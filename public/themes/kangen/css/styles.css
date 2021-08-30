@@ -1,5 +1,6 @@
 :root {
     --primary: #4d60a5;
+    --yellow: #ffdd00;
 }
 
 body{
@@ -47,8 +48,35 @@ li{
     color: var(--primary);
 }
 
+.border-section .section-title{
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.border-section .section-title h3{
+    padding: 8px;
+    background: var(--primary);
+    margin-bottom: 0;
+    font-size: 1.2rem;
+    border-radius: 5px 5px 0 0;
+}
+
+.border-section .section-title h3 a{
+    color: #fff;
+}
+
+.border-section .section-title h3 a:after{
+    display:none;
+}
+
+.border-section .content{
+    padding: 25px 15px 15px 15px;
+    border: 1px solid var(--primary);
+    border-radius: 0 0 5px 5px;
+}
+
 section{
-    margin: 25px 0;
+    padding: 25px 0;
 }
 
 .section-banner img{
@@ -155,13 +183,22 @@ section{
     display: block;
 }
 
-.nav-menu .main-menu ul > li:hover .sub-menu {
+.nav-menu .main-menu.menu-mobile ul > li > ul.sub-menu.show-menu{
     opacity: 1;
     visibility: visible;
+    display: block;
 }
 
 
 /* Banner Main */
+
+.main-banner .content-wrap{
+    display: flex;
+}
+
+.main-banner .content-wrap .item{
+    flex: 1;
+}
 
 .read-more{
     display: block;
@@ -172,12 +209,25 @@ section{
     margin-top: 10px;
 }
 
+.main-banner .title{
+    color: var(--primary);
+    text-align: center;
+    font-size: 25px;
+}
+
+.main-banner .content{
+    font-size: 16px;
+    line-height: 25px;
+    margin-top: 10px;
+    text-align: justify;
+}
 
 /* Product Item */
 
 .product-item{
     box-shadow: 2px 2px 4px 2px rgb(0 0 0 / 5%);
     border-radius: 5px;
+    margin-top: 15px;
 }
 
 .product-item .product-img {
@@ -495,4 +545,151 @@ section.call-to-action .left .content{
 
 .icon-hand-oke img{
     filter: invert(79%) sepia(83%) saturate(1637%) hue-rotate(357deg) brightness(101%) contrast(106%);
+}
+
+.benefit-item{
+    text-align: center;
+}
+
+.benefit-item .icon i{
+    font-size: 70px;
+    color: var(--primary);
+}
+
+.benefit-item .info{
+    margin-top: 20px;
+}
+
+.benefit-item .info p{
+    color: var(--primary);
+}
+
+.contact-home-block{
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.contact-home-block .item{
+    display: flex;
+    flex: 1;
+}
+
+.section-contact {
+    background: #4d60a5;
+    padding-top: 50px;
+    padding-bottom: 30px;
+}
+
+.section-contact .section-title h3 a{
+    color: var(--yellow);
+}
+
+.section-contact .section-title p{
+    color: #fff;
+}
+
+.contact-home-block .item:first-child{
+    margin-right: 15px;
+}
+
+.contact-home-block .item .image{
+    width: 64px;
+    min-width: 64px;
+    margin-right: 20px;
+}
+
+.contact-home-block .item .info p{
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.contact-home-block .item .info p:last-child{
+    text-align: justify;
+}
+
+.contact-form{
+    padding: 15px 20px;
+    background: #ddd;
+    border-radius: 8px;
+}
+
+.contact-form .frm-title{
+    font-size: 20px;
+    color: var(--primary);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.cusomter-slider .item{
+    padding: 0 15px;
+}
+
+.cusomter-slider .item .image{
+    text-align: center; 
+}
+
+.cusomter-slider .item .image img{
+    border-radius: 5px;
+}
+
+.cusomter-slider .item .info{
+    text-align: justify;
+    margin-top: 15px;
+}
+
+.cusomter-slider .item .customer-name{
+    text-align: center;
+    margin-top: 10px;
+}
+
+.cusomter-slider .item .customer-name h5{
+    color: var(--primary);
+}
+
+footer{
+    padding: 40px 0;
+    background: var(--primary);
+    color: #fff;
+}
+
+footer a{
+    color :#fff;
+}
+
+footer a:hover{
+    color: #fff;
+}
+
+footer .footer-middle{
+    margin-top: 20px;
+}
+
+footer .footer-middle .title{
+    position: relative;
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+
+footer .footer-middle .title:before{
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    height: 3px;
+    width: 40px;
+    background: #ddd;
+}
+
+.footer-bottom{
+    padding: 30px 0;
+    background: #5b5b5b;
+}
+
+.footer-bottom .payment-text{
+    color: #ddd;
+}
+
+.footer-bottom .payment-text p{
+    margin-bottom: 10px;
 }

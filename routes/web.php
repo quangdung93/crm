@@ -211,6 +211,7 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'], function () {
 
 //Site Route
 Route::get('/', [HomeController::class, 'index']);
+Route::get('/integrate', [HomeController::class, 'integrate']);
 Route::get('/{url}', function(Request $request, $url){
 
     // //Product

@@ -43,7 +43,7 @@ class MenuController extends Controller
             'name.unique' => 'Tên menu đã tồn tại',
         ]);
 
-        $data['name'] = $request->name;
+        $data['name'] = Str::slug($request->name);
 
         $menu = Menu::create($data);
 
@@ -72,7 +72,7 @@ class MenuController extends Controller
 
         $menu = Menu::findOrFail($id);
 
-        $data['name'] = $request->name;
+        $data['name'] = Str::slug($request->name);
 
         $update = $menu->update($data);
 

@@ -10,10 +10,12 @@
     "require": {
         "php": "^7.3",
         "bensampo/laravel-enum": "^3.4",
+        "corcel/woocommerce": "^2.0",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.3.1",
         "intervention/image": "^2.6",
+        "jgrossi/corcel": "^5.0",
         "laravel/framework": "^8.0",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^3.3",

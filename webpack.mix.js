@@ -3,6 +3,7 @@ const mix = require('laravel-mix');
 //Vendor CSS Site
 mix.styles([
     'resources/css/bootstrap.min.css',
+    'resources/css/animate.min.css',
     'public/admin/assets/icon/feather/css/feather.css',
     'resources/css/common.css',
     'resources/css/slick.css',
