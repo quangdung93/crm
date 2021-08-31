@@ -19,14 +19,22 @@
                                 <h4 class="sub-title">Thông tin {{ $pageName }}</h4>
                                 <x-input type="text" title="Tên sản phẩm" name="name" value="{{ $product->name ?? ''  }}"/>
                                 <x-input type="text" title="Mã sản phẩm" name="sku" value="{{ $product->sku ?? ''  }}"/>
-                                <x-selectbox 
-                                    title="Danh mục" 
-                                    name="category_id" 
-                                    :lists="$categories" 
-                                    value="id" 
-                                    display="name" 
-                                    selected="{{ $product->category_id ?? '' }}"
-                                />
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label text-right">Danh mục</label>
+                                    <div class="col-sm-9">
+                                        <select class="form-control populate select2" name="categories[]" multiple>
+                                            <option value="">Chọn danh mục</option>
+                                            @if($categories)
+                                                @foreach($categories as $item)
+                                                    <option value="{{$item->id}}" {{ $product->categories && in_array($item->id, $product->categories->pluck('id')->toArray()) ? 'selected' : '' }}>{{$item->name}}</option>
+                                                @endforeach
+                                            @endif
+                                        </select>
+                                        @if ($errors->has('categories'))
+                                            <div class="text-danger mt-2">{{ $errors->first('categories') }}</div>
+                                        @endif
+                                    </div>
+                                </div>
                                 <x-selectbox 
                                     title="Thương hiệu" 
                                     name="brand_id" 

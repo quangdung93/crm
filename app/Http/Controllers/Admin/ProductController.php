@@ -30,7 +30,7 @@ class ProductController extends Controller
     }
 
     public function getDatatable(){
-        $products = Product::with('category','brand')->orderByDesc('created_at')->get();
+        $products = Product::with('categories','brand')->orderByDesc('created_at')->get();
         return $this->productService->getDatatable($products);
     }
 
@@ -61,14 +61,14 @@ class ProductController extends Controller
         $request->validate([
             'name' => 'required',
             'slug' => 'required|unique:products',
-            'category_id' => 'required',
+            'categories' => 'required',
             'brand_id' => 'required',
             'price' => 'required',
         ],[
             'name.required' => 'Bạn chưa nhập tên bài viết',
             'slug.required' => 'Đường dẫn không được trống',
             'slug.unique' => 'Đường dẫn đã tồn tại',
-            'category_id.required' => 'Bạn chưa chọn danh mục',
+            'categories.required' => 'Bạn chưa chọn danh mục',
             'brand_id.required' => 'Bạn chưa chọn thương hiệu',
             'price.required' => 'Bạn chưa nhập giá gốc',
         ]);
@@ -97,7 +97,7 @@ class ProductController extends Controller
             $avatarPath = $this->uploadImage('products', $request->file('input_file'));
         }
 
-        $data = $request->except('input_file');
+        $data = $request->except('input_file', 'categories');
         $data['slug'] = Str::slug($request->slug);
         $data['price'] = $price;
         $data['price_old'] = $price_old;
@@ -108,6 +108,7 @@ class ProductController extends Controller
         $product = Product::create($data);
 
         if($product){
+            $product->categories()->attach($request->categories);
             return redirect('admin/products')->with('success', 'Tạo thành công!');
         }
         else{
@@ -134,7 +135,7 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $product = Product::findOrFail($id)->load('images');
+        $product = Product::findOrFail($id)->load('images','categories');
         $categories = Category::active()->get();
         $brands = Brand::active()->get();
 
@@ -157,14 +158,14 @@ class ProductController extends Controller
         $request->validate([
             'name' => 'required',
             'slug' => 'required|unique:products,slug,'.$id,
-            'category_id' => 'required',
+            'categories' => 'required',
             'brand_id' => 'required',
             'price' => 'required',
         ],[
             'name.required' => 'Bạn chưa nhập tên bài viết',
             'slug.required' => 'Đường dẫn không được trống',
             'slug.unique' => 'Đường dẫn đã tồn tại',
-            'category_id.required' => 'Bạn chưa chọn danh mục',
+            'categories.required' => 'Bạn chưa chọn danh mục',
             'brand_id.required' => 'Bạn chưa chọn thương hiệu',
             'price.required' => 'Bạn chưa nhập giá gốc',
         ]);
@@ -200,7 +201,7 @@ class ProductController extends Controller
             $avatarPath = $product->image;
         }
 
-        $data = $request->except('input_file');
+        $data = $request->except('input_file','categories');
         $data['slug'] = $request->slug ? Str::slug($request->slug) : Str::slug($request->title);
         $data['price'] = $price;
         $data['price_old'] = $price_old;
@@ -211,6 +212,7 @@ class ProductController extends Controller
         $update = $product->update($data);
 
         if($update){
+            $product->categories()->sync($request->categories);
             return redirect('admin/products/edit/' . $id)->with('success', 'Sửa thành công!');
         }
         else{

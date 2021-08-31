@@ -73,7 +73,7 @@ class Menu extends Model
         else{
             $name = $menuName;
         }
-        
+
         Cache::forget('menu_'.$name);
     }
 }

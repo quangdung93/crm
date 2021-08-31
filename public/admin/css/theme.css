@@ -221,7 +221,7 @@ table td{
 }
 
 .select2-container--default .select2-search__field:focus{
-    border: 1px solid var(--primary);
+    border-color: var(--primary);
 }
 
 .select2-container--default .select2-selection--single .select2-selection__arrow{
@@ -509,5 +509,10 @@ table td{
 }
 
 /* End Mini Menu */
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice{
+    background-color:var(--primary);
+    border-color: var(--primary);
+}
 
 /* END CUSTOM THEME */

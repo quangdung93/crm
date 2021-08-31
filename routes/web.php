@@ -6,6 +6,8 @@ use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\LogController;
 use App\Http\Controllers\Site\HomeController;
+use App\Http\Controllers\Site\ProductController as ProductControllerSite;
+use App\Http\Controllers\Site\CategoryController as CategoryControllerSite;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\PostController;
@@ -22,6 +24,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\RedirectController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PostCategoryController;
+use App\Models\Category;
 
 /*
 |--------------------------------------------------------------------------
@@ -213,6 +216,18 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'], function () {
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/integrate', [HomeController::class, 'integrate']);
 Route::get('/{url}', function(Request $request, $url){
+
+    $path = str_replace('-','_',  $url);
+
+    if($path == 'san_pham'){
+        return (new ProductControllerSite)->index(); 
+    }
+
+    //Product Category
+    $category = Category::where('slug', $url)->first();
+    if($category){
+        return (new CategoryControllerSite)->index($category);
+    }
 
     // //Product
     // $product = Product::where('slug', $url)->first();

@@ -122,3 +122,38 @@ if (!function_exists('theme')){
 		return $default;
 	}
 }
+
+if (!function_exists('product_template')){
+	function product_template($products){
+		if(!$products){
+			return null;
+		}
+
+		$html = '';
+
+		foreach ($products as $item) {
+			$html .= '<div class="product-item">
+				<div class="product-img">
+					<a href="#">
+						<img src="'.asset($item->image).'" alt="'.$item->name.'"/>
+					</a>
+					<div class="discount">-'.round($item->discount, 1).'%</div>
+				</div>
+				<div class="product-info">
+					<div class="product-title">
+						<a href="#">'.$item->name.'</a>
+					</div>
+					<div class="product-price">
+						<span class="price-old">'.number_format($item->price_old).' đ</span>
+						<span class="price-new">'.number_format($item->price).' đ</span>
+					</div>
+					<div class="note-price">(Giá chưa bao gồm VAT)</div>
+					<div class="btn add-cart-product-temp">Thêm vào giỏ hàng</div>
+				</div>
+			</div>';
+			
+		}
+
+		return $html;
+	}
+}

@@ -16,7 +16,11 @@ class Product extends Model
     protected $dates = ['deleted_at'];
 
     public function category(){
-        return $this->belongsTo(Category::class);
+        return $this->categories()->where('is_primary', 1);
+    }
+
+    public function categories(){
+        return $this->belongsToMany(Category::class, 'product_category');
     }
 
     public function brand(){

@@ -29,6 +29,10 @@ class Category extends Model
         return $this->parent()->with('parents');
     }
 
+    public function products(){
+        return $this->belongsToMany(Product::class, 'product_category');
+    }
+
     public function scopeActive($query){
         return $query->where('status', 1);
     }

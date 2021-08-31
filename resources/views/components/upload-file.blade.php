@@ -5,7 +5,7 @@
         <div class="col-sm-9">
     @endif
     <div class="box-image" style="{{ $width ? 'width:'.$width : '' }}">
-        <img src="{{ asset_image($image) }}" class="img-responsive input-img {{ !$image ? 'hidden' : '' }}">
+        <img src="{{ asset($image) }}" class="img-responsive input-img {{ !$image ? 'hidden' : '' }}">
         <input type="file" 
             name="{{ $name }}" 
             accept="image/jpg,image/png,image/jpeg,image/webp"

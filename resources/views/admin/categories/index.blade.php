@@ -50,6 +50,8 @@
                                                     @can('delete_products')
                                                     <a class="btn btn-danger notify-confirm" href="{{url($routeName.'/delete/'.$row->id)}}" title="Xóa"> <i class="feather icon-trash-2"></i></a>
                                                     @endcan
+
+                                                    <a class="btn btn-success" href="{{ url($row->link()) }}" target="_blank"><i class="feather icon-eye" title="Xem"></i></a>
                                                 </form>
                                                 </td>
                                             </tr>

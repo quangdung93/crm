@@ -10,13 +10,13 @@ class ProductService
     public function getDatatable($table){
         $data = Datatables::of($table)
             ->editColumn('image', function ($row) {
-                return '<img src="'.asset_image($row->image).'" style="width:60px;">';
+                return '<img src="'.asset($row->image).'" style="width:60px;">';
             })
             ->editColumn('name', function ($row) {
                 return $row->name;
             })
-            ->editColumn('category_id', function ($row) {
-                return optional($row->category)->name ?? '';
+            ->editColumn('categories', function ($row) {
+                return implode(',', $row->categories->pluck('name')->toArray());
             })
             ->editColumn('brand_id', function ($row) {
                 return  optional($row->brand)->name ?? '';
@@ -27,9 +27,9 @@ class ProductService
             ->editColumn('discount', function ($row) {
                 return  $row->discount ? $row->discount.'%' : '0';
             })
-            ->editColumn('created_at', function ($row) {
-                return format_date($row->created_at);
-            })
+            // ->editColumn('created_at', function ($row) {
+            //     return format_date($row->created_at);
+            // })
             ->editColumn('status', function ($row) {
                 $status =  $row->status === 1 ? '<label class="label label-success">Hiển thị</label>' : '<label class="label label-danger">Ẩn</label>';
                 if( !empty($row->deleted_at) ){
