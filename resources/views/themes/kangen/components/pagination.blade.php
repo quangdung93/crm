@@ -1,6 +1,6 @@
 @if ($paginator->hasPages())
     <!-- Pagination -->
-    <div class="pagination mt-3 ml-auto mr-auto">
+    <div class="mt-3">
         <ul class="pagination">
             {{-- Previous Page Link --}}
             @if ($paginator->onFirstPage())

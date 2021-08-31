@@ -8,7 +8,10 @@ use Illuminate\Http\Request;
 class CategoryController extends Controller
 {
     public function index($category){
-        $category->load('products');
-        return view('themes.kangen.category.index')->with(['category' => $category]);
+        $products = $category->products()->with('categories')->orderByDesc('created_at')->paginate(16);
+        return view('themes.kangen.category.index')->with([
+            'category' => $category,
+            'products' => $products
+        ]);
     }
 }

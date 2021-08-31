@@ -14,13 +14,42 @@ textarea:focus, select:focus{
     outline: 0;
 }
 
-a:hover{
+a{
     color: var(--primary);
+}
+
+a:hover{
+    opacity: 0.8;
     text-decoration: none;
 }
 
 li{
     list-style:none;
+}
+
+img[data-src].lazy{
+    -ms-opacity: 0;
+    opacity: 0;
+    -webkit-transition: opacity .3s ease-in;
+    transition: opacity .3s ease-in;
+}
+
+img[src].lazy{
+    -ms-opacity: 1;
+    opacity: 1;
+}
+
+.pagination{
+    justify-content: center;
+}
+
+.pagination .page-item.active .page-link{
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+
+.pagination .page-link{
+    color: var(--primary)
 }
 
 .bg-kangen{
@@ -617,8 +646,32 @@ footer .footer-middle .title:before{
     border: 1px solid #f1f1f1;
     border-radius: 5px;
     margin-bottom: 20px;
+    background: #485a9d;
+    color: #fff;
 }
 
 .page-title h3{
     text-align: center;
 }
+
+/* SiderBar */
+
+.siderbar .siderbar-title{
+    position: relative;
+    font-size: 22px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.siderbar .siderbar-title:before{
+    content: "";
+    position: absolute;
+    width: 50px;
+    height: 3px;
+    background: #ddd;
+    bottom: -10px;
+    left: 0;
+}
+
+
+/* End siderbar */

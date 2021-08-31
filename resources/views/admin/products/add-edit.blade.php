@@ -23,10 +23,9 @@
                                     <label class="col-sm-3 col-form-label text-right">Danh mục</label>
                                     <div class="col-sm-9">
                                         <select class="form-control populate select2" name="categories[]" multiple>
-                                            <option value="">Chọn danh mục</option>
                                             @if($categories)
                                                 @foreach($categories as $item)
-                                                    <option value="{{$item->id}}" {{ $product->categories && in_array($item->id, $product->categories->pluck('id')->toArray()) ? 'selected' : '' }}>{{$item->name}}</option>
+                                                    <option value="{{$item->id}}" {{ isset($product->categories) && in_array($item->id, $product->categories->pluck('id')->toArray()) ? 'selected' : '' }}>{{$item->name}}</option>
                                                 @endforeach
                                             @endif
                                         </select>

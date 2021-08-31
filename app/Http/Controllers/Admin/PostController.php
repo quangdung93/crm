@@ -26,7 +26,7 @@ class PostController extends Controller
     }
 
     public function getDatatable(){
-        $posts = Post::with('category')->orderByDesc('created_at')->get();
+        $posts = Post::with('categories')->orderByDesc('created_at')->get();
         return $this->postService->getDatatable($posts);
     }
 
@@ -41,12 +41,12 @@ class PostController extends Controller
         $request->validate([
             'name' => 'required',
             'slug' => 'required|unique:posts',
-            'category_id' => 'required'
+            'categories' => 'required'
         ],[
             'name.required' => 'Bạn chưa nhập tên bài viết',
             'slug.required' => 'Đường dẫn không được trống',
             'slug.unique' => 'Đường dẫn đã tồn tại',
-            'category_id.required' => 'Bạn chưa chọn danh mục',
+            'categories.required' => 'Bạn chưa chọn danh mục',
         ]);
 
         //Avatar image
@@ -54,7 +54,7 @@ class PostController extends Controller
             $avatarPath = $this->uploadImage('posts', $request->file('image'));
         }
 
-        $data = $request->all();
+        $data = $request->except('categories');
         $data['slug'] = Str::slug($request->slug);
         $data['image'] = $avatarPath ?? null;
         $data['status'] = isset($request->status) ? 1 : 0;
@@ -63,6 +63,7 @@ class PostController extends Controller
         $post = Post::create($data);
 
         if($post){
+            $post->categories()->attach($request->categories);
             return redirect('admin/posts')->with('success', 'Tạo thành công!');
         }
         else{
@@ -83,12 +84,12 @@ class PostController extends Controller
         $request->validate([
             'name' => 'required',
             'slug' => 'required|unique:posts,slug,'.$id,
-            'category_id' => 'required'
+            'categories' => 'required'
         ],[
             'name.required' => 'Bạn chưa nhập tên bài viết',
             'slug.required' => 'Đường dẫn không được trống',
             'slug.unique' => 'Đường dẫn đã tồn tại',
-            'category_id.required' => 'Bạn chưa chọn danh mục',
+            'categories.required' => 'Bạn chưa chọn danh mục',
         ]);
 
         $post = Post::findOrFail($id);
@@ -103,7 +104,7 @@ class PostController extends Controller
             $avatarPath = $post->image;
         }
 
-        $data = $request->all();
+        $data = $request->except('categories');
         $data['slug'] = Str::slug($request->slug);
         $data['image'] = $avatarPath ?? null;
         $data['status'] = isset($request->status) ? 1 : 0;
@@ -111,6 +112,7 @@ class PostController extends Controller
         $update = $post->update($data);
 
         if($update){
+            $post->categories()->sync($request->categories);
             return redirect('admin/posts/edit/' . $id)->with('success', 'Sửa thành công!');
         }
         else{

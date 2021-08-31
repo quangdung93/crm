@@ -18,14 +18,21 @@
                             <div class="card-block">
                                 <h4 class="sub-title">Thông tin {{ $pageName }}</h4>
                                 <x-input type="text" :title="$pageName" name="name" value="{{ $post->name ?? ''  }}"/>
-                                <x-selectbox 
-                                    title="Danh mục" 
-                                    name="category_id" 
-                                    :lists="$categories" 
-                                    value="id" 
-                                    display="name" 
-                                    selected="{{ $post->category_id ?? '' }}"
-                                />
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label text-right">Danh mục</label>
+                                    <div class="col-sm-9">
+                                        <select class="form-control populate select2" name="categories[]" multiple>
+                                            @if($categories)
+                                                @foreach($categories as $item)
+                                                    <option value="{{$item->id}}" {{ isset($post->categories) && in_array($item->id, $post->categories->pluck('id')->toArray()) ? 'selected' : '' }}>{{$item->name}}</option>
+                                                @endforeach
+                                            @endif
+                                        </select>
+                                        @if ($errors->has('categories'))
+                                            <div class="text-danger mt-2">{{ $errors->first('categories') }}</div>
+                                        @endif
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="card">

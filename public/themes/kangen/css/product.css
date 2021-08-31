@@ -24,6 +24,8 @@
 .product-item .product-img img{
     width: 99%;
     margin: 0 auto;
+    height: 274px;
+    min-height: 274px;
 }
 
 .product-item .product-img .discount{
@@ -31,7 +33,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    right: 10px;
+    left: 10px;
     top: 10px;
     width: 45px;
     height: 45px;
@@ -65,12 +67,16 @@
     color: var(--primary)
 }
 
-.product-price .price-old{
+.product-item .product-price{
+    text-align: center;
+}
+
+.product-item .product-price .price-old{
     color: #ddd;
     text-decoration: line-through;
 }
 
-.product-price .price-new{
+.product-item .product-price .price-new{
     color: #e81316;
     font-weight: 600;
     margin-left: 5px;

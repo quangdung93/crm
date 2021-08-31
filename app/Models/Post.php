@@ -15,8 +15,8 @@ class Post extends Model
     protected $guarded = [];
     protected $dates = ['deleted_at'];
 
-    public function category(){
-        return $this->belongsTo(PostCategory::class);
+    public function categories(){
+        return $this->belongsToMany(PostCategory::class, 'post_category');
     }
 
     public function scopeActive($query){

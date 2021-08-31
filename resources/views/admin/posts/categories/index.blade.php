@@ -27,6 +27,7 @@
                                     <tr>
                                         <th>STT</th>
                                         <th>Tên {{ $pageName }}</th>
+                                        <th>Danh mục cha</th>
                                         <th>Trạng thái</th>
                                         <th>Thao tác</th>
                                     </tr>
@@ -37,6 +38,7 @@
                                             <tr>
                                                 <td>{{$loop->index + 1}}</td>
                                                 <td>{{$row->name}}</td>
+                                                <td>{{optional($row->parent)->name}}</td>
                                                 <td>
                                                     {!! $row->status ? '<label class="label label-success">Hiển thị</label>' : '<label class="label label-danger">Ẩn</label>' !!}
                                                 </td>
@@ -48,6 +50,8 @@
                                                     @can('delete_posts')
                                                     <a class="btn btn-danger notify-confirm" href="{{url($routeName.'/delete/'.$row->id)}}" title="Xóa"> <i class="feather icon-trash-2"></i></a>
                                                     @endcan
+
+                                                    <a class="btn btn-success" href="{{ url($row->link()) }}" target="_blank"><i class="feather icon-eye" title="Xem"></i></a>
                                                 </form>
                                                 </td>
                                             </tr>

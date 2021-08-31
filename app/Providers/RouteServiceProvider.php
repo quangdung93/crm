@@ -2,11 +2,16 @@
 
 namespace App\Providers;
 
-use Illuminate\Cache\RateLimiting\Limit;
-use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use App\Models\Category;
+use App\Models\PostCategory;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Support\Facades\RateLimiter;
+use App\Http\Controllers\Site\ProductController;
+use App\Http\Controllers\Site\CategoryController;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -36,6 +41,24 @@ class RouteServiceProvider extends ServiceProvider
                 ->middleware('api')
                 ->group(base_path('routes/api.php'));
         });
+
+        Route::bind('url', function ($path) {
+            $slugs = explode('/', $path);
+
+            if(count($slugs) > 1){ //Multi level route
+
+                //Post Category Multi level
+                return $this->handleRoutePostCategory($slugs);
+            }
+            else{ //Single level route
+                $model = $this->handleRouteSingle($path);
+                if($model){
+                    return $model;
+                }
+
+                return $path;
+            }
+        });
     }
 
     /**
@@ -48,5 +71,46 @@ class RouteServiceProvider extends ServiceProvider
         RateLimiter::for('api', function (Request $request) {
             return Limit::perMinute(60);
         });
+    }
+
+    private function handleRouteSingle($path){
+        //Product Category
+        $model = Category::where('slug', $path)->first();
+        if($model){
+            return $model;
+        }
+
+        //Post Category Single Level (Parent)
+        $model = PostCategory::where('slug', $path)->first();
+        if($model){
+            return $model;
+        }
+    }
+
+    private function handleRoutePostCategory($slugs){
+        // Look up all categories and key by slug for easy look-up
+        $categories = PostCategory::whereIn('slug', $slugs)->get()->keyBy('slug');
+        $parent = null;   
+        foreach ($slugs as $slug) {
+            $category = $categories->get($slug);
+            // Category with slug does not exist
+            if (!$category) {
+                abort(404);
+                // throw (new ModelNotFoundException)->setModel(PostCategory::class);
+            }
+    
+            // Check this category is child of previous category
+            if ($parent && $category->parent_id != $parent->getKey()) {
+                // Throw 404 if this category is not child of previous one
+                abort(404);
+            }
+    
+            // Set $parent to this category for next iteration in loop
+            $parent = $category;
+        }
+
+        // All categories exist and are in correct hierarchy
+        // Return last category as route binding
+        return $category;
     }
 }

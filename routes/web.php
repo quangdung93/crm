@@ -1,19 +1,15 @@
 <?php
 
-use App\Models\Page;
-use App\Models\Post;
-use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\LogController;
 use App\Http\Controllers\Site\HomeController;
-use App\Http\Controllers\Site\ProductController as ProductControllerSite;
-use App\Http\Controllers\Site\CategoryController as CategoryControllerSite;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Site\RouteController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\ImageController;
 use App\Http\Controllers\Admin\MediaController;
@@ -22,9 +18,9 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\RedirectController;
+use App\Http\Controllers\Site\WordpressController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PostCategoryController;
-use App\Models\Category;
 
 /*
 |--------------------------------------------------------------------------
@@ -214,37 +210,5 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'], function () {
 
 //Site Route
 Route::get('/', [HomeController::class, 'index']);
-Route::get('/integrate', [HomeController::class, 'integrate']);
-Route::get('/{url}', function(Request $request, $url){
-
-    $path = str_replace('-','_',  $url);
-
-    if($path == 'san_pham'){
-        return (new ProductControllerSite)->index(); 
-    }
-
-    //Product Category
-    $category = Category::where('slug', $url)->first();
-    if($category){
-        return (new CategoryControllerSite)->index($category);
-    }
-
-    // //Product
-    // $product = Product::where('slug', $url)->first();
-    // if($product){
-    //     return (new ProductController)->index($product);
-    // }
-    
-    // //Post
-    // $post = Post::where('slug', $url)->first();
-    // if($post){
-    //     return (new PostController)->index($post);
-    // }
-
-    // //Page
-    // $page = Page::where('slug', $url)->first();
-    // if($page){
-    //     return (new PageController)->index($page);
-    // }
-
-});
+Route::get('/wordpress', [WordpressController::class, 'integrate']);
+Route::get('/{url}', [RouteController::class, 'handle'])->where('url', '.*');

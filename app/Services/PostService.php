@@ -15,8 +15,8 @@ class PostService
             ->editColumn('name', function ($row) {
                 return $row->name;
             })
-            ->editColumn('category_id', function ($row) {
-                return $row->category->name ?? '';
+            ->editColumn('categories', function ($row) {
+                return implode(',', $row->categories->pluck('name')->toArray());
             })
             ->editColumn('created_at', function ($row) {
                 return format_date($row->created_at);

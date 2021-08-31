@@ -50,7 +50,7 @@
         var columns = [
             { data: 'image',name: 'image',orderable: false, searchable: false},
             { data: 'name',name: 'name',width: '25%'},
-            { data: 'category_id',name: 'category_id'},
+            { data: 'categories',name: 'categories'},
             { data: 'created_at',name: 'created_at', searchable: false},
             { data: 'status',name: 'status', searchable: false},
             { data: 'action',orderable: false, searchable: false, className: 'nowrap'}

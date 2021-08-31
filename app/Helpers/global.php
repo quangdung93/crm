@@ -132,19 +132,25 @@ if (!function_exists('product_template')){
 		$html = '';
 
 		foreach ($products as $item) {
+			$discount = $priceOld = '';
+			if($item->discount > 0){
+				$discount = '<div class="discount">-'.round($item->discount, 1).'%</div>';
+				$priceOld = '<span class="price-old">'.number_format($item->price_old).' đ</span>';
+			}
+			
 			$html .= '<div class="product-item">
 				<div class="product-img">
 					<a href="#">
-						<img src="'.asset($item->image).'" alt="'.$item->name.'"/>
+						<img class="lazy" data-src="'.asset($item->image).'" alt="'.$item->name.'"/>
 					</a>
-					<div class="discount">-'.round($item->discount, 1).'%</div>
+					'.$discount.'
 				</div>
 				<div class="product-info">
 					<div class="product-title">
 						<a href="#">'.$item->name.'</a>
 					</div>
 					<div class="product-price">
-						<span class="price-old">'.number_format($item->price_old).' đ</span>
+						'.$priceOld.'
 						<span class="price-new">'.number_format($item->price).' đ</span>
 					</div>
 					<div class="note-price">(Giá chưa bao gồm VAT)</div>

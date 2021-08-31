@@ -17,9 +17,8 @@
             </div>
             <div class="products-wrapper">
                 {!! product_template($products) !!}
-
-                {!! $products->render('themes.kangen.components.pagination') !!}
             </div>
+            {!! $products->render('themes.kangen.components.pagination') !!}
         </div>
     </div>
 
