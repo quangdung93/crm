@@ -24,6 +24,11 @@ class Post extends Model
     }
 
     public function link(){
-        return $this->slug ?: '/';
+        return 'tin-tuc/' . $this->slug ?: '/';
+    }
+
+    public function handleContentPost(){
+        //Lazyload image in body content 
+        $this->body = str_replace('src','data-src',$this->body);
     }
 }

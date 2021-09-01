@@ -656,11 +656,17 @@ footer .footer-middle .title:before{
 
 /* SiderBar */
 
+.siderbar .siderbar-item{
+    margin-bottom: 15px;
+    border-bottom: 1px solid #f1f1f1;
+}
+
 .siderbar .siderbar-title{
     position: relative;
     font-size: 22px;
     text-transform: uppercase;
     margin-bottom: 20px;
+    color: var(--primary);
 }
 
 .siderbar .siderbar-title:before{
@@ -675,3 +681,45 @@ footer .footer-middle .title:before{
 
 
 /* End siderbar */
+
+/* Content Style */
+
+.content-detail{
+    margin-bottom: 30px;
+    font-size: 16px;
+}
+
+.content-detail .aligncenter{
+    clear: both;
+    display: block;
+    margin: 15px auto;
+}
+
+.content-detail ul{
+    padding-left: 20px;
+}
+
+.content-detail img{
+    max-width: 100%;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.content-detail li{
+    list-style: unset;
+}
+
+.content-detail pre, 
+.content-detail blockquote, 
+.content-detail form, 
+.content-detail figure,
+.content-detail p, 
+.content-detail dl, 
+.content-detail ul, 
+.content-detail em, 
+.content-detail ol{
+    margin-bottom: 13px;
+    text-align: justify;
+    font-size: 16px;
+    line-height: 1.5;
+}

@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Post;
 use App\Models\Category;
 use App\Models\PostCategory;
 use Illuminate\Http\Request;
@@ -46,7 +47,12 @@ class RouteServiceProvider extends ServiceProvider
             $slugs = explode('/', $path);
 
             if(count($slugs) > 1){ //Multi level route
-
+                if($slugs[0] === 'tin-tuc'){
+                    $post = Post::where('slug', $slugs[1])->first();
+                    if($post){
+                        return $post;
+                    }
+                }
                 //Post Category Multi level
                 return $this->handleRoutePostCategory($slugs);
             }
@@ -90,27 +96,29 @@ class RouteServiceProvider extends ServiceProvider
     private function handleRoutePostCategory($slugs){
         // Look up all categories and key by slug for easy look-up
         $categories = PostCategory::whereIn('slug', $slugs)->get()->keyBy('slug');
-        $parent = null;   
-        foreach ($slugs as $slug) {
-            $category = $categories->get($slug);
-            // Category with slug does not exist
-            if (!$category) {
-                abort(404);
-                // throw (new ModelNotFoundException)->setModel(PostCategory::class);
+        if($categories){
+            $parent = null;   
+            foreach ($slugs as $slug) {
+                $category = $categories->get($slug);
+                // Category with slug does not exist
+                if (!$category) {
+                    abort(404);
+                    // throw (new ModelNotFoundException)->setModel(PostCategory::class);
+                }
+        
+                // Check this category is child of previous category
+                if ($parent && $category->parent_id != $parent->getKey()) {
+                    // Throw 404 if this category is not child of previous one
+                    abort(404);
+                }
+        
+                // Set $parent to this category for next iteration in loop
+                $parent = $category;
             }
-    
-            // Check this category is child of previous category
-            if ($parent && $category->parent_id != $parent->getKey()) {
-                // Throw 404 if this category is not child of previous one
-                abort(404);
-            }
-    
-            // Set $parent to this category for next iteration in loop
-            $parent = $category;
-        }
 
-        // All categories exist and are in correct hierarchy
-        // Return last category as route binding
-        return $category;
+            // All categories exist and are in correct hierarchy
+            // Return last category as route binding
+            return $category;
+        }
     }
 }

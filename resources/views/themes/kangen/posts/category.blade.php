@@ -28,7 +28,7 @@
                                         </h6>
                                     </div>
                                     <h2 class="post-name"><a href="{{ url($post->link()) }}">{{ $post->name }}</a></h2>
-                                    <div class="post-tagline">✯ LIÊN HỆ TỔNG ĐÀI: 1900.86.68.10 ĐỂ ĐƯỢC TƯ VẤN TRỰC TIẾP ✯</div>
+                                    <div class="post-tagline">✯ LIÊN HỆ TỔNG ĐÀI: <a href="tel:1900866810">1900.86.68.10</a> ĐỂ ĐƯỢC TƯ VẤN TRỰC TIẾP ✯</div>
                                     <div class="post-content">
                                         <div class="image lazy" data-src="&#39;{{asset($post->image)}}&#39;"></div>
                                         <div class="body">
@@ -43,19 +43,7 @@
                     </div>
                     <div class="col-sm-3">
                         <div class="siderbar posts">
-                            <div class="siderbar-title">{{ $categorySiderbar->name }}</div>
-                            <div class="siderbar-content">
-                                @foreach($categorySiderbar->posts as $item)
-                                    <div class="item">
-                                        <a href="{{ url($item->link()) }}">
-                                            <div class="image lazy" data-src="&#39;{{asset($item->image)}}&#39;"></div>
-                                        </a>
-                                        <div class="content">
-                                            <a href="{{ url($item->link()) }}">{{ $item->name }}</a>
-                                        </div>
-                                    </div>
-                                @endforeach
-                            </div>
+                            @include('themes.kangen.posts.siderbar.post-vertical', ['title' => $categorySiderbar->name, 'posts' => $categorySiderbar->posts])
                         </div>
                     </div>
                 </div>

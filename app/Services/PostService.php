@@ -2,6 +2,8 @@
 
 namespace App\Services;
 use Carbon\Carbon;
+use App\Models\Post;
+use App\Models\PostCategory;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Auth;
 
@@ -55,5 +57,18 @@ class PostService
             ->rawColumns(['image','status','action'])
             ->make(true);
         return $data;
+    }
+
+    public function getCategorySiderBar($limit = 5){
+        return PostCategory::where('id', 126)->with('posts')->limit($limit)->first();
+    }
+
+    public function getPostRelated($category_ids, $limit = 5){
+        return Post::whereHas('categories', function($query) use($category_ids){
+            $query->whereIn('post_category_id', $category_ids);
+        })
+        ->inRandomOrder()
+        ->limit($limit)
+        ->get();
     }
 }
