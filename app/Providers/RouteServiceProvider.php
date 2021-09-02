@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Page;
 use App\Models\Post;
 use App\Models\Product;
 use App\Models\Category;
@@ -100,6 +101,12 @@ class RouteServiceProvider extends ServiceProvider
 
         //Post Category Single Level (Parent)
         $model = PostCategory::where('slug', $path)->first();
+        if($model){
+            return $model;
+        }
+
+        //Post Category Single Level (Parent)
+        $model = Page::where('slug', $path)->first();
         if($model){
             return $model;
         }

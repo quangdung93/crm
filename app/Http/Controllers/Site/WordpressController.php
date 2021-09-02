@@ -7,17 +7,18 @@ use Corcel\Model\Page;
 use Corcel\Model\Post;
 use App\Models\Product;
 use Corcel\Model\Taxonomy;
+use Illuminate\Support\Str;
+use App\Http\Controllers\Controller;
 use Corcel\WooCommerce\Model\Product as ProductCorcel;
 use Corcel\WooCommerce\Model\ProductCategory as CategoryCorcel;
-use App\Http\Controllers\Controller;
 
 class WordpressController extends Controller
 {
     public function integrate(){
-        dd($this->getPostWordpress());
+        dd($this->getPage());
     }
 
-    public function getPostWordpress(){
+    public function getPost(){
         //Get Post
         $posts = Post::where('post_type', 'post')->with('taxonomies')->get();
         
@@ -38,10 +39,23 @@ class WordpressController extends Controller
         return true;
     }
 
-    public function getPageWordpress(){
-        $page = Page::all();
+    public function getPage(){
+        $pages = Page::all();
 
-        return $page;
+        foreach($pages as $page){
+            $data = [
+                'name' => $page->post_title,
+                'slug' => $page->post_name ?: Str::slug($page->post_title),
+                'body' => $page->post_content,
+                'meta_title' => $page->post_title,
+                'image' => $page->image,
+                'author_id' => Auth::id(),
+            ];
+
+            $page = \App\Models\Page::create($data);
+        }
+
+        return true;
     }
 
     public function getProductWP(){

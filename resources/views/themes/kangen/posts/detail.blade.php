@@ -26,7 +26,7 @@
                                 </div>
                                 <h2 class="post-name text-center">{{ $post->name }}</h2>
                                 <div class="post-tagline text-center mb-2">✯ LIÊN HỆ TỔNG ĐÀI: <a href="tel:1900866810">1900.86.68.10</a> ĐỂ ĐƯỢC TƯ VẤN TRỰC TIẾP ✯</div>
-                                <div class="content-detail blur-content">
+                                <div class="content-detail">
                                     {!! $post->body !!}
                                 </div>
                             </div>

@@ -266,22 +266,3 @@
     margin: 20px 0;
 }
 
-.installment{
-    margin: 35px 0;
-    padding-top: 30px;
-    border-top: 1px solid #ddd;
-}
-
-.installment > .title{
-    color: #F52222;
-}
-
-.installment > .title p{
-    color: var(--primary)
-}
-
-.installment .content{
-    background: #f8f7fd;
-    padding: 15px;
-    border-radius: 5px;
-}

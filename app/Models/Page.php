@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helpers\ShortcodeHelper;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -19,5 +20,11 @@ class Page extends Model
 
     public function link(){
         return $this->slug ?: '/';
+    }
+
+    public function handleContent(){
+        //Lazyload image in body content 
+        $this->body = ShortcodeHelper::renderFromContent($this->body);
+        $this->body = str_replace('src','data-src',$this->body);
     }
 }

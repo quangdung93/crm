@@ -53,6 +53,17 @@ img[src].lazy{
     color: var(--primary)
 }
 
+.border-style{
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.border-right-style{
+    border-right: 2px solid #ddd;
+    padding-right: 15px;
+}
+
 .bg-kangen{
     background: var(--primary) !important;
     color: #fff !important;
@@ -202,7 +213,7 @@ section{
     padding: 0 10px;
     left: 0;
     top: 43.5px;
-    min-width: 250px;
+    min-width: 350px;
     background: var(--primary);
     -webkit-transition: all .5s ease 0s;
     -o-transition: all .5s ease 0s;
@@ -706,9 +717,9 @@ footer .footer-middle .title:before{
 }
 
 .content-detail img{
+    display: block;
     max-width: 100%;
-    margin-top: 15px;
-    margin-bottom: 15px;
+    margin: 15px auto;
 }
 
 .content-detail li{
@@ -787,4 +798,24 @@ blockquote:before {
     font-size: 18px;
     color: var(--primary);
     margin-bottom: 15px;
+}
+
+.installment{
+    margin: 35px 0;
+    padding-top: 30px;
+}
+
+.installment > .title{
+    color: #F52222;
+}
+
+.installment > .title p{
+    color: var(--primary);
+    text-align: center;
+}
+
+.installment .content{
+    background: #f8f7fd;
+    padding: 15px;
+    border-radius: 5px;
 }

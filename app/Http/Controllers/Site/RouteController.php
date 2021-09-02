@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Site;
 
+use App\Models\Page;
 use App\Models\Post;
+use App\Models\Product;
 use App\Models\Category;
 use App\Models\PostCategory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Product;
 
 class RouteController extends Controller
 {
@@ -23,6 +24,9 @@ class RouteController extends Controller
         }
         else if($model instanceof Category){
             return (new CategoryController)->index($model);
+        }
+        else if($model instanceof Page){
+            return (new PageController)->detail($model);
         }
         else if($model == 'san-pham'){ //custom route
             return (new ProductController)->index(); 

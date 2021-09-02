@@ -20,6 +20,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\RedirectController;
 use App\Http\Controllers\Site\WordpressController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ShortcodeController;
 use App\Http\Controllers\Admin\PostCategoryController;
 
 /*
@@ -146,6 +147,16 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'], function () {
         Route::post('/order', [SettingController::class, 'order'])->name('settings.order');
     });
 
+    //Shortcode
+    Route::group(['prefix' => 'shortcodes', 'middleware' => ['can:read_settings']], function () {
+        Route::get('/', [ShortcodeController::class, 'index']);
+        Route::get('/create', [ShortcodeController::class, 'create'])->middleware('can:add_settings');
+        Route::post('/create', [ShortcodeController::class, 'store'])->middleware('can:add_settings');
+        Route::get('/edit/{id}', [ShortcodeController::class, 'edit'])->middleware('can:edit_settings');
+        Route::post('/edit/{id}', [ShortcodeController::class, 'update'])->middleware('can:edit_settings');
+        Route::get('/delete/{id}', [ShortcodeController::class, 'destroy'])->middleware('can:delete_settings');
+    });
+
     //Media
     Route::group(['prefix' => 'media', 'middleware' => ['can:read_media']], function () {
         Route::get('/', [MediaController::class, 'index']);
@@ -198,7 +209,7 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'], function () {
         Route::get('/delete/{id}', [RedirectController::class, 'destroy'])->middleware('can:delete_redirects');
     });
 
-    //Redirect
+    //Logs
     Route::group(['prefix' => 'logs', 'middleware' => ['can:read_logs']], function () {
         Route::get('/', [LogController::class, 'index']);
         Route::get('datatable', [LogController::class,'getDatatable'])->name('logs.view');
