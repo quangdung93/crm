@@ -140,14 +140,14 @@ if (!function_exists('product_template')){
 			
 			$html .= '<div class="product-item">
 				<div class="product-img">
-					<a href="#">
+					<a href="'.url($item->link()).'">
 						<img class="lazy" data-src="'.asset($item->image).'" alt="'.$item->name.'"/>
 					</a>
 					'.$discount.'
 				</div>
 				<div class="product-info">
 					<div class="product-title">
-						<a href="#">'.$item->name.'</a>
+						<a href="'.url($item->link()).'">'.$item->name.'</a>
 					</div>
 					<div class="product-price">
 						'.$priceOld.'

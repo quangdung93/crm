@@ -60,6 +60,23 @@ $(document).on('click', '.menu-mobile li.has-submenu .icon-show', function(){
     $(this).closest('.has-submenu').find('.sub-menu').toggleClass('show-menu');
 });
 
+$(document).on('click', '.show-all', function(e){
+    e.preventDefault();
+
+    if($('.height-fixed').hasClass('show-all')){
+        $('.height-fixed').removeClass('show-all').addClass('blur-content');
+        $(this).find('span').text('Xem thêm');
+        $(this).find('i').removeClass('icon-chevrons-up').addClass('icon-chevrons-down');
+        scrollToElement($('.height-fixed'));
+    }
+    else{
+        $('.height-fixed').addClass('show-all').removeClass('blur-content');
+        $(this).find('span').text('Thu gọn');
+        $(this).find('i').removeClass('icon-chevrons-down').addClass('icon-chevrons-up');
+    }
+
+});
+
 function generateYoutube() {
     var youtube = document.querySelectorAll(".youtube");
     for (var i = 0; i < youtube.length; i++) {
@@ -116,4 +133,10 @@ function renderIframeYoutube(embed){
         iframe.setAttribute("allowfullscreen", "");
         iframe.setAttribute("src", "https://www.youtube.com/embed/" + embed + "?rel=0&showinfo=0&autoplay=1");
         return iframe;
+}
+
+function scrollToElement(element, time = 500, margin = 10) {
+    $("html, body").animate({
+        scrollTop: element.offset().top - margin
+    }, time);
 }

@@ -7,12 +7,16 @@ use App\Models\Category;
 use App\Models\PostCategory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 
 class RouteController extends Controller
 {
     public function handle($model){
         if($model instanceof Post){
             return (new PostController)->detail($model);
+        }
+        else if($model instanceof Product){
+            return (new ProductController)->detail($model);
         }
         else if($model instanceof PostCategory){
             return (new PostCategoryController)->index($model);

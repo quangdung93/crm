@@ -24,7 +24,7 @@ class Post extends Model
     }
 
     public function link(){
-        return 'tin-tuc/' . $this->slug ?: '/';
+        return config('stableweb.prefix.post.slug') .'/'. $this->slug ?: '/';
     }
 
     public function handleContentPost(){

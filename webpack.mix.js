@@ -12,9 +12,15 @@ mix.styles([
 
 //Javascripts Site
 mix.scripts([
+    'resources/js/jquery.min.js',
+    'resources/js/boostrap.min.js',
     'resources/js/slick.min.js',
     'resources/js/lazyload.min.js',
 ], 'public/themes/kangen/js/app.min.js');
+
+
+
+// *********************** ADMIN PAGE ********************************
 
 //Vendor CSS Admin
 mix.styles([

@@ -2,6 +2,7 @@
 
 namespace App\Services;
 use Carbon\Carbon;
+use App\Models\Product;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Auth;
 
@@ -49,12 +50,20 @@ class ProductService
                         <i class="feather icon-trash-2"></i>
                     </a>';
                 }
-                $action .= '<a class="btn btn-success" href="'.$row->link().'" target="_blank"><i class="feather icon-eye" title="Xem"></i></a>';
+                $action .= '<a class="btn btn-success" href="'.url($row->link()).'" target="_blank"><i class="feather icon-eye" title="Xem"></i></a>';
 
                 return $action;
             })
             ->rawColumns(['image', 'price', 'status','action'])
             ->make(true);
         return $data;
+    }
+
+    public function getProductRelated($category_ids, $limit = 8){
+        return Product::whereHas('categories', function($query) use($category_ids){
+            $query->whereIn('category_id', $category_ids);
+        })
+        ->limit($limit)
+        ->get();
     }
 }

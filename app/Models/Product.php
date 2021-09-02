@@ -36,6 +36,11 @@ class Product extends Model
     }
 
     public function link(){
-        return $this->slug ?: '/';
+        return config('stableweb.prefix.product.slug') .'/'. $this->slug ?: '/';
+    }
+
+    public function handleContent(){
+        //Lazyload image in body content 
+        $this->content = str_replace('src','data-src',$this->content);
     }
 }

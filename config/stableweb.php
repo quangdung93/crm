@@ -9,4 +9,15 @@ return [
 
     //Logging action All model
     'enable_log' => true,
+
+    'prefix' => [
+        'product' => [
+            'slug' => 'san-pham',
+            'title' => 'Sản phẩm'
+        ],
+        'post' => [
+            'slug' => 'tin-tức',
+            'title' => 'Kinh nghiệm hay'
+        ]
+    ]
 ];

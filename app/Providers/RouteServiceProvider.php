@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Post;
+use App\Models\Product;
 use App\Models\Category;
 use App\Models\PostCategory;
 use Illuminate\Http\Request;
@@ -43,14 +44,25 @@ class RouteServiceProvider extends ServiceProvider
                 ->group(base_path('routes/api.php'));
         });
 
+        //Custom route
         Route::bind('url', function ($path) {
             $slugs = explode('/', $path);
 
-            if(count($slugs) > 1){ //Multi level route
-                if($slugs[0] === 'tin-tuc'){
+            if(count($slugs) == 2){ //Multi level route
+
+                //Post
+                if($slugs[0] === config('stableweb.prefix.post.slug')){
                     $post = Post::where('slug', $slugs[1])->first();
                     if($post){
                         return $post;
+                    }
+                }
+
+                //Product
+                if($slugs[0] === config('stableweb.prefix.product.slug')){
+                    $product = Product::where('slug', $slugs[1])->first();
+                    if($product){
+                        return $product;
                     }
                 }
                 //Post Category Multi level
