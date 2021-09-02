@@ -50,6 +50,12 @@ if (!function_exists('asset_image')) {
     }
 }
 
+if (!function_exists('shortcode')) {
+	function shortcode($key){
+		return App\Helpers\ShortcodeHelper::renderByKey($key);
+	}
+}
+
 if (!function_exists('handle_show_attribute')) {
     function handle_show_attribute($key, $value, $model){
 		if($key == 'price' || $key == 'price_old'){

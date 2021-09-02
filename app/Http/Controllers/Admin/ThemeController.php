@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Theme;
+use App\Models\Category;
 use App\Models\ThemeOption;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -61,7 +62,11 @@ class ThemeController extends Controller
     public function edit($id)
     {
         $themeOptions = ThemeOption::where('theme_id', $id)->get()->pluck('value', 'key')->toArray();
-        return view('admin.themes.options')->with(['themeOptions' => $themeOptions]);
+        $categories = Category::active()->get();
+        return view('admin.themes.options')->with([
+            'themeOptions' => $themeOptions,
+            'categories' => $categories,
+        ]);
     }
 
     /**

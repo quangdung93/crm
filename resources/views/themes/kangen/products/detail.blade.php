@@ -119,7 +119,7 @@
                 </div>
             </div>
 
-            {!! App\Helpers\ShortcodeHelper::renderByKey('thongtin') !!}
+            {!! shortcode('thongtin') !!}
 
             @include('themes.kangen.components.installment')
 

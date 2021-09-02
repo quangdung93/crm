@@ -25,6 +25,7 @@
                         </div>
                     </div>
                 </div>
+                {!! shortcode('thongtin') !!}
             </div>
         </div>
     </div>

@@ -17,6 +17,9 @@
             </a>
         </div>
     </div>
+    @if($note)
+        <label class="mark mt-2">Kích thước {{ $note }}</label>
+    @endif
 
     @if($type == 'long')</div></div>@endif
 </div>
