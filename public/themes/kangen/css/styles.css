@@ -227,6 +227,11 @@ section{
 
 .nav-menu .main-menu ul > li > ul.sub-menu > li{
     display: block;
+    border-bottom: 1px solid #6b7cbe;
+}
+
+.nav-menu .main-menu ul > li > ul.sub-menu > li:last-child{
+    border-bottom: none;
 }
 
 .nav-menu .main-menu.menu-mobile ul > li > ul.sub-menu.show-menu{

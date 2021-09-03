@@ -216,6 +216,7 @@
 .add-to-cart .btn-addtocart{
     width: 100%;
     margin-left: 20px;
+    text-transform: uppercase;
 }
 
 .quote-text{
