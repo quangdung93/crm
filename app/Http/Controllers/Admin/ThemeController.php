@@ -5,9 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Theme;
 use App\Models\Category;
 use App\Models\ThemeOption;
+use App\Models\PostCategory;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\UploadedFile;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cache;
 
 class ThemeController extends Controller
@@ -65,9 +66,11 @@ class ThemeController extends Controller
     {
         $themeOptions = ThemeOption::where('theme_id', $id)->get()->pluck('value', 'key')->toArray();
         $categories = Category::active()->get();
+        $postCategories = PostCategory::active()->get();
         return view('admin.themes.options')->with([
             'themeOptions' => $themeOptions,
             'categories' => $categories,
+            'postCategories' => $postCategories,
         ]);
     }
 
@@ -82,41 +85,24 @@ class ThemeController extends Controller
     {
         // try{
             $data = $request->except('_token');
-            // dd($data);
             foreach ($data as $key => $value) {
-                //Image Handle
-                if($request->hasFile($key)){
-                    if(is_array($value) && isset($value['image']) || isset($value['logo'])){
-                        if(isset($value['image']) && $value['image'] instanceof UploadedFile){
-                            $image = $value['image'];
+                if(!is_array($value)){
+                    continue;
+                }
+
+                foreach($value as $index => $item){
+                    foreach($item as $subKey => $subItem){
+                        if($subItem instanceof UploadedFile){
+                            $image = $subItem;
                             $imagePath = $this->uploadImage('settings', $image);
                             if($imagePath){
-                                $setting = ThemeOption::where('key', $key)->first();
-                                // $this->deleteImage($setting->value['image']);
-                                $value['image'] = $imagePath;
+                                // $setting = ThemeOption::where('key', $key)->first();
+                                // $this->deleteImage($setting->value[$upload]);
+                                $value[$index][$subKey] = $imagePath;
                             }
-                        }
-                        elseif(isset($value['logo']) && $value['logo'] instanceof UploadedFile){
-                            $image = $value['logo'];
-                            $imagePath = $this->uploadImage('settings', $image);
-                            if($imagePath){
-                                $setting = ThemeOption::where('key', $key)->first();
-                                // $this->deleteImage($setting->value['image']);
-                                $value['logo'] = $imagePath;
-                            }
-                        }
-                    }
-                    else{
-                        $image = $value;
-                        $imagePath = $this->uploadImage('settings', $image);
-                        if($imagePath){
-                            $setting = ThemeOption::where('key', $key)->first();
-                            $this->deleteImage($setting->value);
-                            $value = $imagePath;
                         }
                     }
                 }
-
                 $option = ThemeOption::where('theme_id', 1)->where('key', $key)->first();
                 $option->update(['value' => $value]);
             }

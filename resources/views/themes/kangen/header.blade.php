@@ -2,7 +2,7 @@
     <div class="container d-flex justify-content-between">
         <div class="logo">
             <a href="/">
-                <img src="https://kangenvietnam.vn/wp-content/uploads/2020/10/logo-dai-lam-thinh.png" alt="Logo"/>
+                <img src="{{ asset(theme('logo.image')) }}" alt="Logo"/>
             </a>
         </div>
         <div class="header-content d-flex align-items-center">
@@ -28,7 +28,7 @@
     <div class="container">
         <div class="main-menu">
             <div class="logo-menu d-sm-none">
-                <img class="img-fluid" src="https://kangenvietnam.vn/wp-content/uploads/2020/10/logo-dai-lam-thinh.png" alt="Logo"/>
+                <img class="img-fluid lazy" data-src="{{ asset(theme('logo.image')) }}" alt="Logo menu"/>
             </div>
             <div class="search d-sm-none">
                 <input type="text" placeholder="Tìm kiếm..."/>

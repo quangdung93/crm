@@ -86,6 +86,51 @@ if (!function_exists('theme')) {
     }
 }
 
+if (!function_exists('category')) {
+	function category($category_id){
+		return (new App\Models\Category())->getCategory($category_id);
+    }
+}
+
+if (!function_exists('get_embed_youtube')) {
+	function get_embed_youtube($url){
+		try{
+			parse_str( parse_url( $url, PHP_URL_QUERY ),$embedUrl);
+			return $embedUrl['v'];
+		}
+		catch(\Exception $e){
+			return null;
+		}
+	}
+}
+
+if (!function_exists('split_textarea')){
+	function split_textarea($text){
+		return array_filter(preg_split('/\r\n|[\r\n]/', $text));
+	}
+}
+
+if (!function_exists('render_split_textarea')){
+	function render_split_textarea($text, $tag = 'p'){
+		$list = split_textarea($text);
+		$html = '';
+		if(count($list) > 0){
+			foreach($list as $item){
+				$html .= '<'.$tag.'>' .$item. '</'.$tag.'>';
+			}
+		}
+
+		return $html;
+	}
+}
+
+
+if (!function_exists('post_excerpt')){
+	function post_excerpt($content, $limit = 30){
+		return strip_tags(Str::words($content, $limit));
+	}
+}
+
 if (!function_exists('product_template')){
 	function product_template($products){
 		if(!$products){

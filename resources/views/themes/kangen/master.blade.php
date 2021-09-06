@@ -14,9 +14,9 @@
     
     <link rel="stylesheet" type="text/css" href="{{ asset('themes/kangen/css/app.min.css') }}"> 
     <link rel="stylesheet" type="text/css" href="{{ asset('themes/kangen/css/styles.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('themes/kangen/css/responsive.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('themes/kangen/css/product.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('themes/kangen/css/post.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('themes/kangen/css/responsive.css') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <script type="text/javascript">
         var BASE_URL = '{{ asset('') }}';

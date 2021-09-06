@@ -19,8 +19,8 @@
                             <strong><span style="color: #f1c40f;">Fax:</span>&nbsp;</strong><a href="tel:0278938007">027-893-8007</a><br />
                             <strong><span style="color: #f1c40f;">Website:</span></strong>&nbsp;enagic.co.jp<br />
                             <a class="dmca-badge" title="DMCA.com Protection Status" href="https://www.dmca.com/Protection/Status.aspx?ID=5adc203c-5bc1-4a57-b994-82be45f0e10e&amp;refurl=https://kangenvietnam.vn/">
-                                <img src="https://images.dmca.com/Badges/dmca_protected_29_120.png?ID=5adc203c-5bc1-4a57-b994-82be45f0e10e" alt="DMCA.com Protection Status" class="lazyloaded" data-ll-status="loaded" />
-                                <noscript><img src="https://images.dmca.com/Badges/dmca_protected_29_120.png?ID=5adc203c-5bc1-4a57-b994-82be45f0e10e" alt="DMCA.com Protection Status" /></noscript>
+                                <img data-src="{{ asset('themes/kangen/images/dmca.png') }}" alt="DMCA.com Protection Status" class="lazy" data-ll-status="loaded" />
+                                <noscript><img src="{{ asset('themes/kangen/images/dmca.png') }}" alt="DMCA.com Protection Status" /></noscript>
                             </a>
                         </p>
                     </div>
@@ -155,7 +155,7 @@
 <section class="footer-bottom">
     <div class="container">
         <div class="payment-icon text-center">
-            <img class="img-fuild" src="https://kangenvietnam.vn/wp-content/uploads/2020/11/incon-thanh-toan.png" alt="payment icons" />
+            <img class="img-fuild lazy" data-src="https://kangenvietnam.vn/wp-content/uploads/2020/11/incon-thanh-toan.png" alt="payment icons" />
         </div>
         <div class="payment-text text-center">
             <p>Chấp nhận thanh toán các loại thẻ ATM</p>

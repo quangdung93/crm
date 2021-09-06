@@ -26,6 +26,10 @@ class PostCategory extends Model
         return $query->where('status', 1);
     }
 
+    public function scopeWithHas($query, $relation, $callback){
+        return $query->whereHas($relation, $callback)->with([$relation => $callback]);
+    }
+
     public function link(){
         if(!is_null($this->parent)){
             return $this->parent->slug .'/'. $this->slug;

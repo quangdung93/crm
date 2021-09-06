@@ -32,7 +32,7 @@
                                     <div class="post-content">
                                         <div class="image lazy" data-src="&#39;{{asset($post->image)}}&#39;"></div>
                                         <div class="body">
-                                            <p>Bạn đang tìm hiểu về nước Kangen hay đã sử dụng được một khoảng thời gian nhưng vẫn chưa hiểu hết được cụ thể công dụng của các loại nước quý này. Nếu bạn muốn tìm hiểu rõ ràng hơn thì bài viết dưới đây giúp bạn giải đáp thắc mắc về nước điện giả</p>
+                                            <p>{!! post_excerpt($post->body, 50) !!}</p>
                                             <a href="{{ url($post->link()) }}" class="btn read-more mt-4 bg-kangen"><i class="feather icon-chevrons-right"></i> Xem thêm</a>
                                         </div>
                                     </div>

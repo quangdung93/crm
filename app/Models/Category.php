@@ -40,4 +40,8 @@ class Category extends Model
     public function link(){
         return $this->slug ?: '/';
     }
+
+    public function getCategory($category_id){
+        return self::where('id', $category_id)->with('products')->first();
+    }
 }

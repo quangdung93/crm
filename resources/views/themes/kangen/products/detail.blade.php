@@ -20,8 +20,8 @@
                         </div>
                         <div class="quote-text">
                             <blockquote>
-                                <p>Giá Trị Của Sản Phẩm Phải Đi Kèm Với Chất Lượng Của Dịch Vụ. Giá Có Thể Tốt Nhưng Dịch Vụ Phải Tốt Hơn</p>
-                                <p class="text-right">CEO: Đại Lâm Thịnh</p>
+                                <p>{{ theme('product_quote.content') }}</p>
+                                <p class="text-right">{{ theme('product_quote.author') }}</p>
                             </blockquote>
                         </div>
                     </div>
@@ -29,7 +29,7 @@
                         <div class="product-detail-info">
                             <div class="answer">
                                 <span><i class="feather icon-chevrons-right"></i></span>
-                                <span><a href="#">Vì sao không nên mua hàng xách tay? Click xem ngay</a></span>
+                                <span><a href="{{ theme('product_question.link') }}">{{ theme('product_question.title') }}</a></span>
                             </div>
                             <div class="product-name"><h3>{{ $product->name }}</h3></div>
                             <div class="product-price">
@@ -60,8 +60,10 @@
                                 <a href="#" class="btn bg-kangen btn-addtocart">Thêm vào giỏ hàng</a>
                             </div>
                             <div class="image-block">
-                                <h5 class="title text-center">Thanh toán các loại thẻ</h5>
-                                <img class="img-fluid lazy" data-src="{{ asset('themes/kangen/images/bank-all.png') }}" alt="" />
+                                <h5 class="title text-center">{{ theme('product_banner_1.title') }}</h5>
+                                <a href="{{ theme('product_banner_1.link') }}" class="d-block">
+                                    <img class="img-fluid lazy" data-src="{{ asset(theme('product_banner_1.image')) }}" alt="" />
+                                </a>
                             </div>
                         </div>
                     </div>
