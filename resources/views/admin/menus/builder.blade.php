@@ -26,10 +26,46 @@
                             </div>
                             @endcan
                             <div class="form-group row">
+                                <label class="col-sm-12 col-form-label font-weight-bold">Liên kết từ sản phẩm</label>
+                                <div class="col-sm-9">
+                                    <select class="form-control populate select2">
+                                        <option value="0">Chọn</option>
+                                        @if($products)
+                                            @foreach($products as $item)
+                                                <option value="{{$item->id}}">{{$item->name}}</option>
+                                            @endforeach
+                                        @endif
+                                    </select>
+                                </div>
+                                <div class="col-sm-3 pl-0">
+                                    <div class="btn btn-success mt-1 add-menu-item" data-type="product" style="padding:6px">
+                                        <i class="feather icon-arrow-right"></i>  Thêm
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-form-label font-weight-bold">Liên kết từ danh mục sản phẩm</label>
+                                <div class="col-sm-9">
+                                    <select class="form-control populate select2">
+                                        <option value="0">Chọn</option>
+                                        @if($category)
+                                            @foreach($category as $item)
+                                                <option value="{{$item->id}}">{{$item->name}}</option>
+                                            @endforeach
+                                        @endif
+                                    </select>
+                                </div>
+                                <div class="col-sm-3 pl-0">
+                                    <div class="btn btn-success mt-1 add-menu-item" data-type="category" style="padding:6px">
+                                        <i class="feather icon-arrow-right"></i>  Thêm
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label class="col-sm-12 col-form-label font-weight-bold">Liên kết từ trang</label>
                                 <div class="col-sm-9">
                                     <select class="form-control populate select2">
-                                        <option value="0">Chọn trang</option>
+                                        <option value="0">Chọn</option>
                                         @if($pages)
                                             @foreach($pages as $item)
                                                 <option value="{{$item->id}}">{{$item->name}}</option>
@@ -47,7 +83,7 @@
                                 <label class="col-sm-12 col-form-label font-weight-bold">Liên kết từ danh mục bài viết</label>
                                 <div class="col-sm-9">
                                     <select class="form-control populate select2">
-                                        <option value="0">Chọn danh mục bài viết</option>
+                                        <option value="0">Chọn</option>
                                         @if($category_posts)
                                             @foreach($category_posts as $item)
                                                 <option value="{{$item->id}}">{{$item->name}}</option>
@@ -65,7 +101,7 @@
                                 <label class="col-sm-12 col-form-label font-weight-bold">Liên kết từ bài viết</label>
                                 <div class="col-sm-9">
                                     <select class="form-control populate select2">
-                                        <option value="0">Chọn bài viết</option>
+                                        <option value="0">Chọn</option>
                                         @if($posts)
                                             @foreach($posts as $item)
                                                 <option value="{{$item->id}}">{{$item->name}}</option>
@@ -174,22 +210,6 @@
             $m_id          = $('#m_id');
 
         /**
-        * Delete menu item
-        */
-        $('.item_actions').on('click', '.delete', function (e) {
-            if(confirm('Bạn có muốn xóa menu này?')){
-                let self = $(this),
-                    id = $(this).data('id');
-                $.get(URL_MAIN + 'admin/menus/item/delete/' + id, function (data) {
-                    if(data.status){
-                        pushNotify('Xóa thành công!', text = '', type = 'success');
-                        window.location.reload();
-                    }
-                });
-            }
-        });
-
-        /**
         * Add Menu
         */
         $(document).on('click', '.add-menu-item', function(){
@@ -280,7 +300,7 @@
                 order: JSON.stringify($('.dd').nestable('serialize')),
                 _token: '{{ csrf_token() }}'
             }, function (data) {
-                data.status && pushNotify('Cập nhật thành công!', text = '', type = 'success');
+                //data.status && pushNotify('Cập nhật thành công!', text = '', type = 'success');
             });
         });
     });

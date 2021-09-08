@@ -1,4 +1,26 @@
 $(function () {
+    // MENU
+    //Localstorage Menu State
+    if(localStorage.getItem('menu_type') == 'mini'){
+        $('.pcoded-wrapper').addClass('mini-menu');
+        $('#mobile-collapse i').removeClass('icon-toggle-right');
+        $('#mobile-collapse i').addClass('icon-toggle-left');
+    }
+    else{
+        $('.pcoded-wrapper').removeClass('mini-menu');
+        $('#mobile-collapse i').removeClass('icon-toggle-left');
+        $('#mobile-collapse i').addClass('icon-toggle-right');
+    }
+
+    //Active Menu current (Menu Admin)
+    $('ul.pcoded-submenu li').each(function(){
+        if($(this).hasClass('active')){
+            $(this).closest('.pcoded-hasmenu').addClass('pcoded-trigger');
+        }
+    });
+
+    //END menu
+
     //Init select input
     $('.select2').select2();
 
@@ -84,51 +106,6 @@ $(function () {
         }
     
     });
-    
-    hideSuccessMessage = function(time = 3000) {
-        setTimeout(() => {
-            $('.alert.alert-success').fadeOut();
-        }, time);
-    }
-
-    hideErrorMessage = function(time = 3000) {
-        setTimeout(() => {
-            $('.alert.alert-danger').fadeOut();
-        }, time);
-    }
-
-    pushNotify = function(title, text = '', type = 'success'){ //success , danger , warning, info
-        let icon = type == 'success' ? 'feather icon-check-circle' : 'feather icon-info';
-        new PNotify({
-            title: title,
-            text: text,
-            icon: icon,
-            type: type
-        });
-    }
-
-    //Handle upload avatar
-    $(document).on('click', '.btn-upload-file', function(e){
-        e.preventDefault();
-        let file_upload = $(this).closest('.box-image').find('.input-file');
-        file_upload[0].click();
-    });
-
-    $(document).on('change','.input-file',function () {
-        let image = $(this).closest('.box-image').find('.input-img');
-        image.show();
-        readURL(this, image);
-    });
-
-    readURL = function(input, element) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                element.attr('src', e.target.result);
-            };
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
     
     timeSince = function(date) {
 
@@ -217,7 +194,6 @@ $(function () {
 
     convert_slug = function(title){
         var slug;
-
         //Đổi chữ hoa thành chữ thường
         slug = title.toLowerCase();
     
@@ -246,13 +222,5 @@ $(function () {
 
         $('input[name="slug"]').val(slug);
     }
-
-
-    //Active Menu current (Menu Admin)
-    $('ul.pcoded-submenu li').each(function(){
-        if($(this).hasClass('active')){
-            $(this).closest('.pcoded-hasmenu').addClass('pcoded-trigger');
-        }
-    });
 
 });

@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use App\Models\PostCategory;
 use Illuminate\Http\Request;
 use App\Services\PostService;
+use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
@@ -25,7 +26,7 @@ class PostController extends Controller
     }
 
     public function getDatatable(){
-        $posts = Post::orderByDesc('created_at')->get();
+        $posts = Post::with('categories')->orderByDesc('created_at')->get();
         return $this->postService->getDatatable($posts);
     }
 
@@ -40,35 +41,29 @@ class PostController extends Controller
         $request->validate([
             'name' => 'required',
             'slug' => 'required|unique:posts',
-            'category_id' => 'required'
+            'categories' => 'required'
         ],[
             'name.required' => 'Bạn chưa nhập tên bài viết',
             'slug.required' => 'Đường dẫn không được trống',
             'slug.unique' => 'Đường dẫn đã tồn tại',
-            'category_id.required' => 'Bạn chưa chọn danh mục',
+            'categories.required' => 'Bạn chưa chọn danh mục',
         ]);
 
         //Avatar image
-        if($request->hasFile('input_file')){
-            $avatarPath = $this->uploadImage('posts', $request->file('input_file'));
+        if($request->hasFile('image')){
+            $avatarPath = $this->uploadImage('posts', $request->file('image'));
         }
 
-        $data = [
-            'name' => $request->name,
-            'slug' => Str::slug($request->slug),
-            'category_id' => $request->category_id,
-            'author_id' => Auth::id(),
-            'seo_title' => $request->seo_title,
-            'meta_description' => $request->meta_description,
-            'meta_keywords' => $request->meta_keywords,
-            'body' => $request->body,
-            'status' => isset($request->status) ? 1 : 0,
-            'image' => $avatarPath ?? null
-        ];
+        $data = $request->except('categories');
+        $data['slug'] = Str::slug($request->slug);
+        $data['image'] = $avatarPath ?? null;
+        $data['status'] = isset($request->status) ? 1 : 0;
+        $data['author_id'] = Auth::id();
 
         $post = Post::create($data);
 
         if($post){
+            $post->categories()->attach($request->categories);
             return redirect('admin/posts')->with('success', 'Tạo thành công!');
         }
         else{
@@ -89,19 +84,19 @@ class PostController extends Controller
         $request->validate([
             'name' => 'required',
             'slug' => 'required|unique:posts,slug,'.$id,
-            'category_id' => 'required'
+            'categories' => 'required'
         ],[
             'name.required' => 'Bạn chưa nhập tên bài viết',
             'slug.required' => 'Đường dẫn không được trống',
             'slug.unique' => 'Đường dẫn đã tồn tại',
-            'category_id.required' => 'Bạn chưa chọn danh mục',
+            'categories.required' => 'Bạn chưa chọn danh mục',
         ]);
 
         $post = Post::findOrFail($id);
 
         //Avatar image
-        if($request->hasFile('input_file')){
-            $avatarPath = $this->uploadImage('posts', $request->file('input_file'));
+        if($request->hasFile('image')){
+            $avatarPath = $this->uploadImage('posts', $request->file('image'));
             if($avatarPath){
                 $this->deleteImage($post->image);
             }
@@ -109,21 +104,15 @@ class PostController extends Controller
             $avatarPath = $post->image;
         }
 
-        $data = [
-            'name' => $request->name,
-            'slug' => $request->slug ? Str::slug($request->slug) : Str::slug($request->title),
-            'category_id' => $request->category_id,
-            'seo_title' => $request->seo_title,
-            'meta_description' => $request->meta_description,
-            'meta_keywords' => $request->meta_keywords,
-            'body' => $request->body,
-            'status' => isset($request->status) ? 1 : 0,
-            'image' => $avatarPath ?? null
-        ];
+        $data = $request->except('categories');
+        $data['slug'] = Str::slug($request->slug);
+        $data['image'] = $avatarPath ?? null;
+        $data['status'] = isset($request->status) ? 1 : 0;
 
         $update = $post->update($data);
 
         if($update){
+            $post->categories()->sync($request->categories);
             return redirect('admin/posts/edit/' . $id)->with('success', 'Sửa thành công!');
         }
         else{

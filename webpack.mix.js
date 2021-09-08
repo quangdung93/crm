@@ -1,17 +1,28 @@
 const mix = require('laravel-mix');
 
-/*
- |--------------------------------------------------------------------------
- | Mix Asset Management
- |--------------------------------------------------------------------------
- |
- | Mix provides a clean, fluent API for defining some Webpack build steps
- | for your Laravel applications. By default, we are compiling the CSS
- | file for the application as well as bundling up all the JS files.
- |
- */
+//Vendor CSS Site
+mix.styles([
+    'resources/css/bootstrap.min.css',
+    'resources/css/animate.min.css',
+    'public/admin/assets/icon/feather/css/feather.css',
+    'resources/css/common.css',
+    'resources/css/slick.css',
 
-//Vendor CSS
+    ], 'public/themes/kangen/css/app.min.css');
+
+//Javascripts Site
+mix.scripts([
+    'resources/js/jquery.min.js',
+    'resources/js/boostrap.min.js',
+    'resources/js/slick.min.js',
+    'resources/js/lazyload.min.js',
+], 'public/themes/kangen/js/app.min.js');
+
+
+
+// *********************** ADMIN PAGE ********************************
+
+//Vendor CSS Admin
 mix.styles([
     //Bootstrap
     'public/admin/bower_components/bootstrap/css/bootstrap.min.css',
@@ -40,7 +51,7 @@ mix.styles([
 
     //Select 2
     'public/admin/bower_components/select2/css/select2.min.css',
-
+    'public/admin/assets/css/style.css',
     'public/admin/assets/css/jquery.mCustomScrollbar.css',
 
     ], 'public/admin/css/vendor.min.css');
@@ -118,10 +129,10 @@ mix.styles([
 
 //     ], 'public/admin/js/vendor.min.js');
 
-if(mix.inProduction()){
-    mix.version()
-}else{
-    mix.sourceMaps()
-}
+// if(mix.inProduction()){
+//     mix.version()
+// }else{
+//     mix.sourceMaps()
+// }
 
 mix.disableNotifications();

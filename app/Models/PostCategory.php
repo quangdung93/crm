@@ -14,11 +14,27 @@ class PostCategory extends Model
 
     protected $guarded = [];
 
+    public function posts(){
+        return $this->belongsToMany(Post::class, 'post_category');
+    }
+
+    public function parent(){
+        return $this->belongsTo(self::class, 'parent_id','id');
+    }
+
     public function scopeActive($query){
         return $query->where('status', 1);
     }
 
+    public function scopeWithHas($query, $relation, $callback){
+        return $query->whereHas($relation, $callback)->with([$relation => $callback]);
+    }
+
     public function link(){
-        return $this->slug;
+        if(!is_null($this->parent)){
+            return $this->parent->slug .'/'. $this->slug;
+        }
+        
+        return $this->slug ?: '/';
     }
 }

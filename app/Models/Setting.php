@@ -4,29 +4,57 @@ namespace App\Models;
 
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Setting extends Model
 {   
+    use SoftDeletes;
+
     protected $table = 'settings';
 
     protected $guarded = [];
+    protected $dates = ['deleted_at'];
 
-    public $setting_cache = null;
+    const MODEL = [
+        'App\Models\Post' => 'Bài viết',
+        'App\Models\Product' => 'Sản phẩm',
+        'App\Models\Page' => 'Trang',
+        'App\Models\PostCategory' => 'Danh mục bài viết',
+        'App\Models\Category' => 'Danh mục',
+        'App\Models\Brand' => 'Thương hiệu',
+        'App\Models\RedirectLink' => 'Chuyển hướng',
+        'App\Models\Setting' => 'Cấu hình',
+        'App\Models\Theme' => 'Giao diện',
+        'App\Models\User' => 'Người dùng',
+        'App\Models\Menu' => 'Menu',
+        'App\Models\MenuItem' => 'Mục menu',
+    ];
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::saved(function ($model) {
+            $model->removeSettingFromCache();
+        });
+
+        static::deleted(function ($model) {
+            $model->removeSettingFromCache();
+        });
+    }
+
+    public function removeSettingFromCache(){
+        Cache::forget('settings');
+    }
 
     public function setting($key, $default = null){
-        if (Cache::tags('settings')->has($key)) {
-            return Cache::tags('settings')->get($key);
+        if(Cache::has('settings')) {
+            return Cache::get('settings')[$key] ?? null;
         }
 
-        if ($this->setting_cache === null) {
-            Cache::tags('settings')->flush();
-
-            foreach (Setting::orderBy('order')->get() as $setting) {
-                @$this->setting_cache[$setting->key] = $setting->value;
-                Cache::tags('settings')->forever($setting->key, $setting->value);
-            }
-        }
+        $settings = Setting::orderBy('order')->pluck('value','key')->toArray();
+        Cache::forever('settings', $settings);
     
-        return @$this->setting_cache[$key] ?: $default;
+        return $settings[$key] ?: $default;
     }
 }

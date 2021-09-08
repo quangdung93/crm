@@ -29,7 +29,11 @@
                                     display="display_name" 
                                     selected="{{ isset($user) ? optional($user->roles->first())->name : ''}}"
                                 />
-                                <x-switch-box type="long" title="Kích hoạt" name="status" checked="{{ isset($user) && $user->status ? 'true' : '' }}"/>
+                                <x-switch-box 
+                                type="long" 
+                                title="Kích hoạt" 
+                                name="status" 
+                                checked="{{ !isset($user) ? 'true' : ($user->status ? 'true' : '') }}"/>
                             </div>
                         </div>
                     </div>

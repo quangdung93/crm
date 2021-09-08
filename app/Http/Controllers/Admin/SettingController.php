@@ -17,6 +17,15 @@ class SettingController extends Controller
     }
 
     public function store(Request $request){
+        $request->validate([
+            'display_name' => 'required',
+            'key' => 'required|unique:settings',
+        ],[
+            'display_name.required' => 'Bạn chưa nhập tên hiển thị',
+            'key.required' => 'Key không được trống',
+            'key.unique' => 'Key đã tồn tại',
+        ]);
+
         $data = $request->all();
         $data['order'] = (int)Setting::where('group', $data['group'])->max('order') + 1;
         $setting = Setting::create($data);
@@ -44,7 +53,8 @@ class SettingController extends Controller
                 }
             }
 
-            Setting::where('key', $key)->update(['value' => $value]);
+            $setting = Setting::where('key', $key)->first();
+            $update = $setting->update(['value' => $value]);
         }
 
         return redirect('admin/settings')->with('success','Cập nhật thành công!');

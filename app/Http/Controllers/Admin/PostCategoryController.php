@@ -48,6 +48,7 @@ class PostCategoryController extends Controller
 
         $data = [
             'name' => $request->name,
+            'parent_id' => $request->parent_id,
             'slug' => Str::slug($request->name),
             'status' => 1,
         ];
@@ -82,7 +83,11 @@ class PostCategoryController extends Controller
     public function edit($id)
     {
         $postCategory = PostCategory::findOrFail($id);
-        return view('admin.posts.categories.add-edit')->with('postCategory', $postCategory);
+        $categories = PostCategory::all();
+        return view('admin.posts.categories.add-edit')->with([
+            'postCategory' => $postCategory,
+            'categories' => $categories,
+        ]);
     }
 
     /**
@@ -106,6 +111,7 @@ class PostCategoryController extends Controller
 
         $data = [
             'name' => $request->name,
+            'parent_id' => $request->parent_id,
             'slug' => $request->slug ? Str::slug($request->slug) : Str::slug($request->name),
             'status' => isset($request->status) ? 1 : 0,
         ];

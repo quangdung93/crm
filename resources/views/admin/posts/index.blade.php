@@ -10,23 +10,24 @@
     <div class="page-body">
         <div class="row ">
             <div class="col-sm-12">
-                <div class="text-right mb-20">
-                    <a href="{{url($routeName.'/create')}}" class="btn btn-primary"><i
-                            class="feather icon-plus"></i> Thêm mới</a>
-                </div>
+                @can('add_posts')
+                    <div class="text-left mb-3">
+                        <a href="{{url($routeName.'/create')}}" class="btn btn-primary"><i
+                                class="feather icon-plus"></i> Thêm mới</a>
+                    </div>
+                @endcan
             </div>
-            <div class="col-sm-12 mt-2">
-                <div class="panel panel-primary">
-                    <div class="panel-heading bg-primary">{{ $pageName }}</div>
-                    <div class="panel-body p-2">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-block">
+                        <h4 class="sub-title">Danh sách {{ $pageName }}</h4>
                         <div class="dt-responsive table-responsive">
-                            <table id="datatable" class="table table-striped table-bordered w100">
+                            <table id="datatable" class="table stableweb-table center w100">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
+                                        <th>Hình ảnh</th>
                                         <th>{{ $pageName }}</th>
                                         <th>Danh mục</th>
-                                        <th>Hình ảnh</th>
                                         <th>Ngày tạo</th>
                                         <th>Trạng thái</th>
                                         <th>Thao tác</th>
@@ -47,26 +48,15 @@
     $(document).ready(function(){
         const ajax_url = "{!! route('posts.view') !!}";
         var columns = [
-            { data: 'id',name: 'id',width: '5%'},
-            { data: 'name',name: 'name',width: '25%'},
-            { data: 'category_id',name: 'category_id'},
             { data: 'image',name: 'image',orderable: false, searchable: false},
+            { data: 'name',name: 'name',width: '25%'},
+            { data: 'categories',name: 'categories'},
             { data: 'created_at',name: 'created_at', searchable: false},
             { data: 'status',name: 'status', searchable: false},
             { data: 'action',orderable: false, searchable: false, className: 'nowrap'}
         ];
 
         showDataTableServerSide($('#datatable'), ajax_url, columns);
-
-        $(document).on('change', '#view-type', function(){
-            var value = $(this).is(':checked');
-            if(value){
-                showTable(url_news_in_trash);
-            }
-            else{
-                showTable(all_url);
-            }
-        })
     });
 </script>
 @endsection

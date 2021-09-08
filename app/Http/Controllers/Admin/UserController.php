@@ -2,20 +2,25 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
-use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    //
+    protected $userModel;
 
+    public function __construct(User $userModel){
+        $this->userModel = $userModel;
+    }
+    //
     public function index(){
-        $users = User::with('roles')->get();
+        $users = $this->userModel->getAllUser();
         return view('admin.users.index')->with(compact('users'));
     }
 
@@ -70,8 +75,13 @@ class UserController extends Controller
         }
     }
 
-    public function edit(Request $request, $id){
-        $user = User::findOrFail($id);
+    public function edit($id){
+        $user = $this->userModel->findUser($id);
+
+        if(!$user){
+            return abort('404');
+        }
+
         $roles = Role::all();
         return view('admin.users.add-edit')->with([
             'roles' => $roles,
@@ -80,7 +90,11 @@ class UserController extends Controller
     }
 
     public function update(Request $request, $id){
-        $user = User::findOrFail($id);
+        $user = $this->userModel->findUser($id);
+
+        if(!$user){
+            return abort('404');
+        }
 
         $request->validate([
             'name' => 'required',
@@ -132,7 +146,11 @@ class UserController extends Controller
     }
 
     public function destroy($id){
-        $user = User::findOrFail($id);
+        $user = $this->userModel->findUser($id);
+
+        if(!$user){
+            return abort('404');
+        }
         $delete = $user->delete();
 
         if($delete){

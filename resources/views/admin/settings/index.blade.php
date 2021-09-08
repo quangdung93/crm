@@ -9,10 +9,8 @@
     <!-- Page-body start -->
     <div class="page-body">
         @role(config('permission.role_dev'))
-            <div class="col-sm-12">
-                <div class="text-right">
-                    <a href="#" id="add-setting" class="btn btn-primary"><i class="feather icon-plus-circle"></i> Thêm cấu hình</a>
-                </div>
+            <div class="col-sm-12 mb-3">
+                <a href="#" id="add-setting" class="btn btn-primary"><i class="feather icon-plus-circle"></i> Thêm cấu hình</a>
             </div>
         @endrole
         <div class="panel-body">
@@ -58,14 +56,13 @@
                                                         image="{{ $setting->value ?? '' }}"
                                                         width="100px" />
                                                     @endif
-`
                                                     @role(config('permission.role_dev'))
                                                         <div class="form-group row">
                                                             <div class="col-sm-3 text-right">
                                                                 <label class="label label-info pointer-move"><i class="feather icon-move"></i></label>
                                                             </div>
                                                             <div class="col-sm-9">
-                                                                <a href="{{ route('settings.delete',['id' => $setting->id]) }}" onclick="return confirm('Bạn có muốn xóa cấu hình này?')" class="text-danger remove-setting">
+                                                                <a href="{{ route('settings.delete',['id' => $setting->id]) }}" class="text-danger notify-confirm remove-setting">
                                                                     <i class="feather icon-trash-2"></i> Xóa
                                                                 </a>
                                                                 <label class="code mb-0">{{ $setting->key }}</label>
@@ -106,27 +103,41 @@
             <form action="{{ route('settings.add') }}" id="m_form" method="POST">
                 {{ csrf_field() }}
                 <div class="modal-body">
-                    <div>
+                    <div class="form-group">
                         <label for="name">Tên hiển thị</label>
-                        <input type="text" class="form-control" id="m_title" name="display_name" placeholder="Nhập tên hiển thị" required><br>
+                        <input type="text" value="{{ old('display_name') }}" class="form-control" id="m_title" name="display_name" placeholder="Nhập tên hiển thị" required>
+                        @if ($errors->has('display_name'))
+                            <div class="text-danger mt-2">{{ $errors->first('display_name') }}</div>
+                        @endif
                     </div>
-                    <div>
+                    <div class="form-group">
                         <label for="name">Key</label>
-                        <input type="text" class="form-control" id="m_title" name="key" placeholder="Nhập key" required><br>
+                        <input type="text" value="{{ old('key') }}" class="form-control" id="m_title" name="key" placeholder="Nhập key" required>
+                        @if ($errors->has('key'))
+                            <div class="text-danger mt-2">{{ $errors->first('key') }}</div>
+                        @endif
                     </div>
-                    <label for="type">Loại cấu hình</label>
-                    <select id="m_type" class="form-control" name="type">
-                        <option value="text" selected="selected">Text</option>
-                        <option value="image">Image</option>
-                        <option value="checkbox">Checkbox</option>
-                        <option value="selectbox">Selectbox</option>
-                        <option value="checkbox">Checkbox</option>
-                    </select>
-                    <label for="group">Nhóm cấu hình</label>
-                    <select id="m_group" class="form-control" name="group">
-                        <option value="site" selected="selected">Website</option>
-                        <option value="admin">Admin</option>
-                    </select>
+                    <div class="form-group">
+                        <label for="type">Loại cấu hình</label>
+                        <select id="m_type" class="form-control" name="type">
+                            <option value="text" selected="selected">Text</option>
+                            <option value="image">Image</option>
+                            <option value="checkbox">Checkbox</option>
+                            <option value="selectbox">Selectbox</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Nội dung</label>
+                        <textarea class="form-control" name="details"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="group">Nhóm cấu hình</label>
+                        <select id="m_group" class="form-control" name="group">
+                            <option value="site" selected="selected">Website</option>
+                            <option value="admin">Admin</option>
+                            <option value="develop">Develop</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <input type="submit" class="btn btn-success pull-right" value="Lưu">
@@ -140,9 +151,14 @@
 @endsection
 
 @section('javascript')
-<script type="text/javascript" src="{{asset('admin\bower_components\Sortable\js\Sortable.js')}}"></script>
 <script>
     $(document).ready(function(){
+
+        //Show popup when validate errors
+        @if($errors->any())
+            $('#setting-modal').modal('show');
+        @endif
+
         $('#add-setting').click(function() {
             $('#m_form').trigger('reset');
             $('#setting-modal').modal('show');
