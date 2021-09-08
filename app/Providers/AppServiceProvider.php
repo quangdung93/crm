@@ -15,6 +15,7 @@ class AppServiceProvider extends ServiceProvider
     {
         if(app()->environment() == 'local'){
             $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
+            $this->app->register(TelescopeServiceProvider::class);
         }
     }
 
@@ -25,6 +26,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        
     }
 }

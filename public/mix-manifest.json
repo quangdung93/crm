@@ -1,3 +1,5 @@
 {
-    "/admin/css/vendor.min.css": "/admin/css/vendor.min.css?id=d98456c4a455dd587e20"
+    "/themes/kangen/css/app.min.css": "/themes/kangen/css/app.min.css",
+    "/themes/kangen/js/app.min.js": "/themes/kangen/js/app.min.js",
+    "/admin/css/vendor.min.css": "/admin/css/vendor.min.css"
 }

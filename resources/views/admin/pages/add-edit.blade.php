@@ -25,7 +25,7 @@
                                 <h4 class="sub-title">Thông tin SEO</h4>
                                 <x-input type="text" title="Đường dẫn" name="slug" value="{{ isset($page) ? $page->slug : ''  }}"/>
                                 <x-input type="text" title="Meta title" name="meta_title" value="{{ isset($page) ? $page->seo_title : ''  }}"/>
-                                <x-input type="text" title="Meta description" name="meta_description" value="{{ isset($page) ? $page->meta_description : ''  }}"/>
+                                <x-textarea type="" title="Meta description" name="meta_description" value="{{ $page->meta_description ?? ''  }}" />
                                 <x-input type="text" title="Meta keyword" name="meta_keywords" value="{{ isset($page) ? $page->meta_keywords : ''  }}"/>
                             </div>
                         </div>
@@ -35,12 +35,19 @@
                                 <x-textarea type="tinymce" title="" name="body" value="{!! isset($page) ? $page->body : '' !!}" />
                             </div>
                         </div>
+                        @if(config('stableweb.google_review'))
+                            <x-google-review :model="$page ?? ''"/>
+                        @endif
                     </div>
                     <div class="col-sm-3">
                         <div class="card">
                             <div class="card-block">
                                 <h4 class="sub-title">Trạng thái</h4>
-                                <x-switch-box type="short" title="Trạng thái" name="status" checked="{{ isset($page) && $page->status ? 'true' : '' }}"/>
+                                <x-switch-box 
+                                type="short" 
+                                title="Trạng thái" 
+                                name="status" 
+                                checked="{{ !isset($page) ? 'true' : ($page->status ? 'true' : '') }}"/>
                             </div>
                         </div>
                         <div class="card">
@@ -67,7 +74,7 @@
 <script type="text/javascript">
     $(document).ready(function(){
 
-        @if(!isset($post))
+        @if(!isset($page))
             $('input[name="name"]').on('keyup', function(){
                 convert_slug($(this).val());
             });

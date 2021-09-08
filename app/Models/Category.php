@@ -29,11 +29,19 @@ class Category extends Model
         return $this->parent()->with('parents');
     }
 
+    public function products(){
+        return $this->belongsToMany(Product::class, 'product_category');
+    }
+
     public function scopeActive($query){
         return $query->where('status', 1);
     }
 
     public function link(){
-        return $this->slug;
+        return $this->slug ?: '/';
+    }
+
+    public function getCategory($category_id){
+        return self::where('id', $category_id)->with('products')->first();
     }
 }

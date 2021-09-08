@@ -6,6 +6,8 @@ use Exception;
 use App\Models\Menu;
 use App\Models\Page;
 use App\Models\Post;
+use App\Models\Product;
+use App\Models\Category;
 use App\Models\MenuItem;
 use Illuminate\Support\Str;
 use App\Models\PostCategory;
@@ -42,12 +44,12 @@ class MenuController extends Controller
             'name.unique' => 'Tên menu đã tồn tại',
         ]);
 
-        $data['name'] = $request->name;
+        $data['name'] = Str::slug($request->name);
 
         $menu = Menu::create($data);
 
         if($menu){
-            return redirect('admin/menus');
+            return redirect('admin/menus')->with('success', 'Tạo menu thành công!');
         }
         else{
             return redirect('admin/menus')->with('danger', 'Tạo thất bại!');
@@ -71,7 +73,7 @@ class MenuController extends Controller
 
         $menu = Menu::findOrFail($id);
 
-        $data['name'] = $request->name;
+        $data['name'] = Str::slug($request->name);
 
         $update = $menu->update($data);
 
@@ -103,11 +105,15 @@ class MenuController extends Controller
         $category_posts = PostCategory::active()->get();
         $posts = Post::active()->get();
         $pages = Page::active()->get();
+        $products = Product::active()->get();
+        $category = Category::active()->get();
 
         return view('admin.menus.builder')->with([
             'menu' => $menu,
             'posts' => $posts,
             'pages' => $pages,
+            'products' => $products,
+            'category' => $category,
             'category_posts' => $category_posts
         ]);
     }
@@ -130,7 +136,7 @@ class MenuController extends Controller
         $data = [
             'menu_id' => $request->menu_id,
             'title' => $instance->name,
-            'url' => $instance->link(),
+            'url' => Str::start($instance->link(), '/'),
             'type' => $type,
             'object_id' => $instance->id,
             'order' => $highestOrder
@@ -197,10 +203,10 @@ class MenuController extends Controller
         $delete = $item->delete();
 
         if($delete){
-            return response()->json(['status' => true]);
+            return redirect('admin/menus/builder/'.$item->menu_id)->with('success', 'Xóa menu thành công!');
         }
         else{
-            return response()->json(['status' => false]);
+            return redirect('admin/menus/builder/'.$item->menu_id)->with('danger', 'Xóa menu thất bại!');
         }
     }
 }

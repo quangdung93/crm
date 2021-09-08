@@ -5,8 +5,6 @@
     <div class="{{ $type == 'tinymce' ? 'col-sm-12' : 'col-sm-9' }}">
         <textarea 
         class="{{ $type ?: 'form-control' }}"
-        name="{{ $name }}">
-            {{ old($name, $value)  }}
-        </textarea>
+        name="{{ $name }}">{{ old($name, $value)  }}</textarea>
     </div>
 </div>

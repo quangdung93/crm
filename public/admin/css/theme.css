@@ -1,17 +1,57 @@
 /* CUSTOM THEME */
 :root {
-    --primary: #027fff;
+    --primary: #3a7afe;
     --success: #009c66;
-    --menu: #01162b;
-    --menu_active: #0c2741;
+    --menu: #063fb0;
+    --menu_active: #0c49c3;
+}
+
+@font-face {
+    font-family: 'opensans';
+    src: url(../fonts/opensans-light.ttf);
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: 'opensans';
+    src: url(../fonts/opensans-regular.ttf);
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: 'opensans';
+    src: url(../fonts/opensans-bold.ttf);
+    font-weight: 600;
 }
 
 body{
-    font-size:13px;
+    font-size:14px;
+    font-family: "opensans";
+    font-weight: 500;
 }
 
 table {
-    font-size:13px;
+    font-size:14px;
+}
+
+.stableweb-table.table thead th{
+    border-bottom: 0;
+    border-top: 0;
+    font-size:14px;
+    font-weight: 600;
+    vertical-align: middle;
+}
+
+.stableweb-table.center thead th{
+    text-align: center;
+}
+
+.stableweb-table.center tbody td{
+    text-align: center;
+}
+
+.stableweb-table.table tbody td{
+    vertical-align: middle;
 }
 
 table td{
@@ -31,6 +71,7 @@ table td{
 .btn{
     padding: 6px 12px;
     text-transform: unset;
+    font-weight: 500;
 }
 
 .btn i.icon-upload-cloud{
@@ -76,24 +117,25 @@ table td{
     background-color: var(--primary) !important;
 }
 
-.btn-primary, .wizard>.actions a, .sweet-alert button.confirm{
+.btn-primary, .wizard>.actions a{
     background-color: var(--primary);
     border-color: var(--primary);
 }
 
-.btn-primary:active, .wizard>.actions a:active, .sweet-alert button.confirm:active{
+.btn-primary:active, .wizard>.actions a:active{
     background-color: var(--primary) !important;
     border-color: var(--primary);
     opacity: 0.7;
 }
 
-.btn-primary:hover, .wizard>.actions a:hover, .sweet-alert button.confirm:hover{
+.btn-primary:hover, .wizard>.actions a:hover{
     background-color: var(--primary) !important;
     border-color: var(--primary);
+    color: #fff !important;
     opacity: 0.7;
 }
 
-.btn-primary:focus, .wizard>.actions a:focus, .sweet-alert button.confirm:focus{
+.btn-primary:focus, .wizard>.actions a:focus{
     background-color: var(--primary) !important;
     border-color: var(--primary);
     opacity: 0.7;
@@ -116,8 +158,32 @@ table td{
     padding: 0;
 }
 
+.pcoded .pcoded-navbar .pcoded-item>li>a>.pcoded-micon i{
+    font-size: 19px;
+}
+
+.label{
+    display: inline-block;
+    line-height: 1.5;
+    border-radius: 0.375rem;
+    padding: 2px 7px;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    font-weight: 500;
+}
+
 .label-primary{
     background: linear-gradient(to right, var(--primary),  var(--primary));
+}
+
+.label-success{
+    background: #0ac282;
+}
+
+.label-default{
+    background: #aeaeae;
+    background-color: #aeaeae !important;
 }
 
 .nowrap{
@@ -134,6 +200,8 @@ table td{
 
 .form-control{
     border-radius: 6px;
+    font-weight: 500;
+    line-height: 1.4;
 }
 
 .form-control:focus{
@@ -153,7 +221,7 @@ table td{
 }
 
 .select2-container--default .select2-search__field:focus{
-    border: 1px solid var(--primary);
+    border-color: var(--primary);
 }
 
 .select2-container--default .select2-selection--single .select2-selection__arrow{
@@ -210,7 +278,8 @@ table td{
 
 .navbar-wrapper .navbar-logo{
     position: relative;
-    background-image: linear-gradient(270deg, #ee63ff 0%, #f5576c 100%);
+    /* background-image: linear-gradient(270deg, #ee63ff 0%, #f5576c 100%); */
+    background-image: linear-gradient(270deg, #063fb0 0%, #3db1ff 100%);
     overflow: hidden;
 }
 
@@ -307,6 +376,10 @@ table td{
     padding: 15px 0!important;
 }
 
+.pcoded .pcoded-navbar .pcoded-item .pcoded-hasmenu .pcoded-submenu li>a{
+    font-weight: 500;
+}
+
 .pcoded .pcoded-navbar .pcoded-item .pcoded-hasmenu .pcoded-submenu li>a .pcoded-micon{
     display: inline-block;
 }
@@ -326,7 +399,7 @@ table td{
 
 .pcoded .pcoded-navbar .pcoded-item{
     padding-top: 10px;
-    border-top: 5px solid #9b659c;
+    border-top: 3px solid #f55971;
 }
 
 .pcoded .pcoded-header[header-theme="theme1"] .navbar-logo a{
@@ -362,6 +435,10 @@ table td{
     background-color: var(--menu);
 }
 
+.pcoded .pcoded-navbar[navbar-theme=theme1] .pcoded-item>li.pcoded-trigger>a{
+    background: var(--menu_active);
+}
+
 .pcoded .pcoded-navbar[navbar-theme="theme1"] .pcoded-item>li.active>a{
     background: var(--menu_active);
 }
@@ -379,6 +456,10 @@ table td{
     background: var(--menu_active);
 }
 
+.pcoded .pcoded-navbar[navbar-theme=theme1] .pcoded-item .pcoded-hasmenu .pcoded-submenu li:hover>a{
+    background-color: var(--menu_active);
+}
+
 .pcoded .pcoded-navbar[active-item-theme="theme1"] .pcoded-item>li.pcoded-trigger>a:before, 
 .pcoded .pcoded-navbar[active-item-theme="theme1"] .pcoded-item>li.active>a:before{
     border-left-color: #f55971 !important;
@@ -386,7 +467,52 @@ table td{
 
 .form-group textarea:not(.tinymce){
     width: 100%;
-    height: 90px;
+    height: 95px;
+}
+
+/* Mini Menu / Localstorage Menu State */
+.pcoded[theme-layout=vertical][vertical-placement=left][vertical-nav-type=offcanvas][vertical-effect=shrink] .pcoded-navbar{
+    margin-left: 0;
+}
+
+.mini-menu .pcoded-navbar .main-menu{
+    width: 55px !important;
+}
+
+.mini-menu .pcoded-navbar{
+    width: 55px !important;
+    margin-left: 0px !important;
+}
+
+.mini-menu .pcoded-content{
+    margin-left: 55px !important;
+}
+
+.pcoded-wrapper:not(.mini-menu) .pcoded-content{
+    margin-left: 240px !important;
+}
+
+.mini-menu .pcoded-navbar .pcoded-item>li>a .pcoded-mtext{
+    display: none !important;
+}
+
+.mini-menu .pcoded-navbar .pcoded-item li.pcoded-hasmenu>a:after{
+    display: none !important;
+}
+
+.mini-menu .pcoded-navbar .pcoded-item .pcoded-hasmenu .pcoded-submenu li>a>.pcoded-mtext{
+    display: none !important;
+}
+
+.mini-menu .pcoded-navbar .pcoded-item .pcoded-hasmenu .pcoded-submenu li>a{
+    padding-left: 20px !important;
+}
+
+/* End Mini Menu */
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice{
+    background-color:var(--primary);
+    border-color: var(--primary);
 }
 
 /* END CUSTOM THEME */

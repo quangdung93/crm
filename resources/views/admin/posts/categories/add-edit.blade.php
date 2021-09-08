@@ -18,6 +18,14 @@
                             <div class="card-block">
                                 <h4 class="sub-title">Thông tin {{ $pageName }}</h4>
                                 <x-input type="text" title="Tên danh mục" name="name" value="{{ isset($postCategory) ? $postCategory->name : ''  }}"/>
+                                <x-selectbox 
+                                    title="Danh mục cha" 
+                                    name="parent_id" 
+                                    :lists="$categories" 
+                                    value="id" 
+                                    display="name" 
+                                    selected="{{ isset($postCategory) ? $postCategory->parent_id : '' }}"
+                                />
                                 @if(isset($postCategory))
                                     <x-input type="text" title="Đường dẫn" name="slug" value="{{ isset($postCategory) ? $postCategory->slug : ''  }}"/>
                                     <x-switch-box type="long" title="Trạng thái" name="status" checked="{{ isset($postCategory) && $postCategory->status ? 'true' : '' }}"/>

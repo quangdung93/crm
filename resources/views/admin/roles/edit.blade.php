@@ -8,59 +8,72 @@
     @include('admin.components.page-header')
     <!-- Page-body start -->
     <div class="page-body panels-wells">
-        <div class="panel panel-primary">
-            <div class="panel-heading bg-primary">Sửa {{ $pageName }}</div>
-            <div class="panel-body">
-                <form class="form-horizontal" method="post"
-                    action="{{url($routeName)}}" role="form">
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                    <div class="form-group row">
-                        <label class="col-sm-3 col-form-label text-right">Tên quyền</label>
-                        <div class="col-sm-6">
-                            <input type="text" name="name" value="{{ $role->name }}" class="form-control" placeholder="Nhập tên quyền" autocomplete="off" required>
+        <form class="form-horizontal" method="post"
+                            action="{{url($routeName)}}" role="form">
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-block">
+                        <h4 class="sub-title">Thông tin {{ $pageName }}</h4>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label text-right">Tên quyền</label>
+                            <div class="col-sm-6">
+                                <input type="text" name="name" value="{{ $role->name }}" class="form-control" placeholder="Nhập tên quyền" autocomplete="off" required>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-3 col-form-label text-right">Tên hiển thị</label>
-                        <div class="col-sm-6">
-                            <input type="text" name="display_name" value="{{ $role->display_name }}" class="form-control" placeholder="Nhập tên hiển thị" autocomplete="off" required>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-12 mt-2">
-                            <div class="dt-responsive table-responsive">
-                                <table class="table table-striped table-bordered w100">
-                                    <thead>
-                                        <tr class="bg-success">
-                                            <th>STT</th>
-                                            <th>Tên quyền</th>
-                                            <th>Đọc</th>
-                                            <th>Thêm</th>
-                                            <th>Sửa</th>
-                                            <th>Xóa</th>
-                                            <th>Tất cả</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach($permissions as $key => $permission)
-                                            <tr>
-                                                <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $key }}</td>
-                                                @foreach($permission as $value)
-                                                    <td><input type="checkbox" name="permission[{{ $value->id }}]" id="{{ $value->name }}" class="checkbox-item" {{ $role->permissions->pluck('id')->contains($value->id) ? 'checked' : '' }}/></td>
-                                                @endforeach
-                                                <td><input type="checkbox" class="check-all"/></td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label text-right">Tên hiển thị</label>
+                            <div class="col-sm-6">
+                                <input type="text" name="display_name" value="{{ $role->display_name }}" class="form-control" placeholder="Nhập tên hiển thị" autocomplete="off" required>
                             </div>
                         </div>
                     </div>
-                    <x-submit-button :route="$routeName"/>
-                </form>
+                </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-block">
+                        <h4 class="sub-title">{{ $pageName }}</h4>
+                        <div class="form-group row">
+                            <div class="col-sm-12 mt-2">
+                                <div class="dt-responsive table-responsive">
+                                    <table class="table stableweb-table center w100">
+                                        <thead>
+                                            <tr>
+                                                <th>STT</th>
+                                                <th>Tên quyền</th>
+                                                <th>Đọc</th>
+                                                <th>Thêm</th>
+                                                <th>Sửa</th>
+                                                <th>Xóa</th>
+                                                <th>Tất cả</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach($permissions as $key => $permission)
+                                                <tr>
+                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td>{{ $key }}</td>
+                                                    @foreach($permission as $value)
+                                                        <td><input type="checkbox" name="permission[{{ $value->id }}]" id="{{ $value->name }}" class="checkbox-item" {{ $role->permissions->pluck('id')->contains($value->id) ? 'checked' : '' }}/></td>
+                                                    @endforeach
+                                                    <td><input type="checkbox" class="check-all"/></td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <x-submit-button :route="$routeName"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </form>
     </div>
     <!-- Page-body end -->
 @endsection

@@ -5,9 +5,9 @@
     <li class="dd-item" data-id="{{ $item->id }}">
         <div class="pull-right item_actions">
             @can('delete_menus')
-                <div class="btn btn-sm btn-danger pull-right delete" data-id="{{ $item->id }}">
+                <a href="{{ url(route('menus.item.delete', ['id' => $item->id])) }}" class="btn btn-sm btn-danger pull-right notify-confirm">
                     <i class="feather icon-trash-2"></i> Xóa
-                </div>
+                </a>
             @endcan
 
             @can('edit_menus')

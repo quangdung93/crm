@@ -33,7 +33,7 @@
                                 <h4 class="sub-title">Thông tin SEO</h4>
                                 <x-input type="text" title="Đường dẫn" name="slug" value="{{ isset($category) ? $category->slug : ''  }}"/>
                                 <x-input type="text" title="Meta title" name="meta_title" value="{{ isset($category) ? $category->meta_title : ''  }}"/>
-                                <x-input type="text" title="Meta description" name="meta_description" value="{{ isset($category) ? $category->meta_description : ''  }}"/>
+                                <x-textarea type="" title="Meta description" name="meta_description" value="{{ $category->meta_description ?? ''  }}" />
                                 <x-input type="text" title="Meta keyword" name="meta_keyword" value="{{ isset($category) ? $category->meta_keyword : ''  }}"/>
                             </div>
                         </div>
@@ -43,12 +43,19 @@
                                 <x-textarea type="tinymce" title="" name="content" value="{!! isset($category) ? $category->content : '' !!}" />
                             </div>
                         </div>
+                        @if(config('stableweb.google_review'))
+                            <x-google-review :model="$category ?? ''"/>
+                        @endif
                     </div>
                     <div class="col-sm-3">
                         <div class="card">
                             <div class="card-block">
                                 <h4 class="sub-title">Trạng thái</h4>
-                                <x-switch-box type="short" title="Trạng thái" name="status" checked="{{ isset($category) && $category->status ? 'true' : '' }}"/>
+                                <x-switch-box 
+                                type="short" 
+                                title="Trạng thái" 
+                                name="status" 
+                                checked="{{ !isset($category) ? 'true' : ($category->status ? 'true' : '') }}"/>
                             </div>
                         </div>
                     </div>
@@ -64,7 +71,7 @@
 <script type="text/javascript">
     $(document).ready(function(){
 
-        @if(!isset($post))
+        @if(!isset($category))
             $('input[name="name"]').on('keyup', function(){
                 convert_slug($(this).val());
             });

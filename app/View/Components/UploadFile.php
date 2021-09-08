@@ -16,14 +16,16 @@ class UploadFile extends Component
     public $name;
     public $image;
     public $width;
+    public $note;
 
-    public function __construct($type, $title, $name, $image, $width)
+    public function __construct($type, $title, $name, $image, $width, $note = null)
     {
         $this->type = $type;
         $this->title = $title;
         $this->name = $name;
         $this->image = $image;
         $this->width = $width;
+        $this->note = $note;
     }
 
     /**

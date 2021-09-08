@@ -1,17 +1,26 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\LogController;
+use App\Http\Controllers\Site\HomeController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Site\RouteController;
+use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\ImageController;
 use App\Http\Controllers\Admin\MediaController;
 use App\Http\Controllers\Admin\ThemeController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\RedirectController;
+use App\Http\Controllers\Site\WordpressController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ShortcodeController;
 use App\Http\Controllers\Admin\PostCategoryController;
 
 /*
@@ -30,13 +39,9 @@ use App\Http\Controllers\Admin\PostCategoryController;
 Route::get('/login', [LoginController::class, 'login']);
 Route::post('/login', [LoginController::class, 'postLogin'])->name('login');
 
-
 //Admin
 Route::group(['prefix' => 'admin','middleware' => 'auth'], function () {
-    Route::get('/', function(){
-        return redirect(route('dashbroad'), 301);
-    });
-
+    Route::redirect('/', 'admin/dashbroad', 301);
     Route::get('/dashbroad', [DashboardController::class, 'index'])->name('dashbroad');
     Route::get('/logout', [LoginController::class, 'logout']);
 
@@ -61,6 +66,17 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'], function () {
         //Create permission // url : /admin/roles/create_permission/{permission_group_name}
         Route::get('/create_permission/{permission}', [RoleController::class, 'createPermission'])
         ->middleware('role:'.config('permission.role_dev'));
+    });
+
+    //Product
+    Route::group(['prefix' => 'products', 'middleware' => ['can:read_products']], function () {
+        Route::get('/', [ProductController::class, 'index']);
+        Route::get('datatable', [ProductController::class,'getDatatable'])->name('products.view');
+        Route::get('/create', [ProductController::class, 'create'])->middleware('can:add_products');
+        Route::post('/create', [ProductController::class, 'store'])->middleware('can:add_products');
+        Route::get('/edit/{product}', [ProductController::class, 'edit'])->middleware('can:edit_products');
+        Route::post('/edit/{id}', [ProductController::class, 'update'])->middleware('can:edit_products');
+        Route::get('/delete/{id}', [ProductController::class, 'destroy'])->middleware('can:delete_products');
     });
 
     //Page
@@ -102,7 +118,7 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'], function () {
         Route::get('/edit/{id}', [MenuController::class, 'edit'])->middleware('can:edit_menus');
         Route::post('/edit/{id}', [MenuController::class, 'update'])->middleware('can:edit_menus');
         Route::get('/builder/{id}', [MenuController::class, 'builder'])->middleware('can:edit_menus');
-        Route::get('/delete/{id}', [MenuController::class, 'destroy'])->middleware('can:delete_menus');
+        Route::get('/delete/{id}', [MenuController::class, 'destroy'])->middleware('role:'.config('permission.role_dev'));
 
         //Menu Items
         Route::group(['prefix' => 'item'], function () {
@@ -115,7 +131,7 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'], function () {
             Route::post('/update/{id}', [MenuController::class, 'updateItem'])
             ->middleware('can:edit_menus')->name('menus.item.update');
             Route::get('/delete/{id}', [MenuController::class, 'deleteItem'])
-            ->middleware('can:delete_menus');
+            ->middleware('can:delete_menus')->name('menus.item.delete');
         });
     });
 
@@ -129,6 +145,16 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'], function () {
         Route::get('/delete/{id}', [SettingController::class, 'destroy'])
         ->middleware('role:'.config('permission.role_dev'))->name('settings.delete');
         Route::post('/order', [SettingController::class, 'order'])->name('settings.order');
+    });
+
+    //Shortcode
+    Route::group(['prefix' => 'shortcodes', 'middleware' => ['can:read_settings']], function () {
+        Route::get('/', [ShortcodeController::class, 'index']);
+        Route::get('/create', [ShortcodeController::class, 'create'])->middleware('can:add_settings');
+        Route::post('/create', [ShortcodeController::class, 'store'])->middleware('can:add_settings');
+        Route::get('/edit/{id}', [ShortcodeController::class, 'edit'])->middleware('can:edit_settings');
+        Route::post('/edit/{id}', [ShortcodeController::class, 'update'])->middleware('can:edit_settings');
+        Route::get('/delete/{id}', [ShortcodeController::class, 'destroy'])->middleware('can:delete_settings');
     });
 
     //Media
@@ -149,6 +175,16 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'], function () {
         Route::get('/delete/{id}', [CategoryController::class, 'destroy'])->middleware('can:delete_products');
     });
 
+    //Brand
+    Route::group(['prefix' => 'brands', 'middleware' => ['can:read_products']], function () {
+        Route::get('/', [BrandController::class, 'index']);
+        Route::get('/create', [BrandController::class, 'create'])->middleware('can:add_products');
+        Route::post('/create', [BrandController::class, 'store'])->middleware('can:add_products');
+        Route::get('/edit/{id}', [BrandController::class, 'edit'])->middleware('can:edit_products');
+        Route::post('/edit/{id}', [BrandController::class, 'update'])->middleware('can:edit_products');
+        Route::get('/delete/{id}', [BrandController::class, 'destroy'])->middleware('can:delete_products');
+    });
+
     //Themes
     Route::group(['prefix' => 'themes', 'middleware' => ['can:read_themes']], function () {
         Route::get('/', [ThemeController::class, 'index']);
@@ -156,4 +192,34 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'], function () {
         Route::post('/edit/{id}', [ThemeController::class, 'update'])->middleware('can:edit_themes');
     });
 
+    //Images
+    Route::group(['prefix' => 'images'], function () {
+        Route::post('/upload', [ImageController::class, 'upload'])->name('images.upload');
+        Route::post('/order', [ImageController::class, 'order'])->name('images.order');
+        Route::post('/delete', [ImageController::class, 'delete'])->name('images.delete');
+    });
+
+    //Redirect
+    Route::group(['prefix' => 'redirects', 'middleware' => ['can:read_redirects']], function () {
+        Route::get('/', [RedirectController::class, 'index']);
+        Route::get('/create', [RedirectController::class, 'create'])->middleware('can:add_redirects');
+        Route::post('/create', [RedirectController::class, 'store'])->middleware('can:add_redirects');
+        Route::get('/edit/{id}', [RedirectController::class, 'edit'])->middleware('can:edit_redirects');
+        Route::post('/edit/{id}', [RedirectController::class, 'update'])->middleware('can:edit_redirects');
+        Route::get('/delete/{id}', [RedirectController::class, 'destroy'])->middleware('can:delete_redirects');
+    });
+
+    //Logs
+    Route::group(['prefix' => 'logs', 'middleware' => ['can:read_logs']], function () {
+        Route::get('/', [LogController::class, 'index']);
+        Route::get('datatable', [LogController::class,'getDatatable'])->name('logs.view');
+        Route::get('details/{id}', [LogController::class,'show']);
+    });
+
 });
+
+
+//Site Route
+Route::get('/', [HomeController::class, 'index']);
+Route::get('/wordpress', [WordpressController::class, 'integrate']);
+Route::get('/{url}', [RouteController::class, 'handle'])->where('url', '.*');
