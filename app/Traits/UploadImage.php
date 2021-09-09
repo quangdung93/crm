@@ -35,7 +35,7 @@ trait UploadImage
                 $img->save($thumbnail);
             }
 
-            return $folder . '/' . $finalFile;
+            return 'storage/'.$folder.'/'.$finalFile;
         }
         catch (\Exception $e) {
             return null;
