@@ -222,4 +222,5 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'], function () {
 //Site Route
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/wordpress', [WordpressController::class, 'integrate']);
+Route::get('/test', [WordpressController::class, 'integrate']);
 Route::get('/{url}', [RouteController::class, 'handle'])->where('url', '.*');
