@@ -13,10 +13,6 @@ class LogController extends Controller
 
     public function __construct(LogService $logService)
     {
-        // $data = Log::first();
-        // dump($data->new);
-        // dump($data->old);
-        // dd($data->changed);
         $this->logService = $logService;
     }
     /**

@@ -30,7 +30,7 @@ class LogService
                 return Setting::MODEL[$row->logable_type];
             })
             ->editColumn('title', function ($row) {
-                return $row->logable->name;
+                return $row->logable->name ?? '';
             })
             ->editColumn('ip', function ($row) {
                 return $row->ip;
