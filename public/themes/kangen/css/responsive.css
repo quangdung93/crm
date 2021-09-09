@@ -300,6 +300,45 @@
 		max-width: 100%;
 		height: auto;
 	}
+
+	.products-wrapper .product-item{
+		width: 50%;
+	}
+
+	.post-lists .post-item .post-content{
+		flex-direction: column;
+	}
+
+	.post-lists .post-item .post-content .body{
+		margin-top: 15px;
+	}
+
+	.siderbar.posts .siderbar-content .item{
+		display: flex;
+	}
+
+	.siderbar.posts .siderbar-content .item a{
+		display: block;
+		width: 150px;
+		min-width: 150px;
+	}
+	
+	.siderbar.posts .siderbar-content .item .content{
+		margin-top: 0;
+		margin-left: 10px;
+	}
+
+	.siderbar.posts .siderbar-content .item .content a{
+		width: 100%;
+	}
+
+	.page-title{
+		padding: 10px;
+	}
+
+	.nav-menu .main-menu ul > li > ul.sub-menu{
+		min-width: 100%;
+	}
 }
 
 /* END 768*/

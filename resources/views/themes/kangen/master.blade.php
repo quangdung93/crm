@@ -10,7 +10,7 @@
     <!-- Favicon icon -->
     <link rel="icon" href="{{asset(setting('site_favicon'))}}" type="image/x-icon">
     <!-- Google font-->
-    <link href="https://fonts.googleapis.com/css?family=Quicksand:400,500,600,700&amp;subset=vietnamese" rel="stylesheet">
+    {{-- <link href="https://fonts.googleapis.com/css?family=Quicksand:400,500,600,700&amp;subset=vietnamese" rel="stylesheet"> --}}
     <meta property="og:image" content="{{ asset(setting('thumbnail')) }}" />
     <meta property="og:title" content="{{ setting('site_title') }}" />
     <meta property="og:url" content="{{ url()->current() }}" />

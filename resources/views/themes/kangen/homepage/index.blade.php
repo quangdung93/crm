@@ -82,7 +82,9 @@
                                 @foreach($youtube as $value)
                                     <a href="#" class="youtube-item {{ $loop->first ? 'active' : '' }}">
                                         <div class="video-thumb">
-                                            <div class="youtube-list" data-embed="{{ get_embed_youtube($value['link']) }}"></div>
+                                            <div class="youtube-list" data-embed="{{ get_embed_youtube($value['link']) }}">
+                                                <img class="lazy" data-src="https://img.youtube.com/vi/{{ get_embed_youtube($value['link']) }}/hqdefault.jpg"/>
+                                            </div>
                                         </div>
                                         <div class="youtube-title">{{ $value['title'] }}</div>
                                     </a>
@@ -366,6 +368,12 @@
 @section('javascript')
 <script>
     $(document).ready(function(){
+        //generateYoutubeItem();
+
+        $('.youtube-list img').each(function(){
+            $(this).lazyload();
+        });
+
         $('.youtube-item').on('click', function(e){
             e.preventDefault();
             $('.youtube-item').removeClass('active');
@@ -374,6 +382,28 @@
                 youtube = renderIframeYoutube(embed);
             $('.section-youtube .preview-intro-video .youtube').html(youtube);
         });
+
+        function generateYoutubeItem() {
+            var youtube = document.querySelectorAll('.youtube-list');
+            for (var i = 0; i < youtube.length; i++) {
+                // thumbnail image source.
+                var source = "https://img.youtube.com/vi/" + youtube[i].dataset.embed + "/hqdefault.jpg"; //sddefault.jpg
+                // Load t image asynchronously    
+                var image = new Image();
+                image.setAttribute("class", "lazy");
+                image.setAttribute("data-src", source);
+                image.addEventListener("load", function () {
+                    youtube[i].appendChild(image);
+                    youtubeLazyLoad(youtube[i].querySelectorAll('.lazy'));
+                }(i));
+            }
+        }
+
+        function youtubeLazyLoad(element, timeout = 0) {
+            setTimeout(function () {
+                $(element).lazyload().addClass('youtube-loaded');
+            }, timeout);
+        }
     });
 </script>
 @endsection

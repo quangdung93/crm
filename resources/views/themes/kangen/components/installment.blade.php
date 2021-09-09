@@ -26,7 +26,7 @@
             </div>
             <div class="col-sm-6">
                 <div class="image-block">
-                    <a href="#"><img class="img-fluid" src="{{ asset('themes/kangen/images/chinh-sach-kangen.jpg') }}" alt="" /></a>
+                    <a href="#"><img class="img-fluid lazy" data-src="{{ asset('themes/kangen/images/chinh-sach-kangen.jpg') }}" alt="" /></a>
                 </div>
             </div>
         </div>

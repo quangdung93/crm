@@ -98,13 +98,13 @@
                             <div class="siderbar-item">
                                 <h5 class="title text-center">Chính Sách Trả Góp</h5>
                                 <div class="image-block">
-                                    <a href="#"><img class="img-fluid" src="{{ asset('themes/kangen/images/chinh-sach-kangen.jpg') }}" alt="" /></a>
+                                    <a href="#"><img class="img-fluid lazy" data-src="{{ asset('themes/kangen/images/chinh-sach-kangen.jpg') }}" alt="" /></a>
                                 </div>
                             </div>
 
                             <div class="siderbar-item">
                                 <div class="image-block">
-                                    <a href="#"><img class="img-fluid" src="{{ asset('themes/kangen/images/click-khuyen-mai.gif') }}" alt="" /></a>
+                                    <a href="#"><img class="img-fluid lazy" data-src="{{ asset('themes/kangen/images/click-khuyen-mai.gif') }}" alt="" /></a>
                                 </div>
                             </div>
                         </div>

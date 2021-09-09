@@ -1,5 +1,5 @@
 //Lazyload
-$('.lazy').lazyload({effect: "fadeIn"});
+$('.lazy').lazyload({effect: "fadeIn"});               
 
 //Slick slider
 if($('.sliders').length > 0){
@@ -37,9 +37,9 @@ if($('.youtube').length > 0){
     generateYoutube();
 }
 
-if($('.youtube-list').length > 0){
-    generateYoutubeItem();
-}
+// if($('.youtube-list').length > 0){
+//     generateYoutubeItem();
+// }
 
 
 //Icon Menu Mobile Click
@@ -56,7 +56,9 @@ $(document).on('click', '.icon-menu-mobile', function(){
     }
 }); 
 
-$(document).on('click', '.menu-mobile li.has-submenu .icon-show', function(){
+$(document).on('click', '.menu-mobile li.has-submenu .icon-show', function(e){
+    e.preventDefault();
+    e.stopPropagation();
     $(this).closest('.has-submenu').find('.sub-menu').toggleClass('show-menu');
 });
 
@@ -98,30 +100,6 @@ function generateYoutube() {
             this.appendChild(iframe);
         });
     }
-}
-
-function generateYoutubeItem() {
-    var youtube = document.querySelectorAll('.youtube-list');
-    for (var i = 0; i < youtube.length; i++) {
-        // thumbnail image source.
-        var source = "https://img.youtube.com/vi/" + youtube[i].dataset.embed + "/hqdefault.jpg"; //sddefault.jpg
-        // Load t image asynchronously    
-        var image = new Image();
-        image.setAttribute("src", source);
-        image.setAttribute("class", "lazy");
-        image.addEventListener("load", function () {
-            youtube[i].appendChild(image);
-            // youtubeLazyLoad(youtube[i].querySelectorAll('.lazy'));
-        }(i));
-    }
-}
-
-function youtubeLazyLoad(element, timeout = 0) {
-    setTimeout(function () {
-        $(element).lazyload({
-            effect: "fadeIn"
-        }).addClass('youtube-loaded');
-    }, timeout);
 }
 
 function renderIframeYoutube(embed){
