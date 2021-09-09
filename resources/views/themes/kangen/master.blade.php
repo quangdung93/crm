@@ -36,6 +36,7 @@
     @yield('body')
     <script src="{{ asset('themes/kangen/js/app.min.js') }}"></script>
     <script src="{{ asset('themes/kangen/js/custom.js') }}"></script>
+    <script src="{{ asset('themes/kangen/js/cart.js') }}"></script>
     {{-- Option scripts --}}
     @yield('javascript')
     @stack('javascript')

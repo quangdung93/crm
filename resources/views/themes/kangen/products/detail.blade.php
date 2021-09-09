@@ -53,9 +53,10 @@
                             </div>
                             <div class="add-to-cart">
                                 <div class="qty-box">
-                                    <a href="#" class="btn bg-kangen mr-2"><i class="feather icon-minus"></i></a>
-                                    <input class="qty-input mr-2" type="text" value="1" />
-                                    <a href="#" class="btn bg-kangen"><i class="feather icon-plus"></i></a>
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                                    <a href="#" class="btn bg-kangen mr-2 btn-cart-minus"><i class="feather icon-minus"></i></a>
+                                    <input class="qty-input mr-2" type="number" value="1" min="1" max="99" maxlength="2"/>
+                                    <a href="#" class="btn bg-kangen btn-cart-plus ="><i class="feather icon-plus"></i></a>
                                 </div>
                                 <a href="#" class="btn bg-kangen btn-addtocart">Thêm vào giỏ hàng</a>
                             </div>

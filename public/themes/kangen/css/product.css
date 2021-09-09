@@ -207,6 +207,7 @@
     color: #666;
     background-color: transparent;
     border-radius: 5px;
+    -moz-appearance: textfield;
 }
 
 .add-to-cart{
