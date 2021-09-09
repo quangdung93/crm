@@ -70,7 +70,7 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'], function () {
 
     //Product
     Route::group(['prefix' => 'products', 'middleware' => ['can:read_products']], function () {
-        Route::get('/', [ProductController::class, 'index']);
+        Route::get('/', [ProductController::class, 'index'])->name('products.index');
         Route::get('datatable', [ProductController::class,'getDatatable'])->name('products.view');
         Route::get('/create', [ProductController::class, 'create'])->middleware('can:add_products');
         Route::post('/create', [ProductController::class, 'store'])->middleware('can:add_products');
@@ -91,7 +91,7 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'], function () {
 
     //Post
     Route::group(['prefix' => 'posts', 'middleware' => ['can:read_posts']], function () {
-        Route::get('/', [PostController::class, 'index']);
+        Route::get('/', [PostController::class, 'index'])->name('posts.index');
         Route::get('datatable', [PostController::class,'getDatatable'])->name('posts.view');
         Route::get('/create', [PostController::class, 'create'])->middleware('can:add_posts');
         Route::post('/create', [PostController::class, 'store'])->middleware('can:add_posts');
