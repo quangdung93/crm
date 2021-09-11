@@ -51,14 +51,17 @@
                                     <i class="feather icon-check-square"></i> <span>Xuất sứ: </span> <span>{{ $product->origin ?: 'Nhật Bản' }}</span>
                                 </div>
                             </div>
-                            <div class="add-to-cart">
-                                <div class="qty-box">
-                                    <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-                                    <a href="#" class="btn bg-kangen mr-2 btn-cart-minus"><i class="feather icon-minus"></i></a>
-                                    <input class="qty-input mr-2" type="number" value="1" min="1" max="99" maxlength="2"/>
-                                    <a href="#" class="btn bg-kangen btn-cart-plus ="><i class="feather icon-plus"></i></a>
-                                </div>
+                            <form data-action="{{ route('cart.add') }}">
+                                <div class="add-to-cart">
+                                    <div class="qty-box">
+                                        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                                        <input type="hidden" name="product_id" value="{{ $product->id }}" />
+                                        <a href="#" class="btn bg-kangen mr-2 btn-cart-minus"><i class="feather icon-minus"></i></a>
+                                        <input name="qty" class="qty-input mr-2" type="number" value="1" min="1" max="99" maxlength="2"/>
+                                        <a href="#" class="btn bg-kangen btn-cart-plus ="><i class="feather icon-plus"></i></a>
+                                    </div>
                                 <a href="#" class="btn bg-kangen btn-addtocart">Thêm vào giỏ hàng</a>
+                            </form>
                             </div>
                             <div class="image-block">
                                 <h5 class="title text-center">{{ theme('product_banner_1.title') }}</h5>

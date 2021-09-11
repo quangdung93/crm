@@ -162,7 +162,7 @@ if (!function_exists('product_template')){
 						<span class="price-new">'.number_format($item->price).' đ</span>
 					</div>
 					<div class="note-price">(Giá chưa bao gồm VAT)</div>
-					<div class="btn add-cart-product-temp">Thêm vào giỏ hàng</div>
+					<div class="btn add-cart-product-temp" data-id="'.$item->id.'">Thêm vào giỏ hàng</div>
 				</div>
 			</div>';
 			

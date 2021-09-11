@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\LogActivity;
+use App\Helpers\ShortcodeHelper;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -40,6 +41,7 @@ class Product extends Model
     }
 
     public function handleContent(){
+        $this->body = ShortcodeHelper::renderFromContent($this->body);
         //Lazyload image in body content 
         $this->content = str_replace('src','data-src',$this->content);
     }

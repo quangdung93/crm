@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\LogController;
+use App\Http\Controllers\Site\CartController;
 use App\Http\Controllers\Site\HomeController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\PageController;
@@ -217,6 +218,17 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'], function () {
     });
 
 });
+
+//****************/ FRONT-END /*********************
+
+//Cart
+Route::group(['prefix' => 'cart'], function () {
+    Route::post('add_item', [CartController::class, 'add'])->name('cart.add');
+    Route::post('add_item_single', [CartController::class, 'addByProductId']);
+});
+
+//Checkout
+Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
 
 
 //Site Route

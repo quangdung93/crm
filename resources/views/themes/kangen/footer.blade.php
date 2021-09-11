@@ -163,3 +163,6 @@
         </div>
     </div>
 </section>
+
+{{--  Popup Cart --}}
+@include('themes.kangen.cart.popup')

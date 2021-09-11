@@ -10,12 +10,22 @@
                 <input type="text" placeholder="Tìm kiếm..."/>
             </div>
             <div class="cart-header ml-5">
-                <a href="#">
+                <a href="#" class="header-btn-cart">
                     <span class="hidden-mb">Giỏ hàng</span>
                     <span class="cart-icon">
                         <i class="feather icon-shopping-cart"></i>
-                        <span>1</span>
+                        @php
+                            $countCart = Cart::count();
+                        @endphp
+                        @if($countCart > 0)
+                            <span>{{ $countCart }}</span>
+                        @endif
                     </span>
+                    <div class="alert-cart">
+                        <div class="close"><i class="feather icon-x"></i></div>
+                        <div><i class="feather icon-check"></i> <span>Thêm giỏ hàng thành công!</span></div>
+                        <div id="view-popup-cart-header" class="btn bg-kangen mt-2">Xem giỏ hàng</div>
+                    </div>
                 </a>
             </div>
             <div class="btn btn-kangen hidden-mb ml-5">Hotline: 0906886627</div>

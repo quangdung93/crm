@@ -339,6 +339,21 @@
 	.nav-menu .main-menu ul > li > ul.sub-menu{
 		min-width: 100%;
 	}
+
+	.header-btn-cart .alert-cart{
+		position: fixed;
+		width: 100%;
+		top: unset;
+		bottom: 0;
+		right: 0;
+		left: 0;
+		padding: 15px;
+		border-radius: 0;
+	}
+
+	.header-btn-cart .alert-cart:before{
+		display:none;
+	}
 }
 
 /* END 768*/

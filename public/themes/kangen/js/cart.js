@@ -18,6 +18,25 @@ $(function() {
         _init: function () {
             var self = this;
 
+            $(document).on('click', '.header-btn-cart', function (e) {
+                e.preventDefault();
+                $('#popup-cart').modal('show');
+            });
+
+            $(document).on('click', '.alert-cart', function(e){
+                e.preventDefault();
+                e.stopPropagation();
+            });
+
+            $(document).on('click', '#view-popup-cart-header', function(e){
+                $(this).closest('.alert-cart').hide();
+                $('#popup-cart').modal('show');
+            });
+
+            $(document).on('click', '.alert-cart .close', function(){
+                $(this).closest('.alert-cart').hide();
+            });
+
             $(document).on('keydown', 'input[type="number"].qty-input', function (event) {
                 self._keyDownValidate($(this), event);
             });
@@ -35,149 +54,66 @@ $(function() {
             $(document).on('click', '.btn-cart-plus', function (e) {
                 e.preventDefault();
                 self._plusButtonHandle();
-                
-                self._updateItem(buttonParentBlock.find('.qty-input'));
             });
 
             $(document).on('click', '.btn-cart-minus', function (e) {
                 e.preventDefault();
                 self._minusButtonHandle();
-
-                self._updateItem(buttonParentBlock.find('.qty-input'));
             });
 
-            $(document).on('click', '.btn-payment-guide', function (event) {
+            $(document).on('click', 'a.btn-addtocart', function (event) {
                 event.preventDefault();
-                if ($(this).hasClass('disable')) {
-                    return false;
-                }
-
-                if ('mobile' === self.elements.device && !$(this).hasClass('btn-payment-mobile')) {
-                    self._openMobileQtyPopup();
-                    return false;
-                }
-
                 self._handleAddToCart($(this));
             });
 
-            $(document).on('click','.btn-cart-product-temp', function(e){
-                e.preventDefault();
-                let product_id = $(this).data('id'),
-                url_api = $('#footer').data('api'),
-                url = url_api + '/cart/add_product_id';
-                self._ajaxRequest(url, {product_id:product_id}, 'POST', self._addToCartSuccess);
-            });
-
-            $(document).on('click','.btn-total-suggest', function(e){
-                e.preventDefault();
-                let product_id = $(this).data('id');
-                let suggest_id = $(this).data('suggest');
-                let url = 'api/cart/add_suggest_product';
-                self._ajaxRequest(url, {product_id:product_id,suggest_id:suggest_id}, 'POST', self._addToCartSuccess);
-            });
-
-            $(document).on('click', '.btn-buy-now', function (event) {
+            $(document).on('click', '.add-cart-product-temp', function (event) {
                 event.preventDefault();
-                if ($(this).hasClass('disable')) {
-                    return false;
-                }
+                let product_id = $(this).data('id');
 
-                var form = $(this).closest('form.purchase-box__form'),
-                    url = form.data('action'),
-                    checkout = form.data('checkout');
                 $.ajax({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
-                    url: url,
-                    data: form.serializeArray(),
+                    url: BASE_URL + 'cart/add_item',
+                    data: {product_id:product_id, qty: 1},
                     type: 'POST',
                     success: function (response) {
-                        if (response.success) {
-                            window.location.href = checkout;
-                        }
+                        self._addToCartSuccess(self, response);
                     }
                 });
             });
 
-            $(document).on('click', 'a.cart-button', function (e) {
-                e.preventDefault();
-
-                let path_name = window.location.pathname;
-                if(path_name === '/checkout'){
-                    window.location.href = path_name;
-                    return;
-                }
-
-                if ($(this).hasClass('cart-alert-button')) {
-                    self._hideAddedToCartPopup(e);
-                }
-
-                self._openMiniCart();
-            });
-
-            $(document).on('click', '.modal-cart-close', function () {
-                self._hideMiniCart();
-            });
-
-            $(document).on('click', '.cart-alert-box .close', function (e) {
-                self._hideAddedToCartPopup(e);
-            });
-
-            $(document).on('click', '.modal-item-info--remove', function () {
-                self._removeItem($(this));
-            });
-
-            $(document).on('click', '.product-qty-popup .product-qty .close', self._hideMobileQtyPopup);
         },
 
-        /**
-         * Handle event add to cart
-         *
-         * @param buttonElement
-         * @returns {boolean}
-         * @private
-         */
-        _handleAddToCart: function (buttonElement) {
-            if (buttonElement.hasClass('disable')) {
-                return false;
-            }
-
+        _handleAddToCart: function (element) {
             var self = this,
-                form = 'mobile' !== self.elements.device
-                    ? buttonElement.closest('form.purchase-box__form')
-                    : buttonElement.closest('.product-qty-popup').find('form.purchase-box__form'),
+                form = element.closest('form'),
                 input = form.find('.qty-input'),
                 url = form.data('action');
-
-            // Call request update cart
-            self._ajaxRequest(url, form.serializeArray(), 'POST', self._addToCartSuccess);
+            // Call request add cart
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: url,
+                data: form.serializeArray(),
+                type: 'POST',
+                success: function (response) {
+                    self._addToCartSuccess(self, response);
+                }
+            });
             input.val(1);
         },
 
-        /**
-         * Handle after add item to cart successful
-         *
-         * @param self
-         * @param response
-         * @private
-         */
         _addToCartSuccess: function (self, response) {
-            var $cartQty = $(self.elements.cartQty);
-
-            if ('mobile' !== self.elements.device) {
-                self._scrollToTop();
-            } else {
-                self._hideMobileQtyPopup();
+            if(response.status){
+                $('.popup-cart-content').html(response.html);
+                $('.header-btn-cart .cart-icon span').text(response.qty);
+                if($(window).width() > 768){
+                    self._scrollToTop($('#header'));
+                }
+                $('.header-btn-cart .alert-cart').show();
             }
-            self._showAddedToCartPopup();
-
-            if ($cartQty.hasClass('hidden')) {
-                $cartQty.removeClass('hidden')
-            }
-
-            $cartQty.text(response.cartQty);
-            $(self.elements.cartModal).html(response.html);
         },
 
         /**
@@ -201,13 +137,6 @@ $(function() {
             self._hideModalLoader();
         },
 
-        /**
-         * Handle after remove item successful
-         *
-         * @param self
-         * @param response
-         * @private
-         */
         _removeItemSuccess: function (self, response) {
             var $cartQty = $(self.elements.cartQty);
 
@@ -219,12 +148,7 @@ $(function() {
             $(self.elements.cartModal).html(response.html);
         },
 
-        /**
-         * Handle event update item
-         *
-         * @param inputElement
-         * @private
-         */
+
         _updateItem: function (inputElement) {
             var self = this,
                 itemsBlock = inputElement.closest('.modal-items'),
@@ -258,15 +182,7 @@ $(function() {
             $(self.elements.cartTotal).text(newTotalPrice);
         },
 
-        /**
-         * Call ajax request and handle success action
-         *
-         * @param url
-         * @param data
-         * @param type
-         * @param successCallback
-         * @private
-         */
+
         _ajaxRequest: function (url, data, type, successCallback) {
             var self = this;
 
@@ -283,53 +199,6 @@ $(function() {
                     }
                 }
             });
-        },
-
-        /**
-         * Show loading icon
-         *
-         * @private
-         */
-        _showModalLoader: function () {
-            $('.modal-loader').removeClass('hidden');
-        },
-
-        /**
-         * Hide loading icon
-         *
-         * @private
-         */
-        _hideModalLoader: function () {
-            $('.modal-loader').addClass('hidden');
-        },
-
-        _openMobileQtyPopup: function () {
-            $('.product-qty-popup').removeClass('hidden').fadeIn();
-        },
-
-        _hideMobileQtyPopup: function () {
-            $('.product-qty-popup').addClass('hidden').fadeOut();
-        },
-
-        _openMiniCart: function () {
-            $(this.elements.cartModal).show().removeClass('hidden').addClass('show').addClass('in');
-            $('body').addClass('modal-open');
-            $('body').append('<div class="modal-backdrop in"></div>');
-        },
-
-        _hideMiniCart: function () {
-            $(this.elements.cartModal).hide().removeClass('in').removeClass('show');
-            $('body').removeClass('modal-open');
-            $('body .modal-backdrop').remove();
-        },
-
-        _showAddedToCartPopup: function () {
-            $(this.elements.successPopup).removeClass('hidden');
-        },
-
-        _hideAddedToCartPopup: function (event) {
-            event.preventDefault();
-            $(this.elements.successPopup).addClass('hidden');
         },
 
         _keyDownValidate: function (element, event) {

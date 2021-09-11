@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\LogActivity;
+use App\Helpers\ShortcodeHelper;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -28,6 +29,7 @@ class Post extends Model
     }
 
     public function handleContentPost(){
+        $this->body = ShortcodeHelper::renderFromContent($this->body);
         //Lazyload image in body content 
         $this->body = str_replace('src','data-src',$this->body);
     }
