@@ -196,7 +196,8 @@
     align-items: center;
 }
 
-.add-to-cart .qty-box .qty-input{
+.qty-box .qty-input,
+.qty-box .checkout-qty-input{
     width: 39px;
     height: 34px;
     line-height: 34px;

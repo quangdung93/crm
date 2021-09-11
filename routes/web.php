@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\MediaController;
 use App\Http\Controllers\Admin\ThemeController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Site\CheckoutController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\RedirectController;
 use App\Http\Controllers\Site\WordpressController;
@@ -225,10 +226,20 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'], function () {
 Route::group(['prefix' => 'cart'], function () {
     Route::post('add_item', [CartController::class, 'add'])->name('cart.add');
     Route::post('add_item_single', [CartController::class, 'addByProductId']);
+    Route::post('update', [CartController::class, 'update'])->name('cart.update');
+    Route::post('remove', [CartController::class, 'remove'])->name('cart.remove');
 });
 
 //Checkout
-Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
+Route::group(['prefix' => 'checkout'], function () {
+    Route::get('/', [CheckoutController::class, 'index'])->name('checkout');
+    Route::post('/', [CheckoutController::class, 'store'])->name('checkout.store');
+    Route::get('load', [CheckoutController::class, 'load'])->name('checkout.load');
+});
+
+Route::get('province/{id}', [CheckoutController::class, 'getDistrict'])->name('district.get');
+Route::get('district/{id}', [CheckoutController::class, 'getWard'])->name('ward.get');
+
 
 
 //Site Route

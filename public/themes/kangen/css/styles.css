@@ -1,6 +1,7 @@
 :root {
     --primary: #4d60a5;
     --yellow: #ffdd00;
+    --red: #bd0303;
 }
 
 body{
@@ -40,8 +41,16 @@ img[src].lazy{
     opacity: 1;
 }
 
+.strike{
+    text-decoration: line-through;
+}
+
 .breadcrumb{
     margin: 1rem 0;
+}
+
+.text-red{
+    color: var(--red) !important;
 }
 
 /* Chrome, Safari, Edge, Opera */

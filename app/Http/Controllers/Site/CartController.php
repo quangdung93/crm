@@ -64,6 +64,38 @@ class CartController extends Controller
         return new CartItem($productId, $product->name, $product->price, 0, $options);
     }
 
+    public function update(Request $request)
+    {
+        if (!$request->ajax() || !$cartId = $request->cart_id) {
+            return response()->json(['status' => false, 'message' => 'Yêu cầu không hợp lệ.']);
+        }
+
+        Cart::update($cartId, (int)$request->qty);
+
+        return response()->json([
+            'status' => true, 
+            'qty' => Cart::count(),
+            'html' => $this->renderListCart()
+        ]);
+
+    }
+
+    public function remove(Request $request)
+    {
+        if (!$request->ajax() || !$cartId = $request->cart_id) {
+            return response()->json(['status' => false, 'message' => 'Yêu cầu không hợp lệ.']);
+        }
+
+        $cartId = $request->cart_id;
+        Cart::remove($cartId);
+
+        return response()->json([
+            'status' => true, 
+            'qty' => Cart::count(),
+            'html' => $this->renderListCart(),
+        ]);
+    }
+
     private function renderListCart(){
         $content = Cart::content();
         $html = '<div class="list-cart">';

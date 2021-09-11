@@ -20,6 +20,13 @@ $(function() {
 
             $(document).on('click', '.header-btn-cart', function (e) {
                 e.preventDefault();
+
+                let path_name = window.location.pathname;
+                if(path_name === '/checkout'){
+                    window.location.href = path_name;
+                    return;
+                }
+
                 $('#popup-cart').modal('show');
             });
 
@@ -47,18 +54,16 @@ $(function() {
 
             $(document).on('focusout', 'input[type="number"].qty-input', function () {
                 self._keyUpValidate($(this));
-
-                self._updateItem($(this));
             });
 
             $(document).on('click', '.btn-cart-plus', function (e) {
                 e.preventDefault();
-                self._plusButtonHandle();
+                self._plusButtonHandle($(this));
             });
 
             $(document).on('click', '.btn-cart-minus', function (e) {
                 e.preventDefault();
-                self._minusButtonHandle();
+                self._minusButtonHandle($(this));
             });
 
             $(document).on('click', 'a.btn-addtocart', function (event) {
@@ -82,7 +87,6 @@ $(function() {
                     }
                 });
             });
-
         },
 
         _handleAddToCart: function (element) {
@@ -114,27 +118,6 @@ $(function() {
                 }
                 $('.header-btn-cart .alert-cart').show();
             }
-        },
-
-        /**
-         * Handle event remove item from cart
-         *
-         * @param element
-         * @private
-         */
-        _removeItem: function (element) {
-            var self = this,
-                itemRow = element.closest('.modal-item'),
-                url = element.data('action'),
-                token = $('input[name="_token"]').val(),
-                data = {_token: token, row_id: itemRow.data('row')},
-                type = 'POST';
-
-            self._showModalLoader();
-
-            self._ajaxRequest(url, data, type, self._removeItemSuccess);
-
-            self._hideModalLoader();
         },
 
         _removeItemSuccess: function (self, response) {
@@ -229,8 +212,8 @@ $(function() {
             element.val(newValue);
         },
 
-        _plusButtonHandle: function() {
-            var elementInput = $('.qty-input'),
+        _plusButtonHandle: function(element) {
+            var elementInput = element.closest('.qty-box').find('.qty-input'),
                 current_value = Number(elementInput.val()),
                 new_value = 99;
 
@@ -241,8 +224,8 @@ $(function() {
             elementInput.val(new_value);
         },
 
-        _minusButtonHandle: function (buttonElement) {
-            var elementInput = $('.qty-input'),
+        _minusButtonHandle: function (element) {
+            var elementInput = element.closest('.qty-box').find('.qty-input'),
                 current_value = Number(elementInput.val()),
                 new_value = 1;
 
