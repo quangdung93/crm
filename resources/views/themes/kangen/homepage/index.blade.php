@@ -20,10 +20,10 @@
     @php
         $section_1 = category(theme('home_section_2'));
     @endphp
-    
+
     @include('themes.kangen.components.product-slider', [
         'title' => $section_1->name, 
-        'products' => $section_1->products
+        'products' => $section_1->products->take(8)
     ])
 
     <section class="section-banner">
@@ -40,7 +40,7 @@
 
     @include('themes.kangen.components.product-slider', [
         'title' => $section_4->name, 
-        'products' => $section_4->products
+        'products' => $section_4->products->take(8)
     ])
 
 
@@ -50,7 +50,7 @@
 
     @include('themes.kangen.components.product-slider', [
         'title' => $section_5->name, 
-        'products' => $section_5->products
+        'products' => $section_5->products->take(8)
     ])
 
     <section class="section-youtube">
