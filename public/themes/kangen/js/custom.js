@@ -140,3 +140,25 @@ function checkPhoneNumber(phoneNumber) {
     }
     return flag;
 }
+
+//Register Form
+$(document).on('submit', '.frm-register', function(e){
+    e.preventDefault();
+    let self = $(this);
+    let url = $(this).data('action');
+    console.log(url);
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        method: 'POST',
+        url: url,
+        data: $(this).serialize(),
+        success: function (response) {
+            if (response.status) {
+                alert('Đăng ký thành công!');
+                self[0].reset();
+            }
+        }
+    });
+});

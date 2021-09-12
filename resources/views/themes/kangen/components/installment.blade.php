@@ -9,15 +9,16 @@
                     <div class="title text-center">ĐĂNG KÝ TRẢ GÓP</div>
                     <div class="content"> 
                         <div class="frm-footer-contact">
-                            <form action="" method="POST">
+                            <form class="frm-register" data-action="{{ route('register.form') }}" method="POST">
                                 <div class="form-group">
-                                    <input type="text" name="" value="" class="form-control" placeholder="Số điện thoại" />
+                                    <input type="text" name="phone" value="" class="form-control" placeholder="Số điện thoại" required/>
+                                    <input type="hidden" name="type" value="installment"/>
                                 </div>
                                 <div class="form-group">
-                                    <textarea name="" placeholder="Lời nhắn" class="form-control"></textarea>
+                                    <textarea name="note" placeholder="Lời nhắn" class="form-control"></textarea>
                                 </div>
                                 <div class="form-group">
-                                    <button class="btn read-more mt-4">Đăng Ký</button>
+                                    <button type="submit" class="btn read-more mt-4">Đăng Ký</button>
                                 </div>
                             </form>
                         </div>

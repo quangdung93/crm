@@ -511,10 +511,10 @@
                                                 <div class="input-wrap">
                                                     <div class="input-block product_services">
                                                         @php
-                                                            $listYoutube = theme('product_services');
+                                                            $productServices = theme('product_services');
                                                         @endphp
-                                                        @if($listYoutube)
-                                                            @foreach($listYoutube as $youtube)
+                                                        @if($productServices)
+                                                            @foreach($productServices as $youtube)
                                                                 <div class="input-item mt-3 d-flex">
                                                                     <input type="text" 
                                                                     name="product_services[{{ $loop->index }}][link]"

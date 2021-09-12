@@ -26,8 +26,18 @@ class ProductController extends Controller
 
         $productRelated = $this->productService->getProductRelated($product->categories->pluck('id')->toArray());
         return view('themes.kangen.products.detail')->with([
+            'metaData' => $this->getMetaData($product),
             'product' => $product,
             'productRelated' => $productRelated,
         ]);
+    }
+
+    public function getMetaData($model){
+        return [
+            'title' => $model->meta_title ?: $model->name,
+            'description' => $model->meta_description,
+            'keyword' => $model->meta_keyword,
+            'image' => $model->image,
+        ];
     }
 }

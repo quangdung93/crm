@@ -306,18 +306,19 @@
                     <div class="col-sm-4">
                         <div class="contact-form">
                             <div class="frm-title">Yêu Cầu Gọi Lại</div>
-                            <form action="" method="POST">
+                            <form class="frm-register" data-action="{{ route('register.form') }}" method="POST">
                                 <div class="form-group">
-                                    <input type="text" name="" value="" class="form-control" placeholder="Họ và tên" />
+                                    <input type="text" name="name" value="" class="form-control" placeholder="Họ và tên" required/>
+                                    <input type="hidden" name="type" value="recall"/>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" name="" value="" class="form-control" placeholder="Số điện thoại" />
+                                    <input type="text" name="phone" value="" class="form-control" placeholder="Số điện thoại" required/>
                                 </div>
                                 <div class="form-group">
-                                    <textarea name="" placeholder="Lời nhắn" class="form-control"></textarea>
+                                    <textarea name="note" placeholder="Lời nhắn" class="form-control"></textarea>
                                 </div>
                                 <div class="form-group">
-                                    <button class="btn read-more mt-4">Gửi Yêu Cầu</button>
+                                    <button type="submit" class="btn read-more mt-4">Gửi Yêu Cầu</button>
                                 </div>
                             </form>
                         </div>

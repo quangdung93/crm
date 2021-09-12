@@ -20,6 +20,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Site\CheckoutController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\RedirectController;
 use App\Http\Controllers\Site\WordpressController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -227,6 +228,13 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'], function () {
         Route::get('/delete/{id}', [OrderController::class, 'destroy'])->middleware('can:delete_orders');
     });
 
+    //Customer
+    Route::group(['prefix' => 'customers', 'middleware' => ['can:read_customers']], function () {
+        Route::get('/', [CustomerController::class, 'index'])->name('customers.index');
+        Route::get('/detail/{id}', [CustomerController::class, 'detail']);
+        Route::get('/delete/{id}', [CustomerController::class, 'destroy'])->middleware('can:delete_customers');
+    });
+
 });
 
 //****************/ SITE /*********************
@@ -247,6 +255,7 @@ Route::group(['prefix' => 'checkout'], function () {
     Route::get('success/{order_id}', [CheckoutController::class, 'thanksPage'])->name('checkout.success');
 });
 
+Route::post('register', [App\Http\Controllers\Site\CustomerController::class, 'register'])->name('register.form');
 Route::get('province/{id}', [CheckoutController::class, 'getDistrict'])->name('district.get');
 Route::get('district/{id}', [CheckoutController::class, 'getWard'])->name('ward.get');
 

@@ -76,26 +76,18 @@
                             <div class="siderbar-item">
                                 <h5 class="title text-center">Đại Lâm Thịnh Có Gì?</h5>
                                 <div class="content">
-                                    <div class="item">
-                                        <a href="#">
-                                            <i class="feather icon-check-circle"></i> <span>Dịch vụ rửa máy chuyên sâu</span>
-                                        </a>
-                                    </div>
-                                    <div class="item">
-                                        <a href="#">
-                                            <i class="feather icon-check-circle"></i> Dịch vụ rửa máy chuyên sâu
-                                        </a>
-                                    </div>
-                                    <div class="item">
-                                        <a href="#">
-                                            <i class="feather icon-check-circle"></i> Dịch vụ rửa máy chuyên sâu
-                                        </a>
-                                    </div>
-                                    <div class="item">
-                                        <a href="#">
-                                            <i class="feather icon-check-circle"></i> Dịch vụ rửa máy chuyên sâu
-                                        </a>
-                                    </div>
+                                    @php
+                                        $productServices = theme('product_services');
+                                    @endphp
+                                    @if($productServices)
+                                        @foreach($productServices as $service)
+                                            <div class="item">
+                                                <a href="{{ url($service['link']) }}">
+                                                    <i class="feather icon-check-circle"></i> <span>{{ $service['title'] }}</span>
+                                                </a>
+                                            </div>
+                                        @endforeach
+                                    @endif
                                 </div>
                             </div>
 
