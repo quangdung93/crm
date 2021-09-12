@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Site;
 
+use Carbon\Carbon;
 use App\Models\Ward;
+use App\Models\Order;
 use App\Models\District;
 use App\Models\Province;
 use Illuminate\Http\Request;
@@ -18,9 +20,33 @@ class CheckoutController extends Controller
         ]);
     }
 
-    public function store(Request $request){
-        dd($request->all());
+    public function store(Request $request){    
+        if(Cart::count() > 0){
+            $response = $this->createOrder($request);
+        }
+        else{
+            $response = [
+                'status' => false,
+                'cart' => false,
+                'message' => 'Giỏ hàng không có sản phẩm. Vui lòng thực hiện lại!'
+            ];
+        }
+
+        return response()->json($response);
     }
+
+    public function thanksPage($order_id){
+        $order = Order::where('id', $order_id)->type('order')->get();
+
+        //Set lifetime checkout sucess link
+        if(Carbon::now() > Carbon::parse($order->created_at)->addMinutes(5)){
+            return abort('404');
+        }
+
+        return view('themes.kangen.checkout.success')->with([
+            'order' => $order
+        ]);
+    }   
 
     public function load(){
         return response()->json([
@@ -106,5 +132,44 @@ class CheckoutController extends Controller
         }
 
         return $html;
+    }
+
+    public function createOrder(Request $request){
+        $data = $request->except('_token');
+        $data['total'] = Cart::totalFloat();
+        $order = Order::create($data);
+
+        if(!$order){
+            $response = [
+                'status' => false,
+                'message' => 'Thanh toán không thành công! Vui lòng thử lại'
+            ];
+        }
+
+        $orderId = $order->id;
+        $listCart = Cart::content();
+
+        foreach ($listCart as $row) {
+            $orderDetail[] = [
+                'order_id' => $orderId,
+                'product_id' => $row->id,
+                'qty' => $row->qty,
+                'price_old' => $row->options['price_old'],
+                'price' => $row->price,
+                'subtotal' => $row->subtotal,
+            ];
+        }
+
+        //Save Order Detail
+        $order->detail()->attach($orderDetail);
+        Cart::destroy();
+
+        $response = [
+            'status' => true,
+            'order_id' => $orderId,
+            'message' => 'Thanh toán thành công!'
+        ];
+
+        return $response;
     }
 }

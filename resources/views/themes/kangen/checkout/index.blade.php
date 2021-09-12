@@ -43,26 +43,26 @@
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <input type="text" id="name" name="name" value="" class="form-control" placeholder="Họ và tên" />
+                                                <input type="text" id="name" name="customer_name" value="" class="form-control" placeholder="Họ và tên" />
                                                 <div class="error text-danger mt-2"></div>
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <input type="text" id="phone" name="phone" value="" class="form-control" placeholder="Số điện thoại" />
+                                                <input type="text" id="phone" name="customer_phone" value="" class="form-control" placeholder="Số điện thoại" />
                                                 <div class="error text-danger mt-2"></div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" id="email" name="email" value="" class="form-control" placeholder="Email" />
+                                        <input type="text" id="email" name="customer_email" value="" class="form-control" placeholder="Email" />
                                         <div class="error text-danger mt-2"></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <div class="checkout-select">
-                                                    <select id="provinces" name="provinces" class="form-control">
+                                                    <select id="provinces" name="province_id" class="form-control">
                                                         <option value="" selected="selected">Chọn tỉnh/thành phố</option>
                                                         @foreach($provinces as $province)
                                                             <option value="{{$province->id}}">{{$province->name}}</option>
@@ -75,7 +75,7 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <div class="checkout-select">
-                                                    <select id="districts" name="districts" class="form-control">
+                                                    <select id="districts" name="district_id" class="form-control">
                                                         <option value="">Chọn quận/huyện</option>
                                                     </select>
                                                     <div class="error text-danger mt-2"></div>
@@ -87,7 +87,7 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <div class="checkout-select">
-                                                    <select id="wards" name="wards" class="form-control">
+                                                    <select id="wards" name="ward_id" class="form-control">
                                                         <option value="">Chọn phường/xã</option>
                                                     </select>
                                                     <div class="error text-danger mt-2"></div>
@@ -96,7 +96,7 @@
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <input type="text" id="address" name="address" value="" class="form-control" placeholder="Số nhà, tên đường" />
+                                                <input type="text" id="address" name="customer_address" value="" class="form-control" placeholder="Số nhà, tên đường" />
                                                 <div class="error text-danger mt-2"></div>
                                             </div>
                                         </div>
@@ -105,7 +105,7 @@
                                         <textarea name="note" placeholder="Lời nhắn" class="form-control"></textarea>
                                     </div>
                                     <div class="form-group">
-                                        <button id="btn-checkout" class="btn read-more mt-4">Gửi Đơn Hàng</button>
+                                        <button id="btn-checkout" class="btn read-more mt-4 {{ Cart::count() === 0 ? 'prevent-event' : '' }}">Gửi Đơn Hàng</button>
                                     </div>
                                 </form>
                             </div>
@@ -155,9 +155,9 @@
                     method: 'POST',
                     url: '{{ route('checkout.store') }}',
                     data: $(this).serialize(),
-                    success: function (result) {
-                        if (result.status) {
-                            window.location = '/';
+                    success: function (response) {
+                        if (response.status) {
+                            window.location = '/checkout/success/' + response.order_id;
                         }
                     }
                 });

@@ -14,6 +14,7 @@ use App\Http\Controllers\Site\RouteController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\ImageController;
 use App\Http\Controllers\Admin\MediaController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ThemeController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SettingController;
@@ -41,7 +42,8 @@ use App\Http\Controllers\Admin\PostCategoryController;
 Route::get('/login', [LoginController::class, 'login']);
 Route::post('/login', [LoginController::class, 'postLogin'])->name('login');
 
-//Admin
+//****************/ ADMIN /*********************
+
 Route::group(['prefix' => 'admin','middleware' => 'auth'], function () {
     Route::redirect('/', 'admin/dashbroad', 301);
     Route::get('/dashbroad', [DashboardController::class, 'index'])->name('dashbroad');
@@ -218,9 +220,16 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'], function () {
         Route::get('details/{id}', [LogController::class,'show']);
     });
 
+    //Order
+    Route::group(['prefix' => 'orders', 'middleware' => ['can:read_orders']], function () {
+        Route::get('/', [OrderController::class, 'index'])->name('orders.index');
+        Route::get('/detail/{id}', [OrderController::class, 'detail']);
+        Route::get('/delete/{id}', [OrderController::class, 'destroy'])->middleware('can:delete_orders');
+    });
+
 });
 
-//****************/ FRONT-END /*********************
+//****************/ SITE /*********************
 
 //Cart
 Route::group(['prefix' => 'cart'], function () {
@@ -235,6 +244,7 @@ Route::group(['prefix' => 'checkout'], function () {
     Route::get('/', [CheckoutController::class, 'index'])->name('checkout');
     Route::post('/', [CheckoutController::class, 'store'])->name('checkout.store');
     Route::get('load', [CheckoutController::class, 'load'])->name('checkout.load');
+    Route::get('success/{order_id}', [CheckoutController::class, 'thanksPage'])->name('checkout.success');
 });
 
 Route::get('province/{id}', [CheckoutController::class, 'getDistrict'])->name('district.get');

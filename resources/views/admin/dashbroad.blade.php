@@ -25,9 +25,9 @@
                     <img src="/storage//settings/April2021/play-icon.png" class="hidden-md" style="width:40px; height:40px;">
                     <div class="relative" style="margin-left:14px; text-align:left;">
                         <p style="color:#ffffff; display:block; margin:0px; font-weight:500; font-size:17px; line-height:17px; margin-top:3px; margin-bottom:4px;">Đơn hàng</p>
-                        <p style="display:block; text-align:left; line-height:14px; margin:0px;font-size:12px">0 đơn hàng</p>
+                        <p style="display:block; text-align:left; line-height:14px; margin:0px;font-size:12px">{{ App\Models\Order::count() }} đơn hàng</p>
                     </div>
-                    <a href="#" target="_blank" style="cursor:pointer; flex-shrink:0;  justify-self:end; margin-left:auto; background:#fff; color:#ee445d; font-weight:500; padding:10px 20px; border-radius:4px;">
+                    <a href="{{ route('orders.index') }}" style="cursor:pointer; flex-shrink:0;  justify-self:end; margin-left:auto; background:#fff; color:#ee445d; font-weight:500; padding:10px 20px; border-radius:4px;">
                         Xem ngay
                     </a>
                 </div>
@@ -42,7 +42,7 @@
                         <p style="color:#ffffff; display:block; margin:0px; font-weight:500; font-size:17px; line-height:17px; margin-top:3px; margin-bottom:4px;">Bài viết</p>
                         <p style="display:block; text-align:left; color:#dce9fe; line-height:14px; margin:0px;font-size:12px">{{ App\Models\Post::active()->count() }} bài viết</p>
                     </div>
-                    <a href="{{ route('posts.index') }}" target="_blank" style="cursor:pointer; flex-shrink:0;  justify-self:end; margin-left:auto; background:#fff; color:#4801FF; font-weight:500; padding:10px 20px; border-radius:4px;">
+                    <a href="{{ route('posts.index') }}" style="cursor:pointer; flex-shrink:0;  justify-self:end; margin-left:auto; background:#fff; color:#4801FF; font-weight:500; padding:10px 20px; border-radius:4px;">
                         Xem ngay
                     </a>
                 </div>
