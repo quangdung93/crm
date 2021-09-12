@@ -26,10 +26,10 @@
 
     {{-- Styles --}}
     <link rel="stylesheet" type="text/css" href="{{ asset('themes/kangen/css/app.min.css') }}"> 
-    <link rel="stylesheet" type="text/css" href="{{ asset('themes/kangen/css/styles.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('themes/kangen/css/product.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('themes/kangen/css/post.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('themes/kangen/css/responsive.css') }}">
+    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('themes/kangen/css/styles.css') }}"> --}}
+    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('themes/kangen/css/product.css') }}"> --}}
+    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('themes/kangen/css/post.css') }}"> --}}
+    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('themes/kangen/css/responsive.css') }}"> --}}
     @yield('styles')
     
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -40,8 +40,8 @@
 <body>
     @yield('body')
     <script src="{{ asset('themes/kangen/js/app.min.js') }}"></script>
-    <script src="{{ asset('themes/kangen/js/custom.js') }}"></script>
-    <script src="{{ asset('themes/kangen/js/cart.js') }}"></script>
+    {{-- <script src="{{ asset('themes/kangen/js/custom.js') }}"></script> --}}
+    {{-- <script src="{{ asset('themes/kangen/js/cart.js') }}"></script> --}}
     {{-- Option scripts --}}
     @yield('javascript')
     @stack('javascript')

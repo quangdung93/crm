@@ -7,6 +7,10 @@ mix.styles([
     'public/admin/assets/icon/feather/css/feather.css',
     'resources/css/common.css',
     'resources/css/slick.css',
+    'resources/css/styles.css',
+    'resources/css/product.css',
+    'resources/css/post.css',
+    'resources/css/responsive.css',
 
     ], 'public/themes/kangen/css/app.min.css');
 
@@ -16,6 +20,9 @@ mix.scripts([
     'resources/js/boostrap.min.js',
     'resources/js/slick.min.js',
     'resources/js/lazyload.min.js',
+    'resources/js/custom.js',
+    'resources/js/cart.js',
+
 ], 'public/themes/kangen/js/app.min.js');
 
 
