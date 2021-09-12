@@ -29,8 +29,8 @@
                     </div>
                 </a>
             </div>
-            <div class="btn btn-kangen hidden-mb ml-5">Hotline: 0906886627</div>
-            <div class="btn btn-kangen hidden-mb ml-4">Trả góp 0%</div>
+            <div class="btn btn-kangen hidden-mb ml-5"><a class="text-white" href="tel:{{ str_replace('.','', setting('site_phone')) }}">Hotline: {{ setting('site_phone') }}</a></div>
+            <div class="btn btn-kangen hidden-mb ml-4"><a class="text-white" href="{{ setting('site_installment_link') }}">Trả góp 0%</a></div>
             <div class="icon-menu-mobile"><i class="feather icon-menu"></i></div>
         </div>
     </div>
