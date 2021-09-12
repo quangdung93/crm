@@ -83,7 +83,7 @@
                                     <a href="#" class="youtube-item {{ $loop->first ? 'active' : '' }}">
                                         <div class="video-thumb">
                                             <div class="youtube-list" data-embed="{{ get_embed_youtube($value['link']) }}">
-                                                <img class="lazy" data-src="https://img.youtube.com/vi/{{ get_embed_youtube($value['link']) }}/hqdefault.jpg"/>
+                                                <img class="lazy" src="https://img.youtube.com/vi/{{ get_embed_youtube($value['link']) }}/hqdefault.jpg"/>
                                             </div>
                                         </div>
                                         <div class="youtube-title">{{ $value['title'] }}</div>

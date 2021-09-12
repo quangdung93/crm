@@ -45,28 +45,13 @@
                         </p>
                         <p>
                             <img
-                                loading="lazy"
-                                class="wp-image-1860 alignnone lazyloaded"
-                                src="https://kangenvietnam.vn/wp-content/uploads/2020/11/zalo.jpg"
+                                class="lazy"
+                                data-src="{{ asset('uploads/2020/11/zalo.jpg') }}"
                                 alt="zalo kangen"
                                 width="128"
                                 height="128"
-                                sizes="(max-width: 128px) 100vw, 128px"
-                                srcset="https://kangenvietnam.vn/wp-content/uploads/2020/11/zalo.jpg 250w, https://kangenvietnam.vn/wp-content/uploads/2020/11/zalo-100x100.jpg 100w, https://kangenvietnam.vn/wp-content/uploads/2020/11/zalo-150x150.jpg 150w"
                                 data-ll-status="loaded"
                             />
-                            <noscript>
-                                <img
-                                    loading="lazy"
-                                    class="wp-image-1860 alignnone"
-                                    src="https://kangenvietnam.vn/wp-content/uploads/2020/11/zalo.jpg"
-                                    alt="zalo kangen"
-                                    width="128"
-                                    height="128"
-                                    srcset="https://kangenvietnam.vn/wp-content/uploads/2020/11/zalo.jpg 250w, https://kangenvietnam.vn/wp-content/uploads/2020/11/zalo-100x100.jpg 100w, https://kangenvietnam.vn/wp-content/uploads/2020/11/zalo-150x150.jpg 150w"
-                                    sizes="(max-width: 128px) 100vw, 128px"
-                                />
-                            </noscript>
                         </p>
                     </div>
 
@@ -103,7 +88,11 @@
             <div class="row">
                 <div class="col-sm-4">
                     <div class="title">FANPAGE ĐẠI LÂM THỊNH</div>
-                    <div class="content"></div>
+                    <div class="content">
+                        <a href="https://www.facebook.com/kangenvietnam.vn/" target="_blank">
+                            <div class="image"><img class="img-fluid" src="{{ asset('themes/kangen/images/facebook.png') }}" alt="Fanpage" /></div>
+                        </a>
+                    </div>
                 </div>
                 <div class="col-sm-4">
                     <div class="title">CHỨNG NHẬN VỀ NƯỚC KANGEN</div>
@@ -156,7 +145,7 @@
 <section class="footer-bottom">
     <div class="container">
         <div class="payment-icon text-center">
-            <img class="img-fuild lazy" data-src="https://kangenvietnam.vn/wp-content/uploads/2020/11/incon-thanh-toan.png" alt="payment icons" />
+            <img class="img-fluid lazy" data-src="{{ asset('uploads/2020/11/incon-thanh-toan.png') }}" alt="payment icons" />
         </div>
         <div class="payment-text text-center">
             <p>Chấp nhận thanh toán các loại thẻ ATM</p>
