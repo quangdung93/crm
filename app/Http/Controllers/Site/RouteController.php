@@ -31,6 +31,9 @@ class RouteController extends Controller
         else if($model == 'san-pham'){ //custom route
             return (new ProductController)->index(); 
         }
+        else if($model == 'tim-kiem'){ //Search
+            return (new SearchController)->index(); 
+        }
         else{
             abort('404');
         }

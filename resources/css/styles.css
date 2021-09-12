@@ -144,7 +144,16 @@ header{
 }
 
 .search{
+    position: relative;
     width: 300px;
+}
+
+.search .icon{
+    position: absolute;
+    right: 10px;
+    top: 1px;
+    font-size: 20px;
+    cursor: pointer;
 }
 
 .search input{

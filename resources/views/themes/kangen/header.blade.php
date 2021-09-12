@@ -7,7 +7,8 @@
         </div>
         <div class="header-content d-flex align-items-center">
             <div class="search hidden-mb">
-                <input type="text" placeholder="Tìm kiếm..."/>
+                <input id="search-input" type="text" value="{{ request()->get('key') }}" placeholder="Tìm kiếm..."/>
+                <span class="icon"><i class="feather icon-search"></i></span>
             </div>
             <div class="cart-header ml-5">
                 <a href="#" class="header-btn-cart">

@@ -118,3 +118,17 @@ $(document).on('submit', '.frm-register', function(e){
         }
     });
 });
+
+$(document).on('click','.search .icon', function(){
+    let value = $(this).closest('.search').find('#search-input').val();
+    window.location.href = '/tim-kiem?key=' + value;
+});
+
+// Handle press "Enter" button on search box
+$('#search-input').keypress(function (event) {
+    var keycode = (event.keyCode ? event.keyCode : event.which);
+    var value = $(this).val();
+    if (keycode == '13') {
+        window.location.href = '/tim-kiem?key=' + value;
+    }
+});

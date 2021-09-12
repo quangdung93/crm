@@ -1,5 +1,15 @@
 const mix = require('laravel-mix');
 
+//Copy Css
+mix.copy('public/themes/kangen/css/styles.css', 'resources/css/styles.css');
+mix.copy('public/themes/kangen/css/product.css', 'resources/css/product.css');
+mix.copy('public/themes/kangen/css/post.css', 'resources/css/post.css');
+mix.copy('public/themes/kangen/css/responsive.css', 'resources/css/responsive.css');
+
+//Copy JS
+mix.copy('public/themes/kangen/js/custom.js', 'resources/js/custom.js');
+mix.copy('public/themes/kangen/js/cart.js', 'resources/js/cart.js');
+
 //Vendor CSS Site
 mix.styles([
     'resources/css/bootstrap.min.css',
