@@ -17,11 +17,10 @@
             </div>
         </div>
     </div>
-
     @php
         $section_1 = category(theme('home_section_2'));
     @endphp
-
+    
     @include('themes.kangen.components.product-slider', [
         'title' => $section_1->name, 
         'products' => $section_1->products
@@ -83,7 +82,7 @@
                                     <a href="#" class="youtube-item {{ $loop->first ? 'active' : '' }}">
                                         <div class="video-thumb">
                                             <div class="youtube-list" data-embed="{{ get_embed_youtube($value['link']) }}">
-                                                <img class="lazy" src="https://img.youtube.com/vi/{{ get_embed_youtube($value['link']) }}/hqdefault.jpg"/>
+                                                <img class="lazy" data-src="https://img.youtube.com/vi/{{ get_embed_youtube($value['link']) }}/hqdefault.jpg"/>
                                             </div>
                                         </div>
                                         <div class="youtube-title">{{ $value['title'] }}</div>
@@ -369,11 +368,10 @@
 @section('javascript')
 <script>
     $(document).ready(function(){
-        //generateYoutubeItem();
-
-        $('.youtube-list img').each(function(){
-            $(this).lazyload();
-        });
+        //Youtube
+        if($('.youtube').length > 0){
+            generateYoutubeLazyLoad();
+        }
 
         $('.youtube-item').on('click', function(e){
             e.preventDefault();
@@ -384,8 +382,8 @@
             $('.section-youtube .preview-intro-video .youtube').html(youtube);
         });
 
-        function generateYoutubeItem() {
-            var youtube = document.querySelectorAll('.youtube-list');
+        function generateYoutubeLazyLoad() {
+            var youtube = document.querySelectorAll('.youtube');
             for (var i = 0; i < youtube.length; i++) {
                 // thumbnail image source.
                 var source = "https://img.youtube.com/vi/" + youtube[i].dataset.embed + "/hqdefault.jpg"; //sddefault.jpg
@@ -404,6 +402,40 @@
             setTimeout(function () {
                 $(element).lazyload().addClass('youtube-loaded');
             }, timeout);
+        }
+
+        function generateYoutube() {
+            var youtube = document.querySelectorAll(".youtube");
+            for (var i = 0; i < youtube.length; i++) {
+                // thumbnail image source.
+                var source = "https://img.youtube.com/vi/" + youtube[i].dataset.embed + "/hqdefault.jpg"; //sddefault.jpg
+                // Load t image asynchronously    
+                var image = new Image();
+                image.src = source;
+                image.addEventListener("load", function () {
+                    youtube[i].appendChild(image);
+                }(i));
+                youtube[i].addEventListener("click", function () {
+                    var iframe = document.createElement("iframe");
+                    iframe.setAttribute("frameborder", "0");
+                    iframe.setAttribute("class", "youtube-video");
+                    iframe.setAttribute("allowfullscreen", "");
+                    iframe.setAttribute("src", "https://www.youtube.com/embed/" + this.dataset.embed + "?rel=0&showinfo=0&autoplay=1");
+                    this.innerHTML = "";
+                    this.appendChild(iframe);
+                });
+            }
+        }
+
+        function renderIframeYoutube(embed){
+            let iframe = document.createElement("iframe");
+                iframe.setAttribute("frameborder", "0");
+                iframe.setAttribute("class", "youtube-video");
+                iframe.setAttribute("width", "100%");
+                iframe.setAttribute("height", "100%");
+                iframe.setAttribute("allowfullscreen", "");
+                iframe.setAttribute("src", "https://www.youtube.com/embed/" + embed + "?rel=0&showinfo=0&autoplay=1");
+                return iframe;
         }
     });
 </script>

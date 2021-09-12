@@ -90,7 +90,7 @@
                     <div class="title">FANPAGE ĐẠI LÂM THỊNH</div>
                     <div class="content">
                         <a href="https://www.facebook.com/kangenvietnam.vn/" target="_blank">
-                            <div class="image"><img class="img-fluid" src="{{ asset('themes/kangen/images/facebook.png') }}" alt="Fanpage" /></div>
+                            <div class="image"><img class="img-fluid lazy" data-src="{{ asset('themes/kangen/images/facebook.png') }}" alt="Fanpage" /></div>
                         </a>
                     </div>
                 </div>

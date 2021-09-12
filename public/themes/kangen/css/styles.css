@@ -383,7 +383,7 @@ a.youtube-item:hover{
     margin-right: 15px;
 }
 
-.youtube-item  .youtube-list{
+.youtube-item .youtube-list{
     position: relative;
     padding-top: 56.25%;
     overflow: hidden;
@@ -402,11 +402,17 @@ a.youtube-item:hover{
 
 .youtube-item .youtube-list img{
     position: absolute;
-    width: 100%;
+    width: 130px;
+    height: 97px;
     top: -16.84%;
     left: 0;
     opacity: .7;
     border-radius: 5px;
+}
+
+.youtube img{
+    width: 100%;
+    height: 135%;
 }
 
 .section-solution .img{
