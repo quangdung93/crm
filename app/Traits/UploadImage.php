@@ -24,13 +24,13 @@ trait UploadImage
             $fileName = Str::slug($fileName);
             $finalFile = time() .'_'. $fileName .'.' . $extension;
 
-            Storage::put('/public/' . $folder . '/' . $finalFile, fopen($file, 'r+'));
+            Storage::disk('public')->put('/storage/' . $folder . '/' . $finalFile, fopen($file, 'r+'));
 
             //Resize image thumbnail
             if(!is_null($thumb)){
                 $thumb = explode('/', $thumb);
-                Storage::put('/public/' . $folder . '/thumb/' . $finalFile, fopen($file, 'r+'));
-                $thumbnail = storage_path('/app/public/' . $folder . '/thumb/' . $finalFile);
+                Storage::disk('public')->put('/storage/' . $folder . '/thumb/' . $finalFile, fopen($file, 'r+'));
+                $thumbnail = Storage::disk('public')->get('/storage/' . $folder . '/thumb/' . $finalFile);
                 $img = Image::make($thumbnail)->resize($thumb[0], $thumb[1]);
                 $img->save($thumbnail);
             }
