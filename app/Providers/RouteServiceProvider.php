@@ -7,13 +7,11 @@ use App\Models\Post;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\PostCategory;
+use App\Models\RedirectLink;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Support\Facades\RateLimiter;
-use App\Http\Controllers\Site\ProductController;
-use App\Http\Controllers\Site\CategoryController;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
 class RouteServiceProvider extends ServiceProvider
@@ -47,6 +45,11 @@ class RouteServiceProvider extends ServiceProvider
 
         //Custom route
         Route::bind('url', function ($path) {
+            $redirect = RedirectLink::where('from_url', $path)->first();
+            if($redirect){
+                return $redirect;
+            }
+
             $slugs = explode('/', $path);
 
             if(count($slugs) == 2){ //Multi level route

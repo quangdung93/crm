@@ -52,6 +52,24 @@ class RedirectController extends Controller
             'to_url' => Str::replace(url('/'),'', $request->to_url),
         ];
 
+        //From URL
+        if(Str::startsWith($data['from_url'], '/')){
+            $data['from_url'] = substr($data['from_url'], 1);
+        }
+
+        if(Str::endsWith($data['from_url'], '/')){
+            $data['from_url'] = substr($data['from_url'], 0, -1);
+        }
+
+        //To URL
+        if(Str::startsWith($data['to_url'], '/')){
+            $data['to_url'] = substr($data['to_url'], 1);
+        }
+
+        if(Str::endsWith($data['to_url'], '/')){
+            $data['to_url'] = substr($data['to_url'], 0, -1);
+        }
+
         $redirect = RedirectLink::create($data);
 
         if($redirect){
@@ -111,6 +129,24 @@ class RedirectController extends Controller
             'from_url' => Str::replace(url('/'),'', $request->from_url),
             'to_url' => Str::replace(url('/'),'', $request->to_url),
         ];
+
+        //From URL
+        if(Str::startsWith($data['from_url'], '/')){
+            $data['from_url'] = substr($data['from_url'], 1);
+        }
+
+        if(Str::endsWith($data['from_url'], '/')){
+            $data['from_url'] = substr($data['from_url'], 0, -1);
+        }
+
+        //To URL
+        if(Str::startsWith($data['to_url'], '/')){
+            $data['to_url'] = substr($data['to_url'], 1);
+        }
+
+        if(Str::endsWith($data['to_url'], '/')){
+            $data['to_url'] = substr($data['to_url'], 0, -1);
+        }
 
         $update = $redirect->update($data);
 
