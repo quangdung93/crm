@@ -1,10 +1,4 @@
 {
-    "/resources/css/styles.css": "/resources/css/styles.css",
-    "/resources/css/product.css": "/resources/css/product.css",
-    "/resources/css/post.css": "/resources/css/post.css",
-    "/resources/css/responsive.css": "/resources/css/responsive.css",
-    "/resources/js/custom.js": "/resources/js/custom.js",
-    "/resources/js/cart.js": "/resources/js/cart.js",
     "/themes/kangen/css/app.min.css": "/themes/kangen/css/app.min.css",
     "/themes/kangen/js/app.min.js": "/themes/kangen/js/app.min.js",
     "/admin/css/vendor.min.css": "/admin/css/vendor.min.css"

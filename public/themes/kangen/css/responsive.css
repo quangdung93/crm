@@ -54,9 +54,22 @@
 	}
 	
 	.border-section .content{
-		padding: 25px 15px 15px 15px;
+		padding: 15px;
 		border: 1px solid var(--primary);
 		border-radius: 0 0 5px 5px;
+	}
+
+	section .section-title h3 a{
+		font-size: 24px;
+	}
+
+	.product-item .product-price{
+		font-size: 12px;
+		margin-top: 5px;
+	}
+
+	.youtube-main-title{
+		font-size: 14px;
 	}
 }
 
@@ -103,6 +116,10 @@
 	header{
 		border-bottom: 1px solid #ddd;
 		margin-bottom: 10px
+	}
+
+	#header .header-top{
+		padding: 10px;
 	}
 
 	/* MENU */
@@ -219,6 +236,8 @@
 
 	.section-solution .content .info h4{
 		text-align: center;
+		font-size: 19px;
+		margin: 15px 0;
 	}
 
 	.news-wrapper{
@@ -241,6 +260,14 @@
 	.news-wrapper .top-news .news-info{
 		padding: 0;
 		margin-top: 15px;
+	}
+
+	.bottom-news-item .content .news-info h4{
+		height: unset;
+	}
+
+	.news-wrapper .top-news .news-info h4 a{
+		font-size: 19px;
 	}
 
 	.bottom-news .bottom-news-item{
@@ -353,6 +380,30 @@
 
 	.header-btn-cart .alert-cart:before{
 		display:none;
+	}
+
+	.shortcode-info .wrap{
+		flex-direction: column;
+	}
+
+	.shortcode-info .wrap .item p{
+		padding-left: 0;
+	}
+
+	.shortcode-info h4{
+		font-size: 18px;
+	}
+
+	.shortcode-info h5{
+		font-size: 16px;
+	}
+
+	.call-to-action .content h4{
+		font-size: 19px;
+	}
+
+	.section-contact .section-title h3 a{
+		font-size: 21px;
 	}
 }
 

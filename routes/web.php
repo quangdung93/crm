@@ -235,6 +235,11 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'], function () {
         Route::get('/delete/{id}', [CustomerController::class, 'destroy'])->middleware('can:delete_customers');
     });
 
+    Route::get('cache', function(){
+        Cache::flush();
+        return 'Cache clear';
+    });
+
 });
 
 //****************/ SITE /*********************

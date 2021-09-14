@@ -53,6 +53,31 @@ img[src].lazy{
     color: var(--red) !important;
 }
 
+#header{
+    padding: 0;
+}
+
+#header .header-top{
+    padding: 10px 0;
+}
+
+.fixed-header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    z-index: 9999;
+}
+
+#header.fixed-header .header-top{
+    padding: 5px;
+}
+
+.fixed-header .logo{
+    max-width: 170px;
+}
+
 .prevent-event{
     pointer-events: none;
     opacity: 0.6;
@@ -83,10 +108,26 @@ input[type=number] {
     color: var(--primary)
 }
 
-.border-style{
+.shortcode-info{
     padding: 15px;
-    border: 1px solid #ddd;
+    background: #f8f7fd;
     border-radius: 5px;
+}
+
+.shortcode-info .wrap{
+    display: flex;
+}
+
+.shortcode-info .wrap .item{
+    flex: 1;
+}
+
+.shortcode-info .wrap .item p{
+    padding-left: 40px;
+}
+
+.shortcode-info h5{
+    margin-bottom: 15px;
 }
 
 .border-right-style{
@@ -319,7 +360,7 @@ header{
 }
 
 .collect-youtube{
-    max-height: 393px;
+    max-height: 440px;
     overflow-y: scroll;
 }
 
@@ -407,6 +448,14 @@ a.youtube-item:hover{
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
+}
+
+.youtube-main-title{
+    text-align: center;
+    margin-top: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--primary);
 }
 
 .youtube-item .youtube-list img{

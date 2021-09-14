@@ -23,13 +23,18 @@
 
     @include('themes.kangen.components.product-slider', [
         'title' => $section_1->name, 
+        'url' => $section_1->link(), 
         'products' => $section_1->products->take(8)
     ])
 
     <section class="section-banner">
         <div class="container">
             <a href="{{ theme('home_section_3.link') }}">
-                <img class="img-fluid lazy" data-src="{{ theme('home_section_3.image') }}" alt="Banner ảnh" />
+                @if(detectDevice() == 'desktop')
+                    <img class="img-fluid lazy" data-src="{{ theme('home_section_3.image') }}" alt="Banner ảnh" />
+                @else
+                    <img class="img-fluid lazy" data-src="{{ theme('home_section_3.mobile') }}" alt="Banner ảnh" />
+                @endif
             </a>
         </div>
     </section>
@@ -40,6 +45,7 @@
 
     @include('themes.kangen.components.product-slider', [
         'title' => $section_4->name, 
+        'url' => $section_4->link(), 
         'products' => $section_4->products->take(8)
     ])
 
@@ -50,6 +56,7 @@
 
     @include('themes.kangen.components.product-slider', [
         'title' => $section_5->name, 
+        'url' => $section_5->link(), 
         'products' => $section_5->products->take(8)
     ])
 
@@ -75,6 +82,7 @@
                                     <div class="play-button"></div>
                                 </div>
                             </div>
+                            <div class="youtube-main-title">{{ $youtube[0]['title'] }}</div>
                         </div>
                         <div class="col-12 col-sm-4 p-0 mt-mb-4">
                             <div class="collect-youtube">
@@ -140,32 +148,32 @@
                         <div class="img">
                             <img class="img-fluid lazy" data-src="{{ asset($section_7[0]['image']) }}" alt="{{ $section_7[0]['title'] }}"/>
                         </div>
+                        <div class="info-logo">
+                            <img class="img-fluid lazy" data-src="{{ asset($section_7[0]['logo']) }}" alt="{{ $section_7[0]['title'] }}"/>
+                        </div>
                     </div>
-                    <div class="col-12 col-sm-6">
+                    <div class="col-12 col-sm-6 align-self-center">
                         <div class="info">
                             <h4>{{ $section_7[0]['title'] }}</h4>
                             <p>{{ $section_7[0]['content'] }}</p>
-                        </div>
-                        <div class="info-logo">
-                            <img class="img-fluid lazy" data-src="{{ asset($section_7[0]['logo']) }}" alt="{{ $section_7[0]['title'] }}"/>
                         </div>
                         <a href="#" class="btn read-more mt-4"><i class="feather icon-chevrons-right"></i> Xem thông tin</a>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-12 col-sm-6">
+                    <div class="col-12 col-sm-6 align-self-center">
                         <div class="info mt-5">
                             <h4>{{ $section_7[1]['title'] }}</h4>
                             <p>{{ $section_7[1]['content'] }}</p>
-                        </div>
-                        <div class="info-logo">
-                            <img class="img-fluid lazy" data-src="{{ asset($section_7[1]['logo']) }}" alt="{{ $section_7[1]['title'] }}"/>
                         </div>
                         <a href="#" class="btn read-more mt-4"><i class="feather icon-chevrons-right"></i> Xem thông tin</a>
                     </div>
                     <div class="col-12 col-sm-6">
                         <div class="img">
                             <img class="img-fluid lazy" data-src="{{ asset($section_7[1]['image']) }}" alt="{{ $section_7[1]['title'] }}"/>
+                        </div>
+                        <div class="info-logo">
+                            <img class="img-fluid lazy" data-src="{{ asset($section_7[1]['logo']) }}" alt="{{ $section_7[1]['title'] }}"/>
                         </div>
                     </div>
                 </div>
@@ -176,7 +184,11 @@
     <section class="section-banner">
         <div class="container">
             <a href="{{ theme('home_section_8.link') }}">
-                <img class="img-fluid lazy" data-src="{{ theme('home_section_8.image') }}" alt="Banner ảnh 2" />
+                @if(detectDevice() == 'desktop')
+                    <img class="img-fluid lazy" data-src="{{ theme('home_section_8.image') }}" alt="Banner ảnh 2" />
+                @else
+                    <img class="img-fluid lazy" data-src="{{ theme('home_section_8.mobile') }}" alt="Banner ảnh 2" />
+                @endif
             </a>
         </div>
     </section>

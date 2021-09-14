@@ -94,14 +94,31 @@
                                 <div class="card">
                                     <div class="card-block">
                                         <h4 class="sub-title">Section 3 (Banner Ảnh)</h4>
-                                        <input type="hidden" name="home_section_3[0][image]" value="{{ theme('home_section_3.image') ?: '' }}" />
+                                        <input 
+                                            type="hidden" 
+                                            name="home_section_3[0][image]" 
+                                            value="{{ theme('home_section_3.image') ?: '' }}" 
+                                        />
                                         <x-upload-file
                                             type="long"
-                                            title="Ảnh banner" 
+                                            title="Desktop" 
                                             name="home_section_3[0][image]"
                                             image="{{ theme('home_section_3.image') }}"
                                             width="500px" 
                                             note="(1000px x 185px)"
+                                        />
+                                        <input 
+                                            type="hidden" 
+                                            name="home_section_3[0][mobile]" 
+                                            value="{{ theme('home_section_3.mobile') ?: '' }}" 
+                                        />
+                                        <x-upload-file
+                                            type="long"
+                                            title="Mobile" 
+                                            name="home_section_3[0][mobile]"
+                                            image="{{ theme('home_section_3.mobile') }}"
+                                            width="250px" 
+                                            note="(400px x 340px)"
                                         />
                                         <x-input 
                                             type="text" 
@@ -293,11 +310,24 @@
                                         />
                                         <x-upload-file
                                             type="long"
-                                            title="Ảnh banner" 
+                                            title="Desktop" 
                                             name="home_section_8[0][image]"
                                             image="{{ theme('home_section_8.image') }}"
                                             width="500px" 
                                             note="(1000px x 185px)"
+                                        />
+                                        <input 
+                                            type="hidden" 
+                                            name="home_section_8[0][mobile]" 
+                                            value="{{ theme('home_section_8.mobile') ?: '' }}" 
+                                        />
+                                        <x-upload-file
+                                            type="long"
+                                            title="Mobile" 
+                                            name="home_section_8[0][mobile]"
+                                            image="{{ theme('home_section_8.mobile') }}"
+                                            width="250px" 
+                                            note="(400px x 340px)"
                                         />
                                         <x-input 
                                             type="text" 

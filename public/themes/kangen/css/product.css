@@ -55,12 +55,13 @@
 }
 
 .product-item .product-info{
-    padding: 15px;
+    padding: 8px;
 }
 
 .product-item .product-title a{
     color: #333;
     font-weight: 600;
+    font-size: 14px;
 }
 
 .product-item .product-title a:hover{
@@ -95,7 +96,7 @@
     color: #fff;
     display: block;
     margin:0 auto;
-    margin-top: 15px;
+    margin-top: 10px;
     width: fit-content;
 }
 

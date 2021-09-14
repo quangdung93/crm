@@ -10,6 +10,11 @@
             <div class="sliders row" data-slick='{"dots": false, "pauseOnHover": true, "infinite": true, "slidesToShow": 4, "slidesToScroll": 4, "speed": 600, "arrows": false, "autoplay": false, "autoplaySpeed": 3000, "swipe": true, "draggable": true, "rtl": false,  "responsive": [ {"breakpoint": 1100, "settings": { "slidesToShow": 4 } }, {"breakpoint": 990, "settings": { "slidesToShow": 2 } }, {"breakpoint": 650, "settings": { "slidesToShow": 2, "dots": false, "arrows": false } } ] }'>
                 {!! product_template($products) !!}
             </div>
+            @if(isset($url))
+                <div class="text-center">
+                    <a href="{{ url($url) }}" class="btn read-more">Xem thêm <i class="feather icon-chevrons-right"></i></a>
+                </div>
+            @endif
         </div>
     </div>
 </section>

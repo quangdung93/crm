@@ -113,7 +113,7 @@
                     {!! $product->content !!}
                 </div>
                 <div class="text-center">
-                    <a href="#" class="btn bg-kangen mt-4 show-all"><span>Xem thêm</span> <i class="feather icon-chevrons-down"></i></a>
+                    <a href="#" id="btn-toggle-content" class="btn bg-kangen mt-4"><span>Xem thêm</span> <i class="feather icon-chevrons-down"></i></a>
                 </div>
             </div>
 
@@ -121,7 +121,10 @@
 
             @include('themes.kangen.components.installment')
 
-            @include('themes.kangen.components.product-slider', ['title' => 'SẢN PHẨM TƯƠNG TỰ', 'products' => $productRelated])
+            @include('themes.kangen.components.product-slider', [
+                'title' => 'SẢN PHẨM TƯƠNG TỰ', 
+                'products' => $productRelated
+            ])
         </div>
     </div>
 @endsection
