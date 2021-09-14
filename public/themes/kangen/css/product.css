@@ -47,6 +47,7 @@
 .product-item .product-title{
     text-align: center;
     height: 40px;
+    margin: 0;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -161,7 +162,7 @@
     color: #bd0303;
 }
 
-.product-detail-info .product-name h3{
+.product-detail-info .product-name h2{
     font-size: 1.5rem;
 }
 

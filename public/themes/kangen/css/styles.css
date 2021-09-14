@@ -1041,3 +1041,22 @@ blockquote:before {
     font-size: 17px;
     color: var(--primary);
 }
+
+.flash-text {
+    color: #fd0;
+    animation: blinkMe .8s linear infinite;
+}
+@keyframes blinkMe {
+0% {
+    opacity: 1;
+    color: #fd0;
+}
+50% {
+    opacity: 0.5;
+    color: #fff;
+}   
+100% {
+    opacity: 1;
+    color: #fd0;
+}
+}

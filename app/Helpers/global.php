@@ -154,9 +154,9 @@ if (!function_exists('product_template')){
 					'.$discount.'
 				</div>
 				<div class="product-info">
-					<div class="product-title">
+					<h3 class="product-title">
 						<a href="'.url($item->link()).'">'.$item->name.'</a>
-					</div>
+					</h3>
 					<div class="product-price">
 						'.$priceOld.'
 						<span class="price-new">'.number_format($item->price).' đ</span>

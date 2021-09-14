@@ -30,7 +30,7 @@
                 </a>
             </div>
             <div class="btn btn-kangen hidden-mb ml-5"><a class="text-white" href="tel:{{ str_replace('.','', setting('site_phone')) }}">Hotline: {{ setting('site_phone') }}</a></div>
-            <div class="btn btn-kangen hidden-mb ml-4"><a class="text-white" href="{{ setting('site_installment_link') }}">Trả góp 0%</a></div>
+            <div class="btn btn-kangen hidden-mb ml-4"><a class="flash-text" href="{{ setting('site_installment_link') }}">Trả góp 0%</a></div>
             <div class="icon-menu-mobile"><i class="feather icon-menu"></i></div>
         </div>
     </div>

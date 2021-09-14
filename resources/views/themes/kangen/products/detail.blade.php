@@ -31,7 +31,7 @@
                                 <span><i class="feather icon-chevrons-right"></i></span>
                                 <span><a href="{{ theme('product_question.link') }}">{{ theme('product_question.title') }}</a></span>
                             </div>
-                            <div class="product-name"><h3>{{ $product->name }}</h3></div>
+                            <div class="product-name"><h2>{{ $product->name }}</h2></div>
                             <div class="product-price">
                                 <div class="price-old">{{ number_format($product->price_old) }} đ</div>
                                 <div class="price-discount">
