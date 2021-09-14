@@ -16,7 +16,7 @@ return [
             'title' => 'Sản phẩm'
         ],
         'post' => [
-            'slug' => 'tin-tuc',
+            'slug' => 'kinh-nghiem-hay',
             'title' => 'Kinh nghiệm hay'
         ]
     ]
