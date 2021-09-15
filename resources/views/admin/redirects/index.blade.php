@@ -34,8 +34,8 @@
                                     @if($redirects)
                                         @foreach($redirects as $row)
                                             <tr>
-                                                <td><a href="{{ url($row->from_url) }}" target="_blank">{{ $row->from_url }}</a></td>
-                                                <td><a href="{{ url($row->to_url) }}" target="_blank">{{ $row->to_url }}</a></td>
+                                                <td style="width:40%; text-align:left"><a href="{{ url($row->from_url) }}" target="_blank">{{ $row->from_url }}</a></td>
+                                                <td style="width:40%; text-align:left"><a href="{{ url($row->to_url) }}" target="_blank">{{ $row->to_url }}</a></td>
                                                 <td>
                                                     @can('edit_redirects')
                                                     <a class="btn btn-primary" href="{{url($routeName.'/edit/'.$row->id)}}" title="Chỉnh sửa"> <i class="feather icon-edit-1 "></i></a>
