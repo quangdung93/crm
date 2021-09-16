@@ -405,6 +405,10 @@
 	.section-contact .section-title h3 a{
 		font-size: 21px;
 	}
+
+	.hotline-bar{
+		display: none;
+	}
 }
 
 /* END 768*/

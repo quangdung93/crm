@@ -142,6 +142,25 @@
     </div>
 </footer>
 
+@if(setting('site_phone'))
+<div class="hotline-phone-ring-wrap">
+    <div class="hotline-phone-ring">
+        <div class="hotline-phone-ring-circle"></div>
+        <div class="hotline-phone-ring-circle-fill"></div>
+        <div class="hotline-phone-ring-img-circle">
+            <a href="tel:{{ str_replace('.','', setting('site_phone')) }}" class="pps-btn-img">
+                <img class="lazy" data-src="{{ asset('themes/kangen/images/icon-call.png') }}" alt="Gọi điện thoại" width="50">
+            </a>
+        </div>
+    </div>
+    <div class="hotline-bar">
+        <a href="tel:{{ str_replace('.','', setting('site_phone')) }}">
+            <span class="text-hotline">{{ setting('site_phone') }}</span>
+        </a>
+    </div>
+</div>
+@endif
+
 <section class="footer-bottom">
     <div class="container">
         <div class="payment-icon text-center">
