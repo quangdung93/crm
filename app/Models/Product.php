@@ -41,7 +41,7 @@ class Product extends Model
     }
 
     public function handleContent(){
-        $this->body = ShortcodeHelper::renderFromContent($this->body);
+        $this->content = ShortcodeHelper::renderFromContent($this->content);
         //Lazyload image in body content 
         $this->content = str_replace('src','data-src',$this->content);
     }

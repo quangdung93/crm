@@ -101,6 +101,7 @@ function tinyMceProductSlider(listSliderName){
 //Init TinyMCE editor
 tinymce.init({
     selector: "textarea.tinymce",
+    content_css: URL_MAIN + "admin/css/tinymce.css",
     min_height: 500,
     plugins: [
         "advlist autolink link image lists charmap print preview hr pagebreak",

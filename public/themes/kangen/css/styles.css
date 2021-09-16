@@ -1242,4 +1242,12 @@ color: #fff;
 }
 }
 /*END*/
-  
+
+.question-answer .card-header{
+    padding: 0;
+    border: 0;
+}
+
+.question-answer .card{
+    margin-bottom: 10px;
+}

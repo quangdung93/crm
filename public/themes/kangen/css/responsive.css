@@ -17,6 +17,11 @@
 	.icon-menu-mobile{
 		display: none !important;
 	}
+
+	.question-answer{
+		width: 70%;
+		margin: 20px auto
+	}
 }
 
 @media screen and (min-width:1024px) {
