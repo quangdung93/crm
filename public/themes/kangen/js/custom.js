@@ -33,19 +33,16 @@ $('.cusomter-slider').slick({
 });
 
 
-if($(window).width() > 1024){
-    var headerHeight = $('#header').outerHeight() - 10;
-
-    $(document).scroll(function(){
-        var scroll = $(window).scrollTop();
-        if(scroll >= headerHeight){
-            $('#header').addClass('fixed-header', 300 , "easeIn");
-        }
-        else{
-            $('#header').removeClass('fixed-header', 300 , "easeIn");
-        }
-    });
-}
+var headerHeight = $('#header').outerHeight() - 10;
+$(document).scroll(function(){
+    var scroll = $(window).scrollTop();
+    if(scroll >= headerHeight){
+        $('#header').addClass('fixed-header', 300 , "easeIn");
+    }
+    else{
+        $('#header').removeClass('fixed-header', 300 , "easeIn");
+    }
+});
 
 
 //Icon Menu Mobile Click
