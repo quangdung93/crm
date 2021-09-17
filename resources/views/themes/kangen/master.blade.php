@@ -25,7 +25,7 @@
     <meta property="twitter:description" content="{{ $metaData['description'] ?? setting('site_description') }}" />
 
     {{-- Styles --}}
-    <link rel="stylesheet" type="text/css" href="{{ asset('themes/kangen/css/app.min.css') }}"> 
+    <link rel="stylesheet" type="text/css" href="{{ mix('themes/kangen/css/app.min.css') }}"> 
     {{-- <link rel="stylesheet" type="text/css" href="{{ asset('themes/kangen/css/styles.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('themes/kangen/css/product.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('themes/kangen/css/post.css') }}">
@@ -39,7 +39,7 @@
 </head>
 <body>
     @yield('body')
-    <script src="{{ asset('themes/kangen/js/app.min.js') }}"></script>
+    <script src="{{ mix('themes/kangen/js/app.min.js') }}"></script>
     {{-- <script src="{{ asset('themes/kangen/js/custom.js') }}"></script> --}}
     {{-- <script src="{{ asset('themes/kangen/js/cart.js') }}"></script> --}}
     {{-- Option scripts --}}

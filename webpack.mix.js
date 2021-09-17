@@ -136,10 +136,10 @@ mix.styles([
 
 //     ], 'public/admin/js/vendor.min.js');
 
-// if(mix.inProduction()){
-//     mix.version()
-// }else{
-//     mix.sourceMaps()
-// }
+if(mix.inProduction()){
+    mix.version()
+}else{
+    mix.sourceMaps()
+}
 
 mix.disableNotifications();
