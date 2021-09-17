@@ -143,7 +143,7 @@ if (!function_exists('product_template')){
 			$discount = $priceOld = '';
 			if($item->discount > 0){
 				$discount = '<div class="discount">-'.round($item->discount, 1).'%</div>';
-				$priceOld = '<span class="price-old">'.number_format($item->price_old).' đ</span>';
+				$priceOld = '<span class="price-old">'.number_format($item->price_old).'đ</span>';
 			}
 			
 			$html .= '<div class="product-item">
@@ -159,7 +159,7 @@ if (!function_exists('product_template')){
 					</h3>
 					<div class="product-price">
 						'.$priceOld.'
-						<span class="price-new">'.number_format($item->price).' đ</span>
+						<span class="price-new">'.number_format($item->price).'đ</span>
 					</div>
 					<div class="note-price">(Giá chưa bao gồm VAT)</div>
 					<div class="btn add-cart-product-temp" data-id="'.$item->id.'">Thêm vào giỏ hàng</div>

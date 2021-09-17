@@ -237,6 +237,8 @@
 
 	.product-price{
 		text-align: center;
+		font-size: 12px;
+		white-space: nowrap;
 	}
 
 	.section-solution .content .info h4{
