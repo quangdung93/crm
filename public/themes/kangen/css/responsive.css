@@ -310,7 +310,7 @@
 
 	.product-item .product-img img{
 		height: auto;
-		min-height: 200px;
+		min-height: auto;
 	}
 
 	.main-banner{
