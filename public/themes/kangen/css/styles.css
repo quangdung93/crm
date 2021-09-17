@@ -4,9 +4,13 @@
     --red: #bd0303;
 }
 
-body{
+body {
     font-size: 14px;
     overflow-x: hidden;
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 input[type='email']:focus, input[type='search']:focus, 
@@ -368,7 +372,7 @@ header{
 }
 
 .collect-youtube{
-    max-height: 440px;
+    max-height: 380px;
     overflow-y: scroll;
 }
 

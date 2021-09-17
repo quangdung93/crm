@@ -85,6 +85,9 @@
                             <div class="youtube-main-title">{{ $youtube[0]['title'] }}</div>
                         </div>
                         <div class="col-12 col-sm-4 p-0 mt-mb-4">
+                            <div class="text-center">
+                                <div class="btn bg-kangen mb-2">Click bên dưới để xem thêm video <i class="animated backInDown feather icon-chevrons-down"></i></div>
+                            </div>
                             <div class="collect-youtube">
                                 @foreach($youtube as $value)
                                     <a href="#" class="youtube-item {{ $loop->first ? 'active' : '' }}">
