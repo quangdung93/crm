@@ -4,7 +4,7 @@
     --red: #bd0303;
 }
 
-body {
+html, body {
     font-size: 14px;
     overflow-x: hidden;
     width: 100%;
