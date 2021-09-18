@@ -209,7 +209,7 @@
                     @foreach($newPosts as $post)
                         <div class="item">
                             <div class="news-info">
-                                <h4><a href="#">{{ $post->name }}</a></h4>
+                                <h4><a href="{{ url($post->link()) }}">{{ $post->name }}</a></h4>
                                 <p>{!! post_excerpt($post->body, 50) !!}</p>
                                 <a href="{{ url($post->link()) }}" class="btn read-more mt-4"><i class="feather icon-chevrons-right"></i> Xem thêm</a>
                             </div>
@@ -355,7 +355,7 @@
                 <div class="cusomter-slider">
                     <div class="item">
                         <div class="image">
-                            <img class="img-fuild lazy" data-src="https://kangenvietnam.vn/wp-content/uploads/2018/02/ts-ngo-duc-vuong-150x150.jpg" alt="" />
+                            <img class="img-fuild lazy" data-src="https://kangenvietnam.vn/uploads/2018/02/ts-ngo-duc-vuong-150x150.jpg" alt="" />
                         </div>
                         <div class="info">Nước kiềm Kangen của tập toàn Enagic là nguồn nước hỗ trợ chữa bệnh cho tôi. Nguồn nước Kangen có tính dương nên khi uống sẽ quân bình tính âm trong cơ thể bạn. Tôi khuyên dùng trong việc điều trị chữa bệnh và dưỡng sinh.</div>
                         <div class="customer-name">
@@ -365,7 +365,7 @@
                     </div>
                     <div class="item">
                         <div class="image">
-                            <img class="img-fuild lazy" data-src="https://kangenvietnam.vn/wp-content/uploads/2018/07/bac-si-tien-si-HIROMI-SHINYA-150x150.jpg" alt="" />
+                            <img class="img-fuild lazy" data-src="https://kangenvietnam.vn/uploads/2018/07/bac-si-tien-si-HIROMI-SHINYA-150x150.jpg" alt="" />
                         </div>
                         <div class="info">Với 6 - 10 ly nước Kangen 9.5 mỗi ngày sẽ giúp cơ thể loại bỏ được một lượng axit gây hại trong cơ thể. Nước Kangen giúp tăng lượng hồng huyết cầu lên não giúp phòng chống được bệnh tai biến mạch mãu não và đột quỵ.</div>
                         <div class="customer-name">
