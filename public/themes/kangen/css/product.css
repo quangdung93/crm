@@ -47,6 +47,7 @@
 .product-item .product-title{
     text-align: center;
     height: 40px;
+    line-height: 16px;
     margin: 0;
     overflow: hidden;
     text-overflow: ellipsis;
