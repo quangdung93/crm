@@ -1,4 +1,6 @@
-﻿@font-face {
+﻿.d2211xgicon{}
+
+@font-face {
   font-family: "feather";
   src: url('../fonts/feather.hxd'); /* IE9*/
   src: url('../fonts/feather.hxd') format('embedded-opentype'), /* IE6-IE8 */

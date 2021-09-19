@@ -20,6 +20,10 @@ class Post extends Model
         return $this->belongsToMany(PostCategory::class, 'post_category');
     }
 
+    public function comments(){
+        return $this->morphMany(Comment::class, 'commentable')->where('status', 1);
+    }
+
     public function scopeActive($query){
         return $query->where('status', 1);
     }

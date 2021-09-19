@@ -12,4 +12,14 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     use UploadImage;
+
+    protected function responseJson($status = true, $message, $data = null){
+        $response = [
+            'status' => $status,
+            'message' => $message,
+            'data' => $data
+        ];
+
+        return response()->json($response);
+    } 
 }

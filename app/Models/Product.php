@@ -32,6 +32,10 @@ class Product extends Model
         return $this->morphMany(Image::class, 'imageable')->orderBy('sequence');
     }
 
+    public function comments(){
+        return $this->morphMany(Comment::class, 'commentable')->where('status', 1);
+    }
+
     public function scopeActive($query){
         return $query->where('status', 1);
     }

@@ -31,6 +31,8 @@
                                 </div>
                             </div>
                         </div>
+                        {{-- Comment --}}
+                        @include('themes.kangen.components.comments', ['model' => $post])
                     </div>
                     <div class="col-sm-3">
                         <div class="siderbar posts">

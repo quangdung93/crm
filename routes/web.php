@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\ImageController;
 use App\Http\Controllers\Admin\MediaController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ThemeController;
+use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Site\CheckoutController;
@@ -235,6 +236,14 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'], function () {
         Route::get('/delete/{id}', [CustomerController::class, 'destroy'])->middleware('can:delete_customers');
     });
 
+    //Comment
+    Route::group(['prefix' => 'comments', 'middleware' => ['can:read_comments']], function () {
+        Route::get('/', [CommentController::class, 'index'])->name('comments.index');
+        Route::post('/edit', [CommentController::class, 'edit'])->name('comments.edit')
+        ->middleware('can:edit_comments');
+        Route::get('/delete/{id}', [CommentController::class, 'delete'])->middleware('can:delete_comments');
+    });
+
     Route::get('cache', function(){
         Cache::flush();
         return 'Cache clear';
@@ -258,6 +267,11 @@ Route::group(['prefix' => 'checkout'], function () {
     Route::post('/', [CheckoutController::class, 'store'])->name('checkout.store');
     Route::get('load', [CheckoutController::class, 'load'])->name('checkout.load');
     Route::get('success/{order_id}', [CheckoutController::class, 'thanksPage'])->name('checkout.success');
+});
+
+//Checkout
+Route::group(['prefix' => 'comments'], function () {
+    Route::post('/create', [App\Http\Controllers\Site\CommentController::class, 'create'])->name('comments.create');
 });
 
 Route::post('register', [App\Http\Controllers\Site\CustomerController::class, 'register'])->name('register.form');

@@ -25,6 +25,9 @@
                         </div>
                     </div>
                 </div>
+                {{-- Comment --}}
+                @include('themes.kangen.components.comments', ['model' => $page])
+
                 {!! shortcode('thongtin') !!}
             </div>
         </div>

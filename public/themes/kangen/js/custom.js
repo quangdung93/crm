@@ -145,3 +145,31 @@ $('#search-input').keypress(function (event) {
         window.location.href = '/tim-kiem?key=' + value;
     }
 });
+
+// Comment
+$(document).on('submit', '#comment-form', function(e){
+    e.preventDefault();
+    let self = $(this);
+    let url = $(this).data('action');
+    let phone = $(this).find('input[name="phone"]').val();
+
+    if(!checkPhoneNumber(phone)){
+        alert('Số điện thoại không hợp lệ');
+        return;
+    }
+
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        method: 'POST',
+        url: url,
+        data: $(this).serialize(),
+        success: function (response) {
+            if (response.status) {
+                alert(response.message);
+                self[0].reset();
+            }
+        }
+    });
+});

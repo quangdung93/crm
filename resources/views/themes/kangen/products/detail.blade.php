@@ -117,6 +117,9 @@
                 </div>
             </div>
 
+            {{-- Comment --}}
+            @include('themes.kangen.components.comments', ['model' => $product])
+
             {!! shortcode('thongtin') !!}
 
             @include('themes.kangen.components.installment')

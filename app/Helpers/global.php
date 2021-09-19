@@ -226,3 +226,12 @@ function detectDevice()
         return 'desktop';
     }
 }
+
+if(!function_exists('getAgoTime')){
+	function getAgoTime($date){
+		Carbon::setLocale('vi');
+	    $dt = Carbon::createFromFormat('Y-m-d H:i:s', $date);
+	    $now = Carbon::now();
+	    return $dt->diffForHumans($now); 
+	}
+}
