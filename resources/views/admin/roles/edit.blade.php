@@ -3,6 +3,9 @@
     $pageName = 'Phân quyền';
     $routeName = getCurrentSlug();
 @endphp
+@section('styles')
+    <link rel="stylesheet" type="text/css" href="{{asset('admin/assets\icon\icofont\css\icofont.css')}}">
+@endsection
 @section('title', $pageName)
 @section('content')
     @include('admin.components.page-header')
@@ -56,11 +59,31 @@
                                             @foreach($permissions as $key => $permission)
                                                 <tr>
                                                     <td>{{ $loop->iteration }}</td>
-                                                    <td>{{ $key }}</td>
+                                                    <td class="text-capitalize">{{ $key }}</td>
                                                     @foreach($permission as $value)
-                                                        <td><input type="checkbox" name="permission[{{ $value->id }}]" id="{{ $value->name }}" class="checkbox-item" {{ $role->permissions->pluck('id')->contains($value->id) ? 'checked' : '' }}/></td>
+                                                        <td class="text-center">
+                                                            <div class="checkbox-zoom zoom-primary m-0">
+                                                                <label>
+                                                                    <input type="checkbox" name="permission[{{ $value->id }}]" id="{{ $value->name }}" class="checkbox-item" {{ $role->permissions->pluck('id')->contains($value->id) ? 'checked' : '' }}>
+                                                                    <span class="cr">
+                                                                        <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
+                                                                    </span>
+                                                                    {{-- <span>Primary</span> --}}
+                                                                </label>
+                                                            </div>
+                                                        </td>
+                                                        {{-- <td><input type="checkbox" name="permission[{{ $value->id }}]" id="{{ $value->name }}" class="checkbox-item" {{ $role->permissions->pluck('id')->contains($value->id) ? 'checked' : '' }}/></td> --}}
                                                     @endforeach
-                                                    <td><input type="checkbox" class="check-all"/></td>
+                                                    <td class="text-center">
+                                                        <div class="checkbox-zoom zoom-danger m-0">
+                                                            <label>
+                                                                <input type="checkbox" class="check-all">
+                                                                <span class="cr">
+                                                                    <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
+                                                                </span>
+                                                            </label>
+                                                        </div>
+                                                    </td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
