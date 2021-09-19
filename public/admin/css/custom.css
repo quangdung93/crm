@@ -247,3 +247,14 @@ input[type=file]{
     -webkit-box-orient: vertical;
 }
 
+.zoom-primary .cr{
+    border-color: var(--primary) !important;
+}
+
+.zoom-primary .cr .cr-icon{
+    color: var(--primary) !important;
+}
+
+.cr{
+    border-radius: 3px !important;
+}
