@@ -31,7 +31,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('themes/kangen/css/post.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('themes/kangen/css/responsive.css') }}"> --}}
     @yield('styles')
-    
+    @yield('schema')
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <script type="text/javascript">
         var BASE_URL = '{{ asset('') }}';

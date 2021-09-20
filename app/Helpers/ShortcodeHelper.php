@@ -21,7 +21,7 @@ class ShortcodeHelper{
     }
 
     public static function renderByKey($key){
-        $shortcode = Shortcode::where('key', $key)->first();
-        return $shortcode->value ?: '';
+        $shortcode = Shortcode::where('key', $key)->active()->first();
+        return $shortcode->value ?? '';
     }
 }

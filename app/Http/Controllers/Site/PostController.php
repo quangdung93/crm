@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Site;
 
+use App\Helpers\SchemaHelper;
 use Illuminate\Http\Request;
 use App\Services\PostService;
 use App\Http\Controllers\Controller;
@@ -23,9 +24,14 @@ class PostController extends Controller
         //Get siderbar category
         $categorySiderbar = $this->postService->getCategorySiderBar();
         $postRelated = $this->postService->getPostRelated($post->categories->pluck('id')->toArray());
+        
+        //Schema
+        $schema = SchemaHelper::schemaPost($post);
+        
         return view('themes.kangen.posts.detail')
                 ->with([
                     'metaData' => $this->getMetaData($post),
+                    'schema' => $schema,
                     'post' => $post,
                     'categorySiderbar' => $categorySiderbar,
                     'postRelated' => $postRelated,

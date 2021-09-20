@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Site;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Helpers\SchemaHelper;
 use App\Services\ProductService;
 use App\Http\Controllers\Controller;
 
@@ -24,8 +25,13 @@ class ProductController extends Controller
     public function detail($product){
         $product->handleContent();
         $productRelated = $this->productService->getProductRelated($product->categories->pluck('id')->toArray());
+        
+        //Schema
+        $schema = SchemaHelper::schemaProduct($product);
+        
         return view('themes.kangen.products.detail')->with([
             'metaData' => $this->getMetaData($product),
+            'schema' => $schema,
             'product' => $product,
             'productRelated' => $productRelated,
         ]);

@@ -36,7 +36,7 @@
                                 type="short" 
                                 title="Trạng thái" 
                                 name="status" 
-                                checked="{{ !isset($page) ? 'true' : ($page->status ? 'true' : '') }}"/>
+                                checked="{{ !isset($shortcode) ? 'true' : ($shortcode->status ? 'true' : '') }}"/>
                             </div>
                         </div>
                     </div>

@@ -16,7 +16,7 @@ class ShortcodeController extends Controller
      */
     public function index()
     {
-        $shortcodes = Shortcode::active()->get();
+        $shortcodes = Shortcode::all();
         return view('admin.shortcodes.index')->with(['shortcodes' => $shortcodes]);
     }
 

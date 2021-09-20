@@ -1,5 +1,12 @@
 @extends('themes.kangen.body')
 @section('title', $post->seo_title ?: $post->name)
+@section('schema')
+    @if(!empty($schema))
+        <script type="application/ld+json">
+            {!! $schema !!}
+        </script>
+    @endif
+@endsection
 @section('content')
     <nav aria-label="breadcrumb">
         <div class="container">
