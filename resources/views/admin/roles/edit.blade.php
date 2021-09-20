@@ -46,8 +46,7 @@
                                     <table class="table stableweb-table center w100">
                                         <thead>
                                             <tr>
-                                                <th>STT</th>
-                                                <th>Tên quyền</th>
+                                                <th class="text-left">Tên quyền</th>
                                                 <th>Đọc</th>
                                                 <th>Thêm</th>
                                                 <th>Sửa</th>
@@ -58,8 +57,7 @@
                                         <tbody>
                                             @foreach($permissions as $key => $permission)
                                                 <tr>
-                                                    <td>{{ $loop->iteration }}</td>
-                                                    <td class="text-capitalize">{{ $key }}</td>
+                                                    <td class="text-capitalize text-left" style="width:15%">{{ $key }}</td>
                                                     @foreach($permission as $value)
                                                         <td class="text-center">
                                                             <div class="checkbox-zoom zoom-primary m-0">
