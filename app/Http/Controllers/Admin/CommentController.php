@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class CommentController extends Controller
 {
     public function index(){
-        $comments = Comment::with('commentable')->get();
+        $comments = Comment::with('commentable')->orderByDesc('created_at')->get();
         return view('admin.comments.index')->with(['comments' => $comments]);
     }
 
