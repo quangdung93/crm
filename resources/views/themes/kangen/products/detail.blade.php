@@ -108,6 +108,9 @@
                 </div>
             </div>
 
+            {{-- Rating --}}
+            @include('themes.kangen.components.rating', ['model' => $product])
+
             <div class="product-content">
                 <div class="content-detail height-fixed blur-content">
                     {!! $product->content !!}

@@ -1300,3 +1300,36 @@ color: #fff;
 }
 
 /* End Comment */
+
+
+/* Rating */
+
+.rating{
+    display: flex;
+    align-items: center;
+    margin: 15px 0;
+}
+
+.rating .star-box{
+    margin-right: 20px;
+}
+
+.rating .text{
+    font-weight: 600;
+    font-size: 17px;
+}
+
+.rating .star-box i{
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.rating .star-box i:hover{
+    color: #ffdd01;
+}
+
+.rating .star-box i.active{
+    color: #ffdd01;
+}
+
+/* End Rating */

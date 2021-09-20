@@ -269,9 +269,14 @@ Route::group(['prefix' => 'checkout'], function () {
     Route::get('success/{order_id}', [CheckoutController::class, 'thanksPage'])->name('checkout.success');
 });
 
-//Checkout
+//Comment
 Route::group(['prefix' => 'comments'], function () {
     Route::post('/create', [App\Http\Controllers\Site\CommentController::class, 'create'])->name('comments.create');
+});
+
+//Rating
+Route::group(['prefix' => 'ratings'], function () {
+    Route::post('/increment', [App\Http\Controllers\Site\RatingController::class, 'increment'])->name('ratings.increment');
 });
 
 Route::post('register', [App\Http\Controllers\Site\CustomerController::class, 'register'])->name('register.form');

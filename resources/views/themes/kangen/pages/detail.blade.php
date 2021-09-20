@@ -25,6 +25,9 @@
                         </div>
                     </div>
                 </div>
+                {{-- Rating --}}
+                @include('themes.kangen.components.rating', ['model' => $page])
+
                 {{-- Comment --}}
                 @include('themes.kangen.components.comments', ['model' => $page])
 
