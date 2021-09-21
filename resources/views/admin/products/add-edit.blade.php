@@ -87,7 +87,7 @@
                             </div>
                         </div>
                         @isset($product)
-                        <div class="card">
+                        <div class="card hidden">
                             <div class="card-block">
                                 <h4 class="sub-title">Hình ảnh</h4>
                                 <div class="row">
