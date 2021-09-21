@@ -55,6 +55,6 @@ class Setting extends Model
         $settings = Setting::orderBy('order')->pluck('value','key')->toArray();
         Cache::forever('settings', $settings);
     
-        return $settings[$key] ?: $default;
+        return @$settings[$key] ?: $default;
     }
 }

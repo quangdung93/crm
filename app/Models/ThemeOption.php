@@ -51,7 +51,7 @@ class ThemeOption extends Model
 
         if(is_array($data[$mainKey])){ 
             if(count($data[$mainKey]) === 1 && $subKey){ //Single array
-                return $data[$mainKey][0][$subKey]; // return string
+                return @$data[$mainKey][0][$subKey]; // return string
             }
 
             if(isset($data[$mainKey][0])){ //Check if is a nested array
@@ -59,7 +59,7 @@ class ThemeOption extends Model
             }
         }
 
-        return $data[$mainKey] ?: $default;
+        return @$data[$mainKey] ?: $default;
     }
 
     public function removeFromCache(){
