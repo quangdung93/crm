@@ -47,7 +47,10 @@ Route::post('/login', [LoginController::class, 'postLogin'])->name('login');
 //****************/ ADMIN /*********************
 
 Route::group(['prefix' => 'admin','middleware' => 'auth'], function () {
-    Route::redirect('/', 'admin/dashbroad', 301);
+    Route::get('/', function(){
+        return redirect('admin/dashbroad', 301);
+    });
+    
     Route::get('/dashbroad', [DashboardController::class, 'index'])->name('dashbroad');
     Route::get('/logout', [LoginController::class, 'logout']);
 
@@ -246,8 +249,8 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'], function () {
 
     Route::get('cache', function(){
         Cache::flush();
-        return 'Cache clear';
-    });
+        return back();
+    })->name('cache.clear');
 
 });
 

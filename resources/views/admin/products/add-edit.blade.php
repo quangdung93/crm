@@ -158,7 +158,9 @@
                                 title="Ảnh đại diện" 
                                 name="input_file"
                                 image="{{ $product->image ?? '' }}"
-                                width="100%"/>
+                                width="100%"
+                                note="(600px x 600px)"
+                                />
                             </div>
                         </div>
                     </div>

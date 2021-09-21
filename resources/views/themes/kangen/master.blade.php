@@ -9,10 +9,8 @@
     <meta name="robots" content="index, follow" />
     <meta name="description" content="{{ $metaData['description'] ?? setting('site_description') }}" />
     <meta name="keywords" content="{{ $metaData['keyword'] ?? setting('site_keyword') }}" />
-    <!-- Favicon icon -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" href="{{asset(setting('site_favicon'))}}" type="image/x-icon">
-    <!-- Google font-->
-    {{-- <link href="https://fonts.googleapis.com/css?family=Quicksand:400,500,600,700&amp;subset=vietnamese" rel="stylesheet"> --}}
     <meta property="og:image" content="{{ $metaData['image'] ?? asset(setting('thumbnail')) }}" />
     <meta property="og:title" content="{{ $metaData['title'] ?? setting('site_title') }}" />
     <meta property="og:url" content="{{ url()->current() }}" />
@@ -26,22 +24,35 @@
 
     {{-- Styles --}}
     <link rel="stylesheet" type="text/css" href="{{ mix('themes/kangen/css/app.min.css') }}"> 
-    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('themes/kangen/css/styles.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('themes/kangen/css/product.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('themes/kangen/css/post.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('themes/kangen/css/responsive.css') }}"> --}}
     @yield('styles')
+
+    {{-- Schema --}}
     @yield('schema')
-    <meta name="csrf-token" content="{{ csrf_token() }}">
     <script type="text/javascript">
         var BASE_URL = '{{ asset('') }}';
     </script>
+    @php
+        $google_analytics_id = setting('site_google_analytics_tracking_id');
+    @endphp
+    @if($google_analytics_id)
+    <script>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer', {{ $google_analytics_id }});
+    </script>
+    @endif
 </head>
 <body>
+    @if($google_analytics_id)
+        <noscript>
+            <iframe src="https://www.googletagmanager.com/ns.html?id={{ $google_analytics_id }}" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+        </noscript> 
+    @endif
     @yield('body')
     <script src="{{ mix('themes/kangen/js/app.min.js') }}"></script>
-    {{-- <script src="{{ asset('themes/kangen/js/custom.js') }}"></script> --}}
-    {{-- <script src="{{ asset('themes/kangen/js/cart.js') }}"></script> --}}
+
     {{-- Option scripts --}}
     @yield('javascript')
     @stack('javascript')

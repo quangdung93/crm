@@ -8,11 +8,15 @@
     @include('admin.components.page-header')
     <!-- Page-body start -->
     <div class="page-body">
-        @role(config('permission.role_dev'))
-            <div class="col-sm-12 mb-3">
-                <a href="#" id="add-setting" class="btn btn-primary"><i class="feather icon-plus-circle"></i> Thêm cấu hình</a>
+        <div class="row mb-3">
+            <div class="col-sm-12">
+                @role(config('permission.role_dev'))
+                    <a href="#" id="add-setting" class="btn btn-primary"><i class="feather icon-plus-circle"></i> Thêm cấu hình</a>
+                @endrole
+                <a href="{{ route('cache.clear') }}" class="btn btn-danger"><i class="feather icon-refresh-cw"></i> Xóa cache</a>
             </div>
-        @endrole
+        </div>
+
         <div class="panel-body">
             <form class="form-horizontal" action="{{url($routeName)}}" method="POST" role="form"
                 enctype="multipart/form-data">
@@ -48,13 +52,20 @@
                                                         :title="$setting->display_name" 
                                                         :name="$setting->key" 
                                                         value="{{ $setting->value ?? '' }}" />
+                                                    @elseif($setting->type == 'textarea')
+                                                        <x-textarea 
+                                                            type="" 
+                                                            :title="$setting->display_name" 
+                                                            :name="$setting->key" 
+                                                            value="{{ $setting->value ?? ''  }}" 
+                                                        />
                                                     @elseif($setting->type == 'image')
                                                         <x-upload-file
                                                         type="long"
                                                         :title="$setting->display_name" 
                                                         :name="$setting->key"
                                                         image="{{ $setting->value ?? '' }}"
-                                                        width="100px" />
+                                                        width="150px" />
                                                     @endif
                                                     @role(config('permission.role_dev'))
                                                         <div class="form-group row">
@@ -121,6 +132,7 @@
                         <label for="type">Loại cấu hình</label>
                         <select id="m_type" class="form-control" name="type">
                             <option value="text" selected="selected">Text</option>
+                            <option value="textarea">Textarea</option>
                             <option value="image">Image</option>
                             <option value="checkbox">Checkbox</option>
                             <option value="selectbox">Selectbox</option>
@@ -180,7 +192,7 @@
                         order: order,
                         _token: '{{ csrf_token() }}'
                     }, function (data) {
-                        data.status && pushNotify('Cập nhật thành công!', text = '', type = 'success');
+                        
                     });
                 }
             })
