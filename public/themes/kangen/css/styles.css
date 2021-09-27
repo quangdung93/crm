@@ -1347,16 +1347,23 @@ color: #fff;
     display: block;
     width: 40px;
     height: 40px;
-    background: red;
     color: #fff;
     font-size: 28px;
     text-align: center;
     border-radius: 5px;
-    margin-bottom: 5px
+    margin-bottom: 10px
 }
 
 .item-social.btn-facebook{
     background: #3b5998;
+}
+
+.item-social.btn-zalo{
+    background: transparent;
+}
+
+.item-social.btn-zalo img{
+    vertical-align: top;
 }
 
 .item-social.btn-google{

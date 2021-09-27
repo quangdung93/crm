@@ -422,13 +422,14 @@
 	.social {
 		left: 0;
 		top: unset;
-		bottom: 0;
+		bottom: 10px;
 		right: 10px;
 		text-align: right;
 	}
 
 	.social .item-social{
 		display: inline-block;
+		margin-left:10px
 	}
 }
 
