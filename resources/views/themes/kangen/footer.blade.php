@@ -84,5 +84,8 @@
     </div>
 </section>
 
+{{-- Social --}}
+@include('themes.kangen.components.social')
+
 {{--  Popup Cart --}}
 @include('themes.kangen.cart.popup')

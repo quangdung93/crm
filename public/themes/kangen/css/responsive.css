@@ -418,6 +418,18 @@
 	.hotline-bar{
 		display: none;
 	}
+
+	.social {
+		left: 0;
+		top: unset;
+		bottom: 0;
+		right: 10px;
+		text-align: right;
+	}
+
+	.social .item-social{
+		display: inline-block;
+	}
 }
 
 /* END 768*/
