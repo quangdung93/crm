@@ -43,9 +43,6 @@
         })(window,document,'script','dataLayer', {{ $google_analytics_id }});
     </script>
     @endif
-
-    {{-- Chat Script --}}
-    <script src="https://uhchat.net/code.php?f=cd62d4"></script>
 </head>
 <body>
     @if($google_analytics_id)
@@ -59,5 +56,8 @@
     {{-- Option scripts --}}
     @yield('javascript')
     @stack('javascript')
+
+    {{-- Chat Script --}}
+    <script src="https://uhchat.net/code.php?f=cd62d4"></script>
 </body>
 </html>
