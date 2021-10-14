@@ -17,15 +17,6 @@ class Product extends Model
     protected $guarded = [];
     protected $dates = ['deleted_at'];
 
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::addGlobalScope('sortProduct', function (Builder $builder) {
-            $builder->orderBy('created_at', 'DESC')->orderBy('sequence', 'ASC');
-        });
-    }
-
     public function category(){
         return $this->categories()->where('is_primary', 1);
     }
