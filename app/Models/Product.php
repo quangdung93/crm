@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Traits\LogActivity;
 use App\Helpers\ShortcodeHelper;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
@@ -15,6 +16,15 @@ class Product extends Model
 
     protected $guarded = [];
     protected $dates = ['deleted_at'];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope('sortProduct', function (Builder $builder) {
+            $builder->orderBy('created_at', 'DESC')->orderBy('sequence', 'ASC');
+        });
+    }
 
     public function category(){
         return $this->categories()->where('is_primary', 1);

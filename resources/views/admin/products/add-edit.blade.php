@@ -43,6 +43,7 @@
                                     selected="{{ $product->brand_id ?? '' }}"
                                 />
                                 <x-input type="text" title="Xuất xứ" name="origin" value="{{ $product->origin ?? ''  }}"/>
+                                <x-input type="text" title="Vị trí" name="sequence" value="{{ $product->sequence ?? ''  }}"/>
                             </div>
                         </div>
                         <div class="card">

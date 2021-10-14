@@ -64,6 +64,7 @@ class ProductController extends Controller
             'categories' => 'required',
             'brand_id' => 'required',
             'price' => 'required',
+            'sequence' => 'numeric',
         ],[
             'name.required' => 'Bạn chưa nhập tên bài viết',
             'slug.required' => 'Đường dẫn không được trống',
@@ -71,6 +72,7 @@ class ProductController extends Controller
             'categories.required' => 'Bạn chưa chọn danh mục',
             'brand_id.required' => 'Bạn chưa chọn thương hiệu',
             'price.required' => 'Bạn chưa nhập giá gốc',
+            'sequence.numeric' => 'Vị trí phải là số',
         ]);
 
         $price = (int)Str::replace(',','', $request->price);
@@ -161,6 +163,7 @@ class ProductController extends Controller
             'categories' => 'required',
             'brand_id' => 'required',
             'price' => 'required',
+            'sequence' => 'numeric',
         ],[
             'name.required' => 'Bạn chưa nhập tên bài viết',
             'slug.required' => 'Đường dẫn không được trống',
@@ -168,6 +171,7 @@ class ProductController extends Controller
             'categories.required' => 'Bạn chưa chọn danh mục',
             'brand_id.required' => 'Bạn chưa chọn thương hiệu',
             'price.required' => 'Bạn chưa nhập giá gốc',
+            'sequence.numeric' => 'Vị trí phải là số',
         ]);
 
         $product = Product::findOrFail($id);
