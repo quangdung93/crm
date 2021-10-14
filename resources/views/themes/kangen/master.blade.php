@@ -44,7 +44,7 @@
     </script>
     @endif
 
-    {{-- Chat --}}
+    {{-- Chat Script --}}
     <script src="https://uhchat.net/code.php?f=cd62d4"></script>
 </head>
 <body>
