@@ -1246,6 +1246,27 @@ color: #fff;
     -webkit-transform: rotate(0) scale(1) skew(1deg);
 }
 }
+
+.hotline-phone-ring-wrap.hotline{
+    bottom: 100px;
+}
+
+.hotline .hotline-phone-ring-circle{
+    border-color: #0662eb
+}
+
+.hotline .hotline-phone-ring-circle-fill{
+    background-color: rgb(6 108 235 / 70%);
+}
+
+.hotline .hotline-phone-ring-img-circle{
+    background-color: #0662eb;
+}
+
+.hotline .hotline-bar{
+    background: rgb(7 97 235);
+}
+
 /*END*/
 
 .question-answer .card-header{
