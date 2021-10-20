@@ -58,6 +58,8 @@
     @stack('javascript')
 
     {{-- Chat Script --}}
-    <script src="https://uhchat.net/code.php?f=cd62d4"></script>
+    @if(app()->environment() !== 'local')
+        <script src="https://uhchat.net/code.php?f=cd62d4"></script>
+    @endif
 </body>
 </html>
