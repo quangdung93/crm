@@ -91,10 +91,13 @@ class WordpressController extends Controller
             $metaKey = collect($metaData)->keyBy('meta_key')->toArray();
 
             $productSite = Product::where('slug', $product->post_name)->first();
-            $productSite->meta_title = $metaKey['rank_math_title']['meta_value'] ?? '';
-            $productSite->meta_description = $metaKey['rank_math_description']['meta_value'] ?? '';
-            $productSite->meta_keyword = $metaKey['rank_math_focus_keyword']['meta_value'] ?? '';
-            $productSite->save();
+
+            if($productSite){
+                $productSite->meta_title = $metaKey['rank_math_title']['meta_value'] ?? '';
+                $productSite->meta_description = $metaKey['rank_math_description']['meta_value'] ?? '';
+                $productSite->meta_keyword = $metaKey['rank_math_focus_keyword']['meta_value'] ?? '';
+                $productSite->save();   
+            }
         }
         
         echo 'DOne';
@@ -108,10 +111,13 @@ class WordpressController extends Controller
             $metaKey = collect($metaData)->keyBy('meta_key')->toArray();
 
             $postSite = \App\Models\Post::where('slug', $post->post_name)->first();
-            $postSite->seo_title = $metaKey['rank_math_title']['meta_value'] ?? '';
-            $postSite->meta_description = $metaKey['rank_math_description']['meta_value'] ?? '';
-            $postSite->meta_keywords = $metaKey['rank_math_focus_keyword']['meta_value'] ?? '';
-            $postSite->save();
+
+            if($postSite){
+                $postSite->seo_title = $metaKey['rank_math_title']['meta_value'] ?? '';
+                $postSite->meta_description = $metaKey['rank_math_description']['meta_value'] ?? '';
+                $postSite->meta_keywords = $metaKey['rank_math_focus_keyword']['meta_value'] ?? '';
+                $postSite->save();   
+            }
         }
         
         echo 'DOne';
