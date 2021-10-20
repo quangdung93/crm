@@ -7,8 +7,10 @@ use App\Models\Ward;
 use App\Models\Order;
 use App\Models\District;
 use App\Models\Province;
+use App\Jobs\SendMailOrder;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
 use Gloudemans\Shoppingcart\Facades\Cart;
 
 class CheckoutController extends Controller
@@ -36,8 +38,8 @@ class CheckoutController extends Controller
     }
 
     public function thanksPage($order_id){
-        $order = Order::where('id', $order_id)->type('order')->get();
-
+        $order = Order::where('id', $order_id)->type('order')->first();
+        
         //Set lifetime checkout sucess link
         if(Carbon::now() > Carbon::parse($order->created_at)->addMinutes(5)){
             return abort('404');
@@ -162,6 +164,11 @@ class CheckoutController extends Controller
 
         //Save Order Detail
         $order->detail()->attach($orderDetail);
+
+        //Send mail order
+        $this->sendMailOrder($orderId);
+        
+        //Remove Cart
         Cart::destroy();
 
         $response = [
@@ -171,5 +178,27 @@ class CheckoutController extends Controller
         ];
 
         return $response;
+    }
+
+    public function sendMailOrder($orderId){
+        $mailOrder = setting('site_order_mail');
+
+        if(trim($mailOrder) !== ''){
+            $orderObj = Order::find($orderId)->load('detail');
+
+            $data = [
+                'mail_to' => $mailOrder,
+                'order' => $orderObj
+            ];
+
+            if(!empty($data['order'])){
+                // SendMailOrder::dispatch($data);
+                Mail::send('themes.kangen.mail.mail-order', $data, 
+                    function($message) use ($data){
+                        $message->to($data['mail_to']);
+                        $message->subject('[Đơn Hàng] Thông Tin Đơn Hàng Mới - ngày '.date('d/m/Y' ,strtotime($data['order']->created_at)). ' lúc '.date('H:i' ,strtotime($data['order']->created_at)));
+                });
+            }
+        }
     }
 }

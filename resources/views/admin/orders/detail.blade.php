@@ -94,6 +94,11 @@
                         </div>
                     </div>
                 </div>
+                @can('delete_orders')
+                    <div class="text-center">
+                        <a class="btn btn-danger" href="/admin/orders/delete/{{ $order->id }}" title="Xem chi tiết"> <i class="feather icon-trash-2"></i> Xóa đơn hàng</a>
+                    </div>
+                @endcan
             </div>
         </div>
     </div>

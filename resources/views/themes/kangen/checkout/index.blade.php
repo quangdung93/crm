@@ -146,8 +146,8 @@
                 return;
             }
             else{
-                $('#btn-checkout > span').text('Đang xử lý');
-                $('.main-content').addClass('prevent-events');
+                $('#btn-checkout').text('Đang xử lý...');
+                $('.checkout-wrapper').addClass('prevent-event');
                 $.ajax({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

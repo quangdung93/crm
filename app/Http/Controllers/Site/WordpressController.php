@@ -83,6 +83,40 @@ class WordpressController extends Controller
         return true;
     }
 
+    //Update Meta SEO Product
+    public function getMetaSEOProduct(){
+        $products = ProductCorcel::all();
+        foreach($products as $product){
+            $metaData = $product->meta->toArray();
+            $metaKey = collect($metaData)->keyBy('meta_key')->toArray();
+
+            $productSite = Product::where('slug', $product->post_name)->first();
+            $productSite->meta_title = $metaKey['rank_math_title']['meta_value'] ?? '';
+            $productSite->meta_description = $metaKey['rank_math_description']['meta_value'] ?? '';
+            $productSite->meta_keyword = $metaKey['rank_math_focus_keyword']['meta_value'] ?? '';
+            $productSite->save();
+        }
+        
+        echo 'DOne';
+    }
+
+    //Update Meta SEO Post
+    public function getMetaSEOPost(){
+        $posts = Post::where('post_type', 'post')->with('taxonomies')->get();
+        foreach($posts as $post){
+            $metaData = $post->meta->toArray();
+            $metaKey = collect($metaData)->keyBy('meta_key')->toArray();
+
+            $postSite = \App\Models\Post::where('slug', $post->post_name)->first();
+            $postSite->seo_title = $metaKey['rank_math_title']['meta_value'] ?? '';
+            $postSite->meta_description = $metaKey['rank_math_description']['meta_value'] ?? '';
+            $postSite->meta_keywords = $metaKey['rank_math_focus_keyword']['meta_value'] ?? '';
+            $postSite->save();
+        }
+        
+        echo 'DOne';
+    }
+
     public function getCategoryWP(){
         $categories = CategoryCorcel::all();
         $data = [];

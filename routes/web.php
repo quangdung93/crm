@@ -290,6 +290,7 @@ Route::get('district/{id}', [CheckoutController::class, 'getWard'])->name('ward.
 
 //Site Route
 Route::get('/', [HomeController::class, 'index']);
-Route::get('/wordpress', [WordpressController::class, 'integrate']);
+Route::get('/wordpress/meta_product', [WordpressController::class, 'getMetaSEOProduct']);
+Route::get('/wordpress/meta_post', [WordpressController::class, 'getMetaSEOPost']);
 Route::get('/test', [WordpressController::class, 'integrate']);
 Route::get('/{url}', [RouteController::class, 'handle'])->where('url', '.*');

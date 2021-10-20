@@ -44,15 +44,15 @@
                                 <x-input type="text" title="Meta keyword" name="meta_keywords" value="{{ $post->meta_keywords ?? ''  }}"/>
                             </div>
                         </div>
+                        @if(config('stableweb.google_review'))
+                            <x-google-review :model="$post ?? ''"/>
+                        @endif
                         <div class="card">
                             <div class="card-block">
                                 <h4 class="sub-title">Nội dung {{ $pageName }}</h4>
                                 <x-textarea type="tinymce" title="" name="body" value="{!! isset($post) ? $post->body : '' !!}" />
                             </div>
                         </div>
-                        @if(config('stableweb.google_review'))
-                            <x-google-review :model="$post ?? ''"/>
-                        @endif
                     </div>
                     <div class="col-sm-3">
                         <div class="card">

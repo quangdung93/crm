@@ -21,4 +21,13 @@ class OrderController extends Controller
             'order' => $order
         ]);
     }
+
+    public function destroy($id){
+        $order = Order::findOrFail($id);
+        $delete = $order->delete();
+
+        if($delete){
+            return redirect('admin/orders')->with('success', 'Xóa thành công!');
+        }
+    }
 }
