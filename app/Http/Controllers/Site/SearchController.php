@@ -24,7 +24,7 @@ class SearchController extends Controller
             'title' => 'Kết quả tìm kiếm',
             'description' => 'Kết quả tìm kiếm từ khóa '.$keyword,
             'keyword' => $keyword,
-            'image' => $products->first()->image,
+            'image' => @$products->first()->image,
         ];
     }
 }
