@@ -166,7 +166,7 @@ class CheckoutController extends Controller
         $order->detail()->attach($orderDetail);
 
         //Send mail order
-        // $this->sendMailOrder($orderId);
+        $this->sendMailOrder($orderId);
         
         //Remove Cart
         Cart::destroy();

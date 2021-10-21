@@ -150,9 +150,9 @@
 <body>
     <div class="body-mail">
         <div class="content-mail">
-            <div class="tit-mail">
+            {{-- <div class="tit-mail">
                 <img width="200" src="{{ asset(theme('logo.image')) }}" alt="Logo">
-            </div>
+            </div> --}}
             <div class="message-mail">
                 <h2 class="tk-mail">Kangen nhận được đơn hàng mới!</h2>
                 <h3>THÔNG TIN ĐƠN HÀNG - #{{$order->id}} - Ngày đặt: {{date('d/m/Y',strtotime($order->created_at))}} lúc {{date('H:i',strtotime($order->created_at))}}</h3>
