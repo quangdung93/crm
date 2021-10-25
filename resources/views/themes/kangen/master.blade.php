@@ -10,6 +10,7 @@
     <meta name="description" content="{{ $metaData['description'] ?? setting('site_description') }}" />
     <meta name="keywords" content="{{ $metaData['keyword'] ?? setting('site_keyword') }}" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="google-site-verification" content="whQAS9PUK2BLMmOshy5AkmvDzoEzg9J4IXtHeGTAS4I" />
     <link rel="icon" href="{{asset(setting('site_favicon'))}}" type="image/x-icon">
     <meta property="og:image" content="{{ $metaData['image'] ?? asset(setting('thumbnail')) }}" />
     <meta property="og:title" content="{{ $metaData['title'] ?? setting('site_title') }}" />
