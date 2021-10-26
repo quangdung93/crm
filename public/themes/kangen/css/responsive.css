@@ -137,6 +137,7 @@
 		height: 100vh;
 		background: var(--primary);
 		transition: all .5s ease 0s;
+		overflow-y: auto;
 		z-index: 99999;
     }
 
@@ -430,6 +431,10 @@
 	.social .item-social{
 		display: inline-block;
 		margin-left:10px
+	}
+
+	.hotline-phone-ring-wrap{
+		zoom: 0.8;
 	}
 }
 
