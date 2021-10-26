@@ -436,6 +436,10 @@
 	.hotline-phone-ring-wrap{
 		zoom: 0.8;
 	}
+
+	.hotline-bar > a{
+		font-size: 13px;
+	}
 }
 
 /* END 768*/
