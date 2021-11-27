@@ -1402,3 +1402,59 @@ color: #fff;
 .item-social.btn-youtube{
     background: #E41818;
 }
+
+.section-policy{
+    padding: 30px;
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.section-policy .title{
+    padding: 10px;
+    background: #293c90;
+    color: #fff;
+    font-size: 20px;
+    text-align: center;
+    font-weight: 600;
+    border-radius: 5px;
+}
+
+.section-policy .content{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.policy-item{
+    max-width: 300px;
+    padding: 15px;
+    background: #293c90;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.policy-item .image{
+    display: block;
+    margin: 0 auto;
+}
+
+.policy-item-title{
+    margin-top: 10px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.policy-item-des{
+    margin: 10px 0;
+}
+
+.policy-item a{
+    display: block;
+    margin: 0 auto;
+    width: 70px;
+    color: #293c90;
+    background: #fff;
+}

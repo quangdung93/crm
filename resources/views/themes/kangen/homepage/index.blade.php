@@ -58,6 +58,9 @@
         'imageMobile' => theme('home_section_8.mobile'),
     ])
 
+    {{-- Policy --}}
+    @include('themes.kangen.components.policy')
+
     {{-- Post --}}
     @include('themes.kangen.components.news')
 
