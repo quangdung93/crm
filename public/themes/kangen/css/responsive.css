@@ -440,6 +440,14 @@
 	.hotline-bar > a{
 		font-size: 13px;
 	}
+
+	.section-policy .content{
+		flex-direction: column;
+	}
+
+	.policy-item{
+		margin-top: 15px;
+	}
 }
 
 /* END 768*/
