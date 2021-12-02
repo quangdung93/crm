@@ -59,7 +59,7 @@ class UserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'status' => isset($request->status) ? 1 : 0,
-            'avatar' => $avatarPath ?? null
+            'avatar' => $avatarPath ?? '/admin/images/user-default.png'
         ];
 
         $user = User::create($data);
