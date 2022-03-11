@@ -30,7 +30,7 @@
                     {!! shortcode('footer_4') !!}
                 </div>
                 <div class="col-sm-4">
-                    <div class="title">ĐĂNG KÝ NHẬN MÃ ƯU ĐÃI</div>
+                    {{-- <div class="title">ĐĂNG KÝ NHẬN MÃ ƯU ĐÃI</div>
                     <div class="content"> 
                         <div class="frm-footer-contact">
                             <form class="frm-register" data-action="{{ route('register.form') }}" method="POST">
@@ -46,7 +46,8 @@
                                 </div>
                             </form>
                         </div>
-                    </div>
+                    </div> --}}
+                    {!! shortcode('lien_ket') !!}
                 </div>
             </div>
         </div>
