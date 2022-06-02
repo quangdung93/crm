@@ -6,6 +6,7 @@ use App\Models\Page;
 use App\Models\Post;
 use App\Models\Product;
 use App\Models\Category;
+use Illuminate\Support\Str;
 use App\Models\PostCategory;
 use App\Models\RedirectLink;
 use Illuminate\Http\Request;
@@ -32,6 +33,8 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->removeIndexPhpFromUrl();
+        
         $this->configureRateLimiting();
 
         $this->routes(function () {
@@ -141,6 +144,19 @@ class RouteServiceProvider extends ServiceProvider
             // All categories exist and are in correct hierarchy
             // Return last category as route binding
             return $category;
+        }
+    }
+
+    protected function removeIndexPhpFromUrl()
+    {
+        if (Str::startsWith(request()->getRequestUri(), '/index.php')) {
+            $url = str_replace('/index.php', '', request()->getRequestUri());
+            $url = request()->getSchemeAndHttpHost() . Str::start($url, '/');
+
+            if (strlen($url) > 0) {
+                header("Location: $url", true, 301);
+                exit;
+            }
         }
     }
 }
