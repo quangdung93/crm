@@ -12,6 +12,7 @@ use Spatie\Permission\Models\Permission;
 class RoleController extends Controller
 {
     protected $listPermission = ['users','roles','posts','products','pages','menus','settings'];
+    
     public function index(){
         $roles = Role::all();
         return view('admin.roles.index')->with(compact('roles'));

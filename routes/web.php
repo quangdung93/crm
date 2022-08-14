@@ -56,7 +56,7 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'], function () {
 
     //User
     Route::group(['prefix' => 'users', 'middleware' => ['can:read_users']], function () {
-        Route::get('/', [UserController::class, 'index']);
+        Route::get('/', [UserController::class, 'index'])->name('user.view');
         Route::get('/create', [UserController::class, 'create'])->middleware('can:add_users');
         Route::post('/create', [UserController::class, 'store'])->middleware('can:add_users');
         Route::get('/edit/{id}', [UserController::class, 'edit'])->middleware('can:edit_users');
@@ -66,7 +66,7 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'], function () {
 
     //Role
     Route::group(['prefix' => 'roles', 'middleware' => ['can:read_roles']], function () {
-        Route::get('/', [RoleController::class, 'index']);
+        Route::get('/', [RoleController::class, 'index'])->name('roles.view');
         Route::get('/create', [RoleController::class, 'create'])->middleware('can:add_roles');
         Route::post('/create', [RoleController::class, 'store'])->middleware('can:add_roles');
         Route::get('/edit/{id}', [RoleController::class, 'edit'])->middleware('can:edit_roles');

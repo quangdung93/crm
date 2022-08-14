@@ -8,46 +8,53 @@
 @endsection
 @section('title', $pageName)
 @section('content')
-    @include('admin.components.page-header')
-    <!-- Page-body start -->
-    <div class="page-body panels-wells">
-        <form class="form-horizontal" method="post"
-                            action="{{url($routeName)}}" role="form">
-                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="card">
-                    <div class="card-block">
-                        <h4 class="sub-title">Thông tin {{ $pageName }}</h4>
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label text-right">Tên quyền</label>
-                            <div class="col-sm-6">
-                                <input type="text" name="name" value="{{ $role->name }}" class="form-control" placeholder="Nhập tên quyền" autocomplete="off" required>
+<section class="app-user-edit">
+    <div class="card">
+        <div class="card-body">
+            <ul class="nav nav-pills" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center active" id="account-tab" data-toggle="tab" href="#account" aria-controls="account" role="tab" aria-selected="true">
+                        <i data-feather="lock"></i><span class="d-none d-sm-block">Chỉnh sửa quyền</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <!-- Account Tab starts -->
+                <div class="tab-pane active" id="account" aria-labelledby="account-tab" role="tabpanel">
+                    <!-- users edit account form start -->
+                    <form class="form-validate">
+                        <div class="row">
+                            <div class="col-12">
+                                <h4 class="mb-1">
+                                    <i data-feather="user" class="font-medium-4 mr-25"></i>
+                                    <span class="align-middle">Thông tin phân quyền</span>
+                                </h4>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="username">Tên nhóm quyền</label>
+                                    <input type="text" class="form-control" placeholder="Username" value="{{  $role->name }}" name="username" id="username" />
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="name">Tên hiển thị</label>
+                                    <input type="text" class="form-control" placeholder="Họ tên" value="{{ $role->display_name }}" name="name" id="name" />
+                                </div>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label text-right">Tên hiển thị</label>
-                            <div class="col-sm-6">
-                                <input type="text" name="display_name" value="{{ $role->display_name }}" class="form-control" placeholder="Nhập tên hiển thị" autocomplete="off" required>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="card">
-                    <div class="card-block">
-                        <h4 class="sub-title">{{ $pageName }}</h4>
-                        <div class="form-group row">
-                            <div class="col-sm-12 mt-2">
-                                <div class="dt-responsive table-responsive">
-                                    <table class="table stableweb-table center w100">
-                                        <thead>
+                        <div class="row mt-1">
+                            <div class="col-12">
+                                <div class="table-responsive border rounded mt-1">
+                                    <h6 class="py-1 mx-1 mb-0 font-medium-2">
+                                        <i data-feather="lock" class="font-medium-3 mr-25"></i>
+                                        <span class="align-middle">Phân quyền</span>
+                                    </h6>
+                                    <table class="table table-striped table-borderless">
+                                        <thead class="thead-light">
                                             <tr>
-                                                <th class="text-left">Tên quyền</th>
-                                                <th>Đọc</th>
+                                                <th>Chức năng</th>
+                                                <th>Xem</th>
                                                 <th>Thêm</th>
                                                 <th>Sửa</th>
                                                 <th>Xóa</th>
@@ -56,47 +63,45 @@
                                         </thead>
                                         <tbody>
                                             @foreach($permissions as $key => $permission)
-                                                <tr>
-                                                    <td class="text-capitalize text-left" style="width:15%">{{ $key }}</td>
-                                                    @foreach($permission as $value)
-                                                        <td class="text-center">
-                                                            <div class="checkbox-zoom zoom-primary m-0">
-                                                                <label>
-                                                                    <input type="checkbox" name="permission[{{ $value->id }}]" id="{{ $value->name }}" class="checkbox-item" {{ $role->permissions->pluck('id')->contains($value->id) ? 'checked' : '' }}>
-                                                                    <span class="cr">
-                                                                        <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
-                                                                    </span>
-                                                                    {{-- <span>Primary</span> --}}
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                        {{-- <td><input type="checkbox" name="permission[{{ $value->id }}]" id="{{ $value->name }}" class="checkbox-item" {{ $role->permissions->pluck('id')->contains($value->id) ? 'checked' : '' }}/></td> --}}
-                                                    @endforeach
-                                                    <td class="text-center">
-                                                        <div class="checkbox-zoom zoom-danger m-0">
-                                                            <label>
-                                                                <input type="checkbox" class="check-all">
-                                                                <span class="cr">
-                                                                    <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
-                                                                </span>
-                                                            </label>
-                                                        </div>
-                                                    </td>
-                                                </tr>
+                                            <tr>
+                                                <td>{{ $key }}</td>
+                                                @foreach($permission as $value)
+                                                <td>
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" 
+                                                        name="permission[{{ $value->id }}]" 
+                                                        id="{{ $value->name }}" 
+                                                        class="checkbox-item custom-control-input" 
+                                                        {{ $role->permissions->pluck('id')->contains($value->id) ? 'checked' : '' }}>
+                                                        <label class="custom-control-label" for="{{ $value->name }}"></label>
+                                                    </div>
+                                                </td>
+                                                @endforeach
+                                                <td>
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" id="all_{{ $value->name }}" class="check-all custom-control-input">
+                                                        <label class="custom-control-label" for="all_{{ $value->name }}"></label>
+                                                    </div>
+                                                </td>
+                                            </tr>
                                             @endforeach
                                         </tbody>
                                     </table>
                                 </div>
-                                <x-submit-button :route="$routeName"/>
+                            </div>
+                            <div class="col-12 d-flex flex-sm-row flex-column mt-2">
+                                <button type="submit" class="btn btn-primary mb-1 mb-sm-0 mr-0 mr-sm-1">Lưu</button>
+                                <button type="reset" class="btn btn-outline-secondary">Hủy bỏ</button>
                             </div>
                         </div>
-                    </div>
+                    </form>
+                    <!-- users edit account form ends -->
                 </div>
+                <!-- Account Tab ends -->
             </div>
         </div>
-        </form>
     </div>
-    <!-- Page-body end -->
+</section>
 @endsection
 @section('javascript')
 <script type="text/javascript">

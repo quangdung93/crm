@@ -14,9 +14,6 @@ class Order extends Model
 
     protected $guarded = [];
     protected $dates = ['deleted_at'];
-    const TYPE_ORDER = 'order';
-    const TYPE_REGISTER = 'register';
-    const TYPE_INSTALLMENT = 'installment';
 
     public function detail(){
         return $this->belongsToMany(Product::class, 'order_detail','order_id', 'product_id')
@@ -31,11 +28,11 @@ class Order extends Model
         return $this->belongsTo(District::class);
     }
 
-    public function ward(){
-        return $this->belongsTo(Ward::class);
+    public function user(){
+        return $this->belongsTo(User::class);
     }
 
-    public function scopeType($query, $type){
-        return $query->where('order_type', $type);
+    public function ward(){
+        return $this->belongsTo(Ward::class);
     }
 }

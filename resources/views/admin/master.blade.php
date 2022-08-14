@@ -52,6 +52,7 @@
     <!-- BEGIN Vendor JS-->
 
     <!-- BEGIN: Page Vendor JS-->
+    <script src="{{asset('admin\bower_components\select2\js\select2.full.min.js')}}"></script>
     <script src="{{ asset('app-assets/vendors/js/tables/datatable/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js') }}"></script>
     <script src="{{ asset('app-assets/vendors/js/tables/datatable/dataTables.responsive.min.js') }}"></script>
@@ -66,9 +67,9 @@
     <script src="{{ asset('app-assets/js/core/app.js') }}"></script>
     <!-- END: Theme JS-->
 
+    <script type="text/javascript" src="{{asset('admin/js/notify-custom.js')}}"></script>
     <script type="text/javascript" src="{{asset('admin/js/admin-custom.js')}}"></script>
 
-    {{-- <script type="text/javascript" src="{{asset('admin/js/notify-custom.js')}}"></script> --}}
     {{-- <script type="text/javascript" src="{{asset('admin/js/image.js')}}"></script> --}}
 
     <!--Custom TinyMCE Editor -->

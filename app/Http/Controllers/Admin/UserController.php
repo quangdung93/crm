@@ -21,7 +21,8 @@ class UserController extends Controller
     //
     public function index(){
         $users = $this->userModel->getAllUser();
-        return view('admin.users.index')->with(compact('users'));
+        $roles = Role::all();
+        return view('admin.users.index')->with(compact('users', 'roles'));
     }
 
     public function create(){
@@ -83,9 +84,13 @@ class UserController extends Controller
         }
 
         $roles = Role::all();
+
+        $users = $this->userModel->getAllUser();
+
         return view('admin.users.add-edit')->with([
             'roles' => $roles,
-            'user' => $user
+            'user' => $user,
+            'users' => $users
         ]);
     }
 
