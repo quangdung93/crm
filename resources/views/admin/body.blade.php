@@ -1,50 +1,40 @@
 @extends('admin.master')
 @section('body')
-    <!-- Pre-loader start -->
-    <div class="theme-loader">
-        <div class="ball-scale">
-            <div class='contain'>
-                <img style="width:50px" src="{{ asset(setting('admin_loader')) }}" alt="admin loader" />
+    <!-- BEGIN: Header-->
+    @include('admin.navbar.header')
+    <!-- END: Header-->
+
+
+    <!-- BEGIN: Main Menu-->
+    @include('admin.navbar.menu')
+    <!-- END: Main Menu-->
+
+    <!-- BEGIN: Content-->
+    <div class="app-content content ">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper container-xxl p-0">
+            <div class="content-header row">
+            </div>
+            <div class="content-body">
+                <!-- users list start -->
+                @yield('content')
+                <!-- users list ends -->
+
             </div>
         </div>
     </div>
-    <!-- Pre-loader end -->
-    <div id="pcoded" class="pcoded">
-        <div class="pcoded-overlay-box"></div>
-        <div class="pcoded-container navbar-wrapper">
+    <!-- END: Content-->
 
-            {{-- Header --}}
-            @include('admin.navbar.header')
-            {{-- End Header --}}
+    <div class="sidenav-overlay"></div>
+    <div class="drag-target"></div>
 
-            <div class="pcoded-main-container">
-                <div class="pcoded-wrapper">
-
-                    {{-- Menu --}}
-                    <nav class="pcoded-navbar">
-                        <div class="pcoded-inner-navbar main-menu">
-                            {!! menu('admin', 'admin') !!}
-                        </div>
-                    </nav>
-                    {{-- End menu --}}
-
-                    {{-- Main content --}}
-                    <div class="pcoded-content">
-                        <div class="pcoded-inner-content">
-                            <div class="main-body">
-                                <div class="page-wrapper">
-                                    {{-- Content --}}
-                                    @yield('content')
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {{-- End Main content --}}
-
-                </div>
-            </div>
-        </div>
-    </div>
+    <!-- BEGIN: Footer-->
+    <footer class="footer footer-static footer-light">
+        <p class="clearfix mb-0"><span class="float-md-left d-block d-md-inline-block mt-25">COPYRIGHT &copy; 2021<a class="ml-25" href="https://1.envato.market/pixinvent_portfolio" target="_blank">Pixinvent</a><span class="d-none d-sm-inline-block">, All rights Reserved</span></span><span class="float-md-right d-none d-md-block">Hand-crafted & Made with<i data-feather="heart"></i></span></p>
+    </footer>
+    <button class="btn btn-primary btn-icon scroll-top" type="button"><i data-feather="arrow-up"></i></button>
+    <!-- END: Footer-->
 @endsection
 
 {{-- Alert --}}

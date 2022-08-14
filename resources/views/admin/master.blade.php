@@ -10,12 +10,34 @@
     <!-- Favicon icon -->
     <link rel="icon" href="{{asset(setting('site_favicon'))}}" type="image/x-icon">
     <!-- Google font-->
-    {{-- <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet"> --}}
-    <link href="https://fonts.googleapis.com/css?family=Quicksand:400,500,600,700&amp;subset=vietnamese" rel="stylesheet">
+    <link rel="apple-touch-icon" href="{{ asset('app-assets/images/ico/apple-icon-120.png') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('app-assets/images/ico/favicon.ico') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600" rel="stylesheet">
     
-    <link rel="stylesheet" type="text/css" href="{{ mix('admin/css/vendor.min.css')}}"> 
-    <link rel="stylesheet" type="text/css" href="{{asset('admin/css/theme.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('admin/css/custom.css')}}">
+    <!-- BEGIN: Vendor CSS-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/vendors.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/tables/datatable/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/tables/datatable/responsive.bootstrap4.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/tables/datatable/buttons.bootstrap4.min.css') }}">
+    <!-- END: Vendor CSS-->
+
+    <!-- BEGIN: Theme CSS-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/bootstrap.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/bootstrap-extended.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/colors.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/components.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/themes/dark-layout.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/themes/bordered-layout.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/themes/semi-dark-layout.css') }}">
+
+    <!-- BEGIN: Page CSS-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/core/menu/menu-types/vertical-menu.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/plugins/forms/form-validation.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/pages/app-user.css') }}">
+    <!-- END: Page CSS-->
+
+    {{-- <link rel="stylesheet" type="text/css" href="{{asset('admin/css/theme.css')}}"> --}}
+    {{-- <link rel="stylesheet" type="text/css" href="{{asset('admin/css/custom.css')}}"> --}}
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <script type="text/javascript">
         var URL_MAIN = '{{ asset('') }}';
@@ -25,74 +47,46 @@
 <body>
     @yield('body')
 
-    <!-- Required Jquery -->
-    <script type="text/javascript" src="{{asset('admin/bower_components/jquery/js/jquery.min.js')}}"></script>
-    <script type="text/javascript" src="{{asset('admin/bower_components/jquery-ui/js/jquery-ui.min.js')}}"></script>
-    <script type="text/javascript" src="{{asset('admin/bower_components/popper.js/js/popper.min.js')}}"></script>
-    <script type="text/javascript" src="{{asset('admin/bower_components/bootstrap/js/bootstrap.min.js')}}"></script>
-    <!-- jquery slimscroll js -->
-    <script type="text/javascript" src="{{asset('admin/bower_components/jquery-slimscroll/js/jquery.slimscroll.js')}}"></script>
-    <!-- modernizr js -->
-    <script type="text/javascript" src="{{asset('admin/bower_components/modernizr/js/modernizr.js')}}"></script>
-    <!-- Chart js -->
-    <script type="text/javascript" src="{{asset('admin/bower_components/chart.js/js/Chart.js')}}"></script>
-    <!-- amchart js -->
-    <script src="{{asset('admin/assets/pages/widget/amchart/amcharts.js')}}"></script>
-    <script src="{{asset('admin/assets/pages/widget/amchart/serial.js')}}"></script>
-    <script src="{{asset('admin/assets/pages/widget/amchart/light.js')}}"></script>
-    <script src="{{asset('admin/assets/js/jquery.mCustomScrollbar.concat.min.js')}}"></script>
-    <script type="text/javascript" src="{{asset('admin/assets/js/SmoothScroll.js')}}"></script>
-    <script src="{{asset('admin/assets/js/pcoded.min.js')}}"></script>
-    <!-- TinyMCE Editor -->
-    <script src="{{asset('tinymce/js/tinymce/tinymce.min.js')}}"></script>
-    <!-- DATETIME PICKER JS -->
-    <script src="{{asset('admin\assets\pages\advance-elements\moment-with-locales.min.js')}}"></script>
-    <script src="{{asset('admin\bower_components\bootstrap-datepicker\js\bootstrap-datepicker.min.js')}}"></script>
-    <script src="{{asset('admin\assets\pages\advance-elements\bootstrap-datetimepicker.min.js')}}"></script>
-    <!-- pnotify js -->
-    <script type="text/javascript" src="{{asset('admin\bower_components\pnotify\js\pnotify.js')}}"></script>
-    <script type="text/javascript" src="{{asset('admin\bower_components\pnotify\js\pnotify.desktop.js')}}"></script>
-    <script type="text/javascript" src="{{asset('admin\bower_components\pnotify\js\pnotify.buttons.js')}}"></script>
-    <script type="text/javascript" src="{{asset('admin\bower_components\pnotify\js\pnotify.confirm.js')}}"></script>
-    <script type="text/javascript" src="{{asset('admin\bower_components\pnotify\js\pnotify.callbacks.js')}}"></script>
-    <script type="text/javascript" src="{{asset('admin\bower_components\pnotify\js\pnotify.animate.js')}}"></script>
-    <script type="text/javascript" src="{{asset('admin\bower_components\pnotify\js\pnotify.history.js')}}"></script>
-    <script type="text/javascript" src="{{asset('admin\bower_components\pnotify\js\pnotify.mobile.js')}}"></script>
-    <script type="text/javascript" src="{{asset('admin\bower_components\pnotify\js\pnotify.nonblock.js')}}"></script>
-    <script type="text/javascript" src="{{asset('admin\assets\pages\pnotify\notify.js')}}"></script>
-    <!-- data-table js -->
-    <script src="{{asset('admin\bower_components\datatables.net\js\jquery.dataTables.min.js')}}"></script>
-    <script src="{{asset('admin\bower_components\datatables.net-buttons\js\dataTables.buttons.min.js')}}"></script>
-    <script src="{{asset('admin\assets\pages\data-table\js\jszip.min.js')}}"></script>
-    <script src="{{asset('admin\assets\pages\data-table\js\pdfmake.min.js')}}"></script>
-    <script src="{{asset('admin\assets\pages\data-table\js\vfs_fonts.js')}}"></script>
-    <script src="{{asset('admin\bower_components\datatables.net-buttons\js\buttons.print.min.js')}}"></script>
-    <script src="{{asset('admin\bower_components\datatables.net-buttons\js\buttons.html5.min.js')}}"></script>
-    <script src="{{asset('admin\bower_components\datatables.net-bs4\js\dataTables.bootstrap4.min.js')}}"></script>
-    <script src="{{asset('admin\bower_components\datatables.net-responsive\js\dataTables.responsive.min.js')}}"></script>
-    <script src="{{asset('admin\bower_components\datatables.net-responsive-bs4\js\responsive.bootstrap4.min.js')}}"></script>
-    <script src="{{asset('admin\assets\pages\data-table\js\data-table-custom.js')}}"></script>
-    <script src="{{asset('admin\assets\pages\data-table\extensions\fixed-header\js\dataTables.fixedHeader.min.js')}}"></script>
-    <!-- Switch component js -->
-    <script src="{{asset('admin\bower_components\switchery\js\switchery.min.js')}}" type="text/javascript"></script>
-    <!-- Select 2 js -->
-    <script type="text/javascript" src="{{asset('admin\bower_components\select2\js\select2.full.min.js')}}"></script>
-    {{-- Lodash --}}
-    <script type="text/javascript" src="{{asset('admin\assets\js\lodash.min.js')}}"></script>
-    {{-- nestable --}}
-    <script type="text/javascript" src="{{asset('admin/assets/pages/nestable/jquery.nestable.js')}}"></script>
-    <!-- custom js -->
-    <script src="{{asset('admin/assets/js/vartical-layout.min.js')}}"></script>
-    <script type="text/javascript" src="{{asset('admin/assets/js/script.min.js')}}"></script>
-    {{-- Sortable --}}
-    <script type="text/javascript" src="{{asset('admin\bower_components\Sortable\js\Sortable.js')}}"></script>
+    <!-- BEGIN: Vendor JS-->
+    <script src="{{ asset('app-assets/vendors/js/vendors.min.js') }}"></script>
+    <!-- BEGIN Vendor JS-->
+
+    <!-- BEGIN: Page Vendor JS-->
+    <script src="{{ asset('app-assets/vendors/js/tables/datatable/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('app-assets/vendors/js/tables/datatable/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('app-assets/vendors/js/tables/datatable/responsive.bootstrap4.js') }}"></script>
+    <script src="{{ asset('app-assets/vendors/js/tables/datatable/datatables.buttons.min.js') }}"></script>
+    <script src="{{ asset('app-assets/vendors/js/tables/datatable/buttons.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('app-assets/vendors/js/forms/validation/jquery.validate.min.js') }}"></script>
+    <!-- END: Page Vendor JS-->
+
+    <!-- BEGIN: Theme JS-->
+    <script src="{{ asset('app-assets/js/core/app-menu.js') }}"></script>
+    <script src="{{ asset('app-assets/js/core/app.js') }}"></script>
+    <!-- END: Theme JS-->
+
     <script type="text/javascript" src="{{asset('admin/js/admin-custom.js')}}"></script>
-    <script type="text/javascript" src="{{asset('admin/js/notify-custom.js')}}"></script>
-    <script type="text/javascript" src="{{asset('admin/js/image.js')}}"></script>
+
+    {{-- <script type="text/javascript" src="{{asset('admin/js/notify-custom.js')}}"></script> --}}
+    {{-- <script type="text/javascript" src="{{asset('admin/js/image.js')}}"></script> --}}
 
     <!--Custom TinyMCE Editor -->
-    <script type="text/javascript" src="{{asset('admin/js/tinymce-custom.js')}}"></script>
+    {{-- <script type="text/javascript" src="{{asset('admin/js/tinymce-custom.js')}}"></script> --}}
     @yield('javascript')
     @stack('javascript')
+
+    <script>
+        $(window).on('load', function() {
+            if (feather) {
+                feather.replace({
+                    width: 14,
+                    height: 14
+                });
+            }
+        })
+    </script>
 </body>
 </html>
+
+

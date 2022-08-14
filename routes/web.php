@@ -285,11 +285,3 @@ Route::group(['prefix' => 'ratings'], function () {
 Route::post('register', [App\Http\Controllers\Site\CustomerController::class, 'register'])->name('register.form');
 Route::get('province/{id}', [CheckoutController::class, 'getDistrict'])->name('district.get');
 Route::get('district/{id}', [CheckoutController::class, 'getWard'])->name('ward.get');
-
-
-
-//Site Route
-Route::get('/', [HomeController::class, 'index']);
-Route::get('/wordpress', [WordpressController::class, 'integrate']);
-Route::get('/test', [WordpressController::class, 'integrate']);
-Route::get('/{url}', [RouteController::class, 'handle'])->where('url', '.*');
