@@ -22,7 +22,8 @@
                 <!-- Account Tab starts -->
                 <div class="tab-pane active" id="account" aria-labelledby="account-tab" role="tabpanel">
                     <!-- users edit account form start -->
-                    <form class="form-validate">
+                    <form class="form-validate" action="{{ route('roles.update', ['id' => $role->id]) }}" method="POST">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <div class="row">
                             <div class="col-12">
                                 <h4 class="mb-1">
@@ -33,13 +34,13 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="username">Tên nhóm quyền</label>
-                                    <input type="text" class="form-control" placeholder="Username" value="{{  $role->name }}" name="username" id="username" />
+                                    <input type="text" class="form-control" placeholder="Nhập tên nhóm quyền" value="{{  $role->name }}" name="name" id="name" />
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="name">Tên hiển thị</label>
-                                    <input type="text" class="form-control" placeholder="Họ tên" value="{{ $role->display_name }}" name="name" id="name" />
+                                    <input type="text" class="form-control" placeholder="Nhập tên hiển thị" value="{{ $role->display_name }}" name="display_name" id="display_name" />
                                 </div>
                             </div>
                         </div>

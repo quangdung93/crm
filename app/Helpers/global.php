@@ -3,6 +3,9 @@
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 
+const CODE_SUCCESS = 0;
+const CODE_ERROR = 1;
+
 if (!function_exists('getCurrentSlug')) {
     function getCurrentSlug(){
         return request()->path();
@@ -22,8 +25,8 @@ if (!function_exists('setting')) {
 }
 
 if (!function_exists('format_date')) {
-    function format_date($data){
-        return Carbon::parse($data)->format('d/m/Y');
+    function format_date($data, $format = 'd-m-Y'){
+        return Carbon::parse($data)->format($format);
     }
 }
 

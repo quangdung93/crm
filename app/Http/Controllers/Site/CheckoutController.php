@@ -64,10 +64,10 @@ class CheckoutController extends Controller
                 foreach($data as $item){
                     $html .= '<option value="'.$item->id.'">'.$item->name.'</option>';
                 }
-                return response()->json(['status' => true, 'html' => $html]);
+                return $this->responseJson(CODE_SUCCESS, $html);
             }
-            else{
-                return response()->json(['status' => false, 'alert' => 'Không có dữ liệu']);    
+            else{    
+                return $this->responseJson(CODE_ERROR, null, 'Không có dữ liệu');
             }
         }
     }
@@ -80,10 +80,10 @@ class CheckoutController extends Controller
                 foreach($data as $item){
                     $html .= '<option value="'.$item->id.'">'.$item->name.'</option>';
                 }
-                return response()->json(['status' => true, 'html' => $html]);
+                return $this->responseJson(CODE_SUCCESS, $html);
             }
             else{
-                return response()->json(['status' => false, 'alert' => 'Không có dữ liệu']);    
+                return $this->responseJson(CODE_ERROR, null, 'Không có dữ liệu');
             }
         }
     }

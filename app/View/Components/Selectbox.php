@@ -17,8 +17,9 @@ class Selectbox extends Component
     public $value;
     public $display;
     public $selected;
+    public $id;
 
-    public function __construct($title, $name, $lists, $value, $display, $selected)
+    public function __construct($title, $name, $lists, $value, $display, $selected, $id = null)
     {
         $this->title = $title;
         $this->name = $name;
@@ -26,6 +27,7 @@ class Selectbox extends Component
         $this->value = $value;
         $this->display = $display;
         $this->selected = $selected;
+        $this->id = $id;
     }
 
     /**

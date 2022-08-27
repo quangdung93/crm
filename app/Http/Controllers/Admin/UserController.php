@@ -58,8 +58,8 @@ class UserController extends Controller
             'name' => $request->name,
             'username' => Str::slug($request->username),
             'email' => $request->email,
+            'phone' => $request->phone,
             'password' => Hash::make($request->password),
-            'status' => isset($request->status) ? 1 : 0,
             'avatar' => $avatarPath ?? null
         ];
 
@@ -131,7 +131,12 @@ class UserController extends Controller
             'name' => $request->name,
             'username' => Str::slug($request->username),
             'email' => $request->email,
-            'status' => isset($request->status) ? 1 : 0,
+            'phone' => $request->phone,
+            'status' => $request->status,
+            'address' => $request->address,
+            'gender' => $request->gender,
+            'managers' => implode(',', $request->managers),
+            'birthday' => format_date($request->dob, 'Y-m-d'),
             'avatar' => $avatarPath ?? null
         ];
 

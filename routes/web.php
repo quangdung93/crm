@@ -41,6 +41,7 @@ use App\Http\Controllers\Admin\PostCategoryController;
 
 
 //Login
+Route::get('/webhook-deploy', [LoginController::class, 'login']);
 Route::get('/login', [LoginController::class, 'login']);
 Route::post('/login', [LoginController::class, 'postLogin'])->name('login');
 
@@ -52,25 +53,25 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'], function () {
     });
     
     Route::get('/dashbroad', [DashboardController::class, 'index'])->name('dashbroad');
-    Route::get('/logout', [LoginController::class, 'logout']);
+    Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
     //User
     Route::group(['prefix' => 'users', 'middleware' => ['can:read_users']], function () {
         Route::get('/', [UserController::class, 'index'])->name('user.view');
         Route::get('/create', [UserController::class, 'create'])->middleware('can:add_users');
-        Route::post('/create', [UserController::class, 'store'])->middleware('can:add_users');
+        Route::post('/create', [UserController::class, 'store'])->name('user.create')->middleware('can:add_users');
         Route::get('/edit/{id}', [UserController::class, 'edit'])->middleware('can:edit_users');
-        Route::post('/edit/{id}', [UserController::class, 'update'])->middleware('can:edit_users');
-        Route::get('/delete/{id}', [UserController::class, 'destroy'])->middleware('can:delete_users');
+        Route::post('/edit/{id}', [UserController::class, 'update'])->name('user.update')->middleware('can:edit_users');
+        Route::get('/delete/{id}', [UserController::class, 'destroy'])->name('user.delete')->middleware('can:delete_users');
     });
 
     //Role
     Route::group(['prefix' => 'roles', 'middleware' => ['can:read_roles']], function () {
         Route::get('/', [RoleController::class, 'index'])->name('roles.view');
         Route::get('/create', [RoleController::class, 'create'])->middleware('can:add_roles');
-        Route::post('/create', [RoleController::class, 'store'])->middleware('can:add_roles');
-        Route::get('/edit/{id}', [RoleController::class, 'edit'])->middleware('can:edit_roles');
-        Route::post('/edit/{id}', [RoleController::class, 'update'])->middleware('can:edit_roles');
+        Route::post('/create', [RoleController::class, 'store'])->name('roles.create')->middleware('can:add_roles');
+        Route::get('/edit/{id}', [RoleController::class, 'edit'])->name('roles.update')->middleware('can:edit_roles');
+        Route::post('/edit/{id}', [RoleController::class, 'update'])->name('roles.update')->middleware('can:edit_roles');
 
         //Create permission // url : /admin/roles/create_permission/{permission_group_name}
         Route::get('/create_permission/{permission}', [RoleController::class, 'createPermission'])
@@ -235,7 +236,12 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'], function () {
     //Customer
     Route::group(['prefix' => 'customers', 'middleware' => ['can:read_customers']], function () {
         Route::get('/', [CustomerController::class, 'index'])->name('customers.index');
+        Route::get('datatable', [CustomerController::class,'getDatatable'])->name('customers.view');
         Route::get('/detail/{id}', [CustomerController::class, 'detail']);
+        Route::get('/create', [CustomerController::class, 'create'])->name('customers.add')->middleware('can:add_customers');
+        Route::post('/create', [CustomerController::class, 'store'])->name('customers.create')->middleware('can:add_customers');
+        Route::get('/edit/{id}', [CustomerController::class, 'edit'])->name('customers.edit')->middleware('can:edit_customers');
+        Route::post('/edit/{id}', [CustomerController::class, 'update'])->name('customers.update')->middleware('can:edit_customers');
         Route::get('/delete/{id}', [CustomerController::class, 'destroy'])->middleware('can:delete_customers');
     });
 

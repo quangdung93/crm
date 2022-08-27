@@ -43,13 +43,13 @@
                                     </td>
                                     <td>
                                         @can('edit_users')
-                                            <a class="" href="{{url($routeName.'/edit/'.$row->id)}}" title="Chỉnh sửa"> 
+                                            <a class="" href="{{url(route('user.update', ['id' => $row->id]))}}" title="Chỉnh sửa"> 
                                                 <i data-feather="edit" class="font-medium-2 mr-1"></i>
                                             </a>
                                         @endcan
 
                                         @can('delete_users')
-                                            <a class="notify-confirm" href="{{url($routeName.'/delete/'.$row->id)}}" title="Xóa"> 
+                                            <a class="" href="{{url(route('user.delete', ['id' => $row->id]))}}" title="Xóa"> 
                                                 <i data-feather="delete" class="font-medium-2"></i>
                                             </a>
                                         @endcan
@@ -65,7 +65,8 @@
             <!-- Modal to add new user starts-->
             <div class="modal modal-slide-in new-user-modal fade" id="modals-slide-in">
                 <div class="modal-dialog">
-                    <form class="add-new-user modal-content pt-0">
+                    <form class="modal-content pt-0" action="{{ route('user.create') }}" method="POST">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
                         <div class="modal-header mb-1">
                             <h5 class="modal-title" id="exampleModalLabel">Tạo người dùng</h5>
@@ -73,29 +74,33 @@
                         <div class="modal-body flex-grow-1">
                             <div class="form-group">
                                 <label class="form-label" for="basic-icon-default-fullname">Họ tên</label>
-                                <input type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="Nhập tên người dùng" name="user-fullname" aria-label="John Doe" aria-describedby="basic-icon-default-fullname2" />
+                                <input type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="Nhập tên người dùng" name="name" aria-label="John Doe" aria-describedby="basic-icon-default-fullname2" />
                             </div>
                             <div class="form-group">
                                 <label class="form-label" for="basic-icon-default-uname">Username</label>
-                                <input type="text" id="basic-icon-default-uname" class="form-control dt-uname" placeholder="acb" aria-label="jdoe1" aria-describedby="basic-icon-default-uname2" name="user-name" />
+                                <input type="text" id="basic-icon-default-uname" class="form-control dt-uname" placeholder="acb" aria-describedby="basic-icon-default-uname2" name="username" />
                             </div>
                             <div class="form-group">
                                 <label class="form-label" for="basic-icon-default-email">Email</label>
-                                <input type="text" id="basic-icon-default-email" class="form-control dt-email" placeholder="john.doe@example.com" aria-label="john.doe@example.com" aria-describedby="basic-icon-default-email2" name="user-email" />
+                                <input type="text" id="basic-icon-default-email" class="form-control dt-email" placeholder="john.doe@example.com" aria-describedby="basic-icon-default-email2" name="email" />
                             </div>
                             <div class="form-group">
                                 <label class="form-label" for="basic-icon-default-email">Mật khẩu</label>
                                 <input type="password" id="basic-icon-default-email" value="" class="form-control dt-email" name="password" />
                             </div>
                             <div class="form-group">
+                                <label class="form-label" for="basic-icon-default-email">Điện thoại</label>
+                                <input type="text" id="basic-icon-default-email" class="form-control" placeholder="Nhập số điện thoại" aria-describedby="basic-icon-default-email2" name="phone" />
+                            </div>
+                            <div class="form-group">
                                 <label class="form-label" for="user-role">User Role</label>
-                                <select id="user-role" class="form-control">
+                                <select id="user-role" name="role" class="form-control">
                                     @foreach($roles as $key => $value)
                                         <option value="{{ $value->name }}">{{ $value->display_name }}</option>
                                     @endforeach
                                 </select>
                             </div>
-                            <button type="submit" class="btn btn-primary mr-1 data-submit">Lưu</button>
+                            <button type="submit" class="btn btn-primary mr-1">Lưu</button>
                             <button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Hủy bỏ</button>
                         </div>
                     </form>

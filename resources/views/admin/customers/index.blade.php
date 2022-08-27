@@ -5,53 +5,47 @@
 @endphp
 @section('title', $pageName)
 @section('content')
-    @include('admin.components.page-header')
-    <!-- Page-body start -->
-    <div class="page-body">
-        <div class="row ">
-            <div class="col-sm-12">
-                <div class="card">
-                    <div class="card-block">
-                        <h4 class="sub-title">{{ $pageName }}</h4>
-                        <div class="dt-responsive table-responsive">
-                            <table id="datatable" class="table stableweb-table center w100">
-                                <thead>
-                                    <tr>
-                                        <th>Tên khách hàng</th>
-                                        <th>Điện thoại</th>
-                                        <th>Ghi chú</th>
-                                        <th>Loại đăng ký</th>
-                                        <th>Ngày đăng ký</th>
-                                        <th>Thao tác</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @if($customers)
-                                        @foreach($customers as $row)
-                                            <tr>
-                                                <td> {{$row->name}} </td>
-                                                <td> {{$row->phone}} </td>
-                                                <td> {{$row->note}} </td>
-                                                <td> {{$row->type}} </td>
-                                                <td>{{ format_date($row->created_at) }}</td>
-                                                <td>
-                                                    <a class="btn btn-success" href="/admin/customers/detail/{{ $row->id }}" title="Xem chi tiết"> <i class="feather icon-eye"></i></a>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    @endif
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<section class="app-user-list">
+    <div class="col-sm-12">
+        <div class="text-right mb-2">
+            <a href="{{ route('customers.add') }}" class="btn btn-primary"><i data-feather="plus" class="font-medium-2 mr-1"></i> Thêm mới</a>
         </div>
     </div>
-    <!-- Page-body end -->
+    <div class="card">
+        <div class="card-datatable table-responsive">
+            <table class="datatable-customer table">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Mã KH</th>
+                        <th>Tên KH</th>
+                        <th>Ngày bán</th>
+                        <th>Ngày chăm sóc</th>
+                        <th>Nhân viên</th>
+                        <th>Bán hàng</th>
+                        <th>Chỉnh sửa</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</section>
 @endsection
 
 @section('javascript')
 <script type="text/javascript">
+    $(document).ready(function(){
+        const ajax_url = "{!! route('customers.view') !!}";
+        var columns = [
+            { data: 'customer_code',name: 'customer_code',orderable: false, searchable: false},
+            { data: 'name',name: 'name',width: '25%'},
+            { data: 'joindate',name: 'joindate'},
+            { data: 'customer_date',name: 'customer_date'},
+            { data: 'created_by',name: 'created_by'},
+            { data: 'sale', orderable: false, searchable: false, className: 'nowrap'},
+            { data: 'action',orderable: false, searchable: false, className: 'nowrap'}
+        ];
+
+        showDataTableServerSide($('.datatable-customer'), ajax_url, columns);
+    });
 </script>
 @endsection

@@ -195,20 +195,21 @@ $(function () {
                 "type" : "GET",
             },
             columns: columns,
-            "oLanguage": {
-                "sInfo":         "Hiển thị _START_ đến _END_ của _TOTAL_ dòng",
-                "sInfoEmpty":      "Hiển thị 0 đến 0 của 0 dòng",
-                "sLengthMenu":     "Hiển thị _MENU_ dòng",
-                "sEmptyTable":     "Không có dữ liệu",
-                "sSearch":         "Tìm kiếm:",
-                "sProcessing":     "Đang tải...",
-                "oPaginate": {
+            language: {
+                sLengthMenu: 'Hiển thị _MENU_',
+                sInfo: "Hiển thị _START_ đến _END_ của _TOTAL_ dòng",
+                sInfoEmpty: "Hiển thị 0 đến 0 của 0 dòng",
+                search: 'Tìm kiếm',
+                searchPlaceholder: 'Nhập tên khóa..',
+                sEmptyTable: "Không có dữ liệu",
+                sProcessing:     "Đang tải...",
+                oPaginate: {
                     "sFirst":      "Trang đầu",
                     "sLast":       "Trang cuối",
                     "sNext":       "Trang kế",
                     "sPrevious":   "Trang trước"
                 }
-            }
+            },
         });
     }
 

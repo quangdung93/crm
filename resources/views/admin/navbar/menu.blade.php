@@ -21,7 +21,12 @@
                     'icon' => 'circle',
                 ]
             ]
-        ]
+        ],
+        [
+            'name' => 'Khách hàng',
+            'url' => route('customers.index'),
+            'icon' => 'users'
+        ],
     ];
 @endphp
 
