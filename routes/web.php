@@ -229,8 +229,9 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'], function () {
     //Order
     Route::group(['prefix' => 'orders', 'middleware' => ['can:read_orders']], function () {
         Route::get('/', [OrderController::class, 'index'])->name('orders.index');
-        Route::get('/detail/{id}', [OrderController::class, 'detail']);
+        Route::get('/detail/{id}', [OrderController::class, 'detailOrder'])->name('order.detail');
         Route::get('/delete/{id}', [OrderController::class, 'destroy'])->middleware('can:delete_orders');
+        Route::get('/customer/{id}', [OrderController::class, 'getOrdersByCustomer']);
     });
 
     //Customer
@@ -238,6 +239,7 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'], function () {
         Route::get('/', [CustomerController::class, 'index'])->name('customers.index');
         Route::get('datatable', [CustomerController::class,'getDatatable'])->name('customers.view');
         Route::get('/detail/{id}', [CustomerController::class, 'detail']);
+        Route::post('/care', [CustomerController::class, 'customerCare'])->name('customers.care');
         Route::get('/create', [CustomerController::class, 'create'])->name('customers.add')->middleware('can:add_customers');
         Route::post('/create', [CustomerController::class, 'store'])->name('customers.create')->middleware('can:add_customers');
         Route::get('/edit/{id}', [CustomerController::class, 'edit'])->name('customers.edit')->middleware('can:edit_customers');

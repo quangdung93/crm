@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use Carbon\Carbon;
+use App\Models\Order;
+use App\Models\CustomerCare;
 use App\Models\Customer;
 use App\Models\Province;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
@@ -96,18 +99,60 @@ class CustomerController extends Controller
 
     public function detail($id){
         $customer = Customer::findOrFail($id);
+        $orders = Order::with('user')->where('customer_id', $id)->get();
+        $customerCares = CustomerCare::where('customer_id', $id)->get();
+
+        $result = Order::selectRaw("count(store_id) as quantity, 
+                SUM(total_money) as total_money, 
+                SUM(lack) as total_debt, 
+                SUM(coupon) as total_discount, 
+                SUM(total_quantity) as total_quantity")
+                ->where('status', 1)
+                ->where('admin_status', 1)
+                ->where('customer_id', $id)->first()->toArray();
+
+        $totalMoney = isset($result['total_money']) ? $result['total_money'] : 0;
+        $typeCustomer = 'Thành viên';
+        if($totalMoney < 15000000){
+            $typeCustomer = 'Thành viên';
+        }
+        if($totalMoney >= 15000000 && $totalMoney < 30000000){
+            $typeCustomer = 'Silver';
+        }
+        if($totalMoney >= 30000000 && $totalMoney < 60000000){
+            $typeCustomer = 'Gold';
+        }
+        if($totalMoney >= 60000000 && $totalMoney < 100000000){
+            $typeCustomer = 'Platinum';
+        }
+        if($totalMoney >= 100000000){
+            $typeCustomer = 'Diamond';
+        }
+
         return view('admin.customers.detail')->with([
-            'customer' => $customer
+            'customer' => $customer,
+            'orders' => $orders,
+            'customerCares' => $customerCares,
+            'typeCustomer' => $typeCustomer,
+            'totalMoney' => $totalMoney,
+            'points' => round($totalMoney / 100000, 0)
         ]);
     }
 
     public function renderDatatable($table){
         $data = Datatables::of($table)
             ->editColumn('customer_code', function ($row) {
-                return $row->customer_code;
+                return '<a href="'.url('/admin/customers/detail/'.$row->id).'">'.$row->customer_code.'</a>';
             })
             ->editColumn('name', function ($row) {
-                return $row->name;
+                $name = '<div>';
+                $name .= '<a href="'.url('/admin/customers/detail/'.$row->id).'">'.$row->name.'</a>';
+                $name .= '<div><span>Điểm tích lũy: '.$row->customer_diem.'</span></div>';
+                $name .= '<div><span>Loại thành viên: Thành viên</span></div>';
+                $name .= '</div>';
+
+                return $name;
+
             })
             ->editColumn('joindate', function ($row) {
                 return Carbon::parse($row->joindate)->format('d/m/Y');
@@ -138,8 +183,29 @@ class CustomerController extends Controller
 
                 return $action;
             })
-            ->rawColumns(['sale', 'action'])
+            ->rawColumns(['customer_code', 'name', 'sale', 'action'])
             ->make(true);
         return $data;
+    }
+
+    public function customerCare(Request $request){
+        $request->validate([
+            'task' => 'required',
+            'customer_id' => 'required',
+        ],[
+            'customer_id.required' => 'Khách hàng không tồn tại',
+            'task.required' => 'Bạn chưa chọn công việc',
+        ]);
+
+        $data = $request->except('token');
+        $data['created_by'] = Auth::id();
+        $customer = CustomerCare::create($data);
+
+        if($customer){
+            return redirect('admin/customers/detail/'.$request->customer_id)->with('success', 'Tạo thành công!');
+        }
+        else{
+            return redirect('admin/customers/detail/'.$request->customer_id)->with('danger', 'Tạo thất bại!');
+        }
     }
 }

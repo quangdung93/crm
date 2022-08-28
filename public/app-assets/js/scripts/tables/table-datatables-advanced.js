@@ -93,126 +93,7 @@ var normalizeDate = function (dateString) {
 
 $(function () {
   var isRtl = $('html').attr('data-textdirection') === 'rtl';
-
-  var dt_ajax_table = $('.datatables-ajax'),
-    dt_filter_table = $('.dt-column-search'),
-    dt_adv_filter_table = $('.dt-advanced-search'),
-    dt_responsive_table = $('.dt-responsive'),
-    assetPath = '../../../app-assets/';
-
-  if ($('body').attr('data-framework') === 'laravel') {
-    assetPath = $('body').attr('data-asset-path');
-  }
-
-  // Ajax Sourced Server-side
-  // --------------------------------------------------------------------
-
-  if (dt_ajax_table.length) {
-    var dt_ajax = dt_ajax_table.dataTable({
-      processing: true,
-      dom:
-        '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
-      ajax: assetPath + 'data/ajax.php',
-      language: {
-        paginate: {
-          // remove previous & next text from pagination
-          previous: '&nbsp;',
-          next: '&nbsp;'
-        }
-      }
-    });
-  }
-
-  // Column Search
-  // --------------------------------------------------------------------
-
-  if (dt_filter_table.length) {
-    // Setup - add a text input to each footer cell
-    $('.dt-column-search thead tr').clone(true).appendTo('.dt-column-search thead');
-    $('.dt-column-search thead tr:eq(1) th').each(function (i) {
-      var title = $(this).text();
-      $(this).html('<input type="text" class="form-control form-control-sm" placeholder="Search ' + title + '" />');
-
-      $('input', this).on('keyup change', function () {
-        if (dt_filter.column(i).search() !== this.value) {
-          dt_filter.column(i).search(this.value).draw();
-        }
-      });
-    });
-
-    var dt_filter = dt_filter_table.DataTable({
-      ajax: assetPath + 'data/table-datatable.json',
-      columns: [
-        { data: 'full_name' },
-        { data: 'email' },
-        { data: 'post' },
-        { data: 'city' },
-        { data: 'start_date' },
-        { data: 'salary' }
-      ],
-      dom:
-        '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
-      orderCellsTop: true,
-      language: {
-        paginate: {
-          // remove previous & next text from pagination
-          previous: '&nbsp;',
-          next: '&nbsp;'
-        }
-      }
-    });
-  }
-
-  // Advanced Search
-  // --------------------------------------------------------------------
-
-  // Advanced Filter table
-  if (dt_adv_filter_table.length) {
-    var dt_adv_filter = dt_adv_filter_table.DataTable({
-      ajax: assetPath + 'data/table-datatable.json',
-      columns: [
-        { data: 'responsive_id' },
-        { data: 'full_name' },
-        { data: 'email' },
-        { data: 'post' },
-        { data: 'city' },
-        { data: 'start_date' },
-        { data: 'salary' }
-      ],
-
-      columnDefs: [
-        {
-          className: 'control',
-          orderable: false,
-          targets: 0
-        }
-      ],
-      dom:
-        '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
-      orderCellsTop: true,
-      responsive: {
-        details: {
-          display: $.fn.dataTable.Responsive.display.modal({
-            header: function (row) {
-              var data = row.data();
-              return 'Details of ' + data['full_name'];
-            }
-          }),
-          type: 'column',
-          renderer: $.fn.dataTable.Responsive.renderer.tableAll({
-            tableClass: 'table'
-          })
-        }
-      },
-      language: {
-        paginate: {
-          // remove previous & next text from pagination
-          previous: '&nbsp;',
-          next: '&nbsp;'
-        }
-      }
-    });
-  }
+  var dt_responsive_table = $('.dt-responsive');
 
   // on key up from input field
   $('input.dt-input').on('keyup', function () {
@@ -224,18 +105,18 @@ $(function () {
 
   if (dt_responsive_table.length) {
     var dt_responsive = dt_responsive_table.DataTable({
-      ajax: assetPath + 'data/table-datatable.json',
+      ajax: assetPath + 'admin/orders/customer/5530',
       columns: [
-        { data: 'responsive_id' },
-        { data: 'full_name' },
-        { data: 'email' },
-        { data: 'post' },
-        { data: 'city' },
-        { data: 'start_date' },
-        { data: 'salary' },
-        { data: 'age' },
-        { data: 'experience' },
-        { data: 'status' }
+        { data: '_id' },
+        { data: 'code' },
+        { data: 'store_id' },
+        { data: 'created_at' },
+        { data: 'created_by' },
+        { data: 'customer_id' },
+        { data: 'total_quantity' },
+        { data: 'total_price' },
+        { data: 'payment_method' },
+        { data: 'status' },
       ],
       columnDefs: [
         {
@@ -249,11 +130,11 @@ $(function () {
           render: function (data, type, full, meta) {
             var $status_number = full['status'];
             var $status = {
-              1: { title: 'Current', class: 'badge-light-primary' },
-              2: { title: 'Professional', class: ' badge-light-success' },
-              3: { title: 'Rejected', class: ' badge-light-danger' },
+              0: { title: 'Khởi tạo', class: 'badge-light-primary' },
+              1: { title: 'Hoàn thành', class: ' badge-light-success' },
+              3: { title: 'Đang giao', class: ' badge-light-danger' },
               4: { title: 'Resigned', class: ' badge-light-warning' },
-              5: { title: 'Applied', class: ' badge-light-info' }
+              5: { title: 'Đang giao', class: ' badge-light-info' }
             };
             if (typeof $status[$status_number] === 'undefined') {
               return data;
@@ -266,6 +147,27 @@ $(function () {
               '</span>'
             );
           }
+        },
+        {
+          // Label
+          targets: -2,
+          render: function (data, type, full, meta) {
+            var $paymentMethod = full['payment_method'];
+            var $payment = {
+              1: { title: 'Tiền mặt', class: ' badge-light-success' },
+              2: { title: 'Chuyển khoản', class: 'badge-light-primary' },
+            };
+            if (typeof $payment[$paymentMethod] === 'undefined') {
+              return data;
+            }
+            return (
+              '<span class="badge badge-pill ' +
+              $payment[$paymentMethod].class +
+              '">' +
+              $payment[$paymentMethod].title +
+              '</span>'
+            );
+          }
         }
       ],
       dom:
@@ -275,7 +177,7 @@ $(function () {
           display: $.fn.dataTable.Responsive.display.modal({
             header: function (row) {
               var data = row.data();
-              return 'Details of ' + data['full_name'];
+              return 'Details of ' + data['code'];
             }
           }),
           type: 'column',

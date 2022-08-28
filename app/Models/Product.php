@@ -22,7 +22,7 @@ class Product extends Model
         parent::boot();
 
         static::addGlobalScope('sortProduct', function (Builder $builder) {
-            $builder->orderBy('created_at', 'DESC')->orderBy('sequence', 'ASC');
+            $builder->orderBy('created_at', 'DESC');
         });
     }
 

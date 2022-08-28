@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Product;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Order extends Model
 {
@@ -17,7 +18,7 @@ class Order extends Model
 
     public function detail(){
         return $this->belongsToMany(Product::class, 'order_detail','order_id', 'product_id')
-        ->withPivot('qty', 'price_old', 'price', 'subtotal');
+        ->withPivot('qty', 'price_old', 'price', 'subtotal', 'discount');
     }
 
     public function province(){
@@ -29,7 +30,11 @@ class Order extends Model
     }
 
     public function user(){
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'created_by');
+    }
+
+    public function customer(){
+        return $this->belongsTo(Customer::class, 'customer_id');
     }
 
     public function ward(){

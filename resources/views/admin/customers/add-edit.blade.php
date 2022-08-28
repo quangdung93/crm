@@ -103,11 +103,11 @@
                                 <div class="form-group">
                                     <label class="d-block mb-1">Giới tính</label>
                                     <div class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="male" value="1" name="gender" class="custom-control-input" {{ @$customer->gender ? 'checked' : '' }}/>
+                                        <input type="radio" id="male" value="1" name="gender" class="custom-control-input" {{ !@$customer->gender ? 'checked' : '' }}/>
                                         <label class="custom-control-label" for="male">Name</label>
                                     </div>
                                     <div class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="female" value="0" name="gender" class="custom-control-input" {{ !@$customer->gender ? 'checked' : '' }}/>
+                                        <input type="radio" id="female" value="0" name="gender" class="custom-control-input" {{ @$customer->gender ? 'checked' : '' }}/>
                                         <label class="custom-control-label" for="female">Nữ</label>
                                     </div>
                                 </div>

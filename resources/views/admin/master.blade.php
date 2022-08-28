@@ -42,6 +42,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <script type="text/javascript">
         var URL_MAIN = '{{ asset('') }}';
+        var assetPath = '{{ asset('') }}';
     </script>
     @yield('styles')
 </head>
