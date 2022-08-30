@@ -25,15 +25,15 @@ class LoginController extends Controller
 
     public function postLogin(Request $request){
         $request->validate([
-            'email' => 'required',
+            'username' => 'required',
             'password' => 'required',
         ],[
-            'email.required' => 'Bạn chưa nhập email',
+            'username.required' => 'Bạn chưa nhập tên đăng nhập',
             'password.required' => 'Bạn chưa nhập mật khẩu'
         ]);
 
         $credentials = [
-            'email' => $request->email,
+            'username' => $request->username,
             'password' => $request->password,
             'status' => 1
         ];

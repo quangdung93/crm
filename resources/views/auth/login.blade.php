@@ -23,10 +23,10 @@
                                         </div>
                                     </div>
                                     <div class="form-group form-primary">
-                                        <input type="text" name="email" class="form-control" value="{{ old('email') }}"  placeholder="Email người dùng" autofocus>
+                                        <input type="text" name="username" class="form-control" value="{{ old('username') }}"  placeholder="Tên đăng nhập" autofocus>
                                         <span class="form-bar"></span>
-                                        @if ($errors->has('email'))
-                                            <div class="text-danger mt-2">{{ $errors->first('email') }}</div>
+                                        @if ($errors->has('username'))
+                                            <div class="text-danger mt-2">{{ $errors->first('username') }}</div>
                                         @endif
                                     </div>
                                     <div class="form-group form-primary">

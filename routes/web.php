@@ -42,7 +42,11 @@ use App\Http\Controllers\Admin\PostCategoryController;
 
 //Login
 Route::get('/webhook-deploy', [LoginController::class, 'login']);
-Route::get('/login', [LoginController::class, 'login']);
+Route::get('/', function(){
+    return redirect(route('login.view'));
+});
+
+Route::get('/login', [LoginController::class, 'login'])->name('login.view');
 Route::post('/login', [LoginController::class, 'postLogin'])->name('login');
 
 //****************/ ADMIN /*********************
